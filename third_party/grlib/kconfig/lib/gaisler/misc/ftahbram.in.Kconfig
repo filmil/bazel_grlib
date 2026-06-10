@@ -1,4 +1,4 @@
-config FTAHBRAM_ENABLE
+config LIB_GAISLER_MISC_FTAHBRAM_FTAHBRAM_ENABLE
     bool "FT On-chip AHB RAM                  "
 #     if [ "$CONFIG_FTAHBRAM_ENABLE" = "y" ]; then
 #       choice 'AHB RAM size (KiB)   ' \
@@ -11,10 +11,10 @@ config FTAHBRAM_ENABLE
 # 	64		CONFIG_FTAHBRAM_SZ64 \
 # 	128		CONFIG_FTAHBRAM_SZ128 \
 # 	256		CONFIG_FTAHBRAM_SZ256" 4
-config FTAHBRAM_START
+config LIB_GAISLER_MISC_FTAHBRAM_FTAHBRAM_START
     hex "RAM start address (haddr[31:20])    "
     default A00
-config FTAHBRAM_PIPE
+config LIB_GAISLER_MISC_FTAHBRAM_FTAHBRAM_PIPE
     bool "Pipelined implementation            "
 #       if [ "$CONFIG_FTAHBRAM_PIPE" = "n" ]; then
 #          choice 'EDAC   ' \
@@ -22,11 +22,11 @@ config FTAHBRAM_PIPE
 # 	   BCH1		CONFIG_FTAHBRAM_EDAC_BCH1 \
 # 	   BCH2		CONFIG_FTAHBRAM_EDAC_BCH2 \
 #            TechSpec	CONFIG_FTAHBRAM_EDAC_TECHSPEC" None
-config FTAHBRAM_AUTOSCRUB
+config LIB_GAISLER_MISC_FTAHBRAM_FTAHBRAM_AUTOSCRUB
     bool "Auto-scrubbing enable               "
-config FTAHBRAM_ERRORCNTR
+config LIB_GAISLER_MISC_FTAHBRAM_FTAHBRAM_ERRORCNTR
     bool "Error counter enable                "
-config FTAHBRAM_CNTBITS
+config LIB_GAISLER_MISC_FTAHBRAM_FTAHBRAM_CNTBITS
     int "Error counter bits                  "
     default 2
 #       fi

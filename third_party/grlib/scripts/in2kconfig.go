@@ -30,9 +30,10 @@ func main() {
 		if err != nil { return err }
 		if !info.IsDir() && strings.HasSuffix(path, ".in") {
 			relPath, _ := filepath.Rel(grlibPath, path)
+			// Avoid including 'grlib-gpl-...' in the output path if it was part of grlibPath
 			targetPath := filepath.Join(outDir, relPath+".Kconfig")
 			os.MkdirAll(filepath.Dir(targetPath), 0755)
-			convertInToKconfig(path, targetPath)
+			convertInToKconfig(grlibPath, outDir, path, targetPath)
 		}
 		return nil
 	})
@@ -43,19 +44,14 @@ func main() {
 }
 
 var (
-	reMainmenu  = regexp.MustCompile(`(?i)^mainmenu_name\s+"(.*)"`)
-	reComment   = regexp.MustCompile(`(?i)^\s*comment\s+'(.*)'`)
 	reBool      = regexp.MustCompile(`(?i)^\s*bool\s+'(.*)'\s+(CONFIG_[a-zA-Z0-9_]+)`)
 	reInt       = regexp.MustCompile(`(?i)^\s*int\s+'(.*)'\s+(CONFIG_[a-zA-Z0-9_]+)\s*(.*)`)
 	reHex       = regexp.MustCompile(`(?i)^\s*hex\s+'(.*)'\s+(CONFIG_[a-zA-Z0-9_]+)\s*(.*)`)
 	reSource    = regexp.MustCompile(`(?i)^\s*source\s+(.*)`)
-	reIf        = regexp.MustCompile(`(?i)^\s*if\s+\[\s*(.*)\s*\]\s*;\s*then`)
-	reFi        = regexp.MustCompile(`(?i)^\s*fi\b`)
 	reDefine    = regexp.MustCompile(`(?i)^\s*define_(bool|int|hex|string)\s+(CONFIG_[a-zA-Z0-9_]+)\s+(.*)`)
-	reChoice    = regexp.MustCompile(`(?i)^\s*choice\s+'(.*)'\s*\\`)
 )
 
-func convertInToKconfig(src, dest string) {
+func convertInToKconfig(grlibPath, outDir, src, dest string) {
 	sf, err := os.Open(src)
 	if err != nil { return }
 	defer sf.Close()
@@ -64,7 +60,17 @@ func convertInToKconfig(src, dest string) {
 	if err != nil { return }
 	defer df.Close()
 
+	// Calculate a prefix based on the source path RELATIVE TO grlibPath
+	rel, _ := filepath.Rel(grlibPath, src)
+	prefix := strings.ToUpper(rel)
+	prefix = regexp.MustCompile(`[^A-Z0-9]`).ReplaceAllString(prefix, "_")
+	prefix = strings.TrimSuffix(prefix, "_IN")
+	prefix = strings.TrimSuffix(prefix, "_VHD")
+	prefix = strings.Trim(prefix, "_")
+
 	scanner := bufio.NewScanner(sf)
+	symbolCounts := make(map[string]int)
+
 	for scanner.Scan() {
 		line := scanner.Text()
 		trimmed := strings.TrimSpace(line)
@@ -74,32 +80,48 @@ func convertInToKconfig(src, dest string) {
 			continue
 		}
 
+		handleSymbol := func(rawName, kind, label, def string) {
+			name := strings.TrimPrefix(rawName, "CONFIG_")
+			symbolCounts[name]++
+			uniqueName := name
+			if symbolCounts[name] > 1 {
+				uniqueName = fmt.Sprintf("%s_%d", name, symbolCounts[name])
+			}
+			
+			fullName := fmt.Sprintf("%s_%s", prefix, uniqueName)
+			
+			fmt.Fprintf(df, "config %s\n", fullName)
+			if label != "" {
+				fmt.Fprintf(df, "    %s \"%s\"\n", kind, label)
+			} else {
+				fmt.Fprintf(df, "    %s\n", kind)
+			}
+			if def != "" {
+				fmt.Fprintf(df, "    default %s\n", def)
+			}
+		}
+
 		if m := reBool.FindStringSubmatch(trimmed); m != nil {
-			name := strings.TrimPrefix(m[2], "CONFIG_")
-			fmt.Fprintf(df, "config %s\n    bool \"%s\"\n", name, m[1])
+			handleSymbol(m[2], "bool", m[1], "")
 		} else if m := reInt.FindStringSubmatch(trimmed); m != nil {
-			name := strings.TrimPrefix(m[2], "CONFIG_")
 			def := "0"
 			if m[3] != "" { def = m[3] }
-			fmt.Fprintf(df, "config %s\n    int \"%s\"\n    default %s\n", name, m[1], def)
+			handleSymbol(m[2], "int", m[1], def)
 		} else if m := reHex.FindStringSubmatch(trimmed); m != nil {
-			name := strings.TrimPrefix(m[2], "CONFIG_")
 			def := "0"
 			if m[3] != "" { def = m[3] }
-			fmt.Fprintf(df, "config %s\n    hex \"%s\"\n    default %s\n", name, m[1], def)
+			handleSymbol(m[2], "hex", m[1], def)
 		} else if m := reDefine.FindStringSubmatch(trimmed); m != nil {
-			name := strings.TrimPrefix(m[2], "CONFIG_")
 			typ := m[1]
 			def := m[3]
 			if typ == "bool" {
 				if def == "y" { def = "y" } else { def = "n" }
 			}
-			fmt.Fprintf(df, "config %s\n    %s\n    default %s\n", name, typ, def)
+			handleSymbol(m[2], typ, "", def)
 		} else if m := reSource.FindStringSubmatch(trimmed); m != nil {
-			sfile := m[1]
-			fmt.Fprintf(df, "rsource \"%s.Kconfig\"\n", filepath.Join("../../../..", sfile))
+			// Skip generating rsource statements. We'll handle inclusion flatly in gen_master_kconfig.
+			fmt.Fprintf(df, "# Original source: %s\n", m[1])
 		} else {
-			// Comment out everything else to ensure valid Kconfig
 			fmt.Fprintf(df, "# %s\n", line)
 		}
 	}

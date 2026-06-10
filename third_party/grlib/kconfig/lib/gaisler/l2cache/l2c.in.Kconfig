@@ -1,9 +1,9 @@
 # mainmenu_option next_comment
 #   comment 'L2 Cache'
 
-config L2_ENABLE
+config LIB_GAISLER_L2CACHE_L2C_L2_ENABLE
     bool "Enable L2 Cache                      "
-config L2_LITE
+config LIB_GAISLER_L2CACHE_L2C_L2_LITE
     bool "Implement L2 Cache Lite              "
 #      choice 'Associativity (ways)            ' \
 # 	"1		CONFIG_L2_ASSO1 \
@@ -25,29 +25,29 @@ config L2_LITE
 # 	"32		CONFIG_L2_LINE32 \
 # 	64		CONFIG_L2_LINE64" 32
 
-config L2_HPROT
+config LIB_GAISLER_L2CACHE_L2C_L2_HPROT
     bool "Use HPROT information                "
-config L2_PEN
+config LIB_GAISLER_L2CACHE_L2C_L2_PEN
     bool "Enable L2 cache at power-on          "
-config L2_WT
+config LIB_GAISLER_L2CACHE_L2C_L2_WT
     bool "Enable write-through at power-on     "
-config L2_RAN
+config LIB_GAISLER_L2CACHE_L2C_L2_RAN
     bool "Random replacement (LRU default)     "
 #       if [ "$CONFIG_L2_ASSO1" != "1" ]; then
-config L2_SHARE
+config LIB_GAISLER_L2CACHE_L2C_L2_SHARE
     bool "Shared RAM for multi-way caches      "
 #       fi
-config L2_MAP
+config LIB_GAISLER_L2CACHE_L2C_L2_MAP
     hex "Cacheability map                     "
     default 00F0
-config L2_MTRR
+config LIB_GAISLER_L2CACHE_L2C_L2_MTRR
     int "Number of MTRR registers             "
     default 0
 #       choice 'Enable EDAC            ' \
 # 	"None		CONFIG_L2_EDAC_NONE \
 # 	Yes		CONFIG_L2_EDAC_YES \
 # 	TechSpec	CONFIG_L2_EDAC_TECHSPEC" None
-config L2_AXI
+config LIB_GAISLER_L2CACHE_L2C_L2_AXI
     bool "AXI backend interface                "
 
 #      fi

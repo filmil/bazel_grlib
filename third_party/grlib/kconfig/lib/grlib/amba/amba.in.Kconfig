@@ -1,30 +1,30 @@
 
 # mainmenu_option next_comment
 # comment 'AMBA configuration'
-config AHB_DEFMST
+config LIB_GRLIB_AMBA_AMBA_AHB_DEFMST
     int "Default AHB master"
     default 0
-config AHB_RROBIN
+config LIB_GRLIB_AMBA_AMBA_AHB_RROBIN
     bool "Round-robin arbiter                       "
-config AHB_SPLIT
+config LIB_GRLIB_AMBA_AMBA_AHB_SPLIT
     bool "AHB split-transaction support             "
-config AHB_FPNPEN
+config LIB_GRLIB_AMBA_AMBA_AHB_FPNPEN
     bool "Enable full plug&play decoding            "
-config AHB_IOADDR
+config LIB_GRLIB_AMBA_AMBA_AHB_IOADDR
     hex "I/O area start address (haddr[31:20]) "
     default FFF
-config APB_HADDR
+config LIB_GRLIB_AMBA_AMBA_APB_HADDR
     hex "AHB/APB bridge address (haddr[31:20]) "
     default 800
-config AHB_MON
+config LIB_GRLIB_AMBA_AMBA_AHB_MON
     bool "Enable AMBA AHB monitor              "
 #   if [ "$CONFIG_AHB_MON" = "y" ]; then
-config AHB_MONERR
+config LIB_GRLIB_AMBA_AMBA_AHB_MONERR
     bool "Report AHB errors                  "
-config AHB_MONWAR
+config LIB_GRLIB_AMBA_AMBA_AHB_MONWAR
     bool "Report AHB warings                 "
 #   fi
-config AHB_DTRACE
+config LIB_GRLIB_AMBA_AMBA_AHB_DTRACE
     bool "Write trace to simulation console    "
 # endmenu
 

@@ -1,7 +1,7 @@
-config GRETH_ENABLE
+config LIB_GAISLER_GRETH_GRETH_GRETH_ENABLE
     bool "Gaisler Research 10/100/1000 Mbit Ethernet MAC "
 #     if [ "$CONFIG_GRETH_ENABLE" = "y" ]; then
-config GRETH_GIGA
+config LIB_GAISLER_GRETH_GRETH_GRETH_GIGA
     bool "Enable 1000 Mbit support    "
 #       if [ "$CONFIG_GRETH_GIGA" = "n" ]; then
 #         choice 'AHB FIFO size (words)            ' \
@@ -11,21 +11,21 @@ config GRETH_GIGA
 # 	  32		CONFIG_GRETH_FIFO32 \
 # 	  64		CONFIG_GRETH_FIFO64" 8
 #       fi
-config GRETH_FMC_MODE
+config LIB_GAISLER_GRETH_GRETH_GRETH_FMC_MODE
     bool "Enable FMC"
 #       if [ "$CONFIG_LEON3FT_PRESENT" = "y" ]; then
-config GRETH_FT
+config LIB_GAISLER_GRETH_GRETH_GRETH_FT
     bool "Enable fault-tolerance"
 #         if [ "$CONFIG_GRETH_FT" = "y" ]; then
-config GRETH_EDCLFT
+config LIB_GAISLER_GRETH_GRETH_GRETH_EDCLFT
     bool "Enable fault tolerance for EDCL buffer "
 #         fi
 #       fi
 #       if [ "$CONFIG_GRETH_SGMII_PRESENT" = "y" ]; then
-config GRETH_SGMII_MODE
+config LIB_GAISLER_GRETH_GRETH_GRETH_SGMII_MODE
     bool "Enable SGMII"
 #       fi
-config GRETH_PHY_ADDR
+config LIB_GAISLER_GRETH_GRETH_GRETH_PHY_ADDR
     int "PHY address  "
     default 1
 #     fi

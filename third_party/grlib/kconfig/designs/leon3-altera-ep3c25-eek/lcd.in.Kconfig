@@ -1,5 +1,5 @@
-config LCD_ENABLE
+config DESIGNS_LEON3_ALTERA_EP3C25_EEK_LCD_LCD_ENABLE
     bool "LCD graphical frame buffer  "
-config LCD3T_ENABLE
+config DESIGNS_LEON3_ALTERA_EP3C25_EEK_LCD_LCD3T_ENABLE
     bool "LCD 3-wire and touch panel  "
  

@@ -1,5 +1,5 @@
 
-config IU_DISAS
+config LIB_GAISLER_LEON5_DEBUG5_IU_DISAS
     bool "Processor disassembly to console         "
-config AHB_DTRACE
+config LIB_GAISLER_LEON5_DEBUG5_AHB_DTRACE
     bool "AHB trace to simulation console      "

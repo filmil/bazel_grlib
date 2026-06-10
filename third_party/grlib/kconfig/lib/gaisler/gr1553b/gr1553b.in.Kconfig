@@ -1,10 +1,10 @@
-config GR1553B_ENABLE
+config LIB_GAISLER_GR1553B_GR1553B_GR1553B_ENABLE
     bool "Enable GR1553B interface               "
 #     if [ "$CONFIG_GR1553B_ENABLE" = "y" ]; then
-config GR1553B_BCEN
+config LIB_GAISLER_GR1553B_GR1553B_GR1553B_BCEN
     bool "Bus Controller support                  "
-config GR1553B_RTEN
+config LIB_GAISLER_GR1553B_GR1553B_GR1553B_RTEN
     bool "Remote Terminal support                 "
-config GR1553B_BMEN
+config LIB_GAISLER_GR1553B_GR1553B_GR1553B_BMEN
     bool "Bus Monitor support                     "
 #     fi

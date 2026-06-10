@@ -16,6 +16,14 @@ while [[ $# -gt 0 ]]; do
       IN2KCONFIG="${1#*=}"
       shift
       ;;
+    --gen_master_kconfig=*)
+      GEN_MASTER_KCONFIG="${1#*=}"
+      shift
+      ;;
+    --gen_example_bazelrc=*)
+      GEN_EXAMPLE_BAZELRC="${1#*=}"
+      shift
+      ;;
     --python_bin=*)
       PYTHON_BIN="${1#*=}"
       shift
@@ -50,8 +58,22 @@ fi
 [[ "$MAINTAIN_BIN" != /* ]] && MAINTAIN_BIN="$(pwd)/$MAINTAIN_BIN"
 [[ "$GEN_BUILD_FILES" != /* ]] && GEN_BUILD_FILES="$(pwd)/$GEN_BUILD_FILES"
 [[ "$IN2KCONFIG" != /* ]] && IN2KCONFIG="$(pwd)/$IN2KCONFIG"
+[[ "$GEN_MASTER_KCONFIG" != /* ]] && GEN_MASTER_KCONFIG="$(pwd)/$GEN_MASTER_KCONFIG"
+[[ "$GEN_EXAMPLE_BAZELRC" != /* ]] && GEN_EXAMPLE_BAZELRC="$(pwd)/$GEN_EXAMPLE_BAZELRC"
 
-exec "$MAINTAIN_BIN" \
+"$MAINTAIN_BIN" \
     --gen_build_files "$GEN_BUILD_FILES" \
     --in2kconfig "$IN2KCONFIG" \
+    --gen_master_kconfig "$GEN_MASTER_KCONFIG" \
     "${OTHER_ARGS[@]}"
+
+# Finally, update the example bazelrc if not in check mode
+if [[ ! " ${OTHER_ARGS[@]} " =~ " --check " ]]; then
+    if [ -n "$BUILD_WORKSPACE_DIRECTORY" ]; then
+        echo "Updating docs/example.bazelrc..."
+        cd "$BUILD_WORKSPACE_DIRECTORY"
+        bazel query "@grlib_config//:all" --output=label_kind | grep "CONFIG_" > settings_list.txt
+        "$GEN_EXAMPLE_BAZELRC" settings_list.txt docs/example.bazelrc
+        rm settings_list.txt
+    fi
+fi

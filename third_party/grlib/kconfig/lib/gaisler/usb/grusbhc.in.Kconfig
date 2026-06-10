@@ -1,16 +1,16 @@
-config GRUSBHC_ENABLE
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_ENABLE
     bool "Gaisler Research USB 2.0 Host Controller "
 # if [ "$CONFIG_GRUSBHC_ENABLE" = "y" ]; then
-config GRUSBHC_EHC
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_EHC
     bool "Enable Enhanced Host Controller "
-config GRUSBHC_UHC
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_UHC
     bool "Enable Universal Host Controller "
 #   if [ "$CONFIG_GRUSBHC_UHC" = "y" ]; then
-config GRUSBHC_NCC
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_NCC
     int "Number of Universal Host Controllers (1-15)"
     default 1
 #   fi
-config GRUSBHC_NPORTS
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_NPORTS
     int "Total number of ports  (1-15)"
     default 1
 #   choice 'Transceiver interface' \
@@ -39,64 +39,64 @@ config GRUSBHC_NPORTS
 # Endian conversion must be enabled if the core is going to work in GRLIB.
 # Thereby we do not give the user a choice, for now.
 #     bool 'Endian conversion enable    ' CONFIG_GRUSBHC_ENDIAN 
-config GRUSBHC_BEREGS
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_BEREGS
     bool "Enable big endian register interface"
-config GRUSBHC_BEDESC
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_BEDESC
     bool "Enable big endian descriptors"
-config GRUSBHC_BWRD
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_BWRD
     int "Maximum burst length in words (1-256)"
     default 16
 #   comment 'Port routing'
-config GRUSBHC_PRR
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PRR
     bool "Port routing rules"
 #   if [ "$CONFIG_GRUSBHC_PRR" = "n" ]; then
-config GRUSBHC_NPCC
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_NPCC
     int "Number of ports per companion controller (1-15)"
     default 1
 #   else
-config GRUSBHC_PR1
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR1
     int "Route port 1 to companion controller "
     default 0
-config GRUSBHC_PR2
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR2
     int "Route port 2 to companion controller "
     default 0
-config GRUSBHC_PR3
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR3
     int "Route port 3 to companion controller "
     default 0
-config GRUSBHC_PR4
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR4
     int "Route port 4 to companion controller "
     default 0
-config GRUSBHC_PR5
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR5
     int "Route port 5 to companion controller "
     default 0
-config GRUSBHC_PR6
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR6
     int "Route port 6 to companion controller "
     default 0
-config GRUSBHC_PR7
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR7
     int "Route port 7 to companion controller "
     default 0
-config GRUSBHC_PR8
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR8
     int "Route port 8 to companion controller "
     default 0
-config GRUSBHC_PR9
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR9
     int "Route port 9 to companion controller "
     default 0
-config GRUSBHC_PR10
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR10
     int "Route port 10 to companion controller "
     default 0
-config GRUSBHC_PR11
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR11
     int "Route port 11 to companion controller "
     default 0
-config GRUSBHC_PR12
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR12
     int "Route port 12 to companion controller "
     default 0
-config GRUSBHC_PR13
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR13
     int "Route port 13 to companion controller "
     default 0
-config GRUSBHC_PR14
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR14
     int "Route port 14 to companion controller "
     default 0
-config GRUSBHC_PR15
+config LIB_GAISLER_USB_GRUSBHC_GRUSBHC_PR15
     int "Route port 15 to companion controller "
     default 0
 #   fi

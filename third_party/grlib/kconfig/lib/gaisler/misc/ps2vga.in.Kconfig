@@ -1,9 +1,9 @@
-config KBD_ENABLE
+config LIB_GAISLER_MISC_PS2VGA_KBD_ENABLE
     bool "Keyboard/mouse (PS2) interface  "
-config VGA_ENABLE
+config LIB_GAISLER_MISC_PS2VGA_VGA_ENABLE
     bool "Text-based VGA interface  "
 #     if [ "$CONFIG_VGA_ENABLE" = "n" ]; then
-config SVGA_ENABLE
+config LIB_GAISLER_MISC_PS2VGA_SVGA_ENABLE
     bool "SVGA graphical frame buffer  "
 #     fi
 

@@ -1,4 +1,4 @@
-config PS2_ENABLE
+config LIB_GAISLER_MISC_PS2_PS2_ENABLE
     bool "Keyboard/mouse (PS2) interface  "
 
 

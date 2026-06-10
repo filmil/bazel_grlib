@@ -1,19 +1,19 @@
-config CAN_ENABLE
+config LIB_GAISLER_CAN_CAN_MC_CAN_ENABLE
     bool "Enable multi-core CAN interface                 "
 #     if [ "$CONFIG_CAN_ENABLE" = "y" ]; then
-config CAN_NUM
+config LIB_GAISLER_CAN_CAN_MC_CAN_NUM
     int "Number of CAN cores                      "
     default 1
-config CANIO
+config LIB_GAISLER_CAN_CAN_MC_CANIO
     hex "CAN I/O area start address (haddr[19:8]) "
     default C00
-config CANIRQ
+config LIB_GAISLER_CAN_CAN_MC_CANIRQ
     int "Interrupt number                      "
     default 13
-config CANSEPIRQ
+config LIB_GAISLER_CAN_CAN_MC_CANSEPIRQ
     bool "Enable separate interrupts           "
-config CAN_SYNCRST
+config LIB_GAISLER_CAN_CAN_MC_CAN_SYNCRST
     bool "Enable synchronous reset             "
-config CAN_FT
+config LIB_GAISLER_CAN_CAN_MC_CAN_FT
     bool "Enable FT FIFO memory                "
 #     fi

@@ -1,7 +1,7 @@
 
 # mainmenu_option next_comment
 # comment 'LEON5 Processor system'
-config PROC_NUM
+config LIB_GAISLER_LEON5_LEON5_PROC_NUM
     int "Number of processors"
     default 1
 #   choice 'FPU type              ' \
@@ -12,17 +12,17 @@ config PROC_NUM
 #      General-purpose     CONFIG_LEON5_GP \
 #      Minimal             CONFIG_LEON5_EP " Highest-performance
 #   if [ "$CONFIG_LEON5_HP" = "y" ]; then
-config LEON5_PERFCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_PERFCFG
     int
     default 0
 #   fi
 #   if [ "$CONFIG_LEON5_GP" = "y" ]; then
-config LEON5_PERFCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_PERFCFG_2
     int
     default 1
 #   fi
 #   if [ "$CONFIG_LEON5_EP" = "y" ]; then
-config LEON5_PERFCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_PERFCFG_3
     int
     default 2
 #   fi
@@ -30,21 +30,21 @@ config LEON5_PERFCFG
 #     "2-port-memories CONFIG_LEON5_RF_0 \
 #      flip-flops      CONFIG_LEON5_RF_1 " 2-port-memories
 #   if [ "$CONFIG_LEON5_RF_0" = "y" ]; then
-config LEON5_RFCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_RFCFG
     int
     default 0
 #   fi
 #   if [ "$CONFIG_LEON5_RF_1" = "y" ]; then
-config LEON5_RFCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_RFCFG_2
     int
     default 1
 #   fi
 #   mainmenu_option next_comment
 #   comment 'Cache memory Configuration  '
-config LEON5_CMCFG_TAG
+config LIB_GAISLER_LEON5_LEON5_LEON5_CMCFG_TAG
     int "Data Cache Tag "
     default 0
-config LEON5_CMCFG_DATA
+config LIB_GAISLER_LEON5_LEON5_LEON5_CMCFG_DATA
     int "Data Cache Data"
     default 0
 #   endmenu
@@ -78,122 +78,122 @@ config LEON5_CMCFG_DATA
 #            1MiB             CONFIG_LEON5_DTCM_1M" None
 #   endmenu
 #   if [ "$CONFIG_LEON5_ITCM_NONE" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 0
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_1K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_2
     int
     default 7
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_2K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_3
     int
     default 8
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_4K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_4
     int
     default 9
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_8K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_5
     int
     default 10
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_16K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_6
     int
     default 11
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_32K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_7
     int
     default 12
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_64K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_8
     int
     default 13
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_128K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_9
     int
     default 14
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_256K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_10
     int
     default 15
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_512K" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_11
     int
     default 16
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_1M" = "y" ]; then
-config LEON5_ITCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_12
     int
     default 17
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_NONE" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 0
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_1K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_2
     int
     default 7
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_2K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_3
     int
     default 8
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_4K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_4
     int
     default 9
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_8K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_5
     int
     default 10
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_16K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_6
     int
     default 11
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_32K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_7
     int
     default 12
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_64K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_8
     int
     default 13
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_128K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_9
     int
     default 14
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_256K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_10
     int
     default 15
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_512K" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_11
     int
     default 16
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_1M" = "y" ]; then
-config LEON5_DTCMCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_12
     int
     default 17
 #   fi
@@ -210,32 +210,32 @@ config LEON5_DTCMCFG
 # 	   RTL-based-error-correction	CONFIG_CACHE_FT_RTL" None
 #   endmenu
 #   if [ "$CONFIG_IUFT_NONE" = "y" ]; then
-config LEON5_RF_FTCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_RF_FTCFG
     int
     default 0
 #   fi
 #   if [ "$CONFIG_IUFT_TECHSPEC" = "y" ]; then
-config LEON5_RF_FTCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_RF_FTCFG_2
     int
     default 16
 #   fi
 #   if [ "$CONFIG_IUFT_RTL" = "y" ]; then
-config LEON5_RF_FTCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_RF_FTCFG_3
     int
     default 32
 #   fi
 #   if [ "$CONFIG_CACHE_FT_NONE" = "y" ]; then
-config LEON5_CACHE_FTCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_CACHE_FTCFG
     int
     default 0
 #   fi
 #   if [ "$CONFIG_CACHE_FT_TECHSPEC" = "y" ]; then
-config LEON5_CACHE_FTCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_CACHE_FTCFG_2
     int
     default 16
 #   fi
 #   if [ "$CONFIG_CACHE_FT_RTL" = "y" ]; then
-config LEON5_CACHE_FTCFG
+config LIB_GAISLER_LEON5_LEON5_LEON5_CACHE_FTCFG_3
     int
     default 32
 #   fi
@@ -244,11 +244,11 @@ config LEON5_CACHE_FTCFG
 #          64-bit                 CONFIG_AHB_64BIT \
 #          128-bit                CONFIG_AHB_128BIT" 64-bit
 #   if [ "$CONFIG_CACHE_32BIT" != "y" ]; then
-config BWMASK
+config LIB_GAISLER_LEON5_LEON5_BWMASK
     hex "Wide slave AHB bus map                         "
     default 0000
 #   fi
-config CACHE_FIXED
+config LIB_GAISLER_LEON5_LEON5_CACHE_FIXED
     hex "Fixed cacheability map  "
     default 0
 

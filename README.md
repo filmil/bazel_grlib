@@ -8,36 +8,34 @@ This repository contains a Bazel-based build system for GRLIB VHDL designs.
 
 ## Configuration
 
-This repository uses `rules_kconfig` to manage hardware configuration. You can define your hardware parameters in the root `Kconfig` file.
+This repository uses `rules_kconfig` to manage hardware configuration. Every GRLIB component's configuration is namespaced to avoid collisions.
 
-To set configuration values, you can use Bazel command-line flags. Each Kconfig symbol is mapped to a Bazel build setting in the `@grlib_config` repository.
+### Namespacing
 
-### Setting values via command line
+Symbols are prefixed with their GRLIB path. For example, `IU_NWINDOWS` defined in `lib/gaisler/leon3/leon3.in` becomes:
 
-For a boolean option `CONFIG_GRLIB_DUMMY`:
+`@grlib_config//:CONFIG_LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS`
 
-```bash
-# To enable (True)
-bazel build --@grlib_config//:CONFIG_GRLIB_DUMMY=True //...
+### Promoting a Design Configuration
 
-# To disable (False)
-bazel build --@grlib_config//:CONFIG_GRLIB_DUMMY=False //...
-```
-
-For integer or string options:
+To make a specific design's configuration the "active" one (mapping namespaced symbols like `DESIGNS_LEON3MP_IU_NWINDOWS` back to the generic `CFG_IU_NWINDOWS` expected by VHDL), set the `ACTIVE_DESIGN_PREFIX`:
 
 ```bash
-bazel build --@grlib_config//:CONFIG_MY_INT=42 //...
-bazel build --@grlib_config//:CONFIG_MY_STRING="hello" //...
+# Example: Activate the LEON3MP design configuration
+bazel build --@grlib_config//:CONFIG_ACTIVE_DESIGN_PREFIX=DESIGNS_LEON3MP //...
 ```
 
-### Setting values via .bazelrc
+### Setting individual values
 
-You can also add these flags to your `user.bazelrc` or `.bazelrc`:
+You can override any namespaced value via the command line:
 
-```text
-build --@grlib_config//:CONFIG_GRLIB_DUMMY=True
+```bash
+bazel build --@grlib_config//:CONFIG_LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS=16 //...
 ```
+
+### Reference
+
+See `docs/example.bazelrc` for a full list of available namespaced parameters.
 
 ## Usage
 

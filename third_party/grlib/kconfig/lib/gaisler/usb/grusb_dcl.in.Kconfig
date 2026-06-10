@@ -1,4 +1,4 @@
-config GRUSB_DCL
+config LIB_GAISLER_USB_GRUSB_DCL_GRUSB_DCL
     bool "USB Debug Communication Link"
 # if [ "$CONFIG_GRUSB_DCL" = "y" ]; then
 #   choice 'USB Transceiver Interface' \

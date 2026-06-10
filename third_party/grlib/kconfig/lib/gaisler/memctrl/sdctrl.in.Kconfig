@@ -1,17 +1,17 @@
 
 #   mainmenu_option next_comment
 #   comment 'PC133 SDRAM controller             '
-config SDCTRL
+config LIB_GAISLER_MEMCTRL_SDCTRL_SDCTRL
     bool "Enable PC133 SDRAM controller       "
 #     if [ "$CONFIG_SDCTRL" = "y" ]; then
-config SDCTRL_BUS64
+config LIB_GAISLER_MEMCTRL_SDCTRL_SDCTRL_BUS64
     bool "64-bit SDRAM data bus"
-config SDCTRL_INVCLK
+config LIB_GAISLER_MEMCTRL_SDCTRL_SDCTRL_INVCLK
     bool "Unsynchronized sdclock"
-config SDCTRL_PAGE
+config LIB_GAISLER_MEMCTRL_SDCTRL_SDCTRL_PAGE
     bool "Enable page burst operation     "
 #       if [ "$CONFIG_SDCTRL_PAGE" = "y" ]; then
-config SDCTRL_PROGPAGE
+config LIB_GAISLER_MEMCTRL_SDCTRL_SDCTRL_PROGPAGE
     bool "Enable programmable page burst "
 #       fi
 #     fi

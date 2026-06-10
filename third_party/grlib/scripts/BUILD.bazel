@@ -40,6 +40,19 @@ go_binary(
 )
 
 go_library(
+    name = "gen_master_kconfig_lib",
+    srcs = ["gen_master_kconfig.go"],
+    importpath = "grlib/third_party/grlib/scripts/gen_master_kconfig",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "gen_master_kconfig",
+    embed = [":gen_master_kconfig_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
     name = "gen_example_bazelrc_lib",
     srcs = ["gen_example_bazelrc.go"],
     importpath = "grlib/third_party/grlib/scripts/gen_example_bazelrc",

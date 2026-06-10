@@ -1,7 +1,7 @@
-config SPW_ENABLE
+config LIB_GAISLER_SPACEWIRE_SPACEWIRE_SPW_ENABLE
     bool "Enable Spacewire links              "
 #   if [ "$CONFIG_SPW_ENABLE" = "y" ]; then
-config SPW_NUM
+config LIB_GAISLER_SPACEWIRE_SPACEWIRE_SPW_NUM
     int "Number of links (1 - 3)"
     default 1
 #       choice 'AHB RX/TX FIFO size (32-bit words)     ' \
@@ -13,7 +13,7 @@ config SPW_NUM
 # 	"16	CONFIG_SPW_RXFIFO16	 \
 # 	 32	CONFIG_SPW_RXFIFO32	 \
 # 	 64	CONFIG_SPW_RXFIFO64" 16
-config SPW_RMAP
+config LIB_GAISLER_SPACEWIRE_SPACEWIRE_SPW_RMAP
     bool "Enable RMAP protocol   "
 #     if [ "$CONFIG_SPW_RMAP" = "y" ]; then
 #       choice 'RMAP buffer size (bytes)    ' \
@@ -22,9 +22,9 @@ config SPW_RMAP
 # 	 192	CONFIG_SPW_RMAPBUF6	 \
 # 	 256	CONFIG_SPW_RMAPBUF8" 64
 #     fi
-config SPW_RMAPCRC
+config LIB_GAISLER_SPACEWIRE_SPACEWIRE_SPW_RMAPCRC
     bool "Enable RMAP CRC check  "
-config SPW_RXUNAL
+config LIB_GAISLER_SPACEWIRE_SPACEWIRE_SPW_RXUNAL
     bool "Enable Rx unaligned transfers "
 #     if [ "$CONFIG_SPW_GRSPW1" = "y" ]; then
 #       choice 'GRSPW1 FIFO protection           ' \
@@ -40,19 +40,19 @@ config SPW_RXUNAL
 # 	 BCH  		CONFIG_SPW_FT_BCH \
 # 	 TechSpec	CONFIG_SPW_FT_TECHSPEC" None
 #     fi
-config SPW_NETLIST
+config LIB_GAISLER_SPACEWIRE_SPACEWIRE_SPW_NETLIST
     bool "Use GRSPWC netlist     "
-config SPW_PORTS
+config LIB_GAISLER_SPACEWIRE_SPACEWIRE_SPW_PORTS
     int "Number of ports (1 - 2)"
     default 1
 #     choice 'Select GRSPW core (GRSPW1/GRSPW2) ' \
 # 	"1	CONFIG_SPW_GRSPW1	 \
 # 	 2	CONFIG_SPW_GRSPW2" 2 
 #     if [ "$CONFIG_SPW_GRSPW2" = "y" ]; then
-config SPW_DMACHAN
+config LIB_GAISLER_SPACEWIRE_SPACEWIRE_SPW_DMACHAN
     int "Number of DMA channels (1 - 4)"
     default 1
-config SPW_RTSAME
+config LIB_GAISLER_SPACEWIRE_SPACEWIRE_SPW_RTSAME
     bool "Receiver and transmitter uses same clock  "
 #       choice 'Select receiver clock type ' \
 # 	"SDR       CONFIG_SPW_RX_SDR	 \

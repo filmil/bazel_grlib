@@ -1,16 +1,16 @@
-config PARTIAL
+config LIB_TESTGROUPPOLITO_PR_PR_PARTIAL
     bool "Enable Partial Reconfiguration  "
 #   if [ "$CONFIG_PARTIAL" = "y" ]; then
-config CRC
+config LIB_TESTGROUPPOLITO_PR_PR_CRC
     bool "Enable Bitstream Verification (D2PRC-CRC mode)"
 #         if [ "$CONFIG_CRC" = "y" ]; then
 #           integer 'CRC block size ' CONFIG_BLOCK 100
 #         fi
 #         if [ "$CONFIG_CRC" = "n" ] ; then
-config EDAC
+config LIB_TESTGROUPPOLITO_PR_PR_EDAC
     bool "Enable Bitstream EDAC (D2PRC-SECDED mode)"
 #           if [ "$CONFIG_EDAC" = "n" ] ; then
-config DCM_FIFO
+config LIB_TESTGROUPPOLITO_PR_PR_DCM_FIFO
     bool "Async Mode "
 #           fi
 #         fi

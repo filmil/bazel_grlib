@@ -1,8 +1,8 @@
 #     if ["$CONFIG_GRETH_ENABLE" = "y" ]; then
-config GRETH2_ENABLE
+config LIB_GAISLER_GRETH_GRETH2_GRETH2_ENABLE
     bool "Enable second Gaisler Research 10/100/1000 Mbit Ethernet MAC "
 #       if [ "$CONFIG_GRETH2_ENABLE" = "y" ]; then
-config GRETH2_GIGA
+config LIB_GAISLER_GRETH_GRETH2_GRETH2_GIGA
     bool "Enable 1000 Mbit support    "
 #         if [ "$CONFIG_GRETH2_GIGA" = "n" ]; then
 #           choice 'AHB FIFO size (words)            ' \

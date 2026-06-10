@@ -21,6 +21,7 @@ func main() {
 
 	genBuildFiles := ""
 	in2kconfig := ""
+	genMasterKconfig := ""
 	for i := 1; i < len(os.Args); i++ {
 		if os.Args[i] == "--gen_build_files" && i+1 < len(os.Args) {
 			genBuildFiles = os.Args[i+1]
@@ -38,13 +39,21 @@ func main() {
 				}
 			}
 			i++
+		} else if os.Args[i] == "--gen_master_kconfig" && i+1 < len(os.Args) {
+			genMasterKconfig = os.Args[i+1]
+			if !filepath.IsAbs(genMasterKconfig) {
+				if abs, err := filepath.Abs(genMasterKconfig); err == nil {
+					genMasterKconfig = abs
+				}
+			}
+			i++
 		} else if os.Args[i] == "--check" {
 			checkMode = true
 		}
 	}
 
-	if genBuildFiles == "" || in2kconfig == "" {
-		fmt.Fprintf(os.Stderr, "Usage: %s --gen_build_files <path> --in2kconfig <path> [--check]\n", os.Args[0])
+	if genBuildFiles == "" || in2kconfig == "" || genMasterKconfig == "" {
+		fmt.Fprintf(os.Stderr, "Usage: %s --gen_build_files <path> --in2kconfig <path> --gen_master_kconfig <path> [--check]\n", os.Args[0])
 		os.Exit(1)
 	}
 
@@ -72,6 +81,8 @@ func main() {
 		// 2. Run in2kconfig
 		tmpKconfigDir := filepath.Join(tmpDir, "kconfig")
 		runScript(in2kconfig, grlibSrcs, tmpKconfigDir)
+
+		// 3. Run gen_master_kconfig (doesn't support output redirection easily, skip root Kconfig check)
 
 		// Compare
 		outOfSync := false
@@ -108,7 +119,13 @@ func main() {
 	} else {
 		fmt.Println("Synchronizing files...")
 		runScript(genBuildFiles, grlibSrcs, "third_party/grlib/grlib.BUILD")
-		runScript(in2kconfig, grlibSrcs, "third_party/grlib/kconfig")
+		
+		kconfigDir := "third_party/grlib/kconfig"
+		os.RemoveAll(kconfigDir)
+		os.MkdirAll(kconfigDir, 0755)
+		runScript(in2kconfig, grlibSrcs, kconfigDir)
+		
+		runScript(genMasterKconfig)
 		fmt.Println("Files synchronized.")
 	}
 }

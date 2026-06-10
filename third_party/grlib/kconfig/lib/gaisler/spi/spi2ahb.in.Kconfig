@@ -1,26 +1,26 @@
-config SPI2AHB
+config LIB_GAISLER_SPI_SPI2AHB_SPI2AHB
     bool "Enable SPI to AHB bridge "
 #    if [ "$CONFIG_SPI2AHB" = "y" ]; then
-config SPI2AHB_APB
+config LIB_GAISLER_SPI_SPI2AHB_SPI2AHB_APB
     bool "Enable APB interface   "
-config SPI2AHB_ADDRH
+config LIB_GAISLER_SPI_SPI2AHB_SPI2AHB_ADDRH
     hex "AHB protection address (high) "
     default 0000
-config SPI2AHB_ADDRL
+config LIB_GAISLER_SPI_SPI2AHB_SPI2AHB_ADDRL
     hex "AHB protection address (low) "
     default 0000
-config SPI2AHB_MASKH
+config LIB_GAISLER_SPI_SPI2AHB_SPI2AHB_MASKH
     hex "AHB protection mask (high) "
     default 0000
-config SPI2AHB_MASKL
+config LIB_GAISLER_SPI_SPI2AHB_SPI2AHB_MASKL
     hex "AHB protection mask (low) "
     default 0000
-config SPI2AHB_RESEN
+config LIB_GAISLER_SPI_SPI2AHB_SPI2AHB_RESEN
     bool "Enable after reset  "
-config SPI2AHB_CPOL
+config LIB_GAISLER_SPI_SPI2AHB_SPI2AHB_CPOL
     hex "Clock polarity "
     default 0
-config SPI2AHB_CPHA
+config LIB_GAISLER_SPI_SPI2AHB_SPI2AHB_CPHA
     hex "Clock phase    "
     default 0
 #    fi

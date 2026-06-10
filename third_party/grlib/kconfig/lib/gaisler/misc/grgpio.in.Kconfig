@@ -1,11 +1,11 @@
 
-config GRGPIO_ENABLE
+config LIB_GAISLER_MISC_GRGPIO_GRGPIO_ENABLE
     bool "Enable generic GPIO port              "
 #     if [ "$CONFIG_GRGPIO_ENABLE" = "y" ]; then
-config GRGPIO_WIDTH
+config LIB_GAISLER_MISC_GRGPIO_GRGPIO_WIDTH
     int "GPIO width            "
     default 8
-config GRGPIO_IMASK
+config LIB_GAISLER_MISC_GRGPIO_GRGPIO_IMASK
     hex "GPIO interrupt mask   "
     default 0000
 #     fi

@@ -10,7 +10,8 @@ genrule(
     name = "gen_config_vhd",
     srcs = ["@grlib_config//:config_h"],
     outs = ["config.vhd"],
-    cmd = "$(location //third_party/grlib/scripts:gen_config_vhd) $< $@",
+    cmd = "PREFIX=$$(grep 'CONFIG_ACTIVE_DESIGN_PREFIX' $< | awk '{print $$3}' | tr -d '\"'); " +
+          "$(location //third_party/grlib/scripts:gen_config_vhd) --prefix \"$$PREFIX\" $< $@",
     tools = ["//third_party/grlib/scripts:gen_config_vhd"],
     visibility = ["//visibility:public"],
 )

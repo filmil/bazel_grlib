@@ -1,21 +1,21 @@
 # mainmenu_option next_comment
 #     comment 'MIG memory controller   '
-config MIG_DDR2
+config LIB_GAISLER_DDR_MIG_MIG_DDR2
     bool "Enable Xilinx MIG memory controller"
 #         if [ "$CONFIG_MIG_DDR2" = "y" ]; then
-config MIG_RANKS
+config LIB_GAISLER_DDR_MIG_MIG_RANKS
     int "Chip selects (ranks)  "
     default 1
-config MIG_COLBITS
+config LIB_GAISLER_DDR_MIG_MIG_COLBITS
     int "Column bits  "
     default 10
-config MIG_ROWBITS
+config LIB_GAISLER_DDR_MIG_MIG_ROWBITS
     int "Row bits     "
     default 13
-config MIG_BANKBITS
+config LIB_GAISLER_DDR_MIG_MIG_BANKBITS
     int "Bank bits    "
     default 2
-config MIG_HMASK
+config LIB_GAISLER_DDR_MIG_MIG_HMASK
     hex "AHB HMASK    "
     default F00
 #         fi

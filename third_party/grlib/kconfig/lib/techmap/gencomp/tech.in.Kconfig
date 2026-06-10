@@ -76,12 +76,12 @@
 # 	GTH1		CONFIG_TRANS_GTH1" GTP0
 #   fi
 #   if [ "$CONFIG_SYN_INFERRED" != "y" ]; then
-config SYN_INFER_RAM
+config LIB_TECHMAP_GENCOMP_TECH_SYN_INFER_RAM
     bool "Infer RAM"
-config SYN_INFER_PADS
+config LIB_TECHMAP_GENCOMP_TECH_SYN_INFER_PADS
     bool "Infer pads"
 #   fi
-config SYN_NO_ASYNC
+config LIB_TECHMAP_GENCOMP_TECH_SYN_NO_ASYNC
     bool "Disable asynchronous reset"
-config SYN_SCAN
+config LIB_TECHMAP_GENCOMP_TECH_SYN_SCAN
     bool "Enable scan support       "

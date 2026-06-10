@@ -1,9 +1,9 @@
-config PCI_ARBITER
+config LIB_ESA_PCI_PCI_ARB_PCI_ARBITER
     bool "PCI arbiter  "
 #   if [ "$CONFIG_PCI_ARBITER" = "y" ]; then
-config PCI_ARBITER_APB
+config LIB_ESA_PCI_PCI_ARB_PCI_ARBITER_APB
     bool "PCI arbiter APB interface "
-config PCI_ARBITER_NREQ
+config LIB_ESA_PCI_PCI_ARB_PCI_ARBITER_NREQ
     int "Number of PCI REQ/GNT pairs"
     default 4
 #   fi

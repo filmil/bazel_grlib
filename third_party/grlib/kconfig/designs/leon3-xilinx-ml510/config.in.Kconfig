@@ -8,7 +8,7 @@
 #
 
 #define_bool CONFIG_MCTRL_RMW y
-config HAS_SHARED_GRFPU
+config DESIGNS_LEON3_XILINX_ML510_CONFIG_HAS_SHARED_GRFPU
     bool
     default y
 
@@ -16,7 +16,7 @@ config HAS_SHARED_GRFPU
 
 # mainmenu_option next_comment
 #   comment 'Synthesis      '
-rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+# Original source: lib/techmap/gencomp/tech.in
 #   choice 'Target selection                                      ' \
 # 	"Virtex5-QV	CONFIG_DEVICE_XQR5V \
 #         Virtex5-Commercial		CONFIG_DEVICE_COMMERCIAL" CONFIG_DEVICE_XQR5V
@@ -24,18 +24,18 @@ rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
 
 # mainmenu_option next_comment
 #   comment 'Clock generation'
-rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+# Original source: lib/techmap/clocks/clkgen.in
 # endmenu
 
-rsource "../../../../lib/gaisler/subsys/leon_dsu_stat_base.in.Kconfig"
-rsource "../../../../lib/gaisler/l2cache/l2c.in.Kconfig"
-rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+# Original source: lib/gaisler/subsys/leon_dsu_stat_base.in
+# Original source: lib/gaisler/l2cache/l2c.in
+# Original source: lib/grlib/amba/amba.in
 
 # mainmenu_option next_comment
 #   comment 'Debug Link           '
-rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
-rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
-rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
+# Original source: lib/gaisler/uart/dcom.in
+# Original source: lib/gaisler/jtag/jtag.in
+# Original source: lib/gaisler/net/edcl.in
 # endmenu
 
 # mainmenu_option next_comment
@@ -43,61 +43,61 @@ rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
 
 #   mainmenu_option next_comment
 #   comment 'Memory controller             '
-rsource "../../../../lib/esa/memoryctrl/mctrl.in.Kconfig"
-rsource "../../../../lib/gaisler/memctrl/ftmctrl.in.Kconfig"
-rsource "../../../../lib/gaisler/ddr/ddr2sp.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
+# Original source: lib/esa/memoryctrl/mctrl.in
+# Original source: lib/gaisler/memctrl/ftmctrl.in
+# Original source: lib/gaisler/ddr/ddr2sp.in
+# Original source: lib/gaisler/misc/ahbstat.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'On-chip RAM/ROM                 '
-rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/ftahbram.in.Kconfig"
+# Original source: lib/gaisler/misc/ahbrom.in
+# Original source: lib/gaisler/misc/ahbram.in
+# Original source: lib/gaisler/misc/ftahbram.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'Ethernet             '
-rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
-rsource "../../../../lib/gaisler/greth/greth2.in.Kconfig"
+# Original source: lib/gaisler/greth/greth.in
+# Original source: lib/gaisler/greth/greth2.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'UART, timer, I/O port, IRQ controller, statistics'
-rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
-rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+# Original source: lib/gaisler/uart/uart1.in
+# Original source: lib/gaisler/irqmp/irqmp.in
+# Original source: lib/gaisler/misc/gptimer.in
+# Original source: lib/gaisler/misc/grgpio.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'I2C and SPI '
-rsource "../../../../lib/gaisler/i2c/i2c.in.Kconfig"
-rsource "../../../../lib/gaisler/spi/spictrl.in.Kconfig"
+# Original source: lib/gaisler/i2c/i2c.in
+# Original source: lib/gaisler/spi/spictrl.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'PCI              '
 #     mainmenu_option next_comment
 #     comment 'GRPCI2         '
-rsource "../../../../lib/gaisler/pci/grpci2/grpci2.in.Kconfig"
+# Original source: lib/gaisler/pci/grpci2/grpci2.in
 #     endmenu
-rsource "../../../../lib/esa/pci/pci_arb.in.Kconfig"
+# Original source: lib/esa/pci/pci_arb.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'VGA interface'
-rsource "../../../../lib/gaisler/misc/svgactrl.in.Kconfig"
+# Original source: lib/gaisler/misc/svgactrl.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'System ACE and System Monitor'
-rsource "../../../../lib/gaisler/misc/gracectrl.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/grsysmon.in.Kconfig"
+# Original source: lib/gaisler/misc/gracectrl.in
+# Original source: lib/gaisler/misc/grsysmon.in
 #   endmenu
 # endmenu
 
 # mainmenu_option next_comment
 # comment 'VHDL Debugging        '
-rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+# Original source: lib/grlib/util/debug.in
 # endmenu

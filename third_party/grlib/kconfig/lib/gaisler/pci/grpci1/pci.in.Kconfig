@@ -1,8 +1,8 @@
 #   if [ "$CONFIG_PCI_SIMPLE_TARGET" = "y" -o "$CONFIG_PCI_MASTER_TARGET" = "y" -o "$CONFIG_PCI_ACTEL" = "y" ]; then
-config PCI_VENDORID
+config LIB_GAISLER_PCI_GRPCI1_PCI_PCI_VENDORID
     hex "PCI vendor ID"
     default 1AC8
-config PCI_DEVICEID
+config LIB_GAISLER_PCI_GRPCI1_PCI_PCI_DEVICEID
     hex "PCI device ID"
     default 0054
 #    hex 'PCI revision ID'   CONFIG_PCI_REVID 1
@@ -14,7 +14,7 @@ config PCI_DEVICEID
 # 	  32		CONFIG_PCI_FIFO32 \
 # 	  64		CONFIG_PCI_FIFO64 \
 # 	  128 		CONFIG_PCI_FIFO128" 8
-config PCI_HADDR
+config LIB_GAISLER_PCI_GRPCI1_PCI_PCI_HADDR
     hex "PCI initiator address (haddr[31:20]) "
     default E00
 #     fi

@@ -1,16 +1,16 @@
-config CAN_ENABLE
+config LIB_GAISLER_CAN_CAN_OC_CAN_ENABLE
     bool "Enable CAN interface                 "
 #     if [ "$CONFIG_CAN_ENABLE" = "y" ]; then
-config CANIO
+config LIB_GAISLER_CAN_CAN_OC_CANIO
     hex "CAN I/O area start address (haddr[19:8]) "
     default C00
-config CANIRQ
+config LIB_GAISLER_CAN_CAN_OC_CANIRQ
     int "Interrupt number                      "
     default 13
-config CANLOOP
+config LIB_GAISLER_CAN_CAN_OC_CANLOOP
     bool "Enable loop-back testing             "
-config CAN_SYNCRST
+config LIB_GAISLER_CAN_CAN_OC_CAN_SYNCRST
     bool "Enable synchronous reset             "
-config CAN_FT
+config LIB_GAISLER_CAN_CAN_OC_CAN_FT
     bool "Enable FT FIFO memory                "
 #     fi

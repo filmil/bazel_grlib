@@ -1,12 +1,12 @@
-config GRHSSL_ENABLE
+config LIB_GAISLER_HSSL_HSSL_GRHSSL_ENABLE
     bool "Enable High-Speed Serial Link         "
     
 #     if [ "$CONFIG_GRHSSL_ENABLE" = "y" ]; then
-config GRHSSL_NUM
+config LIB_GAISLER_HSSL_HSSL_GRHSSL_NUM
     int "Number of High-Speed Serial Links     "
     default 1
-config GRHSSL_SPFI
+config LIB_GAISLER_HSSL_HSSL_GRHSSL_SPFI
     bool "Enable internal SpaceFibre codec      "
-config GRHSSL_WIZL
+config LIB_GAISLER_HSSL_HSSL_GRHSSL_WIZL
     bool "Enable internal WizardLink codec      "
 #     fi

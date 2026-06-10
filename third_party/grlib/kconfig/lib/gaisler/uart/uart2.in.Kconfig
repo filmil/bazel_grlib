@@ -1,4 +1,4 @@
-config UART2_ENABLE
+config LIB_GAISLER_UART_UART2_UART2_ENABLE
     bool "Enable secondary UART                "
 #     if [ "$CONFIG_UART2_ENABLE" = "y" ]; then
 #         choice 'UART2 FIFO depth' \

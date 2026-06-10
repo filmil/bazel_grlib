@@ -4,23 +4,23 @@
 
 # mainmenu_option next_comment
 #   comment 'Synthesis      '
-rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+# Original source: lib/techmap/gencomp/tech.in
 # endmenu
 
 # mainmenu_option next_comment
 #   comment 'Clock generation'
-rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+# Original source: lib/techmap/clocks/clkgen.in
 # endmenu
 
-rsource "../../../../lib/gaisler/noelv/noelv.in.Kconfig"
-rsource "../../../../lib/gaisler/l2cache/l2c.in.Kconfig"
-rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+# Original source: lib/gaisler/noelv/noelv.in
+# Original source: lib/gaisler/l2cache/l2c.in
+# Original source: lib/grlib/amba/amba.in
 
 # mainmenu_option next_comment
 #   comment 'Debug Link           '
-rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
-rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
-rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
+# Original source: lib/gaisler/uart/dcom.in
+# Original source: lib/gaisler/jtag/jtag.in
+# Original source: lib/gaisler/net/edcl.in
 # endmenu
 
 # mainmenu_option next_comment
@@ -28,11 +28,11 @@ rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
 
 #   mainmenu_option next_comment
 #   comment 'Memory controllers             '
-rsource "../../../../lib/gaisler/ddr/mig_7series.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
+# Original source: lib/gaisler/ddr/mig_7series.in
+# Original source: lib/gaisler/misc/ahbstat.in
 #   endmenu
 
-rsource "../../../../lib/gaisler/nandfctrl2/nandfctrl2.in.Kconfig"
+# Original source: lib/gaisler/nandfctrl2/nandfctrl2.in
 
 #  mainmenu_option next_comment
 #  comment 'On-chip RAM/ROM                 '
@@ -42,35 +42,35 @@ rsource "../../../../lib/gaisler/nandfctrl2/nandfctrl2.in.Kconfig"
 
 #   mainmenu_option next_comment
 #   comment 'Ethernet             '
-rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
+# Original source: lib/gaisler/greth/greth.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'UARTs, timers and irq control         '
 #    source lib/gaisler/uart/uart1.in
 #    source lib/gaisler/misc/gptimer.in
-rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+# Original source: lib/gaisler/misc/grgpio.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'SPW'
     #source lib/gaisler/spacewire/spacewire.in
-rsource "../../../../lib/gaisler/spacewire/router.in.Kconfig"
+# Original source: lib/gaisler/spacewire/router.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'CANFD'
-rsource "../../../../lib/gaisler/canfd/grcanfd.in.Kconfig"
+# Original source: lib/gaisler/canfd/grcanfd.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'HSSL'
-rsource "../../../../lib/gaisler/hssl/hssl.in.Kconfig"
+# Original source: lib/gaisler/hssl/hssl.in
 #   endmenu
 
 # endmenu
 
 # mainmenu_option next_comment
 # comment 'VHDL Debugging        '
-rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+# Original source: lib/grlib/util/debug.in
 # endmenu

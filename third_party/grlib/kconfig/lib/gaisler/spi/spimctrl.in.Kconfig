@@ -1,49 +1,49 @@
 #   mainmenu_option next_comment
 #   comment 'SPI memory controller '
-config SPIMCTRL
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL
     bool "Enable SPI memory controller    "
 #     if [ "$CONFIG_SPIMCTRL" = "y" ]; then
-config SPIMCTRL_READCMD
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_READCMD
     hex "Read instruction    "
     default 0B
-config SPIMCTRL_DUMMYBYTE
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_DUMMYBYTE
     bool "Read instruction requires dummy byte  "
-config SPIMCTRL_DUALOUTPUT
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_DUALOUTPUT
     bool "Enable dual output  "
-config SPIMCTRL_QUADOUTPUT
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_QUADOUTPUT
     bool "Enable quad output  "
-config SPIMCTRL_DUALINPUT
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_DUALINPUT
     bool "Enable dual input  "
-config SPIMCTRL_QUADINPUT
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_QUADINPUT
     bool "Enable quad input  "
-config SPIMCTRL_DSPI
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_DSPI
     bool "Enable DSPI mode  "
-config SPIMCTRL_QSPI
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_QSPI
     bool "Enable QSPI mode  "
-config SPIMCTRL_DUMMYCYCLES
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_DUMMYCYCLES
     int "Number of dummy cycles  "
     default 0
-config SPIMCTRL_EXTADDR
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_EXTADDR
     bool "Use 4 byte address instead of 3  "
-config SPIMCTRL_OFFSET
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_OFFSET
     hex "Address offset     "
     default 0
-config SPIMCTRL_SCALER
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_SCALER
     int "Clock divisor for device clock"
     default 1
-config SPIMCTRL_ASCALER
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_ASCALER
     int "Clock divisor for alt. device clock"
     default 8
-config SPIMCTRL_RECONF
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_RECONF
     bool "Enables writes for configuration register  "
-config SPIMCTRL_WRITECMD
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_WRITECMD
     hex "Write instruction    "
     default 02
-config SPIMCTRL_WRITES
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_WRITES
     bool "Allow ROM area writes  "
-config SPIMCTRL_XIPBYTE
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_XIPBYTE
     bool "Send XIP byte  "
-config SPIMCTRL_XIPPOL
+config LIB_GAISLER_SPI_SPIMCTRL_SPIMCTRL_XIPPOL
     int "XIP disable bit polarity  "
     default 1
 #     fi

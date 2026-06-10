@@ -14,22 +14,22 @@
 #     if [ "$CONFIG_CLK_DCM" = "y" -o "$CONFIG_CLK_ALTDLL" = "y" \
 #                                  -o "$CONFIG_CLK_LATDLL" = "y" \
 # 	-o "$CONFIG_CLK_CLKDLL" = "y" -o "$CONFIG_CLK_LIB18T" = "y"]; then
-config CLK_MUL
+config LIB_TECHMAP_GENCOMP_CLKGEN_CLK_MUL
     int "Clock multiplication factor (2 - 32)"
     default 2
-config CLK_DIV
+config LIB_TECHMAP_GENCOMP_CLKGEN_CLK_DIV
     int "Clock division factor (2 - 32)"
     default 2
 #     fi
 #     if [ "$CONFIG_CLK_CLKDLL" = "y" -o "$CONFIG_CLK_DCM" = "y" ]; then
-config PCI_CLKDLL
+config LIB_TECHMAP_GENCOMP_CLKGEN_PCI_CLKDLL
     bool "Enable Xilinx CLKDLL for PCI clock"
 #     fi
 #     if [ "$CONFIG_CLK_DCM" = "y" ]; then
-config CLK_NOFB
+config LIB_TECHMAP_GENCOMP_CLKGEN_CLK_NOFB
     bool "Disable external feedback for SDRAM clock"
 #     fi
 #   if [ "$CONFIG_PCI_ENABLE" != "y" ]; then
-config PCI_SYSCLK
+config LIB_TECHMAP_GENCOMP_CLKGEN_PCI_SYSCLK
     bool "Use PCI clock as system clock"
 #   fi

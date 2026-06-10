@@ -1,26 +1,26 @@
 #   mainmenu_option next_comment
 #   comment '8/32-bit PROM/SRAM controller with EDAC'
-config SRCTRLFT
+config LIB_GAISLER_MEMCTRL_FTSRCTRL_SRCTRLFT
     bool "Enable 32-bit PROM/SRAM controller    "
 #     if [ "$CONFIG_SRCTRLFT" = "y" ]; then
-config SRCTRLFT_APBEN
+config LIB_GAISLER_MEMCTRL_FTSRCTRL_SRCTRLFT_APBEN
     bool "Enable APB interface"
 #       if [ "$CONFIG_SRCTRLFT_APBEN" != "y" ]; then
-config SRCTRLFT_PROMWS
+config LIB_GAISLER_MEMCTRL_FTSRCTRL_SRCTRLFT_PROMWS
     int "PROM waitstates"
     default 3
-config SRCTRLFT_RAMWS
+config LIB_GAISLER_MEMCTRL_FTSRCTRL_SRCTRLFT_RAMWS
     int "RAM waitstates"
     default 0
-config SRCTRLFT_IOWS
+config LIB_GAISLER_MEMCTRL_FTSRCTRL_SRCTRLFT_IOWS
     int "IO waitstates"
     default 0
 #       fi
-config SRCTRLFT_RMW
+config LIB_GAISLER_MEMCTRL_FTSRCTRL_SRCTRLFT_RMW
     bool "Use read-modify-write for sub-word writes  "
-config SRCTRLFT_8BIT
+config LIB_GAISLER_MEMCTRL_FTSRCTRL_SRCTRLFT_8BIT
     bool "8-bit PROM interface "
-config SRCTRLFT_EDAC
+config LIB_GAISLER_MEMCTRL_FTSRCTRL_SRCTRLFT_EDAC
     bool "Enable EDAC                     "
 
 #       choice 'SRAM banks' \
@@ -99,6 +99,6 @@ config SRCTRLFT_EDAC
 #          	   256_MByte CONFIG_SRCTRLFT_ROMBANKSZDEF15" 0
 #          fi
 #     fi
-config SRCTRLFT_NETLIST
+config LIB_GAISLER_MEMCTRL_FTSRCTRL_SRCTRLFT_NETLIST
     bool "Use VHDL/EDIF netlist           "
 #   endmenu

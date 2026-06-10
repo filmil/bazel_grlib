@@ -1,11 +1,11 @@
-config GRDMAC2_ENABLE
+config LIB_GAISLER_GRDMAC2_GRDMAC2_GRDMAC2_ENABLE
     bool "Enable GRDMAC2 interface              "
 #     if [ "$CONFIG_GRDMAC2_ENABLE" = "y" ]; then
 #       choice 'buffer size (bytes)    ' \
 #         "32	CONFIG_GRDMAC2DBITS32	 \
 # 	 64	CONFIG_GRDMAC2DBITS64	 \
 # 	 128	CONFIG_GRDMAC2DBITS128" 32
-config GRDMAC2FT
+config LIB_GAISLER_GRDMAC2_GRDMAC2_GRDMAC2FT
     bool "Enable fault tolerance "
 #       choice 'Enable accelerator ' \
 #         "0	CONFIG_GRDMAC2ACC0	 \

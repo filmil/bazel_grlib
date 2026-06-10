@@ -1,6 +1,6 @@
 
 # if [ "$CONFIG_GRETH_ENABLE" = "y" ]; then
-config DSU_ETH
+config LIB_GAISLER_NET_EDCL_DSU_ETH
     bool "Ethernet Debug Communication Link (EDCL)"
 #   if [ "$CONFIG_DSU_ETH" = "y" ]; then
 #     choice 'Ethernet/AHB bridge buffer size (kbytes)' \
@@ -9,22 +9,22 @@ config DSU_ETH
 # 	4		CONFIG_DSU_ETHSZ4 \
 # 	8		CONFIG_DSU_ETHSZ8 \
 # 	16		CONFIG_DSU_ETHSZ16" 2
-config DSU_IPMSB
+config LIB_GAISLER_NET_EDCL_DSU_IPMSB
     hex "MSB 16 bits of IP address (hex)       "
     default C0A8
-config DSU_IPLSB
+config LIB_GAISLER_NET_EDCL_DSU_IPLSB
     hex "LSB 16 bits of IP address (hex)       "
     default 0033
-config DSU_ETHMSB
+config LIB_GAISLER_NET_EDCL_DSU_ETHMSB
     hex "MSB 24 bits of ethern number (hex)    "
     default 020000
-config DSU_ETHLSB
+config LIB_GAISLER_NET_EDCL_DSU_ETHLSB
     hex "LSB 24 bits of ethern number (hex)    "
     default 000000
-config DSU_ETH_PROG
+config LIB_GAISLER_NET_EDCL_DSU_ETH_PROG
     bool "Programmable 4-bit LSB of MAC/IP address"
 #     if [ "$CONFIG_DSU_ETH_PROG" = "y" ]; then
-config DSU_ETH_DIS
+config LIB_GAISLER_NET_EDCL_DSU_ETH_DIS
     bool "EDCL disable pin                     "
 #     fi
 #   fi

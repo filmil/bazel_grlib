@@ -1,13 +1,13 @@
 #   mainmenu_option next_comment
 #   comment 'PROM/SRAM/SDRAM Memory controller with EDAC       '
-config MCTRLFT
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT
     bool "Enable PROM/SRAM/SDRAM memory controller  "
 #       if [ "$CONFIG_MCTRLFT" = "y" ]; then
-config MCTRLFT_8BIT
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_8BIT
     bool "8-bit PROM/SRAM bus support    "
-config MCTRLFT_16BIT
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_16BIT
     bool "16-bit PROM/SRAM bus support    "
-config MCTRLFT_5CS
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_5CS
     bool "5th SRAM chip-select  "
 #         choice 'PROM banks and sizes, or programmable' \
 #       	  "4xprogrammable 		   CONFIG_MCTRLFT_ROMASEL0 \
@@ -39,37 +39,37 @@ config MCTRLFT_5CS
 #       	   2x64_MByte  CONFIG_MCTRLFT_ROMASEL26 \
 #       	   2x128_MByte CONFIG_MCTRLFT_ROMASEL27 \
 #       	   2x256_MByte CONFIG_MCTRLFT_ROMASEL28" 4xprogrammable
-config MCTRLFT_SDRAM
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_SDRAM
     bool "SDRAM controller       "
 #     	if [ "$CONFIG_MCTRLFT_SDRAM" = "y" ]; then
-config MCTRLFT_SDRAM_SEPBUS
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_SDRAM_SEPBUS
     bool "Separate address and data buses"
 #     	  if [ "$CONFIG_MCTRLFT_SDRAM_SEPBUS" = "y" ]; then
-config MCTRLFT_SDRAM_BUS64
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_SDRAM_BUS64
     bool "64-bit SDRAM data bus"
 # 	  fi
-config MCTRLFT_SDRAM_INVCLK
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_SDRAM_INVCLK
     bool "Inverted sdclock"
-config MCTRLFT_PAGE
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_PAGE
     bool "Enable page burst operation     "
 #     	  if [ "$CONFIG_MCTRLFT_PAGE" = "y" ]; then
-config MCTRLFT_PROGPAGE
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_PROGPAGE
     bool "Enable programmable page burst "
 # 	  fi
 #         fi
-config MCTRLFT_EDAC
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_EDAC
     bool "Enable EDAC                     "
 #     	if [ "$CONFIG_MCTRLFT_EDAC" = "y" ]; then
-config MCTRLFT_EDACPIPE
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_EDACPIPE
     bool "Enable pipelined EDAC   "
 #         fi
 #     	if [ "$CONFIG_MCTRLFT_EDACPIPE" = "y" -a "$CONFIG_MCTRLFT_SDRAM" = "y"]; then
-config MCTRLFT_RSEDAC
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_RSEDAC
     bool "Enable Reed-Solomon EDAC   "
 #         fi
-config MCTRLFT_WFB
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_WFB
     bool "Extended data bus drive         "
-config MCTRLFT_NETLIST
+config LIB_GAISLER_MEMCTRL_FTMCTRL_MCTRLFT_NETLIST
     bool "Use FTMCTRL netlist             "
 #       fi
 #   endmenu

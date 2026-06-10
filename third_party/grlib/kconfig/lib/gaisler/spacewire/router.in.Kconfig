@@ -1,4 +1,4 @@
-config SPWRTR_ENABLE
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_ENABLE
     bool "Enable Spacewire routing switch               "
 #   if [ "$CONFIG_SPWRTR_ENABLE" = "y" ]; then
 #         choice 'Select SpaceWire link receiver input type ' \
@@ -12,7 +12,7 @@ config SPWRTR_ENABLE
 #         "SDR       CONFIG_SPW_TX_SDR	 \
 # 	 DDR       CONFIG_SPW_TX_DDR   \
 #          Aeroflex  CONFIG_SPW_TX_AFLEX " SDR   
-config SPWRTR_RTSAME
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_RTSAME
     bool "SpaceWire link receiver and transmitter uses same clock  "
 #         choice 'Port receiver and transmitter FIFO size (SpW characters) ' \
 # 	"16	CONFIG_SPWRTR_RXFIFO16	 \
@@ -23,36 +23,36 @@ config SPWRTR_RTSAME
 #          512	CONFIG_SPWRTR_RXFIFO512	 \
 #          1024	CONFIG_SPWRTR_RXFIFO1024 \
 # 	 2048	CONFIG_SPWRTR_RXFIFO2048 " 64
-config SPWRTR_TECHFIFO
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_TECHFIFO
     bool "Use technology specific RAM blocks for routing table and port FIFOs"
 #         choice 'Select SpaceWire RAM fault-tolerance ' \
 #         "NoFT   CONFIG_SPWRTR_FT_NOFT	 \
 # 	 Parity CONFIG_SPWRTR_FT_PAR   \
 #          TMR    CONFIG_SPWRTR_FT_TMR " NoFT   
-config SPWRTR_SPWEN
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_SPWEN
     bool "Enable Spacewire link ports "
 #         if [ "$CONFIG_SPWRTR_SPWEN" = "y" ]; then
-config SPWRTR_SPWPORTS
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_SPWPORTS
     int "Number of SpaceWire link ports (0 - 31)"
     default 2
 #         fi
-config SPWRTR_AMBAEN
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_AMBAEN
     bool "Enable AMBA ports "
 #         if [ "$CONFIG_SPWRTR_AMBAEN" = "y" ]; then
-config SPWRTR_AMBAPORTS
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_AMBAPORTS
     int "Number of AMBA ports (0 - 16)"
     default 0
 #         fi
-config SPWRTR_FIFOEN
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_FIFOEN
     bool "Enable FIFO ports "
 #         if [ "$CONFIG_SPWRTR_FIFOEN" = "y" ]; then
-config SPWRTR_FIFOPORTS
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_FIFOPORTS
     int "Number of FIFO ports (0 - 31)"
     default 0
 #         fi
 #         choice 'Select port arbitration ' \
 #         "Round-robin CONFIG_SPWRTR_ARB_RR" Round-robin   
-config SPWRTR_RMAP
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_RMAP
     bool "Enable hardware RMAP target in AMBA ports   "
 #         if [ "$CONFIG_SPWRTR_RMAP" = "y" ]; then
 #                 choice 'RMAP buffer size (bytes)    ' \
@@ -61,29 +61,29 @@ config SPWRTR_RMAP
 #         	 192	CONFIG_SPWRTR_RMAPBUF6	 \
 # 	         256	CONFIG_SPWRTR_RMAPBUF8" 64
 #         fi
-config SPWRTR_RMAPCRC
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_RMAPCRC
     bool "Enable RMAP CRC support in AMBA ports  "
-config SPWRTR_RXUNAL
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_RXUNAL
     bool "Enable Rx unaligned transfers in AMBA ports"
 #         choice 'AMBA port AHB RX/TX FIFO size (32-bit words)     ' \
 # 	"4	CONFIG_SPWRTR_FIFO2_4	 \
 # 	 8	CONFIG_SPWRTR_FIFO2_8	 \
 # 	 16	CONFIG_SPWRTR_FIFO2_16	 \
 # 	 32	CONFIG_SPWRTR_FIFO2_32" 16
-config SPWRTR_ALMOST
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_ALMOST
     int "FIFO port almost indication range"
     default 8
-config SPWRTR_DMACHAN
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_DMACHAN
     int "Number of DMA channels (1 - 4)"
     default 1
-config SPWRTR_AHBSLVEN
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_AHBSLVEN
     bool "Enable configuration port AHB slave interface   "
-config SPWRTR_TIMERBITS
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_TIMERBITS
     int "Number of bits for Timer prescaler (0 disables timer) "
     default 0
-config SPWRTR_PNP
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_PNP
     bool "SpaceWire Plug and Play      "
-config SPWRTR_AUTOSCRUB
+config LIB_GAISLER_SPACEWIRE_ROUTER_SPWRTR_AUTOSCRUB
     bool "Routing table Auto-scrubbing "
        
 #   fi

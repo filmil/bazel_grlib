@@ -1,10 +1,10 @@
 
 #   mainmenu_option next_comment
 #   comment 'Synchronous SRAM controller   '
-config SSCTRL
+config LIB_GAISLER_MEMCTRL_SSRCTRL_SSCTRL
     bool "Enable Synchronous SRAM controller    "
 #     if [ "$CONFIG_SSCTRL" = "y" ]; then
-config SSCTRL_PROM16
+config LIB_GAISLER_MEMCTRL_SSRCTRL_SSCTRL_PROM16
     bool "Enable 16-bit PROM support            "
 #     fi
 #   endmenu

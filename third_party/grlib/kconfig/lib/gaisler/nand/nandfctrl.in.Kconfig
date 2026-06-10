@@ -1,22 +1,22 @@
-config NANDFCTRL_ENABLE
+config LIB_GAISLER_NAND_NANDFCTRL_NANDFCTRL_ENABLE
     bool "NANDFCTRL - NAND Flash Memory Controller"
 # if [ "$CONFIG_NANDFCTRL_ENABLE" = "y" ]; then
-config NANDFCTRL_NTARGETS
+config LIB_GAISLER_NAND_NANDFCTRL_NANDFCTRL_NTARGETS
     int "Number of targets (1-4)"
     default 2
-config NANDFCTRL_NLANES
+config LIB_GAISLER_NAND_NANDFCTRL_NANDFCTRL_NLANES
     int "Number of lanes (1-8)"
     default 8
-config NANDFCTRL_PSIZE
+config LIB_GAISLER_NAND_NANDFCTRL_NANDFCTRL_PSIZE
     int "Page buffer size (bytes)"
     default 4096
-config NANDFCTRL_SSIZE
+config LIB_GAISLER_NAND_NANDFCTRL_NANDFCTRL_SSIZE
     int "Spare page buffer size (bytes)"
     default 256
-config NANDFCTRL_TM1
+config LIB_GAISLER_NAND_NANDFCTRL_NANDFCTRL_TM1
     bool "Enable timing mode 1"
-config NANDFCTRL_TM2
+config LIB_GAISLER_NAND_NANDFCTRL_NANDFCTRL_TM2
     bool "Enable timing mode 2"
-config NANDFCTRL_TM3
+config LIB_GAISLER_NAND_NANDFCTRL_NANDFCTRL_TM3
     bool "Enable timing mode 3"
 # fi

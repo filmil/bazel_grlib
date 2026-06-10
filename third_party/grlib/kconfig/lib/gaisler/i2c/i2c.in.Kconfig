@@ -1,2 +1,2 @@
-config I2C_ENABLE
+config LIB_GAISLER_I2C_I2C_I2C_ENABLE
     bool "Enable I2C master "

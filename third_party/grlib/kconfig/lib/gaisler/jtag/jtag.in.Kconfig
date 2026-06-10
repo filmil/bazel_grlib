@@ -1,2 +1,2 @@
-config DSU_JTAG
+config LIB_GAISLER_JTAG_JTAG_DSU_JTAG
     bool "JTAG Debug Link"

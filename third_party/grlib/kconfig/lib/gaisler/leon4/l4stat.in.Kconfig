@@ -1,10 +1,10 @@
-config STAT_ENABLE
+config LIB_GAISLER_LEON4_L4STAT_STAT_ENABLE
     bool "Enable LEON4 Statistics Module       "
 #     if [ "$CONFIG_L4S_ENABLE" = "y" ]; then
-config STAT_CNT
+config LIB_GAISLER_LEON4_L4STAT_STAT_CNT
     int "Number of counters (1 - 64)           "
     default 4
-config STAT_NMAX
+config LIB_GAISLER_LEON4_L4STAT_STAT_NMAX
     int "Number of accumulative counters       "
     default 0
 #     fi

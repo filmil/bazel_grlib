@@ -1,11 +1,11 @@
 
-config GRGPIO2_ENABLE
+config LIB_GAISLER_MISC_GRGPIO2_GRGPIO2_ENABLE
     bool "Enable second generic GPIO port              "
 #     if [ "$CONFIG_GRGPIO2_ENABLE" = "y" ]; then
-config GRGPIO2_WIDTH
+config LIB_GAISLER_MISC_GRGPIO2_GRGPIO2_WIDTH
     int "GPIO2 width            "
     default 8
-config GRGPIO2_IMASK
+config LIB_GAISLER_MISC_GRGPIO2_GRGPIO2_IMASK
     hex "GPIO2 interrupt mask   "
     default 0000
 #     fi

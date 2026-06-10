@@ -1,49 +1,49 @@
-config GRPCI2_MASTER
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_MASTER
     bool "GRPCI2 PCI Master interface"
-config GRPCI2_TARGET
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_TARGET
     bool "GRPCI2 PCI Target interface"
 #   if [ "$CONFIG_GRPCI2_MASTER" = "y" ]; then
-config GRPCI2_DMA
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_DMA
     bool "GRPCI2 PCI DMA interface"
 #   fi
   
 #   if [ "$CONFIG_GRPCI2_MASTER" = "y" -o "$CONFIG_GRPCI2_TARGET" = "y" ]; then
-config GRPCI2_VENDORID
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_VENDORID
     hex "PCI vendor ID"
     default 1AC8
-config GRPCI2_DEVICEID
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_DEVICEID
     hex "PCI device ID"
     default 0054
-config GRPCI2_CLASS
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_CLASS
     hex "PCI class code"
     default 000000
-config GRPCI2_REVID
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_REVID
     hex "PCI Revision ID"
     default 00
-config GRPCI2_CAPPOINT
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_CAPPOINT
     hex "Capability pointer"
     default 40
-config GRPCI2_NEXTCAPPOINT
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_NEXTCAPPOINT
     hex "Next Capability pointer"
     default 00
 #   fi 
 #   if [ "$CONFIG_GRPCI2_TARGET" = "y" ]; then
-config GRPCI2_BAR0
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_BAR0
     int "BAR0"
     default 26
-config GRPCI2_BAR1
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_BAR1
     int "BAR1"
     default 0
-config GRPCI2_BAR2
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_BAR2
     int "BAR2"
     default 0
-config GRPCI2_BAR3
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_BAR3
     int "BAR3"
     default 0
-config GRPCI2_BAR4
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_BAR4
     int "BAR4"
     default 0
-config GRPCI2_BAR5
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_BAR5
     int "BAR5"
     default 0
 #   fi
@@ -62,21 +62,21 @@ config GRPCI2_BAR5
 # 	   4		CONFIG_GRPCI2_FIFOCNT4" 2
 #   fi
   
-config GRPCI2_ENDIAN
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_ENDIAN
     bool "GRPCI2 PCI little-endian"
   
-config GRPCI2_DINT
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_DINT
     bool "GRPCI2 Device Int"
 #   if [ "$CONFIG_GRPCI2_DINT" = "y" ]; then
-config GRPCI2_DINTMASK
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_DINTMASK
     hex "GRPCI2 Device Int mask"
     default 0
 #   fi
 
-config GRPCI2_HINT
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_HINT
     bool "GRPCI2 Host Int"
 #   if [ "$CONFIG_GRPCI2_HINT" = "y" ]; then
-config GRPCI2_HINTMASK
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_HINTMASK
     hex "GRPCI2 Hevice Int mask"
     default 0
 #   fi
@@ -90,13 +90,13 @@ config GRPCI2_HINTMASK
 # 	4096 		CONFIG_GRPCI2_TRACE4096" none
 
 #   if [ "$CONFIG_GRPCI2_TRACE0" = "n" ]; then
-config GRPCI2_TRACEAPB
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_TRACEAPB
     bool "Separate PCI trace buffer APB interface"
 #   fi
 
-config GRPCI2_BYPASS
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_BYPASS
     bool "GRPCI2 Input pad bypass"
   
-config GRPCI2_EXTCFG
+config LIB_GAISLER_PCI_GRPCI2_GRPCI2_GRPCI2_EXTCFG
     int "Extended Configuration Space mappit"
     default 0

@@ -1,24 +1,24 @@
-config GPT_ENABLE
+config LIB_GAISLER_MISC_GPTIMER_GPT_ENABLE
     bool "Enable Timer Unit                    "
 #     if [ "$CONFIG_GPT_ENABLE" = "y" ]; then
-config GPT_NTIM
+config LIB_GAISLER_MISC_GPTIMER_GPT_NTIM
     int "Number of timers (1 - 7)              "
     default 2
-config GPT_SW
+config LIB_GAISLER_MISC_GPTIMER_GPT_SW
     int "Scaler width (2 - 16)                 "
     default 8
-config GPT_TW
+config LIB_GAISLER_MISC_GPTIMER_GPT_TW
     int "Timer width (2 - 32)                  "
     default 32
-config GPT_IRQ
+config LIB_GAISLER_MISC_GPTIMER_GPT_IRQ
     int "Timer unit interrupt                  "
     default 8
-config GPT_SEPIRQ
+config LIB_GAISLER_MISC_GPTIMER_GPT_SEPIRQ
     bool "Separate interrupts                  "
-config GPT_WDOGEN
+config LIB_GAISLER_MISC_GPTIMER_GPT_WDOGEN
     bool "Watchdog enable                      "
 #       if [ "$CONFIG_GPT_WDOGEN" = "y" ]; then
-config GPT_WDOG
+config LIB_GAISLER_MISC_GPTIMER_GPT_WDOG
     hex "Initial watchdog time-out value       "
     default FFFF
 #       fi

@@ -1,21 +1,21 @@
 
 # mainmenu_option next_comment
 # comment 'Processor            '
-config NOELV
+config LIB_GAISLER_NOELV_NOELV_NOELV
     bool "Enable NOELV RISC-V Processor"
 #   if [ "$CONFIG_NOELV" = "y" ]; then
-config PROC_NUM
+config LIB_GAISLER_NOELV_NOELV_PROC_NUM
     int "Number of processors"
     default 1
 #     choice 'NOEL-V RV64 or RV32' \
 #       "RV64	CONFIG_NOELV_RV64 \
 #       RV32	CONFIG_NOELV_RV32" XLEN
 #     if [ "$CONFIG_NOELV_RV32" = "y" ]; then
-config NOELV_XLEN
+config LIB_GAISLER_NOELV_NOELV_NOELV_XLEN
     int
     default 32
 #     else
-config NOELV_XLEN
+config LIB_GAISLER_NOELV_NOELV_NOELV_XLEN_2
     int
     default 64
 #     fi
@@ -44,67 +44,67 @@ config NOELV_XLEN
 #     fi
 
 #    if [ "$CONFIG_NOELV_HP" = "y" ]; then
-config PROC_TYP
+config LIB_GAISLER_NOELV_NOELV_PROC_TYP
     int
     default 4
-config PROC_LITE
+config LIB_GAISLER_NOELV_NOELV_PROC_LITE
     int
     default 0
-config PROC_NOFPU
+config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU
     int
     default 0
-config PROC_S
+config LIB_GAISLER_NOELV_NOELV_PROC_S
     int
     default 0
 #    fi
 #    if [ "$CONFIG_NOELV_GP" = "y" ]; then
-config PROC_TYP
+config LIB_GAISLER_NOELV_NOELV_PROC_TYP_2
     int
     default 3
-config PROC_NOFPU
+config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU_2
     int
     default 0
 #     if [ "$CONFIG_NOELV_LITE" = "y" ]; then
-config PROC_LITE
+config LIB_GAISLER_NOELV_NOELV_PROC_LITE_2
     int
     default 1
 #     else
-config PROC_LITE
+config LIB_GAISLER_NOELV_NOELV_PROC_LITE_3
     int
     default 0
 #     fi
 #     if [ "$CONFIG_NOELV_SISSUE" = "y" ]; then
-config PROC_S
+config LIB_GAISLER_NOELV_NOELV_PROC_S_2
     int
     default 1
 #     else
-config PROC_S
+config LIB_GAISLER_NOELV_NOELV_PROC_S_3
     int
     default 0
 #     fi
 #    fi
 #    if [ "$CONFIG_NOELV_MC" = "y" ]; then
-config PROC_TYP
+config LIB_GAISLER_NOELV_NOELV_PROC_TYP_3
     int
     default 2
-config PROC_S
+config LIB_GAISLER_NOELV_NOELV_PROC_S_4
     int
     default 1
 #     if [ "$CONFIG_NOELV_LITE" = "y" ]; then
-config PROC_LITE
+config LIB_GAISLER_NOELV_NOELV_PROC_LITE_4
     int
     default 1
 #     else
-config PROC_LITE
+config LIB_GAISLER_NOELV_NOELV_PROC_LITE_5
     int
     default 0
 #     fi
 #     if [ "$CONFIG_NOELV_FPU" = "y" ]; then
-config PROC_NOFPU
+config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU_3
     int
     default 0
 #     else
-config PROC_NOFPU
+config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU_4
     int
     default 1
 #     fi
@@ -116,10 +116,10 @@ config PROC_NOFPU
 #     if [ "$CONFIG_NOELV_HP" = "y" -o "$CONFIG_NOELV_GP" = "y" -a "$CONFIG_NOELV_FULL" = "y" ]; then
 #      mainmenu_option next_comment
 #        comment 'Interrupt settings       '
-config DOMAINS_NUM
+config LIB_GAISLER_NOELV_NOELV_DOMAINS_NUM
     int "Number of APLIC domains"
     default 4
-config EIID_NUM
+config LIB_GAISLER_NOELV_NOELV_EIID_NUM
     int "Number of External Interrupt Identities"
     default 63
 #      endmenu
@@ -127,13 +127,13 @@ config EIID_NUM
 
 #     mainmenu_option next_comment
 #       comment 'VHDL debug settings       '
-config IU_DISAS
+config LIB_GAISLER_NOELV_NOELV_IU_DISAS
     bool "Processor disassembly to console         "
 #     endmenu
 
 #     mainmenu_option next_comment
 #       comment 'NOEL-V subsystem GPL settings       '
-config PROC_NODBUS
+config LIB_GAISLER_NOELV_NOELV_PROC_NODBUS
     bool "disable non-GPL components               "
 #     endmenu
 #   fi

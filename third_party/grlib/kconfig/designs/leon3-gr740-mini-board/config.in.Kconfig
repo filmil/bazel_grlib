@@ -9,21 +9,21 @@
 
 # mainmenu_option next_comment
 #   comment 'Synthesis      '
-rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+# Original source: lib/techmap/gencomp/tech.in
 # endmenu
 
 # mainmenu_option next_comment
 #   comment 'Clock generation'
-rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+# Original source: lib/techmap/clocks/clkgen.in
 # endmenu
 
-rsource "../../../../lib/gaisler/subsys/leon_dsu_stat_base.in.Kconfig"
-rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+# Original source: lib/gaisler/subsys/leon_dsu_stat_base.in
+# Original source: lib/grlib/amba/amba.in
 
 # mainmenu_option next_comment
 #   comment 'Debug Link           '
-rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
-rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
+# Original source: lib/gaisler/uart/dcom.in
+# Original source: lib/gaisler/jtag/jtag.in
 # endmenu
 
 # mainmenu_option next_comment
@@ -32,31 +32,31 @@ rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
 #   mainmenu_option next_comment
 #   comment 'On-chip RAM                 '
 #     comment 'AHBRAM           '
-rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+# Original source: lib/gaisler/misc/ahbram.in
 #     comment 'FTAHBRAM           '
-rsource "../../../../lib/gaisler/misc/ftahbram.in.Kconfig"
+# Original source: lib/gaisler/misc/ftahbram.in
 #   endmenu
-rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
-rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
+# Original source: lib/gaisler/misc/ahbstat.in
+# Original source: lib/gaisler/spi/spimctrl.in
 
   
 
 #   mainmenu_option next_comment
 #   comment 'UART, timer, I/O port and interrupt controller'
-rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
-rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+# Original source: lib/gaisler/uart/uart1.in
+# Original source: lib/gaisler/irqmp/irqmp.in
+# Original source: lib/gaisler/misc/gptimer.in
+# Original source: lib/gaisler/misc/grgpio.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'PCI'
-rsource "../../../../lib/gaisler/pci/grpci2/grpci2.in.Kconfig"
+# Original source: lib/gaisler/pci/grpci2/grpci2.in
 #   endmenu
 
 # endmenu
 
 # mainmenu_option next_comment
 # comment 'VHDL Debugging        '
-rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+# Original source: lib/grlib/util/debug.in
 # endmenu

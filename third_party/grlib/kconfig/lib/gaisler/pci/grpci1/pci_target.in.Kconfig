@@ -1,4 +1,4 @@
 #   if [ "$CONFIG_PCI_ACTEL"  != "y" ]; then
-config PCI_SIMPLE_TARGET
+config LIB_GAISLER_PCI_GRPCI1_PCI_TARGET_PCI_SIMPLE_TARGET
     bool "PCI interface, target-only     "
 #   fi

@@ -1,31 +1,31 @@
 #   mainmenu_option next_comment
 #    comment 'SPI controller(s) '
-config SPICTRL_ENABLE
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_ENABLE
     bool "Enable SPI controller(s) "
 #     if [ "$CONFIG_SPICTRL_ENABLE" = "y" ]; then
-config SPICTRL_NUM
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_NUM
     int "Number of SPI controllers   "
     default 1
-config SPICTRL_SLVS
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_SLVS
     int "Slave select lines    "
     default 1
-config SPICTRL_FIFO
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_FIFO
     int "FIFO depth (2^N)      "
     default 1
-config SPICTRL_SLVREG
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_SLVREG
     bool "Enable slave select registers"
-config SPICTRL_ASEL
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_ASEL
     bool "Enable automatic slave select"
-config SPICTRL_AM
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_AM
     bool "Support automated transfers  "
-config SPICTRL_ODMODE
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_ODMODE
     bool "Support open drain mode      "
-config SPICTRL_TWEN
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_TWEN
     bool "Support three-wire protocol  "
-config SPICTRL_MAXWLEN
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_MAXWLEN
     int "Maximum supported word length (see help!) "
     default 0
-config SPICTRL_SYNCRAM
+config LIB_GAISLER_SPI_SPICTRL_SPICTRL_SYNCRAM
     bool "Use SYNCRAM for rx and tx queues "
 #      if [ "$CONFIG_SPICTRL_SYNCRAM" = "y" ]; then
 #       choice 'Fault-tolerance' \

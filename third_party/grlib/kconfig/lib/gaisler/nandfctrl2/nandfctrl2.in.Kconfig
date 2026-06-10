@@ -1,78 +1,78 @@
 # mainmenu_option next_comment
 #   comment 'NANDFCTRL'
-config NANDFCTRL2_ENABLE
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NANDFCTRL2_ENABLE
     bool "NANDFCTRL2 - NAND Flash Memory Controller"
 #   if [ "$CONFIG_NANDFCTRL2_ENABLE" = "y" ]; then
-config NFC2_NROFCE
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_NROFCE
     int "nrofce        "
     default 8
-config NFC2_NROFCH
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_NROFCH
     int "nrofch        "
     default 8
-config NFC2_NROFRB
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_NROFRB
     int "nrofrb        "
     default 8
-config NFC2_NROFSEFI
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_NROFSEFI
     int "nrofsefi      "
     default 0
-config NFC2_RND
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_RND
     int "rnd           "
     default 1
 
-config NFC2_MEM0_DATA
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_MEM0_DATA
     int "mem0_data     "
     default 16384
-config NFC2_MEM0_SPARE
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_MEM0_SPARE
     int "mem0_spare    "
     default 2208
-config NFC2_MEM0_ECC_SEL
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_MEM0_ECC_SEL
     int "mem0_ecc_sel  "
     default 0
 
-config NFC2_MEM1_DATA
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_MEM1_DATA
     int "mem1_data     "
     default 8192
-config NFC2_MEM1_SPARE
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_MEM1_SPARE
     int "mem1_spare    "
     default 448
-config NFC2_MEM1_ECC_SEL
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_MEM1_ECC_SEL
     int "mem1_ecc_sel  "
     default 1
 
-config NFC2_MEM2_DATA
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_MEM2_DATA
     int "mem2_data     "
     default 4096
-config NFC2_MEM2_SPARE
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_MEM2_SPARE
     int "mem2_spare    "
     default 224
-config NFC2_MEM2_ECC_SEL
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_MEM2_ECC_SEL
     int "mem2_ecc_sel  "
     default 1
 
-config NFC2_ECC0_GFSIZE
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_ECC0_GFSIZE
     int "ecc0_gfsize   "
     default 14
-config NFC2_ECC0_CHUNK
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_ECC0_CHUNK
     int "ecc0_chunk    "
     default 1024
-config NFC2_ECC0_CAP
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_ECC0_CAP
     int "ecc0_cap      "
     default 60
 
-config NFC2_ECC1_GFSIZE
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_ECC1_GFSIZE
     int "ecc1_gfsize   "
     default 13
-config NFC2_ECC1_CHUNK
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_ECC1_CHUNK
     int "ecc1_chunk    "
     default 512
-config NFC2_ECC1_CAP
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_ECC1_CAP
     int "ecc1_cap      "
     default 16
 
-config NFC2_RST_CYCLES
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_RST_CYCLES
     int "rst_cycles    "
     default 10
-config NFC2_TAG_SIZE
+config LIB_GAISLER_NANDFCTRL2_NANDFCTRL2_NFC2_TAG_SIZE
     int "tag_size      "
     default 0
 

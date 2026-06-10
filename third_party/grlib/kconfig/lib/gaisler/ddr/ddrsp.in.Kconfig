@@ -1,26 +1,26 @@
 
 #   mainmenu_option next_comment
 #   comment 'DDR266 SDRAM controller             '
-config DDRSP
+config LIB_GAISLER_DDR_DDRSP_DDRSP
     bool "Enable DDR266 SDRAM controller       "
 #     if [ "$CONFIG_DDRSP" = "y" ]; then
-config DDRSP_INIT
+config LIB_GAISLER_DDR_DDRSP_DDRSP_INIT
     bool "Enable power-on initialization       "
 #       if [ "$CONFIG_DDRSP_INIT" = "y" ]; then
-config DDRSP_FREQ
+config LIB_GAISLER_DDR_DDRSP_DDRSP_FREQ
     int "Memory frequency (MHz)  "
     default 100
-config DDRSP_COL
+config LIB_GAISLER_DDR_DDRSP_DDRSP_COL
     int "Column address bits (9 - 12)  "
     default 9
-config DDRSP_MBYTE
+config LIB_GAISLER_DDR_DDRSP_DDRSP_MBYTE
     int "Chip select bank size (Mbyte) "
     default 16
 #       fi
 #      if [ "$CONFIG_SYN_VIRTEX2" = "y" -o "$CONFIG_SYN_VIRTEX4" = "y" \
 # 	-o "$CONFIG_SYN_SPARTAN3" = "y" -o "$CONFIG_SYN_VIRTEX5" = "y" \
 # 	-o "$CONFIG_SYN_SPARTAN3E" = "y" -o "$CONFIG_SYN_CYCLONEIII" = "y" ]; then
-config DDRSP_RSKEW
+config LIB_GAISLER_DDR_DDRSP_DDRSP_RSKEW
     int "Read clock phase shift        "
     default 0
 #       fi

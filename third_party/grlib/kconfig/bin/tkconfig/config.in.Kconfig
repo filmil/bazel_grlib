@@ -7,7 +7,7 @@
 #
 #
 
-config PERI_LCONF
+config BIN_TKCONFIG_CONFIG_PERI_LCONF
     bool
     default y
 
@@ -28,30 +28,30 @@ config PERI_LCONF
 # 	Xilinx-Virtex		CONFIG_SYN_VIRTEX \
 # 	Xilinx-Virtex2		CONFIG_SYN_VIRTEX2" Generic
 #   if [ "$CONFIG_SYN_GENERIC" != "y" ]; then
-config SYN_INFER_RAM
+config BIN_TKCONFIG_CONFIG_SYN_INFER_RAM
     bool "Infer cache and trace buffer RAM"
-config SYN_INFER_REGF
+config BIN_TKCONFIG_CONFIG_SYN_INFER_REGF
     bool "Infer register file"
 #     if [ "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y"]; then
-config SYN_INFER_ROM
+config BIN_TKCONFIG_CONFIG_SYN_INFER_ROM
     bool "Infer ROM"
 #     fi
 #     if [ "$CONFIG_SYN_VIRTEX" != "y" -a "$CONFIG_SYN_AXCEL" != "y" \
 #          -a "$CONFIG_SYN_VIRTEX2" != "y" -a "$CONFIG_SYN_PROASIC" != "y" ]; then
-config SYN_INFER_PADS
+config BIN_TKCONFIG_CONFIG_SYN_INFER_PADS
     bool "Infer pads"
 #     fi
 #     if [ "$CONFIG_SYN_AXCEL" != "y" -a "$CONFIG_SYN_PROASIC" != "y" ]; then
-config SYN_INFER_PCI_PADS
+config BIN_TKCONFIG_CONFIG_SYN_INFER_PCI_PADS
     bool "Infer PCI pads"
 #     fi
 #   fi
-config SYN_INFER_MULT
+config BIN_TKCONFIG_CONFIG_SYN_INFER_MULT
     bool "Infer multiplier"
 #   if [ "$CONFIG_SYN_GENERIC" = "y" -o "$CONFIG_SYN_VIRTEX" = "y" \
 #      -o "$CONFIG_SYN_AXCEL" = "y" -o "$CONFIG_SYN_ATC25" = "y" \
 #      -o "$CONFIG_SYN_INFER_REGF" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y"]; then
-config SYN_RFTYPE
+config BIN_TKCONFIG_CONFIG_SYN_RFTYPE
     bool "Improve register file write timing"
 #   fi
 #   if [ "$CONFIG_SYN_ATC25" = "y" -o "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y"\
@@ -67,11 +67,11 @@ config SYN_RFTYPE
 #   mainmenu_option next_comment
 #     comment 'Clock generation'
 #     if [ "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y" ]; then
-config CLK_VIRTEX
+config BIN_TKCONFIG_CONFIG_CLK_VIRTEX
     bool "Use Virtex CLKDLL for clock generation"
 #     fi
 #     if [ "$CONFIG_SYN_VIRTEX2" = "y" -a "$CONFIG_CLK_VIRTEX" != "y"]; then
-config CLK_VIRTEX2
+config BIN_TKCONFIG_CONFIG_CLK_VIRTEX2
     bool "Use Virtex-II DCM for clock generation"
 #     fi
 #     if [ "$CONFIG_CLK_VIRTEX" = "y"]; then
@@ -95,15 +95,15 @@ config CLK_VIRTEX2
 # 	4		CONFIG_DCM_4_1" 1
 #     fi
 #     if [ "$CONFIG_SYN_AXCEL" = "y" ]; then
-config AXCEL_HCLKBUF
+config BIN_TKCONFIG_CONFIG_AXCEL_HCLKBUF
     bool "Use global clock pad (Actel AX)"
 #     fi
 #     if [ "$CONFIG_SYN_VIRTEX2" = "y" -o "$CONFIG_CLK_VIRTEX" = "y"]; then
-config PCI_DLL
+config BIN_TKCONFIG_CONFIG_PCI_DLL
     bool "Enable CLKDLL for PCI clock"
 #     fi
 #     if [ "$CONFIG_PCI_DLL" != "y" ]; then
-config PCI_SYSCLK
+config BIN_TKCONFIG_CONFIG_PCI_SYSCLK
     bool "Use PCI clock as system clock"
 #     fi
 #   endmenu
@@ -112,10 +112,10 @@ config PCI_SYSCLK
 #   comment 'Processor            '
 #   mainmenu_option next_comment
 #   comment 'Integer unit                                           '
-config IU_NWINDOWS
+config BIN_TKCONFIG_CONFIG_IU_NWINDOWS
     int "SPARC register windows"
     default 8
-config IU_V8MULDIV
+config BIN_TKCONFIG_CONFIG_IU_V8MULDIV
     bool "SPARC V8 MUL/DIV instructions"
 #   if [ "$CONFIG_IU_V8MULDIV" = "y" ]; then
 #     choice 'Hardware multiplier latency' \
@@ -126,43 +126,43 @@ config IU_V8MULDIV
 # 	35-cycles		CONFIG_IU_MUL_LATENCY_35" 5-cycles
 #   fi
 #   dep_bool 'SPARC V8e SMAC/UMAC instructions     ' CONFIG_IU_MUL_MAC $CONFIG_IU_MUL_LATENCY_4 $CONFIG_IU_V8MULDIV
-config IU_LDELAY
+config BIN_TKCONFIG_CONFIG_IU_LDELAY
     int "Load delay"
     default 1
-config IU_FASTJUMP
+config BIN_TKCONFIG_CONFIG_IU_FASTJUMP
     bool "Fast jump-address generation   "
-config IU_ICCHOLD
+config BIN_TKCONFIG_CONFIG_IU_ICCHOLD
     bool "ICC interlock                  "
-config IU_FASTDECODE
+config BIN_TKCONFIG_CONFIG_IU_FASTDECODE
     bool "Fast instruction decoding      "
 #   if [ "$CONFIG_SYN_TSMC025" = "y" -o "$CONFIG_SYN_UMC018" = "y" \
 #     -o "$CONFIG_SYN_FS90" = "y" -o "$CONFIG_SYN_PROASIC" = "y" \
 #     -o "$CONFIG_SYN_ATC18" = "y" \
 #     -o "$CONFIG_SYN_AXCEL" = "y" -o "$CONFIG_SYN_ATC25" = "y" ]; then
-config IU_RFPOW
+config BIN_TKCONFIG_CONFIG_IU_RFPOW
     bool "Register file power-saving     "
 #   fi
-config IU_WATCHPOINTS
+config BIN_TKCONFIG_CONFIG_IU_WATCHPOINTS
     int "Hardware watchpoints"
     default 0
 #   endmenu
 #   mainmenu_option next_comment
 #   comment 'Floating-point unit'
-config FPU_ENABLE
+config BIN_TKCONFIG_CONFIG_FPU_ENABLE
     bool "Enable FPU                             "
 #   if [ "$CONFIG_FPU_ENABLE" = "y" ]; then
 #     choice 'FPU core' \
 # 	"GRFPU		CONFIG_FPU_GRFPU \
 # 	Meiko		CONFIG_FPU_MEIKO \
 # 	LTH		CONFIG_FPU_LTH" GRFPU
-config FPU_VER
+config BIN_TKCONFIG_CONFIG_FPU_VER
     int "FSR version ID"
     default 0
 #   fi
 #   endmenu
 #   mainmenu_option next_comment
 #   comment 'Co-processor'
-config CP_ENABLE
+config BIN_TKCONFIG_CONFIG_CP_ENABLE
     bool "Enable co-processor       "
 #   if [ "$CONFIG_CP_ENABLE" = "y" ]; then
 #     string 'Co-processor configuration' CONFIG_CP_CFG "cp_none"
@@ -192,7 +192,7 @@ config CP_ENABLE
 # 	"Random		CONFIG_ICACHE_ALGORND \
 # 	LRR		CONFIG_ICACHE_ALGOLRR \
 # 	LRU		CONFIG_ICACHE_ALGOLRU" Random
-config ICACHE_LOCK
+config BIN_TKCONFIG_CONFIG_ICACHE_LOCK
     bool "Cache locking      "
 #   fi
 #   comment 'Data cache'
@@ -217,13 +217,13 @@ config ICACHE_LOCK
 # 	"Random		CONFIG_DCACHE_ALGORND \
 # 	LRR		CONFIG_DCACHE_ALGOLRR \
 # 	LRU		CONFIG_DCACHE_ALGOLRU" Random
-config DCACHE_LOCK
+config BIN_TKCONFIG_CONFIG_DCACHE_LOCK
     bool "Cache locking      "
 #   fi
 #   if [ "$CONFIG_SYN_ATC25" = "y" -o "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y" \
 # 	-o "$CONFIG_SYN_ATC18" = "y" -o "$CONFIG_SYN_TSMC025" = "y" ]; then
 #     if [ "$CONFIG_SYN_INFER_RAM" != "y" -a "$CONFIG_MMU_ENABLE" != "y" ]; then
-config DCACHE_SNOOP
+config BIN_TKCONFIG_CONFIG_DCACHE_SNOOP
     bool "AHB snooping       "
 #     fi
 #   fi
@@ -233,15 +233,15 @@ config DCACHE_SNOOP
 # 	Fast		CONFIG_DCACHE_SNOOP_FAST" Slow
 #   fi
 #   if [ "$CONFIG_DCACHE_ASSO1" != "y" ]; then
-config DCACHE_RFAST
+config BIN_TKCONFIG_CONFIG_DCACHE_RFAST
     bool "Fast read-data generation   "
 #   fi
 #   if [ "$CONFIG_DCACHE_ASSO1" != "y" ]; then
-config DCACHE_WFAST
+config BIN_TKCONFIG_CONFIG_DCACHE_WFAST
     bool "Fast write-data generation   "
 #   fi
 #   if [ "$CONFIG_MMU_ENABLE" != "y" ]; then
-config DCACHE_LRAM
+config BIN_TKCONFIG_CONFIG_DCACHE_LRAM
     bool "Enable local data RAM            "
 #   fi
 #     if [ "$CONFIG_DCACHE_LRAM" = "y" ]; then
@@ -253,14 +253,14 @@ config DCACHE_LRAM
 # 	16		CONFIG_DCACHE_LRAM_SZ16 \
 # 	32		CONFIG_DCACHE_LRAM_SZ32 \
 # 	64		CONFIG_DCACHE_LRAM_SZ64" 2
-config DCACHE_LRSTART
+config BIN_TKCONFIG_CONFIG_DCACHE_LRSTART
     hex " Local RAM start address (8 MSB) "
     default 0x8f
 #     fi
 # endmenu
 #   mainmenu_option next_comment
 #   comment 'MMU'
-config MMU_ENABLE
+config BIN_TKCONFIG_CONFIG_MMU_ENABLE
     bool "Enable MMU       "
 #   if [ "$CONFIG_MMU_ENABLE" = "y" ]; then
 #     choice 'MMU type              ' \
@@ -283,20 +283,20 @@ config MMU_ENABLE
 # 	16		CONFIG_MMU_D16 \
 # 	32		CONFIG_MMU_D32" 8
 #     fi         
-config MMU_DIAG
+config BIN_TKCONFIG_CONFIG_MMU_DIAG
     bool "Enable Diagnostic Access       "
 #   fi
 #   endmenu
 
 # mainmenu_option next_comment
 # comment 'Debug support unit          '
-config DSU_ENABLE
+config BIN_TKCONFIG_CONFIG_DSU_ENABLE
     bool "Debug support unit                       "
 #   if [ "$CONFIG_DSU_ENABLE" = "y" ]; then
-config DSU_TRACEBUF
+config BIN_TKCONFIG_CONFIG_DSU_TRACEBUF
     bool "Trace buffer"
 #     if [ "$CONFIG_DSU_TRACEBUF" = "y" ]; then
-config DSU_MIXED_TRACE
+config BIN_TKCONFIG_CONFIG_DSU_MIXED_TRACE
     bool "Mixed instruction/AHB tracing"
 #       choice 'Trace buffer lines' \
 # 	"64		CONFIG_DSU_TRACESZ64 \
@@ -310,49 +310,49 @@ config DSU_MIXED_TRACE
 # endmenu
 # mainmenu_option next_comment
 # comment 'AMBA configuration'
-config AHB_DEFMST
+config BIN_TKCONFIG_CONFIG_AHB_DEFMST
     int "Default AHB master"
     default 0
-config AHB_SPLIT
+config BIN_TKCONFIG_CONFIG_AHB_SPLIT
     bool "AHB split-transaction support             "
 # endmenu
 
 # mainmenu_option next_comment
 # comment 'Memory controller'
-config MCTRL_8BIT
+config BIN_TKCONFIG_CONFIG_MCTRL_8BIT
     bool "8-bit PROM/SRAM bus support    "
-config MCTRL_16BIT
+config BIN_TKCONFIG_CONFIG_MCTRL_16BIT
     bool "16-bit PROM/SRAM bus support    "
-config PERI_WPROT
+config BIN_TKCONFIG_CONFIG_PERI_WPROT
     bool "RAM write protection            "
-config MCTRL_WFB
+config BIN_TKCONFIG_CONFIG_MCTRL_WFB
     bool "Write strobe timing feedback            "
-config MCTRL_5CS
+config BIN_TKCONFIG_CONFIG_MCTRL_5CS
     bool "5th SRAM chip-select  "
-config MCTRL_SDRAM
+config BIN_TKCONFIG_CONFIG_MCTRL_SDRAM
     bool "SDRAM controller       "
 #   if [ "$CONFIG_MCTRL_SDRAM" = "y" ]; then
-config MCTRL_SDRAM_INVCLK
+config BIN_TKCONFIG_CONFIG_MCTRL_SDRAM_INVCLK
     bool "Inverted SDRAM clock"
-config MCTRL_SDRAM_SEPBUS
+config BIN_TKCONFIG_CONFIG_MCTRL_SDRAM_SEPBUS
     bool "Separate address and data buses"
 #   fi
 # endmenu
 
 # mainmenu_option next_comment
 # comment 'Peripherals        '
-config PERI_LCONF
+config BIN_TKCONFIG_CONFIG_PERI_LCONF_2
     bool "LEON configuration register       "
-config PERI_IRQ2
+config BIN_TKCONFIG_CONFIG_PERI_IRQ2
     bool "Secondary interrupt controller    "
 #   if [ "$CONFIG_PERI_IRQ2" = "y" ]; then
 #     string 'Sec. interrupt controller configuration       ' CONFIG_PERI_IRQ2_CFG "irq2none"
 #   fi
-config PERI_WDOG
+config BIN_TKCONFIG_CONFIG_PERI_WDOG
     bool "Watchdog                            "
-config PERI_AHBSTAT
+config BIN_TKCONFIG_CONFIG_PERI_AHBSTAT
     bool "AHB status register       "
-config AHBRAM_ENABLE
+config BIN_TKCONFIG_CONFIG_AHBRAM_ENABLE
     bool "On-chip AHB RAM                   "
 #   if [ "$CONFIG_AHBRAM_ENABLE" = "y" ]; then
 #       choice 'AHB RAM size (Kbyte)' \
@@ -366,16 +366,16 @@ config AHBRAM_ENABLE
 #   fi
 # mainmenu_option next_comment
 # comment 'Ethernet interface          '
-config ETH_ENABLE
+config BIN_TKCONFIG_CONFIG_ETH_ENABLE
     bool "Enable Ethernet interface                 "
 #   if [ "$CONFIG_ETH_ENABLE" = "y" ]; then
-config ETH_TXFIFO
+config BIN_TKCONFIG_CONFIG_ETH_TXFIFO
     int "TX FIFO depth"
     default 8
-config ETH_RXFIFO
+config BIN_TKCONFIG_CONFIG_ETH_RXFIFO
     int "RX FIFO depth"
     default 8
-config ETH_BURST
+config BIN_TKCONFIG_CONFIG_ETH_BURST
     int "AHB burst length"
     default 4
 #   fi
@@ -383,18 +383,18 @@ config ETH_BURST
 
 # mainmenu_option next_comment
 # comment 'PCI interface          '
-config PCI_ENABLE
+config BIN_TKCONFIG_CONFIG_PCI_ENABLE
     bool "Enable PCI interface                 "
 #   if [ "$CONFIG_PCI_ENABLE" = "y" ]; then
 #     choice 'PCI core' \
 # 	"Simple-target		CONFIG_PCI_SIMPLE_TARGET" Simple-target
-config PCI_VENDORID
+config BIN_TKCONFIG_CONFIG_PCI_VENDORID
     hex "PCI vendor ID"
     default 16E3
-config PCI_DEVICEID
+config BIN_TKCONFIG_CONFIG_PCI_DEVICEID
     hex "PCI device ID"
     default 0210
-config PCI_REVID
+config BIN_TKCONFIG_CONFIG_PCI_REVID
     hex "PCI revision ID"
     default 1
 #     if [ "$CONFIG_PCI_FAST_TARGET" = "y" -o "$CONFIG_PCI_MASTER_TARGET" = "y" ]; then
@@ -413,9 +413,9 @@ config PCI_REVID
 # 	2048		CONFIG_PCI_TRACE2048     \
 # 	4096 		CONFIG_PCI_TRACE4096" 256
 #     fi
-config PCI_RESETALL
+config BIN_TKCONFIG_CONFIG_PCI_RESETALL
     bool "PCI reset affects complete processor"
-config PCI_ARBEN
+config BIN_TKCONFIG_CONFIG_PCI_ARBEN
     bool "PCI arbiter                         "
 #   fi
 # endmenu
@@ -429,43 +429,43 @@ config PCI_ARBEN
 # 	Internal-PROM		CONFIG_BOOT_INTPROM \
 # 	Both		CONFIG_BOOT_MIXPROM" Memory
 #   if [ "$CONFIG_BOOT_EXTPROM" != "y" ]; then
-config BOOT_RWS
+config BIN_TKCONFIG_CONFIG_BOOT_RWS
     int "RAM read waitstates"
     default 0
-config BOOT_WWS
+config BIN_TKCONFIG_CONFIG_BOOT_WWS
     int "RAM write waitstates"
     default 0
-config BOOT_SYSCLK
+config BIN_TKCONFIG_CONFIG_BOOT_SYSCLK
     int "System clock frequency"
     default 25000000
-config BOOT_BAUDRATE
+config BIN_TKCONFIG_CONFIG_BOOT_BAUDRATE
     int "UART baud rate"
     default 38400
-config BOOT_EXTBAUD
+config BIN_TKCONFIG_CONFIG_BOOT_EXTBAUD
     bool "Use external baud rate setting (PIO[7:0])    "
-config BOOT_PROMABITS
+config BIN_TKCONFIG_CONFIG_BOOT_PROMABITS
     int "Internal boot PROM address bits"
     default 11
 #   fi
 # endmenu
 # mainmenu_option next_comment
 # comment 'VHDL Debugging        '
-config DEBUG_UART
+config BIN_TKCONFIG_CONFIG_DEBUG_UART
     bool "Accelerated UART tracing       "
-config DEBUG_IURF
+config BIN_TKCONFIG_CONFIG_DEBUG_IURF
     bool "Integer unit register writes       "
 #   dep_bool 'Floating-point unit register writes       ' CONFIG_DEBUG_FPURF $CONFIG_FPU_ENABLE
-config DEBUG_NOHALT
+config BIN_TKCONFIG_CONFIG_DEBUG_NOHALT
     bool "Continue on reset trap       "
-config DEBUG_PC32
+config BIN_TKCONFIG_CONFIG_DEBUG_PC32
     bool "32-bit program counters       "
 #   if [ "$CONFIG_FT_ENABLE" = "y" ]; then
 #     if [ "$CONFIG_FT_RF_ENABLE" = "y" ]; then
-config DEBUG_RFERR
+config BIN_TKCONFIG_CONFIG_DEBUG_RFERR
     bool "Inject register-file errors    "
 #     fi
 #     if [ "$CONFIG_FT_CACHEMEM_ENABLE" = "y" ]; then
-config DEBUG_CACHEMEMERR
+config BIN_TKCONFIG_CONFIG_DEBUG_CACHEMEMERR
     bool "Inject cache memory errors    "
 #     fi
 #   fi

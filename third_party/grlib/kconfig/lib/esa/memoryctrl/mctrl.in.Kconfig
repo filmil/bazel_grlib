@@ -1,30 +1,30 @@
 
 #   mainmenu_option next_comment
 #   comment 'Leon2 memory controller        '
-config MCTRL_LEON2
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_LEON2
     bool "Enable Leon2 memory controller  "
 #       if [ "$CONFIG_MCTRL_LEON2" = "y" ]; then
-config MCTRL_8BIT
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_8BIT
     bool "8-bit PROM/SRAM bus support    "
-config MCTRL_16BIT
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_16BIT
     bool "16-bit PROM/SRAM bus support    "
-config MCTRL_5CS
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_5CS
     bool "5th SRAM chip-select  "
-config MCTRL_SDRAM
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_SDRAM
     bool "SDRAM controller       "
 #     	if [ "$CONFIG_MCTRL_SDRAM" = "y" ]; then
-config MCTRL_SDRAM_SEPBUS
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_SDRAM_SEPBUS
     bool "Separate address and data buses"
 #     	  if [ "$CONFIG_MCTRL_SDRAM_SEPBUS" = "y" ]; then
-config MCTRL_SDRAM_BUS64
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_SDRAM_BUS64
     bool "64-bit SDRAM data bus"
-config MCTRL_SDRAM_INVCLK
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_SDRAM_INVCLK
     bool "Unsynchronized sdclock"
 # 	  fi
-config MCTRL_PAGE
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_PAGE
     bool "Enable page burst operation     "
 #     	  if [ "$CONFIG_MCTRL_PAGE" = "y" ]; then
-config MCTRL_PROGPAGE
+config LIB_ESA_MEMORYCTRL_MCTRL_MCTRL_PROGPAGE
     bool "Enable programmable page burst "
 # 	  fi
 #         fi

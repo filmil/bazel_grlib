@@ -1,2 +1,2 @@
-config BOUNDSCAN_EN
+config LIB_GAISLER_JTAG_BSCAN_BOUNDSCAN_EN
     bool "Enable JTAG boundary scan "

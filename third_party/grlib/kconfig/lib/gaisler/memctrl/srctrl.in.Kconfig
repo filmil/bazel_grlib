@@ -1,20 +1,20 @@
 #   mainmenu_option next_comment
 #   comment '8/32-bit PROM/SRAM controller '
-config SRCTRL
+config LIB_GAISLER_MEMCTRL_SRCTRL_SRCTRL
     bool "Enable 8/32-bit PROM/SRAM controller    "
 #     if [ "$CONFIG_SRCTRL" = "y" ]; then
-config SRCTRL_8BIT
+config LIB_GAISLER_MEMCTRL_SRCTRL_SRCTRL_8BIT
     bool "8-bit PROM interface "
-config SRCTRL_PROMWS
+config LIB_GAISLER_MEMCTRL_SRCTRL_SRCTRL_PROMWS
     int "PROM waitstates"
     default 3
-config SRCTRL_RAMWS
+config LIB_GAISLER_MEMCTRL_SRCTRL_SRCTRL_RAMWS
     int "RAM waitstates"
     default 0
-config SRCTRL_IOWS
+config LIB_GAISLER_MEMCTRL_SRCTRL_SRCTRL_IOWS
     int "IO waitstates"
     default 0
-config SRCTRL_RMW
+config LIB_GAISLER_MEMCTRL_SRCTRL_SRCTRL_RMW
     bool "Use read-modify-write for sub-word writes  "
 #       choice 'SRAM banks' \
 #    	  "1		CONFIG_SRCTRL_SRBANKS1 \
@@ -38,7 +38,7 @@ config SRCTRL_RMW
 #    	  	16384	   CONFIG_SRCTRL_BANKSZ11 \
 #    	   32768		CONFIG_SRCTRL_BANKSZ12 \
 #    	   65536  	CONFIG_SRCTRL_BANKSZ13" 0
-config SRCTRL_ROMASEL
+config LIB_GAISLER_MEMCTRL_SRCTRL_SRCTRL_ROMASEL
     int "PROM bank select address bit (0 - 28)"
     default 19
 #     fi

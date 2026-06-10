@@ -1,4 +1,4 @@
 #   if [ "$CONFIG_PCI_SIMPLE_TARGET"  != "y" -a "$CONFIG_PCI_ACTEL"  != "y" ]; then
-config PCI_MASTER_TARGET
+config LIB_GAISLER_PCI_GRPCI1_PCI_MTF_PCI_MASTER_TARGET
     bool "PCI interface, master-target     "
 #   fi

@@ -1,7 +1,7 @@
-config AHBSTAT_ENABLE
+config LIB_GAISLER_MISC_AHBSTAT_AHBSTAT_ENABLE
     bool "Enable AHB Status Register  "
 #     if [ "$CONFIG_AHBSTAT_ENABLE" = "y" ]; then
-config AHBSTAT_NFTSLV
+config LIB_GAISLER_MISC_AHBSTAT_AHBSTAT_NFTSLV
     int "Number of correctable-error slaves  "
     default 1
 #     fi

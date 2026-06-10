@@ -1,9 +1,9 @@
-config GRCAN_ENABLE
+config LIB_GAISLER_CAN_GRCAN_GRCAN_ENABLE
     bool "Enable GRCAN interface                 "
 #     if [ "$CONFIG_GRCAN_ENABLE" = "y" ]; then
-config GRCANIRQ
+config LIB_GAISLER_CAN_GRCAN_GRCANIRQ
     int "Interrupt number                      "
     default 13
-config GRCANSINGLE
+config LIB_GAISLER_CAN_GRCAN_GRCANSINGLE
     bool "Enable single common interrupt       "
 #     fi

@@ -1,12 +1,12 @@
 #   mainmenu_option next_comment
 #   comment 'Version and Revision Register'
-config GRVERSION_ENABLE
+config LIB_GAISLER_MISC_GRVERSION_GRVERSION_ENABLE
     bool "Enable Version and Revision Register "
 #     if [ "$CONFIG_GRVERSION_ENABLE" = "y" ]; then
-config GRVERSION_VERSION
+config LIB_GAISLER_MISC_GRVERSION_GRVERSION_VERSION
     hex "Version  "
     default 0000
-config GRVERSION_REVISION
+config LIB_GAISLER_MISC_GRVERSION_GRVERSION_REVISION
     hex "Revision "
     default 0000
 #     fi

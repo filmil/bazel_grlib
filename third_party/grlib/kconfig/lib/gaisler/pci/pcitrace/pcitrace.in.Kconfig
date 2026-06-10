@@ -1,4 +1,4 @@
-config PCI_TRACE
+config LIB_GAISLER_PCI_PCITRACE_PCITRACE_PCI_TRACE
     bool "Enable PCI trace buffer              "
 #       if [ "$CONFIG_PCI_TRACE" = "y" ]; then
 #         choice 'PCI trace buffer depth' \

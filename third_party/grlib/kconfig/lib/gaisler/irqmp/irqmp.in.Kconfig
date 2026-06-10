@@ -1,10 +1,10 @@
-config IRQ3_ENABLE
+config LIB_GAISLER_IRQMP_IRQMP_IRQ3_ENABLE
     bool "Enable LEON3 interrupt controller    "
 #     if [ "$CONFIG_IRQ3_ENABLE" = "y" ]; then
-config IRQ3_SEC
+config LIB_GAISLER_IRQMP_IRQMP_IRQ3_SEC
     bool "Enable secondary interrupts           "
 #       if [ "$CONFIG_IRQ3_SEC" = "y" ]; then
-config IRQ3_NSEC
+config LIB_GAISLER_IRQMP_IRQMP_IRQ3_NSEC
     int "Secondary interrupt number (1 - 15)    "
     default 12
 #       fi

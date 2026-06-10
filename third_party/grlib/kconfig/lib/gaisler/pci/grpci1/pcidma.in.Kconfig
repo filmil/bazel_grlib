@@ -1,4 +1,4 @@
 #   if [ "$CONFIG_PCI_MASTER_TARGET"  = "y" ]; then
-config PCI_MASTER_TARGET_DMA
+config LIB_GAISLER_PCI_GRPCI1_PCIDMA_PCI_MASTER_TARGET_DMA
     bool "PCI DMA controller               "
 #   fi

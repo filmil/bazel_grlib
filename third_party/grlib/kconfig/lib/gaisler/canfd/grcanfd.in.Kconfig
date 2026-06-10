@@ -1,9 +1,9 @@
-config GRCANFD_ENABLE
+config LIB_GAISLER_CANFD_GRCANFD_GRCANFD_ENABLE
     bool "Enable GRCANFD interface               "
 #     if [ "$CONFIG_GRCANFD_ENABLE" = "y" ]; then
-config GRCANFDIRQ
+config LIB_GAISLER_CANFD_GRCANFD_GRCANFDIRQ
     int "Interrupt number                      "
     default 13
-config GRCANFDSINGLE
+config LIB_GAISLER_CANFD_GRCANFD_GRCANFDSINGLE
     bool "Enable single common interrupt       "
 #     fi

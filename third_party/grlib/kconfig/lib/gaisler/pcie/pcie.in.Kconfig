@@ -1,24 +1,24 @@
 # if [ "$CONFIG_SYN_VIRTEX6" = "y" -o "$CONFIG_SYN_SPARTAN6" = "y" -o "$CONFIG_BOARD_ML505" = "y" ]; then  
-config PCIEXP_MASTER_TARGET
+config LIB_GAISLER_PCIE_PCIE_PCIEXP_MASTER_TARGET
     bool "simple interface      "
 #   if [ "$CONFIG_PCIEXP_MASTER_TARGET" = "y" ]; then
-config PCIEXP_SIMPLE_TARGET
+config LIB_GAISLER_PCIE_PCIE_PCIEXP_SIMPLE_TARGET
     bool "interface, target-only     "
 #   fi
 # 	if [ "$CONFIG_PCIEXP_MASTER_TARGET" != "y" ]; then
-config PCIEXP_MASTER_FIFO
+config LIB_GAISLER_PCIE_PCIE_PCIEXP_MASTER_FIFO
     bool "interface with FIFO      "
 #   	if [ "$CONFIG_PCIEXP_MASTER_FIFO" = "y" ]; then
-config PCIEXP_MASTER_FIFO_DMA
+config LIB_GAISLER_PCIE_PCIE_PCIEXP_MASTER_FIFO_DMA
     bool "DMA controller     "
 #   	fi
 #   fi
 
 #   if [ "$CONFIG_PCIEXP_MASTER_TARGET" = "y" -o "$CONFIG_PCIEXP_MASTER_FIFO" = "y" ]; then
-config PCIEXP_VENDORID
+config LIB_GAISLER_PCIE_PCIE_PCIEXP_VENDORID
     hex "vendor ID"
     default 10EE
-config PCIEXP_DEVICEID
+config LIB_GAISLER_PCIE_PCIE_PCIEXP_DEVICEID
     hex "device ID"
     default 0009
 #   fi

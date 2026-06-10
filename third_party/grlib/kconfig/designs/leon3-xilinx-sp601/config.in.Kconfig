@@ -13,7 +13,7 @@
 
 # mainmenu_option next_comment
 #   comment 'Synthesis      '
-rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+# Original source: lib/techmap/gencomp/tech.in
 # endmenu
 
 #mainmenu_option next_comment
@@ -27,17 +27,17 @@ rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
 
 # mainmenu_option next_comment
 #   comment 'Clock generation'
-rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+# Original source: lib/techmap/clocks/clkgen.in
 # endmenu
 
-rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
-rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+# Original source: lib/gaisler/leon3/leon3.in
+# Original source: lib/grlib/amba/amba.in
 
 # mainmenu_option next_comment
 #   comment 'Debug Link           '
-rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
-rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
-rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
+# Original source: lib/gaisler/uart/dcom.in
+# Original source: lib/gaisler/jtag/jtag.in
+# Original source: lib/gaisler/net/edcl.in
 # endmenu
 
 # mainmenu_option next_comment
@@ -45,39 +45,39 @@ rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
 
 #   mainmenu_option next_comment
 #   comment 'Memory controllers             '
-rsource "../../../../lib/esa/memoryctrl/mctrl.in.Kconfig"
-rsource "../../../../lib/gaisler/ddr/ddr2sp.in.Kconfig"
-rsource "../../../../lib/gaisler/ddr/mig.in.Kconfig"
+# Original source: lib/esa/memoryctrl/mctrl.in
+# Original source: lib/gaisler/ddr/ddr2sp.in
+# Original source: lib/gaisler/ddr/mig.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'On-chip RAM/ROM                 '
-rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+# Original source: lib/gaisler/misc/ahbrom.in
+# Original source: lib/gaisler/misc/ahbram.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'Ethernet             '
-rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
+# Original source: lib/gaisler/greth/greth.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'UARTs, timers and irq control         '
-rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
-rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
-rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+# Original source: lib/gaisler/uart/uart1.in
+# Original source: lib/gaisler/irqmp/irqmp.in
+# Original source: lib/gaisler/misc/gptimer.in
+# Original source: lib/gaisler/misc/grgpio.in
 #   endmenu
 
 #   mainmenu_option next_comment
 #   comment 'SPI'
-rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
-rsource "../../../../lib/gaisler/spi/spictrl.in.Kconfig"
+# Original source: lib/gaisler/spi/spimctrl.in
+# Original source: lib/gaisler/spi/spictrl.in
 #   endmenu
 
 # endmenu
 
 # mainmenu_option next_comment
 # comment 'VHDL Debugging        '
-rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+# Original source: lib/grlib/util/debug.in
 # endmenu

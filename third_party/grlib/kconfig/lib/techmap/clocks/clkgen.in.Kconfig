@@ -23,11 +23,11 @@
 # 	-o "$CONFIG_CLK_CLKDLL" = "y" -o "$CONFIG_CLK_LIB18T" = "y" \
 # 	-o "$CONFIG_CLK_FUSPLL" = "y" -o "$CONFIG_CLK_CLKPLLE2" = "y"\
 #         -o "$CONFIG_CLK_BRAVEMED" = "y"]; then
-config CLK_MUL
+config LIB_TECHMAP_CLOCKS_CLKGEN_CLK_MUL
     int "Clock multiplication factor (allowed values are tech dependent)"
     default 2
 #       if [ "$CONFIG_CLK_BRAVEMED" != "y" ]; then 
-config CLK_DIV
+config LIB_TECHMAP_CLOCKS_CLKGEN_CLK_DIV
     int "Clock division factor (allowed values are tech dependent)"
     default 2
 #       fi
@@ -35,25 +35,25 @@ config CLK_DIV
 #     if [ "$CONFIG_CLK_PRO3PLL" = "y" -o "$CONFIG_CLK_PRO3EPLL" = "y" \
 #          -o "$CONFIG_CLK_PRO3LPLL" = "y" -o "$CONFIG_CLK_FUSPLL" = "y" \
 # 	 -o "$CONFIG_CLK_BRAVEMED" = "y"]; then
-config OCLK_DIV
+config LIB_TECHMAP_CLOCKS_CLKGEN_OCLK_DIV
     int "Outout division factor (0 - 32, see help)"
     default 1
-config OCLKB_DIV
+config LIB_TECHMAP_CLOCKS_CLKGEN_OCLKB_DIV
     int "Outout division factor, 2nd clk (0 - 32, see help)"
     default 0
-config OCLKC_DIV
+config LIB_TECHMAP_CLOCKS_CLKGEN_OCLKC_DIV
     int "Outout division factor, 3rd clk (0 - 32, see help)"
     default 0
 #     fi
 #     if [ "$CONFIG_CLK_CLKDLL" = "y" -o "$CONFIG_CLK_DCM" = "y" ]; then
-config PCI_CLKDLL
+config LIB_TECHMAP_CLOCKS_CLKGEN_PCI_CLKDLL
     bool "Enable Xilinx CLKDLL for PCI clock"
 #     fi
 #     if [ "$CONFIG_CLK_DCM" = "y" ]; then
-config CLK_NOFB
+config LIB_TECHMAP_CLOCKS_CLKGEN_CLK_NOFB
     bool "Disable external feedback for SDRAM clock"
 #     fi
 #   if [ "$CONFIG_PCI_ENABLE" != "y" ]; then
-config PCI_SYSCLK
+config LIB_TECHMAP_CLOCKS_CLKGEN_PCI_SYSCLK
     bool "Use PCI clock as system clock"
 #   fi
