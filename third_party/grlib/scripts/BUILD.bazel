@@ -38,3 +38,16 @@ go_binary(
     embed = [":gen_config_vhd_lib"],
     visibility = ["//visibility:public"],
 )
+
+go_library(
+    name = "gen_example_bazelrc_lib",
+    srcs = ["gen_example_bazelrc.go"],
+    importpath = "grlib/third_party/grlib/scripts/gen_example_bazelrc",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "gen_example_bazelrc",
+    embed = [":gen_example_bazelrc_lib"],
+    visibility = ["//visibility:public"],
+)
