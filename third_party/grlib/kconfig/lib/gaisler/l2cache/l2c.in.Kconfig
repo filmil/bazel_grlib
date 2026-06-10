@@ -1,0 +1,56 @@
+menu "Options"
+comment "L2 Cache"
+
+config L2_ENABLE
+    bool "Enable L2 Cache                      "
+config L2_LITE
+    bool "Implement L2 Cache Lite              "
+# choice translation skipped
+	"1		CONFIG_L2_ASSO1 \
+	2		CONFIG_L2_ASSO2 \
+	3		CONFIG_L2_ASSO3 \
+	4		CONFIG_L2_ASSO4" 1
+# choice translation skipped
+	"1		CONFIG_L2_SZ1 \
+	2		CONFIG_L2_SZ2 \
+	4		CONFIG_L2_SZ4 \
+	8		CONFIG_L2_SZ8 \
+	16		CONFIG_L2_SZ16 \
+	32		CONFIG_L2_SZ32 \
+	64		CONFIG_L2_SZ64 \
+	128		CONFIG_L2_SZ128 \
+	256		CONFIG_L2_SZ256 \
+	512		CONFIG_L2_SZ512" 64
+# choice translation skipped
+	"32		CONFIG_L2_LINE32 \
+	64		CONFIG_L2_LINE64" 32
+
+config L2_HPROT
+    bool "Use HPROT information                "
+config L2_PEN
+    bool "Enable L2 cache at power-on          "
+config L2_WT
+    bool "Enable write-through at power-on     "
+config L2_RAN
+    bool "Random replacement (LRU default)     "
+if y # TODO: improve if translation
+config L2_SHARE
+    bool "Shared RAM for multi-way caches      "
+endif
+config L2_MAP
+    hex "Cacheability map                     "
+    default 00F0
+config L2_MTRR
+    int "Number of MTRR registers             "
+    default 0
+# choice translation skipped
+	"None		CONFIG_L2_EDAC_NONE \
+	Yes		CONFIG_L2_EDAC_YES \
+	TechSpec	CONFIG_L2_EDAC_TECHSPEC" None
+config L2_AXI
+    bool "AXI backend interface                "
+
+#      fi
+#    fi
+endmenu
+

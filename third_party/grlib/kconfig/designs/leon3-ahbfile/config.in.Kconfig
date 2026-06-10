@@ -1,0 +1,34 @@
+# LEON3 configuration for ahbfile example design
+
+mainmenu "LEON3MP Design Configuration"
+
+menu "Options"
+comment "Synthesis      "
+rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
+rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+
+menu "Options"
+comment "Peripherals             "
+
+menu "Options"
+comment "On-chip RAM/ROM                 "
+rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "UARTs, timers and irq control         "
+rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
+rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+endmenu
+
+endmenu
+
+menu "Options"
+comment "VHDL Debugging        "
+rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+endmenu

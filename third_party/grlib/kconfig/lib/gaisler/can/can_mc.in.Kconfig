@@ -1,0 +1,19 @@
+config CAN_ENABLE
+    bool "Enable multi-core CAN interface                 "
+if y # TODO: improve if translation
+config CAN_NUM
+    int "Number of CAN cores                      "
+    default 1
+config CANIO
+    hex "CAN I/O area start address (haddr[19:8]) "
+    default C00
+config CANIRQ
+    int "Interrupt number                      "
+    default 13
+config CANSEPIRQ
+    bool "Enable separate interrupts           "
+config CAN_SYNCRST
+    bool "Enable synchronous reset             "
+config CAN_FT
+    bool "Enable FT FIFO memory                "
+endif

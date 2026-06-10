@@ -1,0 +1,7 @@
+config AHBSTAT_ENABLE
+    bool "Enable AHB Status Register  "
+if y # TODO: improve if translation
+config AHBSTAT_NFTSLV
+    int "Number of correctable-error slaves  "
+    default 1
+endif

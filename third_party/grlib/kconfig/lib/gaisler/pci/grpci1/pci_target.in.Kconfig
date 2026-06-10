@@ -1,0 +1,4 @@
+if y # TODO: improve if translation
+config PCI_SIMPLE_TARGET
+    bool "PCI interface, target-only     "
+endif

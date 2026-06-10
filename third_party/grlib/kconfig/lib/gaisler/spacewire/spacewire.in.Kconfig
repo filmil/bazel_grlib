@@ -1,0 +1,74 @@
+config SPW_ENABLE
+    bool "Enable Spacewire links              "
+if y # TODO: improve if translation
+config SPW_NUM
+    int "Number of links (1 - 3)"
+    default 1
+# choice translation skipped
+	"4	CONFIG_SPW_AHBFIFO4	 \
+	 8	CONFIG_SPW_AHBFIFO8	 \
+	 16	CONFIG_SPW_AHBFIFO16	 \
+	 32	CONFIG_SPW_AHBFIFO32" 16
+# choice translation skipped
+	"16	CONFIG_SPW_RXFIFO16	 \
+	 32	CONFIG_SPW_RXFIFO32	 \
+	 64	CONFIG_SPW_RXFIFO64" 16
+config SPW_RMAP
+    bool "Enable RMAP protocol   "
+if y # TODO: improve if translation
+# choice translation skipped
+	"64	CONFIG_SPW_RMAPBUF2	 \
+	 128	CONFIG_SPW_RMAPBUF4	 \
+	 192	CONFIG_SPW_RMAPBUF6	 \
+	 256	CONFIG_SPW_RMAPBUF8" 64
+endif
+config SPW_RMAPCRC
+    bool "Enable RMAP CRC check  "
+config SPW_RXUNAL
+    bool "Enable Rx unaligned transfers "
+if y # TODO: improve if translation
+# choice translation skipped
+        "None		CONFIG_SPW_FT_NONE \
+	 Parity-DMR	CONFIG_SPW_FT_DMR \
+	 TMR		CONFIG_SPW_FT_TMR" None
+endif
+if y # TODO: improve if translation
+# choice translation skipped
+        "None		CONFIG_SPW_FT_NONE \
+	 Parity-DMR	CONFIG_SPW_FT_DMR \
+	 TMR		CONFIG_SPW_FT_TMR \
+	 BCH  		CONFIG_SPW_FT_BCH \
+	 TechSpec	CONFIG_SPW_FT_TECHSPEC" None
+endif
+config SPW_NETLIST
+    bool "Use GRSPWC netlist     "
+config SPW_PORTS
+    int "Number of ports (1 - 2)"
+    default 1
+# choice translation skipped
+	"1	CONFIG_SPW_GRSPW1	 \
+	 2	CONFIG_SPW_GRSPW2" 2 
+if y # TODO: improve if translation
+config SPW_DMACHAN
+    int "Number of DMA channels (1 - 4)"
+    default 1
+config SPW_RTSAME
+    bool "Receiver and transmitter uses same clock  "
+# choice translation skipped
+	"SDR       CONFIG_SPW_RX_SDR	 \
+	 DDR       CONFIG_SPW_RX_DDR   \
+	 PAD       CONFIG_SPW_RX_PAD   \
+         XOR       CONFIG_SPW_RX_XOR \
+         XOR-ER1   CONFIG_SPW_RX_XORER1 \
+         XOR-ER2   CONFIG_SPW_RX_XORER2 \
+         Aeroflex  CONFIG_SPW_RX_AFLEX " DDR
+# choice translation skipped
+	"SDR       CONFIG_SPW_TX_SDR	 \
+	 DDR       CONFIG_SPW_TX_DDR   \
+         Aeroflex  CONFIG_SPW_TX_AFLEX " SDR   
+      
+endif
+        
+      
+endif
+

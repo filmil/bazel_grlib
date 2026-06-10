@@ -1,0 +1,16 @@
+config CAN_ENABLE
+    bool "Enable CAN interface                 "
+if y # TODO: improve if translation
+config CANIO
+    hex "CAN I/O area start address (haddr[19:8]) "
+    default C00
+config CANIRQ
+    int "Interrupt number                      "
+    default 13
+config CANLOOP
+    bool "Enable loop-back testing             "
+config CAN_SYNCRST
+    bool "Enable synchronous reset             "
+config CAN_FT
+    bool "Enable FT FIFO memory                "
+endif

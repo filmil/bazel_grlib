@@ -1,0 +1,11 @@
+config UART1_ENABLE
+    bool "Enable console UART                  "
+if y # TODO: improve if translation
+# choice translation skipped
+	  "1		CONFIG_UA1_FIFO1 \
+	   2		CONFIG_UA1_FIFO2 \
+	   4		CONFIG_UA1_FIFO4 \
+	   8		CONFIG_UA1_FIFO8 \
+	  16		CONFIG_UA1_FIFO16 \
+	  32  		CONFIG_UA1_FIFO32" 1
+endif

@@ -1,0 +1,4 @@
+if y # TODO: improve if translation
+config PCI_MASTER_TARGET
+    bool "PCI interface, master-target     "
+endif

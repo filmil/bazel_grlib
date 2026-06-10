@@ -1,0 +1,112 @@
+config GRUSBDC_ENABLE
+    bool "Gaisler Research USB 2.0 Device Controller "
+if y # TODO: improve if translation
+config GRUSBDC_AIFACE
+    bool "AHB Master Interface"
+# choice translation skipped
+   "ULPI	   CONFIG_GRUSBDC_ULPI \
+   UTMI/UTMI+8-bit  CONFIG_GRUSBDC_UTMI8 \
+   UTMI/UTMI+16-bit CONFIG_GRUSBDC_UTMI16" ULPI
+config GRUSBDC_NEPI
+    int "Number of IN endpoints "
+    default 1
+config GRUSBDC_NEPO
+    int "Number of OUT endpoints"
+    default 1
+config GRUSBDC_I0
+    int "Buffer size for IN endpoint 0 "
+    default 1024
+config GRUSBDC_I1
+    int "Buffer size for IN endpoint 1 "
+    default 1024
+config GRUSBDC_I2
+    int "Buffer size for IN endpoint 2 "
+    default 1024
+config GRUSBDC_I3
+    int "Buffer size for IN endpoint 3 "
+    default 1024
+config GRUSBDC_I4
+    int "Buffer size for IN endpoint 4 "
+    default 1024
+config GRUSBDC_I5
+    int "Buffer size for IN endpoint 5 "
+    default 1024
+config GRUSBDC_I6
+    int "Buffer size for IN endpoint 6 "
+    default 1024
+config GRUSBDC_I7
+    int "Buffer size for IN endpoint 7 "
+    default 1024
+config GRUSBDC_I8
+    int "Buffer size for IN endpoint 8 "
+    default 1024
+config GRUSBDC_I9
+    int "Buffer size for IN endpoint 9 "
+    default 1024
+config GRUSBDC_I10
+    int "Buffer size for IN endpoint 10 "
+    default 1024
+config GRUSBDC_I11
+    int "Buffer size for IN endpoint 11 "
+    default 1024
+config GRUSBDC_I12
+    int "Buffer size for IN endpoint 12 "
+    default 1024
+config GRUSBDC_I13
+    int "Buffer size for IN endpoint 13 "
+    default 1024
+config GRUSBDC_I14
+    int "Buffer size for IN endpoint 14 "
+    default 1024
+config GRUSBDC_I15
+    int "Buffer size for IN endpoint 15 "
+    default 1024
+config GRUSBDC_O0
+    int "Buffer size for OUT endpoint 0"
+    default 1024
+config GRUSBDC_O1
+    int "Buffer size for OUT endpoint 1"
+    default 1024
+config GRUSBDC_O2
+    int "Buffer size for OUT endpoint 2"
+    default 1024
+config GRUSBDC_O3
+    int "Buffer size for OUT endpoint 3"
+    default 1024
+config GRUSBDC_O4
+    int "Buffer size for OUT endpoint 4"
+    default 1024
+config GRUSBDC_O5
+    int "Buffer size for OUT endpoint 5"
+    default 1024
+config GRUSBDC_O6
+    int "Buffer size for OUT endpoint 6"
+    default 1024
+config GRUSBDC_O7
+    int "Buffer size for OUT endpoint 7"
+    default 1024
+config GRUSBDC_O8
+    int "Buffer size for OUT endpoint 8"
+    default 1024
+config GRUSBDC_O9
+    int "Buffer size for OUT endpoint 9"
+    default 1024
+config GRUSBDC_O10
+    int "Buffer size for OUT endpoint 10"
+    default 1024
+config GRUSBDC_O11
+    int "Buffer size for OUT endpoint 11"
+    default 1024
+config GRUSBDC_O12
+    int "Buffer size for OUT endpoint 12"
+    default 1024
+config GRUSBDC_O13
+    int "Buffer size for OUT endpoint 13"
+    default 1024
+config GRUSBDC_O14
+    int "Buffer size for OUT endpoint 14"
+    default 1024
+config GRUSBDC_O15
+    int "Buffer size for OUT endpoint 15"
+    default 1024
+endif

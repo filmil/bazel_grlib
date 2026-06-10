@@ -1,0 +1,724 @@
+
+menu "Options"
+comment "Processor            "
+config LEON3
+    bool "Enable LEON3 SPARC V8 Processor"
+if y # TODO: improve if translation
+config PROC_NUM
+    int "Number of processors"
+    default 1
+# choice translation skipped
+    "Minimal-configuration	CONFIG_LEON3_MIN \
+     General-purpose-cfg	CONFIG_LEON3_GP \
+     High-Performance-cfg	CONFIG_LEON3_HP \
+     Custom-configuration	CONFIG_LEON3_CUSTOM" Custom-configuration
+if y # TODO: improve if translation
+config IU_NWINDOWS
+    int
+    default 8
+config IU_V8MULDIV
+    bool
+    default n
+config IU_BP
+    bool
+    default n
+config IU_SVT
+    bool
+    default y
+config IU_LDELAY
+    int
+    default 1
+config IU_WATCHPOINTS
+    int
+    default 0
+config PWD
+    bool
+    default n
+config IU_RSTADDR
+    hex
+    default 00000
+config FPU_ENABLE
+    bool
+    default n
+config ICACHE_ENABLE
+    bool
+    default y
+config ICACHE_ASSO1
+    bool
+    default y
+config ICACHE_SZ2
+    bool
+    default y
+config ICACHE_LZ16
+    bool
+    default y
+config ICACHE_ALGORND
+    bool
+    default y
+config ICACHE_LOCK
+    bool
+    default n
+config DCACHE_ENABLE
+    bool
+    default y
+config DCACHE_ASSO1
+    bool
+    default y
+config DCACHE_SZ2
+    bool
+    default y
+config DCACHE_LZ16
+    bool
+    default y
+config DCACHE_ALGORND
+    bool
+    default y
+config DCACHE_LOCK
+    bool
+    default n
+config DCACHE_SNOOP
+    bool
+    default n
+config CACHE_FIXED
+    hex
+    default 0
+config MMU_ENABLE
+    bool
+    default n
+config MMU_SV
+    bool
+    default n
+config DSU_ENABLE
+    bool
+    default n
+config NP_ASI
+    bool
+    default n
+config PWRPSR
+    bool
+    default n
+config ALTWIN
+    bool
+    default n
+config REX
+    bool
+    default n
+endif
+if y # TODO: improve if translation
+config IU_NWINDOWS
+    int
+    default 8
+config IU_V8MULDIV
+    bool
+    default y
+config IU_MUL_LATENCY_5
+    bool
+    default y
+config IU_MUL_MAC
+    bool
+    default n
+config IU_BP
+    bool
+    default y
+config IU_SVT
+    bool
+    default y
+config IU_LDELAY
+    int
+    default 1
+config IU_WATCHPOINTS
+    int
+    default 2
+config PWD
+    bool
+    default y
+config IU_RSTADDR
+    hex
+    default 00000
+config FPU_ENABLE
+    bool
+    default n
+config ICACHE_ENABLE
+    bool
+    default y
+config ICACHE_ASSO2
+    bool
+    default y
+config ICACHE_SZ4
+    bool
+    default y
+config ICACHE_LZ16
+    bool
+    default y
+config ICACHE_ALGORND
+    bool
+    default y
+config ICACHE_LOCK
+    bool
+    default n
+config ICACHE_LRAM
+    bool
+    default n
+config DCACHE_ENABLE
+    bool
+    default y
+config DCACHE_ASSO2
+    bool
+    default y
+config DCACHE_SZ4
+    bool
+    default y
+config DCACHE_LZ16
+    bool
+    default y
+config DCACHE_ALGORND
+    bool
+    default y
+config DCACHE_LOCK
+    bool
+    default n
+config DCACHE_SNOOP
+    bool
+    default y
+config DCACHE_SNOOP_SEPTAG
+    bool
+    default y
+config DCACHE_SNOOP_SP
+    bool
+    default n
+config CACHE_FIXED
+    hex
+    default 0
+config DCACHE_LRAM
+    bool
+    default n
+config MMU_ENABLE
+    bool
+    default y
+config MMU_SV
+    bool
+    default y
+config MMU_SPLIT
+    bool
+    default y
+config MMU_REPARRAY
+    bool
+    default y
+config MMU_I8
+    bool
+    default y
+config MMU_D8
+    bool
+    default y
+config MMU_FASTWB
+    bool
+    default y
+config MMU_PAGE_4K
+    bool
+    default y
+config DSU_ENABLE
+    bool
+    default y
+config DSU_ITRACE
+    bool
+    default y
+config DSU_ITRACESZ4
+    bool
+    default y
+config DSU_ATRACESZ4
+    bool
+    default y
+config NP_ASI
+    bool
+    default y
+config PWRPSR
+    bool
+    default y
+config ALTWIN
+    bool
+    default n
+config REX
+    bool
+    default n
+endif
+if y # TODO: improve if translation
+config IU_NWINDOWS
+    int
+    default 8
+config IU_V8MULDIV
+    bool
+    default y
+config IU_MUL_LATENCY_2
+    bool
+    default y
+config IU_MUL_MAC
+    bool
+    default n
+config IU_BP
+    bool
+    default y
+config IU_SVT
+    bool
+    default y
+config IU_LDELAY
+    int
+    default 1
+config IU_WATCHPOINTS
+    int
+    default 4
+config PWD
+    bool
+    default y
+config IU_RSTADDR
+    hex
+    default 00000
+config FPU_ENABLE
+    bool
+    default y
+config FPU_GRFPU
+    bool
+    default y
+config FPU_GRFPU_INFMUL
+    bool
+    default y
+config ICACHE_ENABLE
+    bool
+    default y
+config ICACHE_ASSO2
+    bool
+    default y
+config ICACHE_SZ4
+    bool
+    default y
+config ICACHE_LZ16
+    bool
+    default y
+config ICACHE_ALGOLRU
+    bool
+    default y
+config ICACHE_LOCK
+    bool
+    default n
+config ICACHE_LRAM
+    bool
+    default n
+config DCACHE_ENABLE
+    bool
+    default y
+config DCACHE_ASSO2
+    bool
+    default y
+config DCACHE_SZ4
+    bool
+    default y
+config DCACHE_LZ16
+    bool
+    default y
+config DCACHE_ALGOLRU
+    bool
+    default y
+config DCACHE_LOCK
+    bool
+    default n
+config DCACHE_SNOOP
+    bool
+    default y
+config DCACHE_SNOOP_SEPTAG
+    bool
+    default y
+config DCACHE_SNOOP_SP
+    bool
+    default n
+config CACHE_FIXED
+    hex
+    default 0
+config DCACHE_LRAM
+    bool
+    default n
+config MMU_ENABLE
+    bool
+    default y
+config MMU_SV
+    bool
+    default y
+config MMU_SPLIT
+    bool
+    default y
+config MMU_REPARRAY
+    bool
+    default y
+config MMU_I16
+    bool
+    default y
+config MMU_D16
+    bool
+    default y
+config MMU_FASTWB
+    bool
+    default y
+config MMU_PAGE_4K
+    bool
+    default y
+config DSU_ENABLE
+    bool
+    default y
+config DSU_ITRACE
+    bool
+    default y
+config DSU_ITRACESZ4
+    bool
+    default y
+config DSU_ATRACESZ4
+    bool
+    default y
+config NP_ASI
+    bool
+    default y
+config PWRPSR
+    bool
+    default y
+config ALTWIN
+    bool
+    default n
+config REX
+    bool
+    default n
+endif
+if y # TODO: improve if translation
+menu "Options"
+comment "Integer unit                                           "
+config IU_NWINDOWS
+    int "SPARC register windows"
+    default 8
+if y # TODO: improve if translation
+config IU_RFINF
+    bool "Use inferred tech for IU register file"
+endif
+config IU_V8MULDIV
+    bool "SPARC V8 MUL/DIV instructions"
+if y # TODO: improve if translation
+# choice translation skipped
+	  "2-cycles		CONFIG_IU_MUL_LATENCY_2 \
+	  4-cycles		CONFIG_IU_MUL_LATENCY_4 \
+	  5-cycles		CONFIG_IU_MUL_LATENCY_5" 5-cycles
+if y # TODO: improve if translation
+config IU_MUL_MAC
+    bool "SPARC V8e SMAC/UMAC instructions     "
+endif
+# choice translation skipped
+	  "Inferred		CONFIG_IU_MUL_INFERRED \
+	  NTNU_Modgen		CONFIG_IU_MUL_MODGEN \
+	  TechSpec		CONFIG_IU_MUL_TECHSPEC \
+	  Designware		CONFIG_IU_MUL_DW" Inferred
+endif
+config IU_BP
+    bool "Branch prediction     "
+config IU_SVT
+    bool "Single-vector trapping"
+config IU_LDELAY
+    int "Load delay"
+    default 1
+config IU_WATCHPOINTS
+    int "Hardware watchpoints"
+    default 0
+config PWD
+    bool "Enable power-down mode "
+config IU_RSTADDR
+    hex " Reset start address (addr[31:12]) "
+    default 00000
+config NP_ASI
+    bool "SPARC V8E non-privileged ASI access"
+config WRPSR
+    bool "SPARC V8E partial Write %psr (WRPSR)"
+config ALTWIN
+    bool "SPARC V8E AWP and regfile partitioning "
+config REX
+    bool "Enable LEON-REX extension"
+endmenu
+menu "Options"
+comment "Floating-point unit"
+config FPU_ENABLE
+    bool "Enable FPU                             "
+if y # TODO: improve if translation
+# choice translation skipped
+	  "GRFPU		CONFIG_FPU_GRFPU \
+	   GRFPU-LITE	CONFIG_FPU_GRFPULITE" GRFPU
+if y # TODO: improve if translation
+# choice translation skipped
+   	   "Inferred              CONFIG_FPU_GRFPU_INFMUL \
+   	    DW                    CONFIG_FPU_GRFPU_DWMUL \
+   	    ModGen                CONFIG_FPU_GRFPU_MODGEN \
+   	    TechSpec              CONFIG_FPU_GRFPU_TECHSPEC" Inferred
+endif
+if y # TODO: improve if translation
+config FPU_GRFPU_SH
+    bool "Shared GRFPU                      "
+endif
+if y # TODO: improve if translation
+# choice translation skipped
+	   "Simple                CONFIG_FPU_GRFPC0 \
+	    Data-forwarding       CONFIG_FPU_GRFPC1 \
+	    Non-blocking          CONFIG_FPU_GRFPC2" Simple
+endif
+#        bool 'Use VHDL netlist          ' CONFIG_FPU_NETLIST
+if y # TODO: improve if translation
+config FPU_RFINF
+    bool "Use inferred tech for FP register file"
+endif
+endif
+endmenu
+menu "Options"
+comment "Cache system"
+config ICACHE_ENABLE
+    bool "Enable instruction cache       "
+if y # TODO: improve if translation
+# choice translation skipped
+	  "1		CONFIG_ICACHE_ASSO1 \
+	  2		CONFIG_ICACHE_ASSO2 \
+	  3		CONFIG_ICACHE_ASSO3 \
+	  4		CONFIG_ICACHE_ASSO4" 1
+# choice translation skipped
+	  "1		CONFIG_ICACHE_SZ1 \
+	  2		CONFIG_ICACHE_SZ2 \
+	  4		CONFIG_ICACHE_SZ4 \
+	  8		CONFIG_ICACHE_SZ8 \
+	  16		CONFIG_ICACHE_SZ16 \
+	  32		CONFIG_ICACHE_SZ32 \
+	  64		CONFIG_ICACHE_SZ64 \
+	  128		CONFIG_ICACHE_SZ128 \
+	  256		CONFIG_ICACHE_SZ256" 4
+# choice translation skipped
+	  "16		CONFIG_ICACHE_LZ16 \
+	  32		CONFIG_ICACHE_LZ32" 32
+if y # TODO: improve if translation
+# choice translation skipped
+	  "Random		CONFIG_ICACHE_ALGORND \
+	  Direct		CONFIG_ICACHE_ALGODIR \
+	  LRR		CONFIG_ICACHE_ALGOLRR \
+	  LRU		CONFIG_ICACHE_ALGOLRU" Random
+config ICACHE_LOCK
+    bool "Cache locking      "
+endif
+endif
+if y # TODO: improve if translation
+config ICACHE_LRAM
+    bool "Enable local instruction RAM            "
+endif
+if y # TODO: improve if translation
+# choice translation skipped
+	  "1		CONFIG_ICACHE_LRAM_SZ1 \
+	  2		CONFIG_ICACHE_LRAM_SZ2 \
+	  4		CONFIG_ICACHE_LRAM_SZ4 \
+	  8		CONFIG_ICACHE_LRAM_SZ8 \
+	  16		CONFIG_ICACHE_LRAM_SZ16 \
+	  32		CONFIG_ICACHE_LRAM_SZ32 \
+	  64		CONFIG_ICACHE_LRAM_SZ64 \
+	  128		CONFIG_ICACHE_LRAM_SZ128 \
+	  256		CONFIG_ICACHE_LRAM_SZ256" 4
+config ICACHE_LRSTART
+    hex " Local instruction RAM start address (8 MSB) "
+    default 8e
+endif
+config DCACHE_ENABLE
+    bool "Enable data cache       "
+if y # TODO: improve if translation
+# choice translation skipped
+	  "1		CONFIG_DCACHE_ASSO1 \
+	  2		CONFIG_DCACHE_ASSO2 \
+	  3		CONFIG_DCACHE_ASSO3 \
+	  4		CONFIG_DCACHE_ASSO4" 1
+# choice translation skipped
+ 	  "1		CONFIG_DCACHE_SZ1 \
+	  2		CONFIG_DCACHE_SZ2 \
+	  4		CONFIG_DCACHE_SZ4 \
+	  8		CONFIG_DCACHE_SZ8 \
+	  16		CONFIG_DCACHE_SZ16 \
+	  32		CONFIG_DCACHE_SZ32 \
+	  64		CONFIG_DCACHE_SZ64 \
+	  128		CONFIG_DCACHE_SZ128 \
+	  256		CONFIG_DCACHE_SZ256" 4
+# choice translation skipped
+	  "16		CONFIG_DCACHE_LZ16 \
+	  32		CONFIG_DCACHE_LZ32" 32
+if y # TODO: improve if translation
+# choice translation skipped
+	  "Random		CONFIG_DCACHE_ALGORND \
+	  Direct		CONFIG_DCACHE_ALGODIR \
+	  LRR		CONFIG_DCACHE_ALGOLRR \
+	  LRU		CONFIG_DCACHE_ALGOLRU" Random
+config DCACHE_LOCK
+    bool "Cache locking      "
+endif
+config DCACHE_SNOOP
+    bool "AHB snooping       "
+if y # TODO: improve if translation
+config DCACHE_SNOOP_SEPTAG
+    bool "Separate physical/snoop tags  "
+if y # TODO: improve if translation
+config DCACHE_SNOOP_SP
+    bool "Use SP RAM for separate tags  "
+endif
+endif
+endif
+if y # TODO: improve if translation
+config CACHE_FIXED
+    hex "Fixed cacheability map  "
+    default 0
+endif
+if y # TODO: improve if translation
+config DCACHE_LRAM
+    bool "Enable local data RAM            "
+endif
+if y # TODO: improve if translation
+# choice translation skipped
+	  "1		CONFIG_DCACHE_LRAM_SZ1 \
+	  2		CONFIG_DCACHE_LRAM_SZ2 \
+	  4		CONFIG_DCACHE_LRAM_SZ4 \
+	  8		CONFIG_DCACHE_LRAM_SZ8 \
+	  16		CONFIG_DCACHE_LRAM_SZ16 \
+	  32		CONFIG_DCACHE_LRAM_SZ32 \
+	  64		CONFIG_DCACHE_LRAM_SZ64 \
+	  128		CONFIG_DCACHE_LRAM_SZ128 \
+	  256		CONFIG_DCACHE_LRAM_SZ256" 4
+config DCACHE_LRSTART
+    hex " Local data RAM start address (8 MSB) "
+    default 8f
+endif
+endmenu
+
+menu "Options"
+comment "MMU"
+config MMU_ENABLE
+    bool "Enable MMU       "
+if y # TODO: improve if translation
+config MMU_SV
+    bool "Include supervisor bit in tag"
+# choice translation skipped
+	  "combined	CONFIG_MMU_COMBINED \
+	   split		CONFIG_MMU_SPLIT" combined
+# choice translation skipped
+	  "LRU      	CONFIG_MMU_REPARRAY \
+	   Increment	CONFIG_MMU_REPINCREMENT" Increment
+# choice translation skipped
+	  "2		CONFIG_MMU_I2 \
+	   4		CONFIG_MMU_I4 \
+	   8		CONFIG_MMU_I8 \
+	   16		CONFIG_MMU_I16 \
+	   32		CONFIG_MMU_I32 \
+	   64		CONFIG_MMU_I64" 8
+if y # TODO: improve if translation
+# choice translation skipped
+	  "2		CONFIG_MMU_D2 \
+	   4		CONFIG_MMU_D4 \
+	   8		CONFIG_MMU_D8 \
+	   16		CONFIG_MMU_D16 \
+	   32		CONFIG_MMU_D32 \
+	   64		CONFIG_MMU_D64" 8
+config MMU_FASTWB
+    bool "Fast writebuffer       "
+endif
+# choice translation skipped
+	  "4K		CONFIG_MMU_PAGE_4K \
+	  8K		CONFIG_MMU_PAGE_8K \
+	  16K		CONFIG_MMU_PAGE_16K \
+	  32K		CONFIG_MMU_PAGE_32K \
+	  Programmable	CONFIG_MMU_PAGE_PROG" 4K
+if y # TODO: improve if translation
+config MMU_INF
+    bool "Use inferred tech for MMU"
+endif
+endif
+endmenu
+
+menu "Options"
+comment "Debug Support Unit        "
+config DSU_ENABLE
+    bool "Enable LEON3 Debug support unit    "
+if y # TODO: improve if translation
+config DSU_ITRACE
+    bool "Instruction trace buffer"
+if y # TODO: improve if translation
+# choice translation skipped
+	  "1		CONFIG_DSU_ITRACESZ1 \
+	  2		CONFIG_DSU_ITRACESZ2 \
+	  4		CONFIG_DSU_ITRACESZ4 \
+	  8		CONFIG_DSU_ITRACESZ8 \
+	  16		CONFIG_DSU_ITRACESZ16" 1
+config DSU_ITRACE_2P
+    bool "Enable two-port instruction trace buffer"
+endif
+config DSU_ATRACE
+    bool "AHB trace buffer"
+if y # TODO: improve if translation
+# choice translation skipped
+	  "1		CONFIG_DSU_ATRACESZ1 \
+	  2		CONFIG_DSU_ATRACESZ2 \
+	  4		CONFIG_DSU_ATRACESZ4 \
+	  8		CONFIG_DSU_ATRACESZ8 \
+	  16		CONFIG_DSU_ATRACESZ16" 1
+config DSU_AFILT
+    bool "Enable AHB trace buffer filters "
+config DSU_ASTAT
+    bool "Enable statistics outputs       "
+endif
+endif
+config STAT_ENABLE
+    bool "Enable LEON3 Statistics Module       "
+if y # TODO: improve if translation
+config STAT_CNT
+    int "Number of counters (1 - 64)           "
+    default 4
+config STAT_NMAX
+    int "Number of accumulative counters       "
+    default 0
+endif
+endmenu
+endif
+menu "Options"
+comment "Fault-tolerance  "
+if y # TODO: improve if translation
+config LEON3FT_EN
+    bool "Use LEON3-FT processor core      "
+if y # TODO: improve if translation
+# choice translation skipped
+	"None		CONFIG_IUFT_NONE \
+	Parity		CONFIG_IUFT_PAR \
+	PDMR 		CONFIG_IUFT_DMR \
+	BCH  		CONFIG_IUFT_BCH \
+	BCH-OTF		CONFIG_IUFT_BCHOTF \
+	TechSpec	CONFIG_IUFT_TECHSPEC \
+	TMR		CONFIG_IUFT_TMR" None
+if y # TODO: improve if translation
+# choice translation skipped
+	  "None		CONFIG_FPUFT_NONE \
+	   Parity		CONFIG_FPUFT_PAR \
+ 	   PDMR 		CONFIG_FPUFT_DMR \
+	   TMR		CONFIG_FPUFT_TMR" None
+endif
+config RF_ERRINJ
+    bool "Register file error injection"
+# choice translation skipped
+	  "None		CONFIG_CACHE_FT_NONE \
+	   Parity		CONFIG_CACHE_FT_EN \
+	   TechSpec		CONFIG_CACHE_FT_TECH" None
+config CACHE_ERRINJ
+    int "Cache memory error injection"
+    default 0
+#      bool 'Use LEON3FT netlist         ' CONFIG_LEON3_NETLIST
+endif
+endif
+endmenu
+menu "Options"
+comment "VHDL debug settings       "
+config IU_DISAS
+    bool "Processor disassembly to console         "
+if y # TODO: improve if translation
+config IU_DISAS_NET
+    bool "Processor disassembly in netlist         "
+endif
+config DEBUG_PC32
+    bool "32-bit program counters       "
+endmenu
+endif
+endmenu
+

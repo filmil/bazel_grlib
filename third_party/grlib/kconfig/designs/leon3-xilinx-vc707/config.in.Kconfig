@@ -1,0 +1,118 @@
+#
+# LEON3 configuration written in linux configuration language
+#
+# Written by Jiri Gaisler, Gaisler Research
+#
+# Comments and bug reports to support@gaisler.com
+#
+#
+
+#define_bool CONFIG_MCTRL_RMW y
+config LEON3FT_PRESENT
+    bool
+    default y
+config HAS_SHARED_GRFPU
+    bool
+    default y
+
+mainmenu "LEON3MP Design Configuration"
+
+menu "Options"
+comment "Synthesis      "
+rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Clock generation"
+rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/subsys/leon_dsu_stat_base.in.Kconfig"
+rsource "../../../../lib/gaisler/l2cache/l2c.in.Kconfig"
+rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+
+menu "Options"
+comment "Debug Link           "
+rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
+rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
+rsource "../../../../lib/gaisler/usb/grusb_dcl.in.Kconfig"
+rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Peripherals             "
+
+menu "Options"
+comment "Memory controller             "
+rsource "../../../../lib/esa/memoryctrl/mctrl.in.Kconfig"
+rsource "../../../../lib/gaisler/ddr/mig_7series.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "On-chip RAM/ROM                 "
+rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Ethernet             "
+rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "USB 2.0 Host Controller      "
+rsource "../../../../lib/gaisler/usb/grusbhc.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "USB 2.0 Device Controller      "
+rsource "../../../../lib/gaisler/usb/grusbdc.in.Kconfig"
+endmenu
+  
+menu "Options"
+comment "CAN                     "
+rsource "../../../../lib/gaisler/can/can_mc.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "GRDMAC2                 "
+rsource "../../../../lib/gaisler/grdmac2/grdmac2.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Spacewire "
+rsource "../../../../lib/gaisler/spacewire/spacewire.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "UARTs, timers and irq control         "
+rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
+rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+rsource "../../../../lib/gaisler/i2c/i2c.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Keybord and VGA interface"
+rsource "../../../../lib/gaisler/misc/ps2vga.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "SPI"
+rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
+rsource "../../../../lib/gaisler/spi/spictrl.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Partial Reconfiguration  "
+rsource "../../../../lib/testgrouppolito/pr/pr.in.Kconfig"
+endmenu
+
+endmenu
+
+menu "Options"
+comment "VHDL Debugging        "
+rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+endmenu

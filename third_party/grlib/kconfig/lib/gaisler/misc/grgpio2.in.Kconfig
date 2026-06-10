@@ -1,0 +1,12 @@
+
+config GRGPIO2_ENABLE
+    bool "Enable second generic GPIO port              "
+if y # TODO: improve if translation
+config GRGPIO2_WIDTH
+    int "GPIO2 width            "
+    default 8
+config GRGPIO2_IMASK
+    hex "GPIO2 interrupt mask   "
+    default 0000
+endif
+

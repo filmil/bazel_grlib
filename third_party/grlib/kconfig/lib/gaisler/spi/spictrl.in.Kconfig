@@ -1,0 +1,43 @@
+menu "Options"
+comment "SPI controller(s) "
+config SPICTRL_ENABLE
+    bool "Enable SPI controller(s) "
+if y # TODO: improve if translation
+config SPICTRL_NUM
+    int "Number of SPI controllers   "
+    default 1
+config SPICTRL_SLVS
+    int "Slave select lines    "
+    default 1
+config SPICTRL_FIFO
+    int "FIFO depth (2^N)      "
+    default 1
+config SPICTRL_SLVREG
+    bool "Enable slave select registers"
+config SPICTRL_ASEL
+    bool "Enable automatic slave select"
+config SPICTRL_AM
+    bool "Support automated transfers  "
+config SPICTRL_ODMODE
+    bool "Support open drain mode      "
+config SPICTRL_TWEN
+    bool "Support three-wire protocol  "
+config SPICTRL_MAXWLEN
+    int "Maximum supported word length (see help!) "
+    default 0
+config SPICTRL_SYNCRAM
+    bool "Use SYNCRAM for rx and tx queues "
+if y # TODO: improve if translation
+# choice translation skipped
+	"None		CONFIG_SPICTRL_NOFT \
+	 Parity-DMR	CONFIG_SPICTRL_DMRFT \
+	 TMR		CONFIG_SPICTRL_TMRFT" None
+endif
+# choice translation skipped
+	"Standard	CONFIG_SPICTRL_PROT0 \
+	 Dual	        CONFIG_SPICTRL_PROT1 \
+	 Quad		CONFIG_SPICTRL_PROT2" Standard
+endif
+endmenu
+
+

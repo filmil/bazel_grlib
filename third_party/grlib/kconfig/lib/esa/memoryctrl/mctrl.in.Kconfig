@@ -1,0 +1,33 @@
+
+menu "Options"
+comment "Leon2 memory controller        "
+config MCTRL_LEON2
+    bool "Enable Leon2 memory controller  "
+if y # TODO: improve if translation
+config MCTRL_8BIT
+    bool "8-bit PROM/SRAM bus support    "
+config MCTRL_16BIT
+    bool "16-bit PROM/SRAM bus support    "
+config MCTRL_5CS
+    bool "5th SRAM chip-select  "
+config MCTRL_SDRAM
+    bool "SDRAM controller       "
+if y # TODO: improve if translation
+config MCTRL_SDRAM_SEPBUS
+    bool "Separate address and data buses"
+if y # TODO: improve if translation
+config MCTRL_SDRAM_BUS64
+    bool "64-bit SDRAM data bus"
+config MCTRL_SDRAM_INVCLK
+    bool "Unsynchronized sdclock"
+endif
+config MCTRL_PAGE
+    bool "Enable page burst operation     "
+if y # TODO: improve if translation
+config MCTRL_PROGPAGE
+    bool "Enable programmable page burst "
+endif
+endif
+endif
+endmenu
+

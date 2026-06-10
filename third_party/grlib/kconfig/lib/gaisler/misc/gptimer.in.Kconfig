@@ -1,0 +1,25 @@
+config GPT_ENABLE
+    bool "Enable Timer Unit                    "
+if y # TODO: improve if translation
+config GPT_NTIM
+    int "Number of timers (1 - 7)              "
+    default 2
+config GPT_SW
+    int "Scaler width (2 - 16)                 "
+    default 8
+config GPT_TW
+    int "Timer width (2 - 32)                  "
+    default 32
+config GPT_IRQ
+    int "Timer unit interrupt                  "
+    default 8
+config GPT_SEPIRQ
+    bool "Separate interrupts                  "
+config GPT_WDOGEN
+    bool "Watchdog enable                      "
+if y # TODO: improve if translation
+config GPT_WDOG
+    hex "Initial watchdog time-out value       "
+    default FFFF
+endif
+endif

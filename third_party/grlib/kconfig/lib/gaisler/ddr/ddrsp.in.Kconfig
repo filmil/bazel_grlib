@@ -1,0 +1,28 @@
+
+menu "Options"
+comment "DDR266 SDRAM controller             "
+config DDRSP
+    bool "Enable DDR266 SDRAM controller       "
+if y # TODO: improve if translation
+config DDRSP_INIT
+    bool "Enable power-on initialization       "
+if y # TODO: improve if translation
+config DDRSP_FREQ
+    int "Memory frequency (MHz)  "
+    default 100
+config DDRSP_COL
+    int "Column address bits (9 - 12)  "
+    default 9
+config DDRSP_MBYTE
+    int "Chip select bank size (Mbyte) "
+    default 16
+endif
+     if [ "$CONFIG_SYN_VIRTEX2" = "y" -o "$CONFIG_SYN_VIRTEX4" = "y" \
+	-o "$CONFIG_SYN_SPARTAN3" = "y" -o "$CONFIG_SYN_VIRTEX5" = "y" \
+	-o "$CONFIG_SYN_SPARTAN3E" = "y" -o "$CONFIG_SYN_CYCLONEIII" = "y" ]; then
+config DDRSP_RSKEW
+    int "Read clock phase shift        "
+    default 0
+endif
+endif
+endmenu

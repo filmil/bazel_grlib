@@ -1,0 +1,75 @@
+menu "Options"
+comment "PROM/SRAM/SDRAM Memory controller with EDAC       "
+config MCTRLFT
+    bool "Enable PROM/SRAM/SDRAM memory controller  "
+if y # TODO: improve if translation
+config MCTRLFT_8BIT
+    bool "8-bit PROM/SRAM bus support    "
+config MCTRLFT_16BIT
+    bool "16-bit PROM/SRAM bus support    "
+config MCTRLFT_5CS
+    bool "5th SRAM chip-select  "
+# choice translation skipped
+      	  "4xprogrammable 		   CONFIG_MCTRLFT_ROMASEL0 \
+      	   4x16_kByte	   CONFIG_MCTRLFT_ROMASEL1 \
+      	   4x32_kByte	   CONFIG_MCTRLFT_ROMASEL2 \
+      	   4x64_kByte		CONFIG_MCTRLFT_ROMASEL3 \
+      	   4x128_kByte		CONFIG_MCTRLFT_ROMASEL4 \
+      	   4x256_kByte		CONFIG_MCTRLFT_ROMASEL5 \
+      	   4x512_kByte		CONFIG_MCTRLFT_ROMASEL6 \
+      	   4x1_MByte	CONFIG_MCTRLFT_ROMASEL7 \
+      	   4x2_MByte	CONFIG_MCTRLFT_ROMASEL8 \
+      	   4x4_MByte	CONFIG_MCTRLFT_ROMASEL9 \
+      	  	4x8_MByte	CONFIG_MCTRLFT_ROMASEL10 \
+      	  	4x16_MByte	CONFIG_MCTRLFT_ROMASEL11 \
+      	   4x32_MByte	CONFIG_MCTRLFT_ROMASEL12 \
+      	   4x64_MByte  CONFIG_MCTRLFT_ROMASEL13 \
+      	   4x128_MByte CONFIG_MCTRLFT_ROMASEL14 \
+      	   2x256_MByte CONFIG_MCTRLFT_ROMASEL15 \
+      	   2x64_kByte		CONFIG_MCTRLFT_ROMASEL16 \
+      	   2x128_kByte		CONFIG_MCTRLFT_ROMASEL17 \
+      	   2x256_kByte		CONFIG_MCTRLFT_ROMASEL18 \
+      	   2x512_kByte		CONFIG_MCTRLFT_ROMASEL19 \
+      	   2x1_MByte	CONFIG_MCTRLFT_ROMASEL20 \
+      	   2x2_MByte	CONFIG_MCTRLFT_ROMASEL21 \
+      	   2x4_MByte	CONFIG_MCTRLFT_ROMASEL22 \
+      	  	2x8_MByte	CONFIG_MCTRLFT_ROMASEL23 \
+      	  	2x16_MByte	CONFIG_MCTRLFT_ROMASEL24 \
+      	   2x32_MByte	CONFIG_MCTRLFT_ROMASEL25 \
+      	   2x64_MByte  CONFIG_MCTRLFT_ROMASEL26 \
+      	   2x128_MByte CONFIG_MCTRLFT_ROMASEL27 \
+      	   2x256_MByte CONFIG_MCTRLFT_ROMASEL28" 4xprogrammable
+config MCTRLFT_SDRAM
+    bool "SDRAM controller       "
+if y # TODO: improve if translation
+config MCTRLFT_SDRAM_SEPBUS
+    bool "Separate address and data buses"
+if y # TODO: improve if translation
+config MCTRLFT_SDRAM_BUS64
+    bool "64-bit SDRAM data bus"
+endif
+config MCTRLFT_SDRAM_INVCLK
+    bool "Inverted sdclock"
+config MCTRLFT_PAGE
+    bool "Enable page burst operation     "
+if y # TODO: improve if translation
+config MCTRLFT_PROGPAGE
+    bool "Enable programmable page burst "
+endif
+endif
+config MCTRLFT_EDAC
+    bool "Enable EDAC                     "
+if y # TODO: improve if translation
+config MCTRLFT_EDACPIPE
+    bool "Enable pipelined EDAC   "
+endif
+if y # TODO: improve if translation
+config MCTRLFT_RSEDAC
+    bool "Enable Reed-Solomon EDAC   "
+endif
+config MCTRLFT_WFB
+    bool "Extended data bus drive         "
+config MCTRLFT_NETLIST
+    bool "Use FTMCTRL netlist             "
+endif
+endmenu

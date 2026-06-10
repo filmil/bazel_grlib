@@ -1,0 +1,21 @@
+if y # TODO: improve if translation
+config PCI_VENDORID
+    hex "PCI vendor ID"
+    default 1AC8
+config PCI_DEVICEID
+    hex "PCI device ID"
+    default 0054
+#    hex 'PCI revision ID'   CONFIG_PCI_REVID 1
+if y # TODO: improve if translation
+# choice translation skipped
+	  "None		CONFIG_PCI_FIFO0 \
+	   8		CONFIG_PCI_FIFO8 \
+	  16		CONFIG_PCI_FIFO16 \
+	  32		CONFIG_PCI_FIFO32 \
+	  64		CONFIG_PCI_FIFO64 \
+	  128 		CONFIG_PCI_FIFO128" 8
+config PCI_HADDR
+    hex "PCI initiator address (haddr[31:20]) "
+    default E00
+endif
+endif

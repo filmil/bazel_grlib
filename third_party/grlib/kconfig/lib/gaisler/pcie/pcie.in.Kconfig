@@ -1,0 +1,43 @@
+if y # TODO: improve if translation
+config PCIEXP_MASTER_TARGET
+    bool "simple interface      "
+if y # TODO: improve if translation
+config PCIEXP_SIMPLE_TARGET
+    bool "interface, target-only     "
+endif
+if y # TODO: improve if translation
+config PCIEXP_MASTER_FIFO
+    bool "interface with FIFO      "
+if y # TODO: improve if translation
+config PCIEXP_MASTER_FIFO_DMA
+    bool "DMA controller     "
+endif
+endif
+
+if y # TODO: improve if translation
+config PCIEXP_VENDORID
+    hex "vendor ID"
+    default 10EE
+config PCIEXP_DEVICEID
+    hex "device ID"
+    default 0009
+endif
+
+if y # TODO: improve if translation
+    if [ "$CONFIG_SYN_VIRTEX6" = "y" ] then
+if y # TODO: improve if translation
+# choice translation skipped
+	    "1		CONFIG_LANE_WIDTH1 \
+	    2		CONFIG_LANE_WIDTH2 \
+	    4		CONFIG_LANE_WIDTH4 \
+	    8		CONFIG_LANE_WIDTH8" 1
+endif
+if y # TODO: improve if translation
+# choice translation skipped
+	    "1		CONFIG_LANE_WIDTH1 \
+	    2		CONFIG_LANE_WIDTH2 \
+	    4		CONFIG_LANE_WIDTH4" 1
+endif
+endif
+endif
+endif

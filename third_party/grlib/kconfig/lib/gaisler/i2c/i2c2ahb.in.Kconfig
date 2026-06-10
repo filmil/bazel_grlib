@@ -1,0 +1,26 @@
+config I2C2AHB
+    bool "Enable I2C to AHB bridge "
+if y # TODO: improve if translation
+config I2C2AHB_APB
+    bool "Enable APB interface   "
+config I2C2AHB_ADDRH
+    hex "AHB protection address (high) "
+    default 0000
+config I2C2AHB_ADDRL
+    hex "AHB protection address (low) "
+    default 0000
+config I2C2AHB_MASKH
+    hex "AHB protection mask (high) "
+    default 0000
+config I2C2AHB_MASKL
+    hex "AHB protection mask (low) "
+    default 0000
+config I2C2AHB_RESEN
+    bool "Enable after reset  "
+config I2C2AHB_SADDR
+    hex "I2C memory address "
+    default 50
+config I2C2AHB_CADDR
+    hex "I2C configuration address "
+    default 51
+endif

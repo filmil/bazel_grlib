@@ -1,0 +1,31 @@
+config GRETH_ENABLE
+    bool "Gaisler Research 10/100/1000 Mbit Ethernet MAC "
+if y # TODO: improve if translation
+config GRETH_GIGA
+    bool "Enable 1000 Mbit support    "
+if y # TODO: improve if translation
+# choice translation skipped
+	  "4		CONFIG_GRETH_FIFO4 \
+	  8		CONFIG_GRETH_FIFO8 \
+	  16		CONFIG_GRETH_FIFO16 \
+	  32		CONFIG_GRETH_FIFO32 \
+	  64		CONFIG_GRETH_FIFO64" 8
+endif
+config GRETH_FMC_MODE
+    bool "Enable FMC"
+if y # TODO: improve if translation
+config GRETH_FT
+    bool "Enable fault-tolerance"
+if y # TODO: improve if translation
+config GRETH_EDCLFT
+    bool "Enable fault tolerance for EDCL buffer "
+endif
+endif
+if y # TODO: improve if translation
+config GRETH_SGMII_MODE
+    bool "Enable SGMII"
+endif
+config GRETH_PHY_ADDR
+    int "PHY address  "
+    default 1
+endif

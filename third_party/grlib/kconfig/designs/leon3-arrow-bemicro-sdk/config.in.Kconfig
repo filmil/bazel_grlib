@@ -1,0 +1,64 @@
+#
+# LEON3 configuration written in linux configuration language
+#
+# Comments and bug reports to support@gaisler.com
+#
+
+mainmenu "LEON3 Design Configuration"
+
+menu "Options"
+comment "Synthesis      "
+rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Clock generation"
+rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
+rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+
+menu "Options"
+comment "Debug Link           "
+rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
+rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
+rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Peripherals             "
+
+menu "Options"
+comment "Memory controllers             "
+rsource "../../../../lib/gaisler/ddr/ddrsp.in.Kconfig"
+rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "On-chip RAM/ROM                 "
+rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Ethernet             "
+rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "UARTs, timers and irq control         "
+rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
+rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/spi/spictrl.in.Kconfig"
+
+endmenu
+
+menu "Options"
+comment "VHDL Debugging        "
+rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+endmenu

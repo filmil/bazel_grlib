@@ -1,0 +1,9 @@
+config GRCAN_ENABLE
+    bool "Enable GRCAN interface                 "
+if y # TODO: improve if translation
+config GRCANIRQ
+    int "Interrupt number                      "
+    default 13
+config GRCANSINGLE
+    bool "Enable single common interrupt       "
+endif

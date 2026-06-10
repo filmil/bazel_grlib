@@ -1,0 +1,16 @@
+if y # TODO: improve if translation
+config GRETH2_ENABLE
+    bool "Enable second Gaisler Research 10/100/1000 Mbit Ethernet MAC "
+if y # TODO: improve if translation
+config GRETH2_GIGA
+    bool "Enable 1000 Mbit support    "
+if y # TODO: improve if translation
+# choice translation skipped
+	  "4		CONFIG_GRETH2_FIFO4 \
+	  8		CONFIG_GRETH2_FIFO8 \
+	  16		CONFIG_GRETH2_FIFO16 \
+	  32		CONFIG_GRETH2_FIFO32 \
+	  64		CONFIG_GRETH2_FIFO64" 8
+endif
+endif
+endif

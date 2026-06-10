@@ -1,0 +1,68 @@
+#
+# LEON3 configuration written in linux configuration language
+#
+# Written by Jiri Gaisler, Gaisler Research
+#
+# Comments and bug reports to support@gaisler.com
+#
+#
+
+#define_bool CONFIG_MCTRL_RMW y
+
+mainmenu "LEON3 Design Configuration"
+
+menu "Options"
+comment "Synthesis      "
+rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Board options"
+# choice translation skipped
+	"XC6S-LX45		CONFIG_FPGA_LX45 \
+        XC6S-LX75               CONFIG_FPGA_LX75 \
+	XC6S-LX100     		CONFIG_FPGA_LX100 \
+        XC6S-LX150              CONFIG_FPGA_LX150" XC6S-LX75
+endmenu
+
+menu "Options"
+comment "Clock generation"
+rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
+rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+
+menu "Options"
+comment "Debug Link           "
+rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
+rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Peripherals             "
+
+rsource "../../../../lib/gaisler/ddr/mig.in.Kconfig"
+
+menu "Options"
+comment "On-chip RAM/ROM                 "
+rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "UARTs, timers and irq control         "
+rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
+rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/spi/spictrl.in.Kconfig"
+
+endmenu
+
+menu "Options"
+comment "VHDL Debugging        "
+rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+endmenu

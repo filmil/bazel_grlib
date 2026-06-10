@@ -1,0 +1,10 @@
+config STAT_ENABLE
+    bool "Enable LEON4 Statistics Module       "
+if y # TODO: improve if translation
+config STAT_CNT
+    int "Number of counters (1 - 64)           "
+    default 4
+config STAT_NMAX
+    int "Number of accumulative counters       "
+    default 0
+endif

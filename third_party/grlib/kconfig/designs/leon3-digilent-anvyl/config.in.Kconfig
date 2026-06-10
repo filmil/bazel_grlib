@@ -1,0 +1,99 @@
+
+# LEON3 configuration written in linux configuration language
+#
+# Written by Jiri Gaisler, Gaisler Research
+#
+# Comments and bug reports to jiri@gaisler.com
+#
+#
+
+#define_bool CONFIG_MCTRL_RMW y
+#define_bool CONFIG_LEON3FT_PRESENT y
+#define_bool CONFIG_HAS_SHARED_GRFPU y
+
+mainmenu "LEON3MP Design Configuration"
+
+menu "Options"
+comment "Synthesis      "
+rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+
+endmenu
+
+menu "Options"
+comment "Clock generation"
+rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
+rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+
+menu "Options"
+comment "Debug Link           "
+rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
+rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
+rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Peripherals             "
+
+menu "Options"
+comment "Memory controller             "
+rsource "../../../../lib/esa/memoryctrl/mctrl.in.Kconfig"
+rsource "../../../../lib/gaisler/ddr/ddr2sp.in.Kconfig"
+#    mainmenu_option next_comment
+#    comment 'Xilinx MIG DDR2 controller   '
+#      if [ "$CONFIG_DDR2SP" = "n" ]; then
+#	bool 'Enable Xilinx MIG DDR2 controller' CONFIG_MIG_DDR2
+#      fi
+#    endmenu
+rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "On-chip RAM/ROM                 "
+rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Ethernet             "
+rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
+endmenu
+
+#  mainmenu_option next_comment
+#  comment 'CAN                     '
+#    source lib/gaisler/can/can_mc.in
+#  endmenu
+
+menu "Options"
+comment "UART, timer, I/O port and interrupt controller"
+if y # TODO: improve if translation
+rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
+endif
+rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+endmenu
+
+#  mainmenu_option next_comment
+#  comment 'Spacewire '
+#    source lib/gaisler/spacewire/spacewire.in
+#  endmenu
+
+menu "Options"
+comment "Keybord and VGA interface"
+rsource "../../../../lib/gaisler/misc/ps2vga.in.Kconfig"
+endmenu
+menu "Options"
+comment "SPI"
+rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
+#    source lib/gaisler/spi/spictrl.in
+endmenu
+
+endmenu
+
+menu "Options"
+comment "VHDL Debugging        "
+rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+endmenu

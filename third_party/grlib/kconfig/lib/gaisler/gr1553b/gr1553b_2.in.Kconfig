@@ -1,0 +1,12 @@
+if y # TODO: improve if translation
+config GR1553B_ENABLE2
+    bool "Enable second GR1553B interface         "
+if y # TODO: improve if translation
+config GR1553B_BCEN2
+    bool "Bus Controller support                  "
+config GR1553B_RTEN2
+    bool "Remote Terminal support                 "
+config GR1553B_BMEN2
+    bool "Bus Monitor support                     "
+endif
+endif

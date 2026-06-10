@@ -1,0 +1,8 @@
+config GRUSB_DCL
+    bool "USB Debug Communication Link"
+if y # TODO: improve if translation
+# choice translation skipped
+   "ULPI	   CONFIG_GRUSB_DCL_ULPI \
+   UTMI/UTMI+8-bit  CONFIG_GRUSB_DCL_UTMI8 \
+   UTMI/UTMI+16-bit CONFIG_GRUSB_DCL_UTMI16" ULPI
+endif

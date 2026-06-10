@@ -1,0 +1,9 @@
+config KBD_ENABLE
+    bool "Keyboard/mouse (PS2) interface  "
+config VGA_ENABLE
+    bool "Text-based VGA interface  "
+if y # TODO: improve if translation
+config SVGA_ENABLE
+    bool "SVGA graphical frame buffer  "
+endif
+

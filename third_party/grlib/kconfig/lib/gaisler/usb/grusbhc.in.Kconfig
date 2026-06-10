@@ -1,0 +1,103 @@
+config GRUSBHC_ENABLE
+    bool "Gaisler Research USB 2.0 Host Controller "
+if y # TODO: improve if translation
+config GRUSBHC_EHC
+    bool "Enable Enhanced Host Controller "
+config GRUSBHC_UHC
+    bool "Enable Universal Host Controller "
+if y # TODO: improve if translation
+config GRUSBHC_NCC
+    int "Number of Universal Host Controllers (1-15)"
+    default 1
+endif
+config GRUSBHC_NPORTS
+    int "Total number of ports  (1-15)"
+    default 1
+# choice translation skipped
+   "ULPI	CONFIG_GRUSBHC_ULPI \
+    UTMI+16-bit	CONFIG_GRUSBHC_UTMI16 \
+    UTMI+8-bit	CONFIG_GRUSBHC_UTMI8" ULPI
+if y # TODO: improve if translation
+# choice translation skipped
+      "External  CONFIG_GRUSBHC_VBUSEXT \
+       Internal  CONFIG_GRUSBHC_VBUSINT"
+if y # TODO: improve if translation
+# choice translation skipped
+ 	  "ActiveLow  CONFIG_GRUSBHC_FAULTL \
+           ActiveHigh CONFIG_GRUSBHC_FAULTH \
+           None       CONFIG_GRUSBHC_FAULTN" ActiveLow
+endif
+  else
+# choice translation skipped
+      "ActiveHigh CONFIG_GRUSBHC_ENABLEH \
+       ActiveLow  CONFIG_GRUSBHC_ENABLEL" ActiveHigh
+# choice translation skipped
+      "ActiveHigh CONFIG_GRUSBHC_FAULT2H \
+       ActiveLow  CONFIG_GRUSBHC_FAULT2L" ActiveHigh
+endif
+comment "Memory interface"
+# Endian conversion must be enabled if the core is going to work in GRLIB.
+# Thereby we do not give the user a choice, for now.
+#     bool 'Endian conversion enable    ' CONFIG_GRUSBHC_ENDIAN 
+config GRUSBHC_BEREGS
+    bool "Enable big endian register interface"
+config GRUSBHC_BEDESC
+    bool "Enable big endian descriptors"
+config GRUSBHC_BWRD
+    int "Maximum burst length in words (1-256)"
+    default 16
+comment "Port routing"
+config GRUSBHC_PRR
+    bool "Port routing rules"
+if y # TODO: improve if translation
+config GRUSBHC_NPCC
+    int "Number of ports per companion controller (1-15)"
+    default 1
+  else
+config GRUSBHC_PR1
+    int "Route port 1 to companion controller "
+    default 0
+config GRUSBHC_PR2
+    int "Route port 2 to companion controller "
+    default 0
+config GRUSBHC_PR3
+    int "Route port 3 to companion controller "
+    default 0
+config GRUSBHC_PR4
+    int "Route port 4 to companion controller "
+    default 0
+config GRUSBHC_PR5
+    int "Route port 5 to companion controller "
+    default 0
+config GRUSBHC_PR6
+    int "Route port 6 to companion controller "
+    default 0
+config GRUSBHC_PR7
+    int "Route port 7 to companion controller "
+    default 0
+config GRUSBHC_PR8
+    int "Route port 8 to companion controller "
+    default 0
+config GRUSBHC_PR9
+    int "Route port 9 to companion controller "
+    default 0
+config GRUSBHC_PR10
+    int "Route port 10 to companion controller "
+    default 0
+config GRUSBHC_PR11
+    int "Route port 11 to companion controller "
+    default 0
+config GRUSBHC_PR12
+    int "Route port 12 to companion controller "
+    default 0
+config GRUSBHC_PR13
+    int "Route port 13 to companion controller "
+    default 0
+config GRUSBHC_PR14
+    int "Route port 14 to companion controller "
+    default 0
+config GRUSBHC_PR15
+    int "Route port 15 to companion controller "
+    default 0
+endif
+endif

@@ -1,0 +1,30 @@
+
+menu "Options"
+comment "AMBA configuration"
+config AHB_DEFMST
+    int "Default AHB master"
+    default 0
+config AHB_RROBIN
+    bool "Round-robin arbiter                       "
+config AHB_SPLIT
+    bool "AHB split-transaction support             "
+config AHB_FPNPEN
+    bool "Enable full plug&play decoding            "
+config AHB_IOADDR
+    hex "I/O area start address (haddr[31:20]) "
+    default FFF
+config APB_HADDR
+    hex "AHB/APB bridge address (haddr[31:20]) "
+    default 800
+config AHB_MON
+    bool "Enable AMBA AHB monitor              "
+if y # TODO: improve if translation
+config AHB_MONERR
+    bool "Report AHB errors                  "
+config AHB_MONWAR
+    bool "Report AHB warings                 "
+endif
+config AHB_DTRACE
+    bool "Write trace to simulation console    "
+endmenu
+

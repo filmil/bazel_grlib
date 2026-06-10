@@ -1,0 +1,4 @@
+if y # TODO: improve if translation
+config PCI_MASTER_TARGET_DMA
+    bool "PCI DMA controller               "
+endif

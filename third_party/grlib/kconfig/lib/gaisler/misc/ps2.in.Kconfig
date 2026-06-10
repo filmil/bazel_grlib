@@ -1,0 +1,4 @@
+config PS2_ENABLE
+    bool "Keyboard/mouse (PS2) interface  "
+
+

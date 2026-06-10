@@ -1,0 +1,34 @@
+config FTAHBRAM_ENABLE
+    bool "FT On-chip AHB RAM                  "
+if y # TODO: improve if translation
+# choice translation skipped
+	"1		CONFIG_FTAHBRAM_SZ1 \
+	2		CONFIG_FTAHBRAM_SZ2 \
+	4		CONFIG_FTAHBRAM_SZ4 \
+	8		CONFIG_FTAHBRAM_SZ8 \
+	16		CONFIG_FTAHBRAM_SZ16 \
+	32		CONFIG_FTAHBRAM_SZ32 \
+	64		CONFIG_FTAHBRAM_SZ64 \
+	128		CONFIG_FTAHBRAM_SZ128 \
+	256		CONFIG_FTAHBRAM_SZ256" 4
+config FTAHBRAM_START
+    hex "RAM start address (haddr[31:20])    "
+    default A00
+config FTAHBRAM_PIPE
+    bool "Pipelined implementation            "
+if y # TODO: improve if translation
+# choice translation skipped
+	  "None		CONFIG_FTAHBRAM_EDAC_NONE \
+	   BCH1		CONFIG_FTAHBRAM_EDAC_BCH1 \
+	   BCH2		CONFIG_FTAHBRAM_EDAC_BCH2 \
+           TechSpec	CONFIG_FTAHBRAM_EDAC_TECHSPEC" None
+config FTAHBRAM_AUTOSCRUB
+    bool "Auto-scrubbing enable               "
+config FTAHBRAM_ERRORCNTR
+    bool "Error counter enable                "
+config FTAHBRAM_CNTBITS
+    int "Error counter bits                  "
+    default 2
+endif
+endif
+

@@ -1,0 +1,86 @@
+#
+# LEON3 configuration written in linux configuration language
+#
+# Written by Jiri Gaisler, Gaisler Research
+#
+# Comments and bug reports to support@gaisler.com
+#
+#
+
+#define_bool CONFIG_MCTRL_RMW y
+
+mainmenu "LEON3MP Design Configuration"
+
+menu "Options"
+comment "Synthesis      "
+rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+endmenu
+
+#mainmenu_option next_comment
+#  comment 'Board options'
+#    choice 'FPGA type                                      ' \
+#	"XC4V-LX25		CONFIG_FPGA_LX25 \
+#	XC4V-LX60     		CONFIG_FPGA_LX60" XC4V-LX25
+#
+#  source lib/techmap/clocks/clkgen.in
+#endmenu
+
+menu "Options"
+comment "Clock generation"
+rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
+rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+
+menu "Options"
+comment "Debug Link           "
+rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
+rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
+rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Peripherals             "
+
+menu "Options"
+comment "Memory controllers             "
+rsource "../../../../lib/gaisler/ddr/ddr2sp.in.Kconfig"
+rsource "../../../../lib/gaisler/ddr/mig_7series.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "On-chip RAM/ROM                 "
+rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Ethernet             "
+rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "UARTs, timers and irq control         "
+rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
+rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "SPI"
+rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
+#    source lib/gaisler/spi/spictrl.in
+endmenu
+
+menu "Options"
+comment "Partial Reconfiguration  "
+rsource "../../../../lib/testgrouppolito/pr/pr.in.Kconfig"
+endmenu
+
+endmenu
+
+menu "Options"
+comment "VHDL Debugging        "
+rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+endmenu

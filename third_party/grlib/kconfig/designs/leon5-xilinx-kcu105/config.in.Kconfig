@@ -1,0 +1,67 @@
+#
+# LEON5 configuration written in linux configuration language
+#
+#
+# Comments and bug reports to support@gaisler.com
+#
+#
+
+mainmenu "LEON5 Design Configuration"
+
+menu "Options"
+comment "Synthesis      "
+rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Clock generation"
+rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/leon5/leon5.in.Kconfig"
+rsource "../../../../lib/gaisler/l2cache/l2c.in.Kconfig"
+
+menu "Options"
+comment "Debug Link           "
+rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
+rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
+rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Peripherals             "
+
+menu "Options"
+comment "Memory controller             "
+rsource "../../../../lib/gaisler/ddr/mig_7series.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "On-chip RAM/ROM                 "
+rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Ethernet             "
+rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "GPIO"
+rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "I2C"
+rsource "../../../../lib/gaisler/i2c/i2c.in.Kconfig"
+endmenu
+
+
+endmenu
+
+menu "Options"
+comment "VHDL Debugging        "
+rsource "../../../../lib/gaisler/leon5/debug5.in.Kconfig"
+endmenu

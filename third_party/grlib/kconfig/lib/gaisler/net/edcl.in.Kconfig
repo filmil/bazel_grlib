@@ -1,0 +1,32 @@
+
+if y # TODO: improve if translation
+config DSU_ETH
+    bool "Ethernet Debug Communication Link (EDCL)"
+if y # TODO: improve if translation
+# choice translation skipped
+	"1		CONFIG_DSU_ETHSZ1 \
+	2		CONFIG_DSU_ETHSZ2 \
+	4		CONFIG_DSU_ETHSZ4 \
+	8		CONFIG_DSU_ETHSZ8 \
+	16		CONFIG_DSU_ETHSZ16" 2
+config DSU_IPMSB
+    hex "MSB 16 bits of IP address (hex)       "
+    default C0A8
+config DSU_IPLSB
+    hex "LSB 16 bits of IP address (hex)       "
+    default 0033
+config DSU_ETHMSB
+    hex "MSB 24 bits of ethern number (hex)    "
+    default 020000
+config DSU_ETHLSB
+    hex "LSB 24 bits of ethern number (hex)    "
+    default 000000
+config DSU_ETH_PROG
+    bool "Programmable 4-bit LSB of MAC/IP address"
+if y # TODO: improve if translation
+config DSU_ETH_DIS
+    bool "EDCL disable pin                     "
+endif
+endif
+endif
+

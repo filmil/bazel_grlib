@@ -1,0 +1,141 @@
+
+menu "Options"
+comment "Processor            "
+config NOELV
+    bool "Enable NOELV RISC-V Processor"
+if y # TODO: improve if translation
+config PROC_NUM
+    int "Number of processors"
+    default 1
+# choice translation skipped
+      "RV64	CONFIG_NOELV_RV64 \
+      RV32	CONFIG_NOELV_RV32" XLEN
+if y # TODO: improve if translation
+config NOELV_XLEN
+    int
+    default 32
+    else
+config NOELV_XLEN
+    int
+    default 64
+endif
+# choice translation skipped
+      "High-Performance CONFIG_NOELV_HP \
+      General-purpose	CONFIG_NOELV_GP \
+      Minimal-configuration CONFIG_NOELV_MC"
+#      Custom-configuration	CONFIG_NOELV_CUSTOM" Custom-configuration
+
+if y # TODO: improve if translation
+# choice translation skipped
+        "Full CONFIG_NOELV_FULL \
+        Lite CONFIG_NOELV_LITE"
+endif
+
+if y # TODO: improve if translation
+# choice translation skipped
+        "Dual-issue CONFIG_NOELV_DISSUE \
+        Single-issue	CONFIG_NOELV_SISSUE"
+endif
+    
+if y # TODO: improve if translation
+# choice translation skipped
+        "FPU-enable CONFIG_NOELV_FPU \
+        FPU-disable CONFIG_NOELV_NOFPU"
+endif
+
+if y # TODO: improve if translation
+config PROC_TYP
+    int
+    default 4
+config PROC_LITE
+    int
+    default 0
+config PROC_NOFPU
+    int
+    default 0
+config PROC_S
+    int
+    default 0
+endif
+if y # TODO: improve if translation
+config PROC_TYP
+    int
+    default 3
+config PROC_NOFPU
+    int
+    default 0
+if y # TODO: improve if translation
+config PROC_LITE
+    int
+    default 1
+    else
+config PROC_LITE
+    int
+    default 0
+endif
+if y # TODO: improve if translation
+config PROC_S
+    int
+    default 1
+    else
+config PROC_S
+    int
+    default 0
+endif
+endif
+if y # TODO: improve if translation
+config PROC_TYP
+    int
+    default 2
+config PROC_S
+    int
+    default 1
+if y # TODO: improve if translation
+config PROC_LITE
+    int
+    default 1
+    else
+config PROC_LITE
+    int
+    default 0
+endif
+if y # TODO: improve if translation
+config PROC_NOFPU
+    int
+    default 0
+    else
+config PROC_NOFPU
+    int
+    default 1
+endif
+endif
+ 
+#   if [ "$CONFIG_NOELV_CUSTOM" = "y" ]; then
+#   fi
+
+if y # TODO: improve if translation
+menu "Options"
+comment "Interrupt settings       "
+config DOMAINS_NUM
+    int "Number of APLIC domains"
+    default 4
+config EIID_NUM
+    int "Number of External Interrupt Identities"
+    default 63
+endmenu
+endif
+
+menu "Options"
+comment "VHDL debug settings       "
+config IU_DISAS
+    bool "Processor disassembly to console         "
+endmenu
+
+menu "Options"
+comment "NOEL-V subsystem GPL settings       "
+config PROC_NODBUS
+    bool "disable non-GPL components               "
+endmenu
+endif
+endmenu
+

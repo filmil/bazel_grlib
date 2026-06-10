@@ -1,0 +1,3 @@
+config DSU_UART
+    bool "Serial Debug Link (RS232)                "
+

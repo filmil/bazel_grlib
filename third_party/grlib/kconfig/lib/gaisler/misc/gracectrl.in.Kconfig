@@ -1,0 +1,3 @@
+config GRACECTRL
+    bool "Enable System ACE I/F Controller "
+

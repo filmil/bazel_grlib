@@ -1,0 +1,25 @@
+config PARTIAL
+    bool "Enable Partial Reconfiguration  "
+if y # TODO: improve if translation
+config CRC
+    bool "Enable Bitstream Verification (D2PRC-CRC mode)"
+if y # TODO: improve if translation
+          integer 'CRC block size ' CONFIG_BLOCK 100
+endif
+if y # TODO: improve if translation
+config EDAC
+    bool "Enable Bitstream EDAC (D2PRC-SECDED mode)"
+if y # TODO: improve if translation
+config DCM_FIFO
+    bool "Async Mode "
+endif
+endif
+if y # TODO: improve if translation
+# choice translation skipped
+	      " 64		CONFIG_DPR_FIFO64 \
+	       128		CONFIG_DPR_FIFO128 \
+	       256		CONFIG_DPR_FIFO256 \
+	       512 		CONFIG_DPR_FIFO512" 64
+endif
+endif
+  

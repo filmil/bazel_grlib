@@ -1,0 +1,10 @@
+config PCI_ARBITER
+    bool "PCI arbiter  "
+if y # TODO: improve if translation
+config PCI_ARBITER_APB
+    bool "PCI arbiter APB interface "
+config PCI_ARBITER_NREQ
+    int "Number of PCI REQ/GNT pairs"
+    default 4
+endif
+

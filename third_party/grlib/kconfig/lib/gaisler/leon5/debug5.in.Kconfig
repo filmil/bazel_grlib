@@ -1,0 +1,5 @@
+
+config IU_DISAS
+    bool "Processor disassembly to console         "
+config AHB_DTRACE
+    bool "AHB trace to simulation console      "

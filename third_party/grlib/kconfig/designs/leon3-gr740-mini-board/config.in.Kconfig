@@ -1,0 +1,62 @@
+
+# LEON3 configuration written in linux configuration language
+#
+# Comments and bug reports to support@gaisler.com
+#
+#
+
+mainmenu "LEON3MP Design Configuration"
+
+menu "Options"
+comment "Synthesis      "
+rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Clock generation"
+rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/subsys/leon_dsu_stat_base.in.Kconfig"
+rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+
+menu "Options"
+comment "Debug Link           "
+rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
+rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Peripherals             "
+
+menu "Options"
+comment "On-chip RAM                 "
+comment "AHBRAM           "
+rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
+comment "FTAHBRAM           "
+rsource "../../../../lib/gaisler/misc/ftahbram.in.Kconfig"
+endmenu
+rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
+rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
+
+  
+
+menu "Options"
+comment "UART, timer, I/O port and interrupt controller"
+rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
+rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "PCI"
+rsource "../../../../lib/gaisler/pci/grpci2/grpci2.in.Kconfig"
+endmenu
+
+endmenu
+
+menu "Options"
+comment "VHDL Debugging        "
+rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+endmenu

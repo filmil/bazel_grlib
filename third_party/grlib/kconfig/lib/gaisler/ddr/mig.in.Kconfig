@@ -1,0 +1,22 @@
+menu "Options"
+comment "MIG memory controller   "
+config MIG_DDR2
+    bool "Enable Xilinx MIG memory controller"
+if y # TODO: improve if translation
+config MIG_RANKS
+    int "Chip selects (ranks)  "
+    default 1
+config MIG_COLBITS
+    int "Column bits  "
+    default 10
+config MIG_ROWBITS
+    int "Row bits     "
+    default 13
+config MIG_BANKBITS
+    int "Bank bits    "
+    default 2
+config MIG_HMASK
+    hex "AHB HMASK    "
+    default F00
+endif
+endmenu

@@ -1,0 +1,12 @@
+config PCI_TRACE
+    bool "Enable PCI trace buffer              "
+if y # TODO: improve if translation
+# choice translation skipped
+	  "256		CONFIG_PCI_TRACE256     \
+	  512		CONFIG_PCI_TRACE512      \
+	  1024		CONFIG_PCI_TRACE1024     \
+	  2048		CONFIG_PCI_TRACE2048     \
+	  4096 		CONFIG_PCI_TRACE4096" 256
+endif
+#    bool 'PCI reset affects complete processor' CONFIG_PCI_RESETALL
+

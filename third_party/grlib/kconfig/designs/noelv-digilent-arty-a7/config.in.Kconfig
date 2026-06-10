@@ -1,0 +1,76 @@
+#define_bool CONFIG_MCTRL_RMW y
+
+mainmenu "NOELVMP Design Configuration"
+
+menu "Options"
+comment "Synthesis      "
+rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Clock generation"
+rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/noelv/noelv.in.Kconfig"
+rsource "../../../../lib/gaisler/l2cache/l2c.in.Kconfig"
+rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
+
+menu "Options"
+comment "Debug Link           "
+rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
+rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
+rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "Peripherals             "
+
+menu "Options"
+comment "Memory controllers             "
+rsource "../../../../lib/gaisler/ddr/mig_7series.in.Kconfig"
+rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
+endmenu
+
+rsource "../../../../lib/gaisler/nandfctrl2/nandfctrl2.in.Kconfig"
+
+#  mainmenu_option next_comment
+#  comment 'On-chip RAM/ROM                 '
+#    source lib/gaisler/misc/ahbrom.in
+#    source lib/gaisler/misc/ahbram.in
+#  endmenu
+
+menu "Options"
+comment "Ethernet             "
+rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "UARTs, timers and irq control         "
+#    source lib/gaisler/uart/uart1.in
+#    source lib/gaisler/misc/gptimer.in
+rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "SPW"
+    #source lib/gaisler/spacewire/spacewire.in
+rsource "../../../../lib/gaisler/spacewire/router.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "CANFD"
+rsource "../../../../lib/gaisler/canfd/grcanfd.in.Kconfig"
+endmenu
+
+menu "Options"
+comment "HSSL"
+rsource "../../../../lib/gaisler/hssl/hssl.in.Kconfig"
+endmenu
+
+endmenu
+
+menu "Options"
+comment "VHDL Debugging        "
+rsource "../../../../lib/grlib/util/debug.in.Kconfig"
+endmenu

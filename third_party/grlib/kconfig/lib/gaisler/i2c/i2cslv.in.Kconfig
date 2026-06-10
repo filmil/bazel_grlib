@@ -1,0 +1,11 @@
+config I2CSLV_ENABLE
+    bool "Enable I2C slave "
+if y # TODO: improve if translation
+config I2CSLV_HARDADDR
+    bool "Hard coded address     "
+config I2CSLV_TENBIT
+    bool "10-bit address support "
+config I2CSLV_I2CADDR
+    hex "I2C slave address      "
+    default 000
+endif

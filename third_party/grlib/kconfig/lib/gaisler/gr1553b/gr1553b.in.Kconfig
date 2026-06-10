@@ -1,0 +1,10 @@
+config GR1553B_ENABLE
+    bool "Enable GR1553B interface               "
+if y # TODO: improve if translation
+config GR1553B_BCEN
+    bool "Bus Controller support                  "
+config GR1553B_RTEN
+    bool "Remote Terminal support                 "
+config GR1553B_BMEN
+    bool "Bus Monitor support                     "
+endif

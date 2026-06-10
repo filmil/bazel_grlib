@@ -1,0 +1,50 @@
+menu "Options"
+comment "SPI memory controller "
+config SPIMCTRL
+    bool "Enable SPI memory controller    "
+if y # TODO: improve if translation
+config SPIMCTRL_READCMD
+    hex "Read instruction    "
+    default 0B
+config SPIMCTRL_DUMMYBYTE
+    bool "Read instruction requires dummy byte  "
+config SPIMCTRL_DUALOUTPUT
+    bool "Enable dual output  "
+config SPIMCTRL_QUADOUTPUT
+    bool "Enable quad output  "
+config SPIMCTRL_DUALINPUT
+    bool "Enable dual input  "
+config SPIMCTRL_QUADINPUT
+    bool "Enable quad input  "
+config SPIMCTRL_DSPI
+    bool "Enable DSPI mode  "
+config SPIMCTRL_QSPI
+    bool "Enable QSPI mode  "
+config SPIMCTRL_DUMMYCYCLES
+    int "Number of dummy cycles  "
+    default 0
+config SPIMCTRL_EXTADDR
+    bool "Use 4 byte address instead of 3  "
+config SPIMCTRL_OFFSET
+    hex "Address offset     "
+    default 0
+config SPIMCTRL_SCALER
+    int "Clock divisor for device clock"
+    default 1
+config SPIMCTRL_ASCALER
+    int "Clock divisor for alt. device clock"
+    default 8
+config SPIMCTRL_RECONF
+    bool "Enables writes for configuration register  "
+config SPIMCTRL_WRITECMD
+    hex "Write instruction    "
+    default 02
+config SPIMCTRL_WRITES
+    bool "Allow ROM area writes  "
+config SPIMCTRL_XIPBYTE
+    bool "Send XIP byte  "
+config SPIMCTRL_XIPPOL
+    int "XIP disable bit polarity  "
+    default 1
+endif
+endmenu
