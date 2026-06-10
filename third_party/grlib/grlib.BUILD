@@ -512,10 +512,10 @@ vhdl_library(
     srcs = [":gaisler_files"],
     standard = "1993",
     deps = [
-        ":eth",
         ":grlib",
         ":techmap",
         ":opencores",
+        ":eth",
     ],
     visibility = ["//visibility:public"],
 )

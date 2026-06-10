@@ -27,7 +27,7 @@ use_repo(kconfig, "grlib_config")
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
-    name = "grlib",
+    name = "grlib_srcs",
     build_file = "//third_party/grlib:grlib.BUILD",
     strip_prefix = "grlib-gpl-2025.2-b4298",
     urls = ["https://download.gaisler.com/products/GRLIB/bin/grlib-gpl-2025.2-b4298.tar.gz"],
