@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strings"
 )
 
@@ -23,8 +24,12 @@ func main() {
 		}
 	}
 
-	// Assuming the script is run while the files are still present to generate the BUILD file
-	libs, _ := readLines("lib/libs.txt")
+	grlibPath := "."
+	if len(os.Args) > 1 {
+		grlibPath = os.Args[1]
+	}
+
+	libs, _ := readLines(filepath.Join(grlibPath, "lib/libs.txt"))
 	var activeLibs []string
 	libStds := make(map[string]string)
 	for _, l := range libs {
@@ -43,20 +48,20 @@ func main() {
 	}
 
 	var discoveredLibs []string
-	entries, _ := os.ReadDir("lib")
+	entries, _ := os.ReadDir(filepath.Join(grlibPath, "lib"))
 	for _, entry := range entries {
 		if entry.IsDir() {
 			if entry.Name() == "tech" {
-				techEntries, _ := os.ReadDir("lib/tech")
+				techEntries, _ := os.ReadDir(filepath.Join(grlibPath, "lib/tech"))
 				for _, te := range techEntries {
 					if te.IsDir() {
-						if _, err := os.Stat(filepath.Join("lib/tech", te.Name(), "dirs.txt")); err == nil {
+						if _, err := os.Stat(filepath.Join(grlibPath, "lib/tech", te.Name(), "dirs.txt")); err == nil {
 							discoveredLibs = append(discoveredLibs, "tech/"+te.Name())
 						}
 					}
 				}
 			} else {
-				if _, err := os.Stat(filepath.Join("lib", entry.Name(), "dirs.txt")); err == nil {
+				if _, err := os.Stat(filepath.Join(grlibPath, "lib", entry.Name(), "dirs.txt")); err == nil {
 					discoveredLibs = append(discoveredLibs, entry.Name())
 				}
 			}
@@ -89,8 +94,8 @@ func main() {
 	libFiles := make(map[string][]vhdlFile)
 
 	for _, lib := range allLibs {
-		libPath := filepath.Join("lib", lib)
-		dirs, err := readLines(filepath.Join(libPath, "dirs.txt"))
+		libSourcePath := filepath.Join(grlibPath, "lib", lib)
+		dirs, err := readLines(filepath.Join(libSourcePath, "dirs.txt"))
 		if err != nil {
 			continue
 		}
@@ -116,7 +121,7 @@ func main() {
 				if strings.HasPrefix(dp, "#") {
 					break
 				}
-				subdirPath := filepath.Join(libPath, dp)
+				subdirPath := filepath.Join(libSourcePath, dp)
 				linesSyn, _ := readLines(filepath.Join(subdirPath, "vhdlsyn.txt"))
 				linesSim, _ := readLines(filepath.Join(subdirPath, "vhdlsim.txt"))
 
@@ -137,7 +142,7 @@ func main() {
 					}
 					fParts := strings.Fields(fLine)
 					fileName := filepath.Join(dp, fParts[0])
-					fullPath := filepath.Join(libPath, fileName)
+					fullPath := filepath.Join(libSourcePath, fileName)
 					if _, err := os.Stat(fullPath); err == nil {
 						found := false
 						for _, existing := range files {
@@ -173,8 +178,23 @@ func main() {
 	}
 
 	// Generate grlib.BUILD
-	gb, _ := os.Create("third_party/grlib/grlib.BUILD")
+	outPath := "third_party/grlib/grlib.BUILD"
+	if len(os.Args) > 2 {
+		outPath = os.Args[2]
+	}
+	os.MkdirAll(filepath.Dir(outPath), 0755)
+	gb, err := os.Create(outPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating %s: %v\n", outPath, err)
+		os.Exit(1)
+	}
 	fmt.Fprintln(gb, "load(\"@rules_nvc//nvc:rules.bzl\", \"vhdl_library\")")
+	fmt.Fprintln(gb, "")
+	fmt.Fprintln(gb, "filegroup(")
+	fmt.Fprintln(gb, "    name = \"grlib_srcs_all\",")
+	fmt.Fprintln(gb, "    srcs = glob([\"**\"]),")
+	fmt.Fprintln(gb, "    visibility = [\"//visibility:public\"],")
+	fmt.Fprintln(gb, ")")
 	fmt.Fprintln(gb, "")
 
 	for _, lib := range allLibs {
@@ -189,6 +209,7 @@ func main() {
 		fmt.Fprintln(gb, "# do not sort")
 		fmt.Fprintf(gb, "filegroup(\n")
 		fmt.Fprintf(gb, "    name = \"%s_files\",\n", libBase)
+		fmt.Fprintln(gb, "    # do not sort")
 		fmt.Fprintf(gb, "    srcs = [\n")
 		for _, f := range files {
 			filePath := fmt.Sprintf("lib/%s/%s", lib, f.path)
@@ -206,6 +227,7 @@ func main() {
 		// vhdl_library
 		fmt.Fprintf(gb, "vhdl_library(\n")
 		fmt.Fprintf(gb, "    name = \"%s\",\n", libBase)
+		fmt.Fprintln(gb, "    # do not sort")
 		fmt.Fprintf(gb, "    srcs = [\":%s_files\"],\n", libBase)
 
 		std := libStds[lib]
@@ -219,6 +241,7 @@ func main() {
 		fmt.Fprintf(gb, "    standard = \"%s\",\n", std)
 
 		fmt.Fprintf(gb, "    deps = [\n")
+		sort.Strings(libDeps[lib])
 		for _, d := range libDeps[lib] {
 			fmt.Fprintf(gb, "        \":%s\",\n", filepath.Base(d))
 		}

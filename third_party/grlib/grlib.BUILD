@@ -1,8 +1,15 @@
 load("@rules_nvc//nvc:rules.bzl", "vhdl_library")
 
+filegroup(
+    name = "grlib_srcs_all",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
 # do not sort
 filegroup(
     name = "grlib_files",
+    # do not sort
     srcs = [
         "lib/grlib/stdlib/version.vhd",
         "lib/grlib/stdlib/config_types.vhd",
@@ -55,6 +62,7 @@ filegroup(
 
 vhdl_library(
     name = "grlib",
+    # do not sort
     srcs = [":grlib_files"],
     standard = "1993",
     deps = [
@@ -65,6 +73,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "techmap_files",
+    # do not sort
     srcs = [
         "lib/techmap/gencomp/gencomp.vhd",
         "lib/techmap/gencomp/netcomp.vhd",
@@ -88,6 +97,7 @@ filegroup(
 
 vhdl_library(
     name = "techmap",
+    # do not sort
     srcs = [":techmap_files"],
     standard = "1993",
     deps = [
@@ -99,6 +109,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "spw_files",
+    # do not sort
     srcs = [
         "lib/spw/comp/spwcomp.vhd",
         "lib/spw/wrapper/grspw_gen.vhd",
@@ -110,6 +121,7 @@ filegroup(
 
 vhdl_library(
     name = "spw",
+    # do not sort
     srcs = [":spw_files"],
     standard = "1993",
     deps = [
@@ -122,6 +134,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "eth_files",
+    # do not sort
     srcs = [
         "lib/eth/comp/ethcomp.vhd",
         "lib/eth/core/greth_pkg.vhd",
@@ -138,6 +151,7 @@ filegroup(
 
 vhdl_library(
     name = "eth",
+    # do not sort
     srcs = [":eth_files"],
     standard = "1993",
     deps = [
@@ -150,6 +164,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "opencores_files",
+    # do not sort
     srcs = [
         "lib/opencores/can/cancomp.vhd",
         "lib/opencores/can/can_top.vhd",
@@ -163,6 +178,7 @@ filegroup(
 
 vhdl_library(
     name = "opencores",
+    # do not sort
     srcs = [":opencores_files"],
     standard = "1993",
     deps = [
@@ -174,6 +190,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "gaisler_files",
+    # do not sort
     srcs = [
         "lib/gaisler/arith/arith.vhd",
         "lib/gaisler/arith/mul32.vhd",
@@ -514,13 +531,14 @@ filegroup(
 
 vhdl_library(
     name = "gaisler",
+    # do not sort
     srcs = [":gaisler_files"],
     standard = "1993",
     deps = [
-        ":techmap",
-        ":opencores",
         ":eth",
         ":grlib",
+        ":opencores",
+        ":techmap",
     ],
     visibility = ["//visibility:public"],
 )
@@ -528,6 +546,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "esa_files",
+    # do not sort
     srcs = [
         "lib/esa/memoryctrl/memoryctrl.vhd",
         "lib/esa/memoryctrl/mctrl.vhd",
@@ -541,11 +560,12 @@ filegroup(
 
 vhdl_library(
     name = "esa",
+    # do not sort
     srcs = [":esa_files"],
     standard = "1993",
     deps = [
-        ":grlib",
         ":gaisler",
+        ":grlib",
         ":techmap",
     ],
     visibility = ["//visibility:public"],
@@ -554,6 +574,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "fmf_files",
+    # do not sort
     srcs = [
         "lib/fmf/utilities/conversions.vhd",
         "lib/fmf/utilities/gen_utils.vhd",
@@ -567,6 +588,7 @@ filegroup(
 
 vhdl_library(
     name = "fmf",
+    # do not sort
     srcs = [":fmf_files"],
     standard = "1993",
     deps = [
@@ -577,6 +599,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "gsi_files",
+    # do not sort
     srcs = [
         "lib/gsi/ssram/functions.vhd",
         "lib/gsi/ssram/core_burst.vhd",
@@ -587,6 +610,7 @@ filegroup(
 
 vhdl_library(
     name = "gsi",
+    # do not sort
     srcs = [":gsi_files"],
     standard = "1993",
     deps = [
@@ -598,6 +622,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "cypress_files",
+    # do not sort
     srcs = [
         "lib/cypress/ssram/components.vhd",
         "lib/cypress/ssram/package_utility.vhd",
@@ -609,6 +634,7 @@ filegroup(
 
 vhdl_library(
     name = "cypress",
+    # do not sort
     srcs = [":cypress_files"],
     standard = "1993",
     deps = [
@@ -619,6 +645,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "micron_files",
+    # do not sort
     srcs = [
         "lib/micron/sdram/components.vhd",
         "lib/micron/sdram/mt48lc16m16a2.vhd",
@@ -628,6 +655,7 @@ filegroup(
 
 vhdl_library(
     name = "micron",
+    # do not sort
     srcs = [":micron_files"],
     standard = "1993",
     deps = [
@@ -639,6 +667,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "atc18_files",
+    # do not sort
     srcs = [
         "lib/tech/atc18/components/atmel_components.vhd",
         "lib/tech/atc18/components/atmel_simprims.vhd",
@@ -648,6 +677,7 @@ filegroup(
 
 vhdl_library(
     name = "atc18",
+    # do not sort
     srcs = [":atc18_files"],
     standard = "1993",
     deps = [
@@ -658,6 +688,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "dware_files",
+    # do not sort
     srcs = [
         "lib/tech/dware/simprims/DWpackages.vhd",
         "lib/tech/dware/simprims/DW_Foundation_arith.vhd",
@@ -669,6 +700,7 @@ filegroup(
 
 vhdl_library(
     name = "dware",
+    # do not sort
     srcs = [":dware_files"],
     standard = "1993",
     deps = [
@@ -680,6 +712,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "ec_files",
+    # do not sort
     srcs = [
         "lib/tech/ec/orca/orcacomp.vhd",
         "lib/tech/ec/orca/global.vhd",
@@ -691,6 +724,7 @@ filegroup(
 
 vhdl_library(
     name = "ec",
+    # do not sort
     srcs = [":ec_files"],
     standard = "1993",
     deps = [
@@ -702,6 +736,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "eclipsee_files",
+    # do not sort
     srcs = [
         "lib/tech/eclipsee/simprims/eclipse.vhd",
     ],
@@ -710,6 +745,7 @@ filegroup(
 
 vhdl_library(
     name = "eclipsee",
+    # do not sort
     srcs = [":eclipsee_files"],
     standard = "1993",
     deps = [
@@ -721,6 +757,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "simprim_files",
+    # do not sort
     srcs = [
         "lib/tech/simprim/vcomponents/vcomponents.vhd",
     ],
@@ -729,6 +766,7 @@ filegroup(
 
 vhdl_library(
     name = "simprim",
+    # do not sort
     srcs = [":simprim_files"],
     standard = "1993",
     deps = [
@@ -739,6 +777,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "umc18_files",
+    # do not sort
     srcs = [
         "lib/tech/umc18/components/umc_components.vhd",
         "lib/tech/umc18/components/umc_simprims.vhd",
@@ -748,6 +787,7 @@ filegroup(
 
 vhdl_library(
     name = "umc18",
+    # do not sort
     srcs = [":umc18_files"],
     standard = "1993",
     deps = [
@@ -759,6 +799,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "virage_files",
+    # do not sort
     srcs = [
         "lib/tech/virage/vcomponents/virage_vcomponents.vhd",
         "lib/tech/virage/simprims/virage_simprims.vhd",
@@ -768,6 +809,7 @@ filegroup(
 
 vhdl_library(
     name = "virage",
+    # do not sort
     srcs = [":virage_files"],
     standard = "1993",
     deps = [
@@ -778,6 +820,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "testgrouppolito_files",
+    # do not sort
     srcs = [
         "lib/testgrouppolito/pr/dprc_pkg.vhd",
         "lib/testgrouppolito/pr/dprc.vhd",
@@ -791,12 +834,13 @@ filegroup(
 
 vhdl_library(
     name = "testgrouppolito",
+    # do not sort
     srcs = [":testgrouppolito_files"],
     standard = "1993",
     deps = [
-        ":techmap",
-        ":unisim",
         ":grlib",
+        ":unisim",
+        ":techmap",
     ],
     visibility = ["//visibility:public"],
 )
@@ -804,6 +848,7 @@ vhdl_library(
 # do not sort
 filegroup(
     name = "work_files",
+    # do not sort
     srcs = [
         "lib/work/debug/debug.vhd",
         "lib/work/debug/grtestmod.vhd",
@@ -814,11 +859,12 @@ filegroup(
 
 vhdl_library(
     name = "work",
+    # do not sort
     srcs = [":work_files"],
     standard = "1993",
     deps = [
-        ":grlib",
         ":gaisler",
+        ":grlib",
     ],
     visibility = ["//visibility:public"],
 )

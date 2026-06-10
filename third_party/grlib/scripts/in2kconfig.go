@@ -15,14 +15,21 @@ func main() {
 		os.Chdir(workspaceDir)
 	}
 
-	tempDir := "grlib-gpl-2025.2-b4298"
+	grlibPath := "."
+	if len(os.Args) > 1 {
+		grlibPath = os.Args[1]
+	}
+
 	outDir := "third_party/grlib/kconfig"
+	if len(os.Args) > 2 {
+		outDir = os.Args[2]
+	}
 	os.MkdirAll(outDir, 0755)
 
-	err := filepath.Walk(tempDir, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(grlibPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil { return err }
 		if !info.IsDir() && strings.HasSuffix(path, ".in") {
-			relPath, _ := filepath.Rel(tempDir, path)
+			relPath, _ := filepath.Rel(grlibPath, path)
 			targetPath := filepath.Join(outDir, relPath+".Kconfig")
 			os.MkdirAll(filepath.Dir(targetPath), 0755)
 			convertInToKconfig(path, targetPath)

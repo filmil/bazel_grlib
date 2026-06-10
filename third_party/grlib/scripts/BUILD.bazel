@@ -51,3 +51,23 @@ go_binary(
     embed = [":gen_example_bazelrc_lib"],
     visibility = ["//visibility:public"],
 )
+
+go_library(
+    name = "maintain_lib",
+    srcs = ["maintain.go"],
+    importpath = "grlib/third_party/grlib/scripts/maintain",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "maintain",
+    data = [
+        ":gen_build_files",
+        ":gen_config_vhd",
+        ":gen_example_bazelrc",
+        ":in2kconfig",
+        "@grlib_srcs//:grlib_srcs_all",
+    ],
+    embed = [":maintain_lib"],
+    visibility = ["//visibility:public"],
+)

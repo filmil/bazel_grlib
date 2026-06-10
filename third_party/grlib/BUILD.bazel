@@ -1,5 +1,11 @@
 exports_files(["grlib.BUILD"])
 
+filegroup(
+    name = "kconfig_all",
+    srcs = glob(["kconfig/**/*.Kconfig"]),
+    visibility = ["//visibility:public"],
+)
+
 genrule(
     name = "gen_config_vhd",
     srcs = ["@grlib_config//:config_h"],

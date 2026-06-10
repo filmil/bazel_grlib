@@ -1,4 +1,47 @@
 load("@gazelle//:def.bzl", "gazelle")
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
 
 # gazelle:prefix grlib
 gazelle(name = "gazelle")
+
+sh_binary(
+    name = "maintain",
+    srcs = ["maintain.sh"],
+    args = [
+        "--maintain_bin=$(rootpath //third_party/grlib/scripts:maintain)",
+        "--gen_build_files=$(rootpath //third_party/grlib/scripts:gen_build_files)",
+        "--in2kconfig=$(rootpath //third_party/grlib/scripts:in2kconfig)",
+        "--python_bin=$(rootpath @python_3_12_host//:python)",
+    ],
+    data = [
+        "maintain.sh",
+        "//third_party/grlib/scripts:gen_build_files",
+        "//third_party/grlib/scripts:in2kconfig",
+        "//third_party/grlib/scripts:maintain",
+        "@grlib_srcs//:grlib_srcs_all",
+        "@python_3_12_host//:python",
+        "//third_party/grlib:kconfig_all",
+    ],
+)
+
+sh_test(
+    name = "maintain_test",
+    srcs = ["maintain_test.sh"],
+    args = [
+        "--maintain_bin=$(rootpath //third_party/grlib/scripts:maintain)",
+        "--gen_build_files=$(rootpath //third_party/grlib/scripts:gen_build_files)",
+        "--in2kconfig=$(rootpath //third_party/grlib/scripts:in2kconfig)",
+        "--python_bin=$(rootpath @python_3_12_host//:python)",
+    ],
+    data = [
+        "maintain.sh",
+        "//third_party/grlib/scripts:gen_build_files",
+        "//third_party/grlib/scripts:in2kconfig",
+        "//third_party/grlib/scripts:maintain",
+        "@grlib_srcs//:grlib_srcs_all",
+        "//third_party/grlib:grlib.BUILD",
+        "@python_3_12_host//:python",
+        "//third_party/grlib:kconfig_all",
+    ],
+)
