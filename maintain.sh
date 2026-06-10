@@ -24,6 +24,10 @@ while [[ $# -gt 0 ]]; do
       GEN_EXAMPLE_BAZELRC="${1#*=}"
       shift
       ;;
+    --vhd_preprocess=*)
+      VHD_PREPROCESS="${1#*=}"
+      shift
+      ;;
     --python_bin=*)
       PYTHON_BIN="${1#*=}"
       shift
@@ -60,11 +64,13 @@ fi
 [[ "$IN2KCONFIG" != /* ]] && IN2KCONFIG="$(pwd)/$IN2KCONFIG"
 [[ "$GEN_MASTER_KCONFIG" != /* ]] && GEN_MASTER_KCONFIG="$(pwd)/$GEN_MASTER_KCONFIG"
 [[ "$GEN_EXAMPLE_BAZELRC" != /* ]] && GEN_EXAMPLE_BAZELRC="$(pwd)/$GEN_EXAMPLE_BAZELRC"
+[[ "$VHD_PREPROCESS" != /* ]] && VHD_PREPROCESS="$(pwd)/$VHD_PREPROCESS"
 
 "$MAINTAIN_BIN" \
     --gen_build_files "$GEN_BUILD_FILES" \
     --in2kconfig "$IN2KCONFIG" \
     --gen_master_kconfig "$GEN_MASTER_KCONFIG" \
+    --vhd_preprocess "$VHD_PREPROCESS" \
     "${OTHER_ARGS[@]}"
 
 # Finally, update the example bazelrc if not in check mode

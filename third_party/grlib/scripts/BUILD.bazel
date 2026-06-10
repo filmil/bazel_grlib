@@ -53,6 +53,19 @@ go_binary(
 )
 
 go_library(
+    name = "vhd_preprocess_lib",
+    srcs = ["vhd_preprocess.go"],
+    importpath = "grlib/third_party/grlib/scripts/vhd_preprocess",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "vhd_preprocess",
+    embed = [":vhd_preprocess_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
     name = "gen_example_bazelrc_lib",
     srcs = ["gen_example_bazelrc.go"],
     importpath = "grlib/third_party/grlib/scripts/gen_example_bazelrc",

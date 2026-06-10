@@ -22,6 +22,7 @@ func main() {
 	genBuildFiles := ""
 	in2kconfig := ""
 	genMasterKconfig := ""
+	vhdPreprocess := ""
 	for i := 1; i < len(os.Args); i++ {
 		if os.Args[i] == "--gen_build_files" && i+1 < len(os.Args) {
 			genBuildFiles = os.Args[i+1]
@@ -47,13 +48,21 @@ func main() {
 				}
 			}
 			i++
+		} else if os.Args[i] == "--vhd_preprocess" && i+1 < len(os.Args) {
+			vhdPreprocess = os.Args[i+1]
+			if !filepath.IsAbs(vhdPreprocess) {
+				if abs, err := filepath.Abs(vhdPreprocess); err == nil {
+					vhdPreprocess = abs
+				}
+			}
+			i++
 		} else if os.Args[i] == "--check" {
 			checkMode = true
 		}
 	}
 
-	if genBuildFiles == "" || in2kconfig == "" || genMasterKconfig == "" {
-		fmt.Fprintf(os.Stderr, "Usage: %s --gen_build_files <path> --in2kconfig <path> --gen_master_kconfig <path> [--check]\n", os.Args[0])
+	if genBuildFiles == "" || in2kconfig == "" || genMasterKconfig == "" || vhdPreprocess == "" {
+		fmt.Fprintf(os.Stderr, "Usage: %s --gen_build_files <path> --in2kconfig <path> --gen_master_kconfig <path> --vhd_preprocess <path> [--check]\n", os.Args[0])
 		os.Exit(1)
 	}
 
@@ -76,13 +85,11 @@ func main() {
 		
 		// 1. Run gen_build_files
 		tmpBuildFile := filepath.Join(tmpDir, "grlib.BUILD")
-		runScript(genBuildFiles, grlibSrcs, tmpBuildFile)
+		runScript(genBuildFiles, grlibSrcs, tmpBuildFile, vhdPreprocess)
 
 		// 2. Run in2kconfig
 		tmpKconfigDir := filepath.Join(tmpDir, "kconfig")
 		runScript(in2kconfig, grlibSrcs, tmpKconfigDir)
-
-		// 3. Run gen_master_kconfig (doesn't support output redirection easily, skip root Kconfig check)
 
 		// Compare
 		outOfSync := false
@@ -93,7 +100,6 @@ func main() {
 			outOfSync = true
 		}
 
-		// Simplified Kconfig comparison: just check if any file is different or missing
 		err = filepath.Walk(tmpKconfigDir, func(path string, info os.FileInfo, err error) error {
 			if err != nil { return err }
 			if info.IsDir() { return nil }
@@ -118,7 +124,7 @@ func main() {
 		fmt.Println("All files are up to date.")
 	} else {
 		fmt.Println("Synchronizing files...")
-		runScript(genBuildFiles, grlibSrcs, "third_party/grlib/grlib.BUILD")
+		runScript(genBuildFiles, grlibSrcs, "third_party/grlib/grlib.BUILD", vhdPreprocess)
 		
 		kconfigDir := "third_party/grlib/kconfig"
 		os.RemoveAll(kconfigDir)
@@ -145,7 +151,7 @@ func printDiff(path1, path2 string) {
 	cmd := exec.Command("diff", "-u", path1, path2)
 	cmd.Stdout = os.Stderr
 	cmd.Stderr = os.Stderr
-	cmd.Run() // ignore error as diff returns 1 if files differ
+	cmd.Run()
 }
 
 func filesEqual(path1, path2 string) bool {

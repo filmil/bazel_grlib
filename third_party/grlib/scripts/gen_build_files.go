@@ -29,6 +29,11 @@ func main() {
 		grlibPath = os.Args[1]
 	}
 
+	outPath := "third_party/grlib/grlib.BUILD"
+	if len(os.Args) > 2 {
+		outPath = os.Args[2]
+	}
+
 	libs, _ := readLines(filepath.Join(grlibPath, "lib/libs.txt"))
 	var activeLibs []string
 	libStds := make(map[string]string)
@@ -78,12 +83,8 @@ func main() {
 	}
 	addToAll("grlib")
 	addToAll("techmap")
-	for _, l := range activeLibs {
-		addToAll(l)
-	}
-	for _, l := range discoveredLibs {
-		addToAll(l)
-	}
+	for _, l := range activeLibs { addToAll(l) }
+	for _, l := range discoveredLibs { addToAll(l) }
 
 	libPathMap := make(map[string]string)
 	for _, l := range allLibs {
@@ -91,42 +92,30 @@ func main() {
 	}
 
 	libDeps := make(map[string][]string)
-	libFiles := make(map[string][]vhdlFile)
+	libFiles := make(map[string][]string)
 
 	for _, lib := range allLibs {
 		libSourcePath := filepath.Join(grlibPath, "lib", lib)
 		dirs, err := readLines(filepath.Join(libSourcePath, "dirs.txt"))
-		if err != nil {
-			continue
-		}
+		if err != nil { continue }
 
 		if lib == "gaisler" {
-			// specifically add components that are often missing from dirs.txt or needed for noelv
-			dirs = append(dirs, "l5nv/shared")
-			dirs = append(dirs, "noelv/pkg")
-			dirs = append(dirs, "noelv/core")
-			dirs = append(dirs, "noelv/subsys")
-			dirs = append(dirs, "noelv")
+			dirs = append(dirs, "l5nv/shared", "noelv/pkg", "noelv/core", "noelv/subsys", "noelv")
 		}
 
-		var files []vhdlFile
+		var files []string
 		depsSet := make(map[string]bool)
 		for _, dir := range dirs {
 			dir = strings.TrimSpace(dir)
-			if dir == "" || strings.HasPrefix(dir, "#") {
-				continue
-			}
+			if dir == "" || strings.HasPrefix(dir, "#") { continue }
 
 			for _, dp := range strings.Fields(dir) {
-				if strings.HasPrefix(dp, "#") {
-					break
-				}
+				if strings.HasPrefix(dp, "#") { break }
 				subdirPath := filepath.Join(libSourcePath, dp)
 				linesSyn, _ := readLines(filepath.Join(subdirPath, "vhdlsyn.txt"))
 				linesSim, _ := readLines(filepath.Join(subdirPath, "vhdlsim.txt"))
 
 				if len(linesSyn) == 0 && len(linesSim) == 0 {
-					// No source list files, try to glob all .vhd files in this subdir
 					entries, _ := os.ReadDir(subdirPath)
 					for _, entry := range entries {
 						if !entry.IsDir() && strings.HasSuffix(entry.Name(), ".vhd") {
@@ -137,27 +126,29 @@ func main() {
 
 				for _, fLine := range append(linesSyn, linesSim...) {
 					fLine = strings.TrimSpace(fLine)
-					if fLine == "" || strings.HasPrefix(fLine, "#") {
-						continue
-					}
+					if fLine == "" || strings.HasPrefix(fLine, "#") { continue }
 					fParts := strings.Fields(fLine)
-					fileName := filepath.Join(dp, fParts[0])
-					fullPath := filepath.Join(libSourcePath, fileName)
-					if _, err := os.Stat(fullPath); err == nil {
+					fileName := fParts[0]
+					
+					relVhdPath := filepath.Join("lib", lib, dp, fileName)
+					fullVhdPath := filepath.Join(grlibPath, relVhdPath)
+
+					if _, err := os.Stat(fullVhdPath); err == nil {
+						finalRef := relVhdPath
+						if relVhdPath == "lib/grlib/stdlib/config.vhd" {
+							finalRef = "@@//third_party/grlib:config.vhd"
+						}
+
+						// Avoid duplicates
 						found := false
 						for _, existing := range files {
-							if existing.path == fileName {
-								found = true
-								break
-							}
+							if existing == finalRef { found = true; break }
 						}
 						if !found {
-							files = append(files, vhdlFile{path: fileName})
-							fileDeps := parseLibDeps(fullPath)
+							files = append(files, finalRef)
+							fileDeps := parseLibDeps(fullVhdPath)
 							for _, d := range fileDeps {
-								if d != filepath.Base(lib) {
-									depsSet[d] = true
-								}
+								if d != filepath.Base(lib) { depsSet[d] = true }
 							}
 						}
 					}
@@ -169,25 +160,14 @@ func main() {
 			libFiles[lib] = files
 			var deps []string
 			for d := range depsSet {
-				if p, ok := libPathMap[d]; ok {
-					deps = append(deps, p)
-				}
+				if p, ok := libPathMap[d]; ok { deps = append(deps, p) }
 			}
 			libDeps[lib] = deps
 		}
 	}
 
-	// Generate grlib.BUILD
-	outPath := "third_party/grlib/grlib.BUILD"
-	if len(os.Args) > 2 {
-		outPath = os.Args[2]
-	}
 	os.MkdirAll(filepath.Dir(outPath), 0755)
-	gb, err := os.Create(outPath)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error creating %s: %v\n", outPath, err)
-		os.Exit(1)
-	}
+	gb, _ := os.Create(outPath)
 	fmt.Fprintln(gb, "load(\"@rules_nvc//nvc:rules.bzl\", \"vhdl_library\")")
 	fmt.Fprintln(gb, "")
 	fmt.Fprintln(gb, "filegroup(")
@@ -196,58 +176,28 @@ func main() {
 	fmt.Fprintln(gb, "    visibility = [\"//visibility:public\"],")
 	fmt.Fprintln(gb, ")")
 	fmt.Fprintln(gb, "")
-
+	
 	for _, lib := range allLibs {
 		files := libFiles[lib]
-		if len(files) == 0 {
-			continue
-		}
+		if len(files) == 0 { continue }
 
 		libBase := filepath.Base(lib)
-
-		// Filegroup
 		fmt.Fprintln(gb, "# do not sort")
-		fmt.Fprintf(gb, "filegroup(\n")
-		fmt.Fprintf(gb, "    name = \"%s_files\",\n", libBase)
-		fmt.Fprintln(gb, "    # do not sort")
-		fmt.Fprintf(gb, "    srcs = [\n")
+		fmt.Fprintf(gb, "filegroup(\n    name = \"%s_files\",\n    # do not sort\n    srcs = [\n", libBase)
 		for _, f := range files {
-			filePath := fmt.Sprintf("lib/%s/%s", lib, f.path)
-			if filePath == "lib/grlib/stdlib/config.vhd" {
-				// Use the generated one instead
-				fmt.Fprintf(gb, "        \"@@//third_party/grlib:config.vhd\",\n")
-			} else {
-				fmt.Fprintf(gb, "        \"%s\",\n", filePath)
-			}
+			fmt.Fprintf(gb, "        \"%s\",\n", f)
 		}
-		fmt.Fprintf(gb, "    ],\n")
-		fmt.Fprintf(gb, "    visibility = [\"//visibility:public\"],\n")
-		fmt.Fprintf(gb, ")\n\n")
+		fmt.Fprintf(gb, "    ],\n    visibility = [\"//visibility:public\"],\n)\n\n")
 
-		// vhdl_library
-		fmt.Fprintf(gb, "vhdl_library(\n")
-		fmt.Fprintf(gb, "    name = \"%s\",\n", libBase)
-		fmt.Fprintln(gb, "    # do not sort")
-		fmt.Fprintf(gb, "    srcs = [\":%s_files\"],\n", libBase)
-
+		fmt.Fprintf(gb, "vhdl_library(\n    name = \"%s\",\n    # do not sort\n    srcs = [\":%s_files\"],\n", libBase, libBase)
 		std := libStds[lib]
-		if std == "" {
-			std = "1993"
-		} else if std == "93" {
-			std = "1993"
-		} else if std == "08" {
-			std = "2008"
-		}
-		fmt.Fprintf(gb, "    standard = \"%s\",\n", std)
-
-		fmt.Fprintf(gb, "    deps = [\n")
+		if std == "" { std = "1993" } else if std == "93" { std = "1993" } else if std == "08" { std = "2008" }
+		fmt.Fprintf(gb, "    standard = \"%s\",\n    deps = [\n", std)
 		sort.Strings(libDeps[lib])
 		for _, d := range libDeps[lib] {
 			fmt.Fprintf(gb, "        \":%s\",\n", filepath.Base(d))
 		}
-		fmt.Fprintf(gb, "    ],\n")
-		fmt.Fprintf(gb, "    visibility = [\"//visibility:public\"],\n")
-		fmt.Fprintf(gb, ")\n\n")
+		fmt.Fprintf(gb, "    ],\n    visibility = [\"//visibility:public\"],\n)\n\n")
 	}
 	gb.Close()
 	fmt.Println("Generated grlib.BUILD")
@@ -257,16 +207,12 @@ var libRegex = regexp.MustCompile(`(?i)^\s*library\s+([a-zA-Z0-9_]+)\s*;`)
 
 func parseLibDeps(path string) []string {
 	f, err := os.Open(path)
-	if err != nil {
-		return nil
-	}
+	if err != nil { return nil }
 	defer f.Close()
-
 	var deps []string
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
-		line := scanner.Text()
-		match := libRegex.FindStringSubmatch(line)
+		match := libRegex.FindStringSubmatch(scanner.Text())
 		if len(match) > 1 {
 			dep := strings.ToLower(match[1])
 			if dep != "ieee" && dep != "std" && dep != "work" {
@@ -279,14 +225,10 @@ func parseLibDeps(path string) []string {
 
 func readLines(path string) ([]string, error) {
 	file, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
+	if err != nil { return nil, err }
 	defer file.Close()
 	var lines []string
 	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
+	for scanner.Scan() { lines = append(lines, scanner.Text()) }
 	return lines, scanner.Err()
 }

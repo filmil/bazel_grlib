@@ -14,6 +14,7 @@ sh_binary(
         "--in2kconfig=$(rootpath //third_party/grlib/scripts:in2kconfig)",
         "--gen_master_kconfig=$(rootpath //third_party/grlib/scripts:gen_master_kconfig)",
         "--gen_example_bazelrc=$(rootpath //third_party/grlib/scripts:gen_example_bazelrc)",
+        "--vhd_preprocess=$(rootpath //third_party/grlib/scripts:vhd_preprocess)",
         "--python_bin=$(rootpath @python_3_12_host//:python)",
     ],
     data = [
@@ -22,6 +23,7 @@ sh_binary(
         "//third_party/grlib/scripts:in2kconfig",
         "//third_party/grlib/scripts:gen_master_kconfig",
         "//third_party/grlib/scripts:gen_example_bazelrc",
+        "//third_party/grlib/scripts:vhd_preprocess",
         "//third_party/grlib/scripts:maintain",
         "@grlib_srcs//:grlib_srcs_all",
         "@python_3_12_host//:python",
@@ -38,6 +40,7 @@ sh_test(
         "--in2kconfig=$(rootpath //third_party/grlib/scripts:in2kconfig)",
         "--gen_master_kconfig=$(rootpath //third_party/grlib/scripts:gen_master_kconfig)",
         "--gen_example_bazelrc=$(rootpath //third_party/grlib/scripts:gen_example_bazelrc)",
+        "--vhd_preprocess=$(rootpath //third_party/grlib/scripts:vhd_preprocess)",
         "--python_bin=$(rootpath @python_3_12_host//:python)",
     ],
     data = [
@@ -46,6 +49,7 @@ sh_test(
         "//third_party/grlib/scripts:in2kconfig",
         "//third_party/grlib/scripts:gen_master_kconfig",
         "//third_party/grlib/scripts:gen_example_bazelrc",
+        "//third_party/grlib/scripts:vhd_preprocess",
         "//third_party/grlib/scripts:maintain",
         "@grlib_srcs//:grlib_srcs_all",
         "//third_party/grlib:grlib.BUILD",

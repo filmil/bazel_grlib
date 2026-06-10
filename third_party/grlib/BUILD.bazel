@@ -21,3 +21,9 @@ filegroup(
     srcs = ["config.vhd"],
     visibility = ["//visibility:public"],
 )
+
+alias(
+    name = "config_h",
+    actual = "@grlib_config//:config_h",
+    visibility = ["//visibility:public"],
+)
