@@ -78,3 +78,69 @@ build --@grlib_config//:CONFIG_AHBDW=64
 ```
 
 Now, a simple `bazel build @grlib_srcs//:grlib` will always use your custom hardware configuration.
+
+## Advanced: Building Multiple Configurations via Transitions
+
+If you need to build the same library with different settings in the same workspace (e.g., a "Lite" vs "Full" version of a core), you can use **Bazel Transitions**.
+
+### 1. Define the Transition (`transitions.bzl`)
+
+Create a Starlark file to define how the configuration should be modified for specific targets:
+
+```python
+# transitions.bzl
+
+def _leon3_high_perf_transition_impl(settings, attr):
+    # This transition overrides specific Kconfig settings
+    return {
+        "@grlib_config//:CONFIG_ACTIVE_DESIGN_PREFIX": "BIN_TKCONFIG_CONFIG",
+        "@grlib_config//:CONFIG_BIN_TKCONFIG_CONFIG_IU_NWINDOWS": "16",
+        "@grlib_config//:CONFIG_BIN_TKCONFIG_CONFIG_FPU_ENABLE": "True",
+    }
+
+leon3_high_perf_transition = transition(
+    implementation = _leon3_high_perf_transition_impl,
+    inputs = [],
+    outputs = [
+        "@grlib_config//:CONFIG_ACTIVE_DESIGN_PREFIX",
+        "@grlib_config//:CONFIG_BIN_TKCONFIG_CONFIG_IU_NWINDOWS",
+        "@grlib_config//:CONFIG_BIN_TKCONFIG_CONFIG_FPU_ENABLE",
+    ],
+)
+
+def _configured_library_impl(ctx):
+    # Forward the providers from the underlying library built in the new configuration
+    return [ctx.attr.library[0][DefaultInfo]]
+
+configured_library = rule(
+    implementation = _configured_library_impl,
+    attrs = {
+        "library": attr.label(cfg = leon3_high_perf_transition),
+        "_allowlist_function_transition": attr.label(
+            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
+        ),
+    },
+)
+```
+
+### 2. Use the Rule in your BUILD file
+
+Now you can define targets that represent specific hardware variants:
+
+```python
+# BUILD.bazel
+load(":transitions.bzl", "configured_library")
+
+configured_library(
+    name = "leon3_high_perf",
+    library = "@grlib_srcs//:grlib",
+)
+```
+
+### 3. Build the Variant
+
+Building this target will automatically apply the configuration changes defined in the transition, regardless of what is set on your command line or in `.bazelrc`:
+
+```bash
+bazel build //:leon3_high_perf
+```
