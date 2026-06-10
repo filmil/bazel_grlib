@@ -1,0 +1,6 @@
+# GRLIB Kconfig placeholder
+mainmenu "GRLIB Configuration"
+
+config GRLIB_DUMMY
+    bool "Dummy option"
+    default y
