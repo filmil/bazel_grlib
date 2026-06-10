@@ -1,34 +1,34 @@
 # LEON3 configuration for ahbfile example design
 
-mainmenu "LEON3MP Design Configuration"
+# mainmenu_name "LEON3MP Design Configuration"
 
-menu "Options"
-comment "Synthesis      "
+# mainmenu_option next_comment
+#   comment 'Synthesis      '
 rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
-endmenu
+# endmenu
 
 rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
 rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
 
-menu "Options"
-comment "Peripherals             "
+# mainmenu_option next_comment
+# comment 'Peripherals             '
 
-menu "Options"
-comment "On-chip RAM/ROM                 "
+#   mainmenu_option next_comment
+#   comment 'On-chip RAM/ROM                 '
 rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "UARTs, timers and irq control         "
+#   mainmenu_option next_comment
+#   comment 'UARTs, timers and irq control         '
 rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
 rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
-endmenu
+#   endmenu
 
-endmenu
+# endmenu
 
-menu "Options"
-comment "VHDL Debugging        "
+# mainmenu_option next_comment
+# comment 'VHDL Debugging        '
 rsource "../../../../lib/grlib/util/debug.in.Kconfig"
-endmenu
+# endmenu

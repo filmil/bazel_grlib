@@ -1,7 +1,7 @@
 config GRHSSL_ENABLE
     bool "Enable High-Speed Serial Link         "
     
-if y # TODO: improve if translation
+#     if [ "$CONFIG_GRHSSL_ENABLE" = "y" ]; then
 config GRHSSL_NUM
     int "Number of High-Speed Serial Links     "
     default 1
@@ -9,4 +9,4 @@ config GRHSSL_SPFI
     bool "Enable internal SpaceFibre codec      "
 config GRHSSL_WIZL
     bool "Enable internal WizardLink codec      "
-endif
+#     fi

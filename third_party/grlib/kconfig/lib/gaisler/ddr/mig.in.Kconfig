@@ -1,8 +1,8 @@
-menu "Options"
-comment "MIG memory controller   "
+# mainmenu_option next_comment
+#     comment 'MIG memory controller   '
 config MIG_DDR2
     bool "Enable Xilinx MIG memory controller"
-if y # TODO: improve if translation
+#         if [ "$CONFIG_MIG_DDR2" = "y" ]; then
 config MIG_RANKS
     int "Chip selects (ranks)  "
     default 1
@@ -18,5 +18,5 @@ config MIG_BANKBITS
 config MIG_HMASK
     hex "AHB HMASK    "
     default F00
-endif
-endmenu
+#         fi
+# endmenu

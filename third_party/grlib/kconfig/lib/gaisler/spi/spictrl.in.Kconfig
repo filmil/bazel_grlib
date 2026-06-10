@@ -1,8 +1,8 @@
-menu "Options"
-comment "SPI controller(s) "
+#   mainmenu_option next_comment
+#    comment 'SPI controller(s) '
 config SPICTRL_ENABLE
     bool "Enable SPI controller(s) "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_SPICTRL_ENABLE" = "y" ]; then
 config SPICTRL_NUM
     int "Number of SPI controllers   "
     default 1
@@ -27,17 +27,17 @@ config SPICTRL_MAXWLEN
     default 0
 config SPICTRL_SYNCRAM
     bool "Use SYNCRAM for rx and tx queues "
-if y # TODO: improve if translation
-# choice translation skipped
-	"None		CONFIG_SPICTRL_NOFT \
-	 Parity-DMR	CONFIG_SPICTRL_DMRFT \
-	 TMR		CONFIG_SPICTRL_TMRFT" None
-endif
-# choice translation skipped
-	"Standard	CONFIG_SPICTRL_PROT0 \
-	 Dual	        CONFIG_SPICTRL_PROT1 \
-	 Quad		CONFIG_SPICTRL_PROT2" Standard
-endif
-endmenu
+#      if [ "$CONFIG_SPICTRL_SYNCRAM" = "y" ]; then
+#       choice 'Fault-tolerance' \
+# 	"None		CONFIG_SPICTRL_NOFT \
+# 	 Parity-DMR	CONFIG_SPICTRL_DMRFT \
+# 	 TMR		CONFIG_SPICTRL_TMRFT" None
+#      fi
+#      choice 'SPI protocols' \
+# 	"Standard	CONFIG_SPICTRL_PROT0 \
+# 	 Dual	        CONFIG_SPICTRL_PROT1 \
+# 	 Quad		CONFIG_SPICTRL_PROT2" Standard
+#     fi
+#   endmenu
 
 

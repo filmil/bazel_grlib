@@ -1,12 +1,12 @@
 config GRUSBDC_ENABLE
     bool "Gaisler Research USB 2.0 Device Controller "
-if y # TODO: improve if translation
+# if [ "$CONFIG_GRUSBDC_ENABLE" = "y" ]; then
 config GRUSBDC_AIFACE
     bool "AHB Master Interface"
-# choice translation skipped
-   "ULPI	   CONFIG_GRUSBDC_ULPI \
-   UTMI/UTMI+8-bit  CONFIG_GRUSBDC_UTMI8 \
-   UTMI/UTMI+16-bit CONFIG_GRUSBDC_UTMI16" ULPI
+#   choice 'USB Transceiver Interface' \
+#    "ULPI	   CONFIG_GRUSBDC_ULPI \
+#    UTMI/UTMI+8-bit  CONFIG_GRUSBDC_UTMI8 \
+#    UTMI/UTMI+16-bit CONFIG_GRUSBDC_UTMI16" ULPI
 config GRUSBDC_NEPI
     int "Number of IN endpoints "
     default 1
@@ -109,4 +109,4 @@ config GRUSBDC_O14
 config GRUSBDC_O15
     int "Buffer size for OUT endpoint 15"
     default 1024
-endif
+# fi

@@ -1,8 +1,8 @@
-menu "Options"
-comment "NANDFCTRL"
+# mainmenu_option next_comment
+#   comment 'NANDFCTRL'
 config NANDFCTRL2_ENABLE
     bool "NANDFCTRL2 - NAND Flash Memory Controller"
-if y # TODO: improve if translation
+#   if [ "$CONFIG_NANDFCTRL2_ENABLE" = "y" ]; then
 config NFC2_NROFCE
     int "nrofce        "
     default 8
@@ -76,11 +76,11 @@ config NFC2_TAG_SIZE
     int "tag_size      "
     default 0
 
-# choice translation skipped
-      "None		CONFIG_NFC2_FT_NONE \
-	     Parity-DMR	CONFIG_NFC2_FT_DMR \
-	     TMR		CONFIG_NFC2_FT_TMR \
-	     BCH  		CONFIG_NFC2_FT_BCH \
-	     TechSpec	CONFIG_NFC2_FT_TECHSPEC" None
-endif
-endmenu
+#     choice 'GRSPW2 FIFO protection           ' \
+#       "None		CONFIG_NFC2_FT_NONE \
+# 	     Parity-DMR	CONFIG_NFC2_FT_DMR \
+# 	     TMR		CONFIG_NFC2_FT_TMR \
+# 	     BCH  		CONFIG_NFC2_FT_BCH \
+# 	     TechSpec	CONFIG_NFC2_FT_TECHSPEC" None
+#   fi
+# endmenu

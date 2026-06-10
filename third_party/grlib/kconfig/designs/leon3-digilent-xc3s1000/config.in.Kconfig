@@ -9,56 +9,56 @@
 
 #define_bool CONFIG_MCTRL_RMW y
 
-mainmenu "Digilent Design Configuration"
+# mainmenu_name "Digilent Design Configuration"
 
-menu "Options"
-comment "Synthesis      "
+# mainmenu_option next_comment
+#   comment 'Synthesis      '
 rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Clock generation"
+# mainmenu_option next_comment
+#   comment 'Clock generation'
 rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
-endmenu
+# endmenu
 
 rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
 rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
 
-menu "Options"
-comment "Debug Link           "
+# mainmenu_option next_comment
+#   comment 'Debug Link           '
 #  source lib/gaisler/uart/dcom.in
 rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Peripherals             "
+# mainmenu_option next_comment
+# comment 'Peripherals             '
 
-menu "Options"
-comment "Memory controller             "
+#   mainmenu_option next_comment
+#   comment 'Memory controller             '
 rsource "../../../../lib/esa/memoryctrl/mctrl.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "On-chip RAM/ROM                 "
+#   mainmenu_option next_comment
+#   comment 'On-chip RAM/ROM                 '
 rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "UART, timer, I/O port and interrupt controller"
+#   mainmenu_option next_comment
+#   comment 'UART, timer, I/O port and interrupt controller'
 rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
 rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "Keybord and VGA interface"
+#   mainmenu_option next_comment
+#   comment 'Keybord and VGA interface'
 rsource "../../../../lib/gaisler/misc/ps2vga.in.Kconfig"
-endmenu
-endmenu
+#   endmenu
+# endmenu
 
-menu "Options"
-comment "VHDL Debugging        "
+# mainmenu_option next_comment
+# comment 'VHDL Debugging        '
 rsource "../../../../lib/grlib/util/debug.in.Kconfig"
-endmenu
+# endmenu

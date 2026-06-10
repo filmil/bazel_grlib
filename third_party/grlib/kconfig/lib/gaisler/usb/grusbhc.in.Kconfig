@@ -1,41 +1,41 @@
 config GRUSBHC_ENABLE
     bool "Gaisler Research USB 2.0 Host Controller "
-if y # TODO: improve if translation
+# if [ "$CONFIG_GRUSBHC_ENABLE" = "y" ]; then
 config GRUSBHC_EHC
     bool "Enable Enhanced Host Controller "
 config GRUSBHC_UHC
     bool "Enable Universal Host Controller "
-if y # TODO: improve if translation
+#   if [ "$CONFIG_GRUSBHC_UHC" = "y" ]; then
 config GRUSBHC_NCC
     int "Number of Universal Host Controllers (1-15)"
     default 1
-endif
+#   fi
 config GRUSBHC_NPORTS
     int "Total number of ports  (1-15)"
     default 1
-# choice translation skipped
-   "ULPI	CONFIG_GRUSBHC_ULPI \
-    UTMI+16-bit	CONFIG_GRUSBHC_UTMI16 \
-    UTMI+8-bit	CONFIG_GRUSBHC_UTMI8" ULPI
-if y # TODO: improve if translation
-# choice translation skipped
-      "External  CONFIG_GRUSBHC_VBUSEXT \
-       Internal  CONFIG_GRUSBHC_VBUSINT"
-if y # TODO: improve if translation
-# choice translation skipped
- 	  "ActiveLow  CONFIG_GRUSBHC_FAULTL \
-           ActiveHigh CONFIG_GRUSBHC_FAULTH \
-           None       CONFIG_GRUSBHC_FAULTN" ActiveLow
-endif
-  else
-# choice translation skipped
-      "ActiveHigh CONFIG_GRUSBHC_ENABLEH \
-       ActiveLow  CONFIG_GRUSBHC_ENABLEL" ActiveHigh
-# choice translation skipped
-      "ActiveHigh CONFIG_GRUSBHC_FAULT2H \
-       ActiveLow  CONFIG_GRUSBHC_FAULT2L" ActiveHigh
-endif
-comment "Memory interface"
+#   choice 'Transceiver interface' \
+#    "ULPI	CONFIG_GRUSBHC_ULPI \
+#     UTMI+16-bit	CONFIG_GRUSBHC_UTMI16 \
+#     UTMI+8-bit	CONFIG_GRUSBHC_UTMI8" ULPI
+#   if [ "$CONFIG_GRUSBHC_ULPI" = "y" ]; then
+#     choice 'Bus power generation' \
+#       "External  CONFIG_GRUSBHC_VBUSEXT \
+#        Internal  CONFIG_GRUSBHC_VBUSINT"
+#        if [ "$CONFIG_GRUSBHC_VBUSEXT" = "y" ]; then 
+#          choice 'External bus fault indicator' \
+#  	  "ActiveLow  CONFIG_GRUSBHC_FAULTL \
+#            ActiveHigh CONFIG_GRUSBHC_FAULTH \
+#            None       CONFIG_GRUSBHC_FAULTN" ActiveLow
+#        fi
+#   else
+#     choice 'Bus power enable signal' \
+#       "ActiveHigh CONFIG_GRUSBHC_ENABLEH \
+#        ActiveLow  CONFIG_GRUSBHC_ENABLEL" ActiveHigh
+#     choice 'Bus power fault indicator' \
+#       "ActiveHigh CONFIG_GRUSBHC_FAULT2H \
+#        ActiveLow  CONFIG_GRUSBHC_FAULT2L" ActiveHigh
+#   fi
+#   comment 'Memory interface'
 # Endian conversion must be enabled if the core is going to work in GRLIB.
 # Thereby we do not give the user a choice, for now.
 #     bool 'Endian conversion enable    ' CONFIG_GRUSBHC_ENDIAN 
@@ -46,14 +46,14 @@ config GRUSBHC_BEDESC
 config GRUSBHC_BWRD
     int "Maximum burst length in words (1-256)"
     default 16
-comment "Port routing"
+#   comment 'Port routing'
 config GRUSBHC_PRR
     bool "Port routing rules"
-if y # TODO: improve if translation
+#   if [ "$CONFIG_GRUSBHC_PRR" = "n" ]; then
 config GRUSBHC_NPCC
     int "Number of ports per companion controller (1-15)"
     default 1
-  else
+#   else
 config GRUSBHC_PR1
     int "Route port 1 to companion controller "
     default 0
@@ -99,5 +99,5 @@ config GRUSBHC_PR14
 config GRUSBHC_PR15
     int "Route port 15 to companion controller "
     default 0
-endif
-endif
+#   fi
+# fi

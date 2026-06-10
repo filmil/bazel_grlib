@@ -1,6 +1,6 @@
 config I2CSLV_ENABLE
     bool "Enable I2C slave "
-if y # TODO: improve if translation
+#    if [ "$CONFIG_I2CSLV_ENABLE" = "y" ]; then
 config I2CSLV_HARDADDR
     bool "Hard coded address     "
 config I2CSLV_TENBIT
@@ -8,4 +8,4 @@ config I2CSLV_TENBIT
 config I2CSLV_I2CADDR
     hex "I2C slave address      "
     default 000
-endif
+#    fi

@@ -1,8 +1,8 @@
-menu "Options"
-comment "8/32-bit PROM/SRAM controller "
+#   mainmenu_option next_comment
+#   comment '8/32-bit PROM/SRAM controller '
 config SRCTRL
     bool "Enable 8/32-bit PROM/SRAM controller    "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_SRCTRL" = "y" ]; then
 config SRCTRL_8BIT
     bool "8-bit PROM interface "
 config SRCTRL_PROMWS
@@ -16,30 +16,30 @@ config SRCTRL_IOWS
     default 0
 config SRCTRL_RMW
     bool "Use read-modify-write for sub-word writes  "
-# choice translation skipped
-   	  "1		CONFIG_SRCTRL_SRBANKS1 \
-   	   2		CONFIG_SRCTRL_SRBANKS2 \
-   	   3		CONFIG_SRCTRL_SRBANKS3 \
-   	   4		CONFIG_SRCTRL_SRBANKS4 \
-   	   5		CONFIG_SRCTRL_SRBANKS5" 1
+#       choice 'SRAM banks' \
+#    	  "1		CONFIG_SRCTRL_SRBANKS1 \
+#    	   2		CONFIG_SRCTRL_SRBANKS2 \
+#    	   3		CONFIG_SRCTRL_SRBANKS3 \
+#    	   4		CONFIG_SRCTRL_SRBANKS4 \
+#    	   5		CONFIG_SRCTRL_SRBANKS5" 1
 
-# choice translation skipped
-   	  "8		   CONFIG_SRCTRL_BANKSZ0 \
-   	   16		   CONFIG_SRCTRL_BANKSZ1 \
-   	   32		   CONFIG_SRCTRL_BANKSZ2 \
-   	   64		   CONFIG_SRCTRL_BANKSZ3 \
-   	   128		CONFIG_SRCTRL_BANKSZ4 \
-   	   256		CONFIG_SRCTRL_BANKSZ5 \
-   	   512		CONFIG_SRCTRL_BANKSZ6 \
-   	   1024		CONFIG_SRCTRL_BANKSZ7 \
-   	   2048		CONFIG_SRCTRL_BANKSZ8 \
-   	   4096		CONFIG_SRCTRL_BANKSZ9 \
-   	  	8192	   CONFIG_SRCTRL_BANKSZ10 \
-   	  	16384	   CONFIG_SRCTRL_BANKSZ11 \
-   	   32768		CONFIG_SRCTRL_BANKSZ12 \
-   	   65536  	CONFIG_SRCTRL_BANKSZ13" 0
+#       choice 'SRAM bank size (kb) (0 for programmable)' \
+#    	  "8		   CONFIG_SRCTRL_BANKSZ0 \
+#    	   16		   CONFIG_SRCTRL_BANKSZ1 \
+#    	   32		   CONFIG_SRCTRL_BANKSZ2 \
+#    	   64		   CONFIG_SRCTRL_BANKSZ3 \
+#    	   128		CONFIG_SRCTRL_BANKSZ4 \
+#    	   256		CONFIG_SRCTRL_BANKSZ5 \
+#    	   512		CONFIG_SRCTRL_BANKSZ6 \
+#    	   1024		CONFIG_SRCTRL_BANKSZ7 \
+#    	   2048		CONFIG_SRCTRL_BANKSZ8 \
+#    	   4096		CONFIG_SRCTRL_BANKSZ9 \
+#    	  	8192	   CONFIG_SRCTRL_BANKSZ10 \
+#    	  	16384	   CONFIG_SRCTRL_BANKSZ11 \
+#    	   32768		CONFIG_SRCTRL_BANKSZ12 \
+#    	   65536  	CONFIG_SRCTRL_BANKSZ13" 0
 config SRCTRL_ROMASEL
     int "PROM bank select address bit (0 - 28)"
     default 19
-endif
-endmenu
+#     fi
+#   endmenu

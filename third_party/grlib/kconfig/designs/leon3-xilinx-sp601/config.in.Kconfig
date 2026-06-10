@@ -9,12 +9,12 @@
 
 #define_bool CONFIG_MCTRL_RMW y
 
-mainmenu "LEON3MP Design Configuration"
+# mainmenu_name "LEON3MP Design Configuration"
 
-menu "Options"
-comment "Synthesis      "
+# mainmenu_option next_comment
+#   comment 'Synthesis      '
 rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
-endmenu
+# endmenu
 
 #mainmenu_option next_comment
 #  comment 'Board options'
@@ -25,59 +25,59 @@ endmenu
 #  source lib/techmap/clocks/clkgen.in
 #endmenu
 
-menu "Options"
-comment "Clock generation"
+# mainmenu_option next_comment
+#   comment 'Clock generation'
 rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
-endmenu
+# endmenu
 
 rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
 rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
 
-menu "Options"
-comment "Debug Link           "
+# mainmenu_option next_comment
+#   comment 'Debug Link           '
 rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
 rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
 rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Peripherals             "
+# mainmenu_option next_comment
+# comment 'Peripherals             '
 
-menu "Options"
-comment "Memory controllers             "
+#   mainmenu_option next_comment
+#   comment 'Memory controllers             '
 rsource "../../../../lib/esa/memoryctrl/mctrl.in.Kconfig"
 rsource "../../../../lib/gaisler/ddr/ddr2sp.in.Kconfig"
 rsource "../../../../lib/gaisler/ddr/mig.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "On-chip RAM/ROM                 "
+#   mainmenu_option next_comment
+#   comment 'On-chip RAM/ROM                 '
 rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "Ethernet             "
+#   mainmenu_option next_comment
+#   comment 'Ethernet             '
 rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "UARTs, timers and irq control         "
+#   mainmenu_option next_comment
+#   comment 'UARTs, timers and irq control         '
 rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
 rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "SPI"
+#   mainmenu_option next_comment
+#   comment 'SPI'
 rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
 rsource "../../../../lib/gaisler/spi/spictrl.in.Kconfig"
-endmenu
+#   endmenu
 
-endmenu
+# endmenu
 
-menu "Options"
-comment "VHDL Debugging        "
+# mainmenu_option next_comment
+# comment 'VHDL Debugging        '
 rsource "../../../../lib/grlib/util/debug.in.Kconfig"
-endmenu
+# endmenu

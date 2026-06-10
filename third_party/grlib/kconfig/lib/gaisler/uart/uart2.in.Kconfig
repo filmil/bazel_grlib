@@ -1,11 +1,11 @@
 config UART2_ENABLE
     bool "Enable secondary UART                "
-if y # TODO: improve if translation
-# choice translation skipped
-	  "1		CONFIG_UA2_FIFO1 \
-	   2		CONFIG_UA2_FIFO2 \
-	   4		CONFIG_UA2_FIFO4 \
-	   8		CONFIG_UA2_FIFO8 \
-	  16		CONFIG_UA2_FIFO16 \
-	  32  		CONFIG_UA2_FIFO32" 1
-endif
+#     if [ "$CONFIG_UART2_ENABLE" = "y" ]; then
+#         choice 'UART2 FIFO depth' \
+# 	  "1		CONFIG_UA2_FIFO1 \
+# 	   2		CONFIG_UA2_FIFO2 \
+# 	   4		CONFIG_UA2_FIFO4 \
+# 	   8		CONFIG_UA2_FIFO8 \
+# 	  16		CONFIG_UA2_FIFO16 \
+# 	  32  		CONFIG_UA2_FIFO32" 1
+#     fi

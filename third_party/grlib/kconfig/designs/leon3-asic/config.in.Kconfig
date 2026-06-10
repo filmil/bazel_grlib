@@ -10,69 +10,69 @@
 #define_bool CONFIG_MCTRL_RMW y
 #define_bool CONFIG_LEON3FT_PRESENT y
 
-mainmenu "LEON3MP Design Configuration"
+# mainmenu_name "LEON3MP Design Configuration"
 
-menu "Options"
-comment "Synthesis      "
+# mainmenu_option next_comment
+#   comment 'Synthesis      '
 rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
 rsource "../../../../lib/gaisler/jtag/bscan.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Clock generation"
+# mainmenu_option next_comment
+#   comment 'Clock generation'
 rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
-endmenu
+# endmenu
 
 rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
 rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
 
-menu "Options"
-comment "Debug Link           "
+# mainmenu_option next_comment
+#   comment 'Debug Link           '
 rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
 rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
 rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Memory controllers             "
+# mainmenu_option next_comment
+#   comment 'Memory controllers             '
 rsource "../../../../lib/esa/memoryctrl/mctrl.in.Kconfig"
 rsource "../../../../lib/gaisler/memctrl/ftmctrl.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Peripherals             "
+# mainmenu_option next_comment
+# comment 'Peripherals             '
 
-menu "Options"
-comment "Spacewire "
+#   mainmenu_option next_comment
+#   comment 'Spacewire '
 rsource "../../../../lib/gaisler/spacewire/spacewire.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "Ethernet             "
+#   mainmenu_option next_comment
+#   comment 'Ethernet             '
 rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "SPI"
+#   mainmenu_option next_comment
+#   comment 'SPI'
 rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
 rsource "../../../../lib/gaisler/spi/spictrl.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "CAN                     "
+#   mainmenu_option next_comment
+#   comment 'CAN                     '
 rsource "../../../../lib/gaisler/can/can_mc.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "UARTs, timers and irq control         "
+#   mainmenu_option next_comment
+#   comment 'UARTs, timers and irq control         '
 rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
 rsource "../../../../lib/gaisler/uart/uart2.in.Kconfig"
 rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
 rsource "../../../../lib/gaisler/i2c/i2c.in.Kconfig"
-endmenu
+#   endmenu
 
-endmenu
+# endmenu
 

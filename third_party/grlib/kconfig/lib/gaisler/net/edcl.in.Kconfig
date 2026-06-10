@@ -1,14 +1,14 @@
 
-if y # TODO: improve if translation
+# if [ "$CONFIG_GRETH_ENABLE" = "y" ]; then
 config DSU_ETH
     bool "Ethernet Debug Communication Link (EDCL)"
-if y # TODO: improve if translation
-# choice translation skipped
-	"1		CONFIG_DSU_ETHSZ1 \
-	2		CONFIG_DSU_ETHSZ2 \
-	4		CONFIG_DSU_ETHSZ4 \
-	8		CONFIG_DSU_ETHSZ8 \
-	16		CONFIG_DSU_ETHSZ16" 2
+#   if [ "$CONFIG_DSU_ETH" = "y" ]; then
+#     choice 'Ethernet/AHB bridge buffer size (kbytes)' \
+# 	"1		CONFIG_DSU_ETHSZ1 \
+# 	2		CONFIG_DSU_ETHSZ2 \
+# 	4		CONFIG_DSU_ETHSZ4 \
+# 	8		CONFIG_DSU_ETHSZ8 \
+# 	16		CONFIG_DSU_ETHSZ16" 2
 config DSU_IPMSB
     hex "MSB 16 bits of IP address (hex)       "
     default C0A8
@@ -23,10 +23,10 @@ config DSU_ETHLSB
     default 000000
 config DSU_ETH_PROG
     bool "Programmable 4-bit LSB of MAC/IP address"
-if y # TODO: improve if translation
+#     if [ "$CONFIG_DSU_ETH_PROG" = "y" ]; then
 config DSU_ETH_DIS
     bool "EDCL disable pin                     "
-endif
-endif
-endif
+#     fi
+#   fi
+# fi
 

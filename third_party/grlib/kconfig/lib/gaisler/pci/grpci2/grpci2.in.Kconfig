@@ -2,12 +2,12 @@ config GRPCI2_MASTER
     bool "GRPCI2 PCI Master interface"
 config GRPCI2_TARGET
     bool "GRPCI2 PCI Target interface"
-if y # TODO: improve if translation
+#   if [ "$CONFIG_GRPCI2_MASTER" = "y" ]; then
 config GRPCI2_DMA
     bool "GRPCI2 PCI DMA interface"
-endif
+#   fi
   
-if y # TODO: improve if translation
+#   if [ "$CONFIG_GRPCI2_MASTER" = "y" -o "$CONFIG_GRPCI2_TARGET" = "y" ]; then
 config GRPCI2_VENDORID
     hex "PCI vendor ID"
     default 1AC8
@@ -26,8 +26,8 @@ config GRPCI2_CAPPOINT
 config GRPCI2_NEXTCAPPOINT
     hex "Next Capability pointer"
     default 00
-endif
-if y # TODO: improve if translation
+#   fi 
+#   if [ "$CONFIG_GRPCI2_TARGET" = "y" ]; then
 config GRPCI2_BAR0
     int "BAR0"
     default 26
@@ -46,53 +46,53 @@ config GRPCI2_BAR4
 config GRPCI2_BAR5
     int "BAR5"
     default 0
-endif
-if y # TODO: improve if translation
-# choice translation skipped
-	  "8		CONFIG_GRPCI2_FIFO8 \
-	  16		CONFIG_GRPCI2_FIFO16 \
-	  32		CONFIG_GRPCI2_FIFO32 \
-	  64		CONFIG_GRPCI2_FIFO64 \
-	  128 	CONFIG_GRPCI2_FIFO128" 8
+#   fi
+#   if [ "$CONFIG_GRPCI2_MASTER" = "y" -o "$CONFIG_GRPCI2_TARGET" = "y" ]; then
+#     choice 'GRPCI2 FIFO depth' \
+# 	  "8		CONFIG_GRPCI2_FIFO8 \
+# 	  16		CONFIG_GRPCI2_FIFO16 \
+# 	  32		CONFIG_GRPCI2_FIFO32 \
+# 	  64		CONFIG_GRPCI2_FIFO64 \
+# 	  128 	CONFIG_GRPCI2_FIFO128" 8
     
-# choice translation skipped
-	  "1		CONFIG_GRPCI2_FIFOCNT1 \
-	   2		CONFIG_GRPCI2_FIFOCNT2 \
-	   3		CONFIG_GRPCI2_FIFOCNT3 \
-	   4		CONFIG_GRPCI2_FIFOCNT4" 2
-endif
+#     choice 'GRPCI2 FIFO Count' \
+# 	  "1		CONFIG_GRPCI2_FIFOCNT1 \
+# 	   2		CONFIG_GRPCI2_FIFOCNT2 \
+# 	   3		CONFIG_GRPCI2_FIFOCNT3 \
+# 	   4		CONFIG_GRPCI2_FIFOCNT4" 2
+#   fi
   
 config GRPCI2_ENDIAN
     bool "GRPCI2 PCI little-endian"
   
 config GRPCI2_DINT
     bool "GRPCI2 Device Int"
-if y # TODO: improve if translation
+#   if [ "$CONFIG_GRPCI2_DINT" = "y" ]; then
 config GRPCI2_DINTMASK
     hex "GRPCI2 Device Int mask"
     default 0
-endif
+#   fi
 
 config GRPCI2_HINT
     bool "GRPCI2 Host Int"
-if y # TODO: improve if translation
+#   if [ "$CONFIG_GRPCI2_HINT" = "y" ]; then
 config GRPCI2_HINTMASK
     hex "GRPCI2 Hevice Int mask"
     default 0
-endif
+#   fi
 
-# choice translation skipped
-	"none		CONFIG_GRPCI2_TRACE0 \
-  256		CONFIG_GRPCI2_TRACE256 \
-	512		CONFIG_GRPCI2_TRACE512 \
-	1024		CONFIG_GRPCI2_TRACE1024 \
-	2048		CONFIG_GRPCI2_TRACE2048 \
-	4096 		CONFIG_GRPCI2_TRACE4096" none
+#   choice 'GRPCI2 PCI trace buffer' \
+# 	"none		CONFIG_GRPCI2_TRACE0 \
+#   256		CONFIG_GRPCI2_TRACE256 \
+# 	512		CONFIG_GRPCI2_TRACE512 \
+# 	1024		CONFIG_GRPCI2_TRACE1024 \
+# 	2048		CONFIG_GRPCI2_TRACE2048 \
+# 	4096 		CONFIG_GRPCI2_TRACE4096" none
 
-if y # TODO: improve if translation
+#   if [ "$CONFIG_GRPCI2_TRACE0" = "n" ]; then
 config GRPCI2_TRACEAPB
     bool "Separate PCI trace buffer APB interface"
-endif
+#   fi
 
 config GRPCI2_BYPASS
     bool "GRPCI2 Input pad bypass"

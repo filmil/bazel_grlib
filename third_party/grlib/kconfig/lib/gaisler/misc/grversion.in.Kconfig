@@ -1,13 +1,13 @@
-menu "Options"
-comment "Version and Revision Register"
+#   mainmenu_option next_comment
+#   comment 'Version and Revision Register'
 config GRVERSION_ENABLE
     bool "Enable Version and Revision Register "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_GRVERSION_ENABLE" = "y" ]; then
 config GRVERSION_VERSION
     hex "Version  "
     default 0000
 config GRVERSION_REVISION
     hex "Revision "
     default 0000
-endif
-endmenu
+#     fi
+#   endmenu

@@ -1,6 +1,6 @@
 config NANDFCTRL_ENABLE
     bool "NANDFCTRL - NAND Flash Memory Controller"
-if y # TODO: improve if translation
+# if [ "$CONFIG_NANDFCTRL_ENABLE" = "y" ]; then
 config NANDFCTRL_NTARGETS
     int "Number of targets (1-4)"
     default 2
@@ -19,4 +19,4 @@ config NANDFCTRL_TM2
     bool "Enable timing mode 2"
 config NANDFCTRL_TM3
     bool "Enable timing mode 3"
-endif
+# fi

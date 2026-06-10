@@ -1,18 +1,18 @@
 
-menu "Options"
-comment "PC133 SDRAM controller             "
+#   mainmenu_option next_comment
+#   comment 'PC133 SDRAM controller             '
 config SDCTRL
     bool "Enable PC133 SDRAM controller       "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_SDCTRL" = "y" ]; then
 config SDCTRL_BUS64
     bool "64-bit SDRAM data bus"
 config SDCTRL_INVCLK
     bool "Unsynchronized sdclock"
 config SDCTRL_PAGE
     bool "Enable page burst operation     "
-if y # TODO: improve if translation
+#       if [ "$CONFIG_SDCTRL_PAGE" = "y" ]; then
 config SDCTRL_PROGPAGE
     bool "Enable programmable page burst "
-endif
-endif
-endmenu
+#       fi
+#     fi
+#   endmenu

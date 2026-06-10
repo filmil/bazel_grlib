@@ -1,12 +1,12 @@
 config IRQ3_ENABLE
     bool "Enable LEON3 interrupt controller    "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_IRQ3_ENABLE" = "y" ]; then
 config IRQ3_SEC
     bool "Enable secondary interrupts           "
-if y # TODO: improve if translation
+#       if [ "$CONFIG_IRQ3_SEC" = "y" ]; then
 config IRQ3_NSEC
     int "Secondary interrupt number (1 - 15)    "
     default 12
-endif
-endif
+#       fi
+#     fi
 

@@ -1,6 +1,6 @@
 
-menu "Options"
-comment "AMBA configuration"
+# mainmenu_option next_comment
+# comment 'AMBA configuration'
 config AHB_DEFMST
     int "Default AHB master"
     default 0
@@ -18,13 +18,13 @@ config APB_HADDR
     default 800
 config AHB_MON
     bool "Enable AMBA AHB monitor              "
-if y # TODO: improve if translation
+#   if [ "$CONFIG_AHB_MON" = "y" ]; then
 config AHB_MONERR
     bool "Report AHB errors                  "
 config AHB_MONWAR
     bool "Report AHB warings                 "
-endif
+#   fi
 config AHB_DTRACE
     bool "Write trace to simulation console    "
-endmenu
+# endmenu
 

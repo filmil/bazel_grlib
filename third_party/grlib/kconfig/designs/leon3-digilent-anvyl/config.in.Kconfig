@@ -11,34 +11,34 @@
 #define_bool CONFIG_LEON3FT_PRESENT y
 #define_bool CONFIG_HAS_SHARED_GRFPU y
 
-mainmenu "LEON3MP Design Configuration"
+# mainmenu_name "LEON3MP Design Configuration"
 
-menu "Options"
-comment "Synthesis      "
+# mainmenu_option next_comment
+#   comment 'Synthesis      '
 rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
 
-endmenu
+# endmenu
 
-menu "Options"
-comment "Clock generation"
+# mainmenu_option next_comment
+#   comment 'Clock generation'
 rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
-endmenu
+# endmenu
 
 rsource "../../../../lib/gaisler/leon3/leon3.in.Kconfig"
 rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
 
-menu "Options"
-comment "Debug Link           "
+# mainmenu_option next_comment
+#   comment 'Debug Link           '
 rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
 rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
 rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Peripherals             "
+# mainmenu_option next_comment
+# comment 'Peripherals             '
 
-menu "Options"
-comment "Memory controller             "
+#   mainmenu_option next_comment
+#   comment 'Memory controller             '
 rsource "../../../../lib/esa/memoryctrl/mctrl.in.Kconfig"
 rsource "../../../../lib/gaisler/ddr/ddr2sp.in.Kconfig"
 #    mainmenu_option next_comment
@@ -48,52 +48,52 @@ rsource "../../../../lib/gaisler/ddr/ddr2sp.in.Kconfig"
 #      fi
 #    endmenu
 rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "On-chip RAM/ROM                 "
+#   mainmenu_option next_comment
+#   comment 'On-chip RAM/ROM                 '
 rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "Ethernet             "
+#   mainmenu_option next_comment
+#   comment 'Ethernet             '
 rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
-endmenu
+#   endmenu
 
 #  mainmenu_option next_comment
 #  comment 'CAN                     '
 #    source lib/gaisler/can/can_mc.in
 #  endmenu
 
-menu "Options"
-comment "UART, timer, I/O port and interrupt controller"
-if y # TODO: improve if translation
+#   mainmenu_option next_comment
+#   comment 'UART, timer, I/O port and interrupt controller'
+#     if [ "$CONFIG_DSU_UART" != "y" ]; then
 rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
-endif
+#     fi
 rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
-endmenu
+#   endmenu
 
 #  mainmenu_option next_comment
 #  comment 'Spacewire '
 #    source lib/gaisler/spacewire/spacewire.in
 #  endmenu
 
-menu "Options"
-comment "Keybord and VGA interface"
+#   mainmenu_option next_comment
+#   comment 'Keybord and VGA interface'
 rsource "../../../../lib/gaisler/misc/ps2vga.in.Kconfig"
-endmenu
-menu "Options"
-comment "SPI"
+#   endmenu
+#   mainmenu_option next_comment
+#   comment 'SPI'
 rsource "../../../../lib/gaisler/spi/spimctrl.in.Kconfig"
 #    source lib/gaisler/spi/spictrl.in
-endmenu
+#   endmenu
 
-endmenu
+# endmenu
 
-menu "Options"
-comment "VHDL Debugging        "
+# mainmenu_option next_comment
+# comment 'VHDL Debugging        '
 rsource "../../../../lib/grlib/util/debug.in.Kconfig"
-endmenu
+# endmenu

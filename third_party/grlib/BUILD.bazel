@@ -1,1 +1,16 @@
 exports_files(["grlib.BUILD"])
+
+genrule(
+    name = "gen_config_vhd",
+    srcs = ["@grlib_config//:config_h"],
+    outs = ["config.vhd"],
+    cmd = "$(location //third_party/grlib/scripts:gen_config_vhd) $< $@",
+    tools = ["//third_party/grlib/scripts:gen_config_vhd"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "config_vhd_file",
+    srcs = ["config.vhd"],
+    visibility = ["//visibility:public"],
+)

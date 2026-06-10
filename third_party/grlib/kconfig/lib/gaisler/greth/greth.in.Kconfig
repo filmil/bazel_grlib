@@ -1,31 +1,31 @@
 config GRETH_ENABLE
     bool "Gaisler Research 10/100/1000 Mbit Ethernet MAC "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_GRETH_ENABLE" = "y" ]; then
 config GRETH_GIGA
     bool "Enable 1000 Mbit support    "
-if y # TODO: improve if translation
-# choice translation skipped
-	  "4		CONFIG_GRETH_FIFO4 \
-	  8		CONFIG_GRETH_FIFO8 \
-	  16		CONFIG_GRETH_FIFO16 \
-	  32		CONFIG_GRETH_FIFO32 \
-	  64		CONFIG_GRETH_FIFO64" 8
-endif
+#       if [ "$CONFIG_GRETH_GIGA" = "n" ]; then
+#         choice 'AHB FIFO size (words)            ' \
+# 	  "4		CONFIG_GRETH_FIFO4 \
+# 	  8		CONFIG_GRETH_FIFO8 \
+# 	  16		CONFIG_GRETH_FIFO16 \
+# 	  32		CONFIG_GRETH_FIFO32 \
+# 	  64		CONFIG_GRETH_FIFO64" 8
+#       fi
 config GRETH_FMC_MODE
     bool "Enable FMC"
-if y # TODO: improve if translation
+#       if [ "$CONFIG_LEON3FT_PRESENT" = "y" ]; then
 config GRETH_FT
     bool "Enable fault-tolerance"
-if y # TODO: improve if translation
+#         if [ "$CONFIG_GRETH_FT" = "y" ]; then
 config GRETH_EDCLFT
     bool "Enable fault tolerance for EDCL buffer "
-endif
-endif
-if y # TODO: improve if translation
+#         fi
+#       fi
+#       if [ "$CONFIG_GRETH_SGMII_PRESENT" = "y" ]; then
 config GRETH_SGMII_MODE
     bool "Enable SGMII"
-endif
+#       fi
 config GRETH_PHY_ADDR
     int "PHY address  "
     default 1
-endif
+#     fi

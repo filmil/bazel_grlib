@@ -1,4 +1,4 @@
-if y # TODO: improve if translation
+#   if [ "$CONFIG_PCI_ACTEL"  != "y" ]; then
 config PCI_SIMPLE_TARGET
     bool "PCI interface, target-only     "
-endif
+#   fi

@@ -13,87 +13,87 @@ config GRETH_SGMII_PRESENT
     bool
     default y
 
-mainmenu "LEON3MP Design Configuration"
+# mainmenu_name "LEON3MP Design Configuration"
 
-menu "Options"
-comment "Synthesis      "
+# mainmenu_option next_comment
+#   comment 'Synthesis      '
 rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Board selection"
-# choice translation skipped
-	"ML505		CONFIG_BOARD_ML505 \
-	ML506  		CONFIG_BOARD_ML506 \
-	ML507  		CONFIG_BOARD_ML507 \
-	ML509  		CONFIG_BOARD_ML509" ML505
-endmenu
+# mainmenu_option next_comment
+#   comment 'Board selection'
+#     choice 'Board type                                     ' \
+# 	"ML505		CONFIG_BOARD_ML505 \
+# 	ML506  		CONFIG_BOARD_ML506 \
+# 	ML507  		CONFIG_BOARD_ML507 \
+# 	ML509  		CONFIG_BOARD_ML509" ML505
+# endmenu
 
-menu "Options"
-comment "Clock generation"
+# mainmenu_option next_comment
+#   comment 'Clock generation'
 rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
-endmenu
+# endmenu
 
 rsource "../../../../lib/gaisler/subsys/leon_dsu_stat_base.in.Kconfig"
 rsource "../../../../lib/gaisler/l2cache/l2c.in.Kconfig"
 rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
 
-menu "Options"
-comment "Debug Link           "
+# mainmenu_option next_comment
+#   comment 'Debug Link           '
 rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
 rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
 rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Peripherals             "
+# mainmenu_option next_comment
+# comment 'Peripherals             '
 
-menu "Options"
-comment "Memory controller             "
+#   mainmenu_option next_comment
+#   comment 'Memory controller             '
 rsource "../../../../lib/esa/memoryctrl/mctrl.in.Kconfig"
 rsource "../../../../lib/gaisler/ddr/mig.in.Kconfig"
 rsource "../../../../lib/gaisler/ddr/ddr2sp.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "On-chip RAM/ROM                 "
+#   mainmenu_option next_comment
+#   comment 'On-chip RAM/ROM                 '
 rsource "../../../../lib/gaisler/misc/ahbrom.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/ahbram.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "Ethernet             "
+#   mainmenu_option next_comment
+#   comment 'Ethernet             '
 rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "UART, timer, I2C, SysMon, I/O port and interrupt controller"
+#   mainmenu_option next_comment
+#   comment 'UART, timer, I2C, SysMon, I/O port and interrupt controller'
 rsource "../../../../lib/gaisler/uart/uart1.in.Kconfig"
 rsource "../../../../lib/gaisler/irqmp/irqmp.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/gptimer.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
 rsource "../../../../lib/gaisler/i2c/i2c.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/grsysmon.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "Keybord and VGA interface"
+#   mainmenu_option next_comment
+#   comment 'Keybord and VGA interface'
 rsource "../../../../lib/gaisler/misc/ps2vga.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "System ACE Interface Controller"
+#   mainmenu_option next_comment
+#   comment 'System ACE Interface Controller'
 rsource "../../../../lib/gaisler/misc/gracectrl.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "PCI EXPRESS"
+#   mainmenu_option next_comment
+#   comment 'PCI EXPRESS'
 rsource "../../../../lib/gaisler/pcie/pcie.in.Kconfig"
-endmenu
-endmenu
+#   endmenu
+# endmenu
 
-menu "Options"
-comment "VHDL Debugging        "
+# mainmenu_option next_comment
+# comment 'VHDL Debugging        '
 rsource "../../../../lib/grlib/util/debug.in.Kconfig"
-endmenu
+# endmenu

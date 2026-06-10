@@ -12,3 +12,29 @@ go_binary(
     embed = [":scripts_lib"],
     visibility = ["//visibility:public"],
 )
+
+go_library(
+    name = "in2kconfig_lib",
+    srcs = ["in2kconfig.go"],
+    importpath = "grlib/third_party/grlib/scripts/in2kconfig",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "in2kconfig",
+    embed = [":in2kconfig_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "gen_config_vhd_lib",
+    srcs = ["gen_config_vhd.go"],
+    importpath = "grlib/third_party/grlib/scripts/gen_config_vhd",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "gen_config_vhd",
+    embed = [":gen_config_vhd_lib"],
+    visibility = ["//visibility:public"],
+)

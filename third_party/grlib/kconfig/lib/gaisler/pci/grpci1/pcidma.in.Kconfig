@@ -1,4 +1,4 @@
-if y # TODO: improve if translation
+#   if [ "$CONFIG_PCI_MASTER_TARGET"  = "y" ]; then
 config PCI_MASTER_TARGET_DMA
     bool "PCI DMA controller               "
-endif
+#   fi

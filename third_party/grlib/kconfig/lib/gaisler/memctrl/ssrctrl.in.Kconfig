@@ -1,10 +1,10 @@
 
-menu "Options"
-comment "Synchronous SRAM controller   "
+#   mainmenu_option next_comment
+#   comment 'Synchronous SRAM controller   '
 config SSCTRL
     bool "Enable Synchronous SRAM controller    "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_SSCTRL" = "y" ]; then
 config SSCTRL_PROM16
     bool "Enable 16-bit PROM support            "
-endif
-endmenu
+#     fi
+#   endmenu

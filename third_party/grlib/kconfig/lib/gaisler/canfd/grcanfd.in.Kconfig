@@ -1,9 +1,9 @@
 config GRCANFD_ENABLE
     bool "Enable GRCANFD interface               "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_GRCANFD_ENABLE" = "y" ]; then
 config GRCANFDIRQ
     int "Interrupt number                      "
     default 13
 config GRCANFDSINGLE
     bool "Enable single common interrupt       "
-endif
+#     fi

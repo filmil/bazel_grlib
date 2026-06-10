@@ -6,7 +6,7 @@ filegroup(
     srcs = [
         "lib/grlib/stdlib/version.vhd",
         "lib/grlib/stdlib/config_types.vhd",
-        "lib/grlib/stdlib/config.vhd",
+        "@@//third_party/grlib:config.vhd",
         "lib/grlib/stdlib/stdlib.vhd",
         "lib/grlib/stdlib/stdio.vhd",
         "lib/grlib/stdlib/testlib.vhd",
@@ -466,6 +466,11 @@ filegroup(
         "lib/gaisler/l5nv/shared/tcmwrap5.vhd",
         "lib/gaisler/l5nv/shared/cachemem5.vhd",
         "lib/gaisler/l5nv/shared/snoopmem5.vhd",
+        "lib/gaisler/noelv/pkg/noelv.vhd",
+        "lib/gaisler/noelv/pkg/noelv_cfg_32.vhd",
+        "lib/gaisler/noelv/pkg/noelv_cfg_64.vhd",
+        "lib/gaisler/noelv/pkg/noelv_cpu_cfg.vhd",
+        "lib/gaisler/noelv/pkg/nvnlconfig.vhd",
         "lib/gaisler/noelv/core/utilnv.vhd",
         "lib/gaisler/noelv/core/noelvtypes.vhd",
         "lib/gaisler/noelv/core/noelvint.vhd",
@@ -512,10 +517,10 @@ vhdl_library(
     srcs = [":gaisler_files"],
     standard = "1993",
     deps = [
-        ":grlib",
         ":techmap",
         ":opencores",
         ":eth",
+        ":grlib",
     ],
     visibility = ["//visibility:public"],
 )
@@ -789,9 +794,9 @@ vhdl_library(
     srcs = [":testgrouppolito_files"],
     standard = "1993",
     deps = [
-        ":grlib",
         ":techmap",
         ":unisim",
+        ":grlib",
     ],
     visibility = ["//visibility:public"],
 )

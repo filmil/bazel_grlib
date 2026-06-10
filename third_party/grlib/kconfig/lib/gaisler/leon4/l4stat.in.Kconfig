@@ -1,10 +1,10 @@
 config STAT_ENABLE
     bool "Enable LEON4 Statistics Module       "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_L4S_ENABLE" = "y" ]; then
 config STAT_CNT
     int "Number of counters (1 - 64)           "
     default 4
 config STAT_NMAX
     int "Number of accumulative counters       "
     default 0
-endif
+#     fi

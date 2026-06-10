@@ -1,19 +1,19 @@
 #include "config.h"
 #include "tkconfig.h"
------------------------------------------------------------------------------
---  LEON3 Demonstration design test bench configuration
---  Copyright (C) 2009 Aeroflex Gaisler
-------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# --  LEON3 Demonstration design test bench configuration
+# --  Copyright (C) 2009 Aeroflex Gaisler
+# ------------------------------------------------------------------------------
 
 
-library techmap;
-use techmap.gencomp.all;
+# library techmap;
+# use techmap.gencomp.all;
 
-package config is
+# package config is
 
--- board options
+# -- board options
 
-  constant CFG_ADS_DAU_MEZZ : integer := CONFIG_ADS_FLASH_DAU_G;
+#   constant CFG_ADS_DAU_MEZZ : integer := CONFIG_ADS_FLASH_DAU_G;
 #include "config.vhd.h"
 
-end;
+# end;

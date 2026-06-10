@@ -120,6 +120,16 @@ func main() {
 				linesSyn, _ := readLines(filepath.Join(subdirPath, "vhdlsyn.txt"))
 				linesSim, _ := readLines(filepath.Join(subdirPath, "vhdlsim.txt"))
 
+				if len(linesSyn) == 0 && len(linesSim) == 0 {
+					// No source list files, try to glob all .vhd files in this subdir
+					entries, _ := os.ReadDir(subdirPath)
+					for _, entry := range entries {
+						if !entry.IsDir() && strings.HasSuffix(entry.Name(), ".vhd") {
+							linesSyn = append(linesSyn, entry.Name())
+						}
+					}
+				}
+
 				for _, fLine := range append(linesSyn, linesSim...) {
 					fLine = strings.TrimSpace(fLine)
 					if fLine == "" || strings.HasPrefix(fLine, "#") {
@@ -181,7 +191,13 @@ func main() {
 		fmt.Fprintf(gb, "    name = \"%s_files\",\n", libBase)
 		fmt.Fprintf(gb, "    srcs = [\n")
 		for _, f := range files {
-			fmt.Fprintf(gb, "        \"lib/%s/%s\",\n", lib, f.path)
+			filePath := fmt.Sprintf("lib/%s/%s", lib, f.path)
+			if filePath == "lib/grlib/stdlib/config.vhd" {
+				// Use the generated one instead
+				fmt.Fprintf(gb, "        \"@@//third_party/grlib:config.vhd\",\n")
+			} else {
+				fmt.Fprintf(gb, "        \"%s\",\n", filePath)
+			}
 		}
 		fmt.Fprintf(gb, "    ],\n")
 		fmt.Fprintf(gb, "    visibility = [\"//visibility:public\"],\n")

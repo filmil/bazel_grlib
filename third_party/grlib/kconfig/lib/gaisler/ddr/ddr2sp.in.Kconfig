@@ -1,40 +1,40 @@
 
-menu "Options"
-comment "DDR2 SDRAM controller             "
-if y # TODO: improve if translation
+#   mainmenu_option next_comment
+#   comment 'DDR2 SDRAM controller             '
+#     if [ "$CONFIG_MIG_DDR2" != "y" ]; then
 config DDR2SP
     bool "Enable DDR2 SDRAM controller       "
-if y # TODO: improve if translation
+#       if [ "$CONFIG_DDR2SP" = "y" ]; then
 config DDR2SP_INIT
     bool "Enable power-on initialization       "
 config DDR2SP_NOSYNC
     bool "DDR clock is aligned to system clock "
-if y # TODO: improve if translation
+#       if [ "$CONFIG_DDR2SP_NOSYNC" = "n" ]; then
 config DDR2SP_FREQ
     int "Memory frequency (MHz)  "
     default 100
-endif
+#       fi
 config DDR2SP_TRFC
     int "Refresh to Activate (tRFC) in ns  "
     default 130
-if y # TODO: improve if translation
+#       if [ "$CONFIG_DDR2SP_INIT" = "y" ]; then
 config DDR2SP_COL
     int "Column address bits (9 - 12)  "
     default 9
 config DDR2SP_MBYTE
     int "Chip select bank size (Mbyte) "
     default 16
-endif
+#       fi
 config DDR2SP_DATAWIDTH
     int "Data width (64, 32, 16) bit "
     default 64
 config DDR2SP_FTEN
     bool "Fault-tolerant DDR2 controller     "
-if y # TODO: improve if translation
+#       if [ "$CONFIG_DDR2SP_FTEN" = "y" ]; then
 config DDR2SP_FTWIDTH
     int "Checkbits width (32,16,8) bit "
     default 32
-endif
+#       fi
 config DDR2SP_DELAY0
     int "Input pad delay for bits 7:0 (0 - 63)"
     default 0
@@ -59,7 +59,7 @@ config DDR2SP_DELAY6
 config DDR2SP_DELAY7
     int "Input pad delay for bits 63:56 (0 - 63)"
     default 0
-if y # TODO: improve if translation
+#       if [ "$CONFIG_DDR2SP_FTEN" = "y" ]; then
 config DDR2SP_CBDELAY0
     int "Input pad delay for checkbits 7:0 (0 - 63)"
     default 0
@@ -72,7 +72,7 @@ config DDR2SP_CBDELAY2
 config DDR2SP_CBDELAY3
     int "Input pad delay for checkbits 31:24 (0 - 63)"
     default 0
-endif
-endif
-endif
-endmenu
+#       fi
+#       fi
+#     fi
+#   endmenu

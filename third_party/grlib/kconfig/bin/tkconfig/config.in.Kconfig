@@ -11,121 +11,121 @@ config PERI_LCONF
     bool
     default y
 
-mainmenu "LEON Processor Configuration"
+# mainmenu_name "LEON Processor Configuration"
 
-menu "Options"
-comment "Synthesis "
-# choice translation skipped
-	"Generic		CONFIG_SYN_GENERIC \
-	Atmel-ATC35		CONFIG_SYN_ATC35 \
-	Atmel-ATC25		CONFIG_SYN_ATC25 \
-	Atmel-ATC18		CONFIG_SYN_ATC18 \
-	UMC-FS90 		CONFIG_SYN_FS90 \
-	UMC-0.18 		CONFIG_SYN_UMC018 \
-	TSMC-0.25		CONFIG_SYN_TSMC025 \
-	Actel-Proasic		CONFIG_SYN_PROASIC \
-	Actel-Axcel  		CONFIG_SYN_AXCEL \
-	Xilinx-Virtex		CONFIG_SYN_VIRTEX \
-	Xilinx-Virtex2		CONFIG_SYN_VIRTEX2" Generic
-if y # TODO: improve if translation
+# mainmenu_option next_comment
+#   comment 'Synthesis '
+#   choice 'Target technology                           ' \
+# 	"Generic		CONFIG_SYN_GENERIC \
+# 	Atmel-ATC35		CONFIG_SYN_ATC35 \
+# 	Atmel-ATC25		CONFIG_SYN_ATC25 \
+# 	Atmel-ATC18		CONFIG_SYN_ATC18 \
+# 	UMC-FS90 		CONFIG_SYN_FS90 \
+# 	UMC-0.18 		CONFIG_SYN_UMC018 \
+# 	TSMC-0.25		CONFIG_SYN_TSMC025 \
+# 	Actel-Proasic		CONFIG_SYN_PROASIC \
+# 	Actel-Axcel  		CONFIG_SYN_AXCEL \
+# 	Xilinx-Virtex		CONFIG_SYN_VIRTEX \
+# 	Xilinx-Virtex2		CONFIG_SYN_VIRTEX2" Generic
+#   if [ "$CONFIG_SYN_GENERIC" != "y" ]; then
 config SYN_INFER_RAM
     bool "Infer cache and trace buffer RAM"
 config SYN_INFER_REGF
     bool "Infer register file"
-if y # TODO: improve if translation
+#     if [ "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y"]; then
 config SYN_INFER_ROM
     bool "Infer ROM"
-endif
-    if [ "$CONFIG_SYN_VIRTEX" != "y" -a "$CONFIG_SYN_AXCEL" != "y" \
-         -a "$CONFIG_SYN_VIRTEX2" != "y" -a "$CONFIG_SYN_PROASIC" != "y" ]; then
+#     fi
+#     if [ "$CONFIG_SYN_VIRTEX" != "y" -a "$CONFIG_SYN_AXCEL" != "y" \
+#          -a "$CONFIG_SYN_VIRTEX2" != "y" -a "$CONFIG_SYN_PROASIC" != "y" ]; then
 config SYN_INFER_PADS
     bool "Infer pads"
-endif
-if y # TODO: improve if translation
+#     fi
+#     if [ "$CONFIG_SYN_AXCEL" != "y" -a "$CONFIG_SYN_PROASIC" != "y" ]; then
 config SYN_INFER_PCI_PADS
     bool "Infer PCI pads"
-endif
-endif
+#     fi
+#   fi
 config SYN_INFER_MULT
     bool "Infer multiplier"
-  if [ "$CONFIG_SYN_GENERIC" = "y" -o "$CONFIG_SYN_VIRTEX" = "y" \
-     -o "$CONFIG_SYN_AXCEL" = "y" -o "$CONFIG_SYN_ATC25" = "y" \
-     -o "$CONFIG_SYN_INFER_REGF" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y"]; then
+#   if [ "$CONFIG_SYN_GENERIC" = "y" -o "$CONFIG_SYN_VIRTEX" = "y" \
+#      -o "$CONFIG_SYN_AXCEL" = "y" -o "$CONFIG_SYN_ATC25" = "y" \
+#      -o "$CONFIG_SYN_INFER_REGF" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y"]; then
 config SYN_RFTYPE
     bool "Improve register file write timing"
-endif
-  if [ "$CONFIG_SYN_ATC25" = "y" -o "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y"\
-       -o "$CONFIG_SYN_ATC18" = "y" -o "$CONFIG_SYN_TSMC025" = "y" ]; then
-if y # TODO: improve if translation
-      bool 'Use dual-port RAM for DSU trace buffer   ' \
-	CONFIG_SYN_TRACE_DPRAM $CONFIG_SYN_ATC25 $CONFIG_SYN_ATC18 \
-	$CONFIG_SYN_VIRTEX $CONFIG_SYN_TSMC025 $CONFIG_SYN_VIRTEX2
-endif
-endif
-endmenu
+#   fi
+#   if [ "$CONFIG_SYN_ATC25" = "y" -o "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y"\
+#        -o "$CONFIG_SYN_ATC18" = "y" -o "$CONFIG_SYN_TSMC025" = "y" ]; then
+#     if [ "$CONFIG_SYN_INFER_RAM" != "y" ]; then
+#       bool 'Use dual-port RAM for DSU trace buffer   ' \
+# 	CONFIG_SYN_TRACE_DPRAM $CONFIG_SYN_ATC25 $CONFIG_SYN_ATC18 \
+# 	$CONFIG_SYN_VIRTEX $CONFIG_SYN_TSMC025 $CONFIG_SYN_VIRTEX2
+#     fi
+#   fi
+# endmenu
 
-menu "Options"
-comment "Clock generation"
-if y # TODO: improve if translation
+#   mainmenu_option next_comment
+#     comment 'Clock generation'
+#     if [ "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y" ]; then
 config CLK_VIRTEX
     bool "Use Virtex CLKDLL for clock generation"
-endif
-if y # TODO: improve if translation
+#     fi
+#     if [ "$CONFIG_SYN_VIRTEX2" = "y" -a "$CONFIG_CLK_VIRTEX" != "y"]; then
 config CLK_VIRTEX2
     bool "Use Virtex-II DCM for clock generation"
-endif
-if y # TODO: improve if translation
-# choice translation skipped
-	"1/2		CONFIG_CLKDLL_1_2 \
-	1		CONFIG_CLKDLL_1_1 \
-	2		CONFIG_CLKDLL_2_1" 1
-endif
-if y # TODO: improve if translation
-# choice translation skipped
-	"2/3		CONFIG_DCM_2_3 \
-	3/4		CONFIG_DCM_3_4 \
-	4/5		CONFIG_DCM_4_5 \
-	1		CONFIG_DCM_1_1 \
-	5/4		CONFIG_DCM_5_4 \
-	4/3		CONFIG_DCM_4_3 \
-	3/2		CONFIG_DCM_3_2 \
-	5/3		CONFIG_DCM_5_3 \
-	2		CONFIG_DCM_2_1 \
-	3		CONFIG_DCM_3_1 \
-	4		CONFIG_DCM_4_1" 1
-endif
-if y # TODO: improve if translation
+#     fi
+#     if [ "$CONFIG_CLK_VIRTEX" = "y"]; then
+#       choice ' System clock multiplier (CLKDLL)' \
+# 	"1/2		CONFIG_CLKDLL_1_2 \
+# 	1		CONFIG_CLKDLL_1_1 \
+# 	2		CONFIG_CLKDLL_2_1" 1
+#     fi
+#     if [ "$CONFIG_CLK_VIRTEX2" = "y"]; then
+#       choice ' System clock multiplier (DCM)' \
+# 	"2/3		CONFIG_DCM_2_3 \
+# 	3/4		CONFIG_DCM_3_4 \
+# 	4/5		CONFIG_DCM_4_5 \
+# 	1		CONFIG_DCM_1_1 \
+# 	5/4		CONFIG_DCM_5_4 \
+# 	4/3		CONFIG_DCM_4_3 \
+# 	3/2		CONFIG_DCM_3_2 \
+# 	5/3		CONFIG_DCM_5_3 \
+# 	2		CONFIG_DCM_2_1 \
+# 	3		CONFIG_DCM_3_1 \
+# 	4		CONFIG_DCM_4_1" 1
+#     fi
+#     if [ "$CONFIG_SYN_AXCEL" = "y" ]; then
 config AXCEL_HCLKBUF
     bool "Use global clock pad (Actel AX)"
-endif
-if y # TODO: improve if translation
+#     fi
+#     if [ "$CONFIG_SYN_VIRTEX2" = "y" -o "$CONFIG_CLK_VIRTEX" = "y"]; then
 config PCI_DLL
     bool "Enable CLKDLL for PCI clock"
-endif
-if y # TODO: improve if translation
+#     fi
+#     if [ "$CONFIG_PCI_DLL" != "y" ]; then
 config PCI_SYSCLK
     bool "Use PCI clock as system clock"
-endif
-endmenu
+#     fi
+#   endmenu
 
-menu "Options"
-comment "Processor            "
-menu "Options"
-comment "Integer unit                                           "
+# mainmenu_option next_comment
+#   comment 'Processor            '
+#   mainmenu_option next_comment
+#   comment 'Integer unit                                           '
 config IU_NWINDOWS
     int "SPARC register windows"
     default 8
 config IU_V8MULDIV
     bool "SPARC V8 MUL/DIV instructions"
-if y # TODO: improve if translation
-# choice translation skipped
-	"1-cycle		CONFIG_IU_MUL_LATENCY_1 \
-	2-cycles		CONFIG_IU_MUL_LATENCY_2 \
-	4-cycles		CONFIG_IU_MUL_LATENCY_4 \
-	5-cycles		CONFIG_IU_MUL_LATENCY_5 \
-	35-cycles		CONFIG_IU_MUL_LATENCY_35" 5-cycles
-endif
-  dep_bool 'SPARC V8e SMAC/UMAC instructions     ' CONFIG_IU_MUL_MAC $CONFIG_IU_MUL_LATENCY_4 $CONFIG_IU_V8MULDIV
+#   if [ "$CONFIG_IU_V8MULDIV" = "y" ]; then
+#     choice 'Hardware multiplier latency' \
+# 	"1-cycle		CONFIG_IU_MUL_LATENCY_1 \
+# 	2-cycles		CONFIG_IU_MUL_LATENCY_2 \
+# 	4-cycles		CONFIG_IU_MUL_LATENCY_4 \
+# 	5-cycles		CONFIG_IU_MUL_LATENCY_5 \
+# 	35-cycles		CONFIG_IU_MUL_LATENCY_35" 5-cycles
+#   fi
+#   dep_bool 'SPARC V8e SMAC/UMAC instructions     ' CONFIG_IU_MUL_MAC $CONFIG_IU_MUL_LATENCY_4 $CONFIG_IU_V8MULDIV
 config IU_LDELAY
     int "Load delay"
     default 1
@@ -135,190 +135,190 @@ config IU_ICCHOLD
     bool "ICC interlock                  "
 config IU_FASTDECODE
     bool "Fast instruction decoding      "
-  if [ "$CONFIG_SYN_TSMC025" = "y" -o "$CONFIG_SYN_UMC018" = "y" \
-    -o "$CONFIG_SYN_FS90" = "y" -o "$CONFIG_SYN_PROASIC" = "y" \
-    -o "$CONFIG_SYN_ATC18" = "y" \
-    -o "$CONFIG_SYN_AXCEL" = "y" -o "$CONFIG_SYN_ATC25" = "y" ]; then
+#   if [ "$CONFIG_SYN_TSMC025" = "y" -o "$CONFIG_SYN_UMC018" = "y" \
+#     -o "$CONFIG_SYN_FS90" = "y" -o "$CONFIG_SYN_PROASIC" = "y" \
+#     -o "$CONFIG_SYN_ATC18" = "y" \
+#     -o "$CONFIG_SYN_AXCEL" = "y" -o "$CONFIG_SYN_ATC25" = "y" ]; then
 config IU_RFPOW
     bool "Register file power-saving     "
-endif
+#   fi
 config IU_WATCHPOINTS
     int "Hardware watchpoints"
     default 0
-endmenu
-menu "Options"
-comment "Floating-point unit"
+#   endmenu
+#   mainmenu_option next_comment
+#   comment 'Floating-point unit'
 config FPU_ENABLE
     bool "Enable FPU                             "
-if y # TODO: improve if translation
-# choice translation skipped
-	"GRFPU		CONFIG_FPU_GRFPU \
-	Meiko		CONFIG_FPU_MEIKO \
-	LTH		CONFIG_FPU_LTH" GRFPU
+#   if [ "$CONFIG_FPU_ENABLE" = "y" ]; then
+#     choice 'FPU core' \
+# 	"GRFPU		CONFIG_FPU_GRFPU \
+# 	Meiko		CONFIG_FPU_MEIKO \
+# 	LTH		CONFIG_FPU_LTH" GRFPU
 config FPU_VER
     int "FSR version ID"
     default 0
-endif
-endmenu
-menu "Options"
-comment "Co-processor"
+#   fi
+#   endmenu
+#   mainmenu_option next_comment
+#   comment 'Co-processor'
 config CP_ENABLE
     bool "Enable co-processor       "
-if y # TODO: improve if translation
-    string 'Co-processor configuration' CONFIG_CP_CFG "cp_none"
-endif
-endmenu
-menu "Options"
-comment "Cache system              "
-comment "Instruction cache                              "
-# choice translation skipped
-	"1		CONFIG_ICACHE_ASSO1 \
-	2		CONFIG_ICACHE_ASSO2 \
-	3		CONFIG_ICACHE_ASSO3 \
-	4		CONFIG_ICACHE_ASSO4" 1
-# choice translation skipped
-	"1		CONFIG_ICACHE_SZ1 \
-	2		CONFIG_ICACHE_SZ2 \
-	4		CONFIG_ICACHE_SZ4 \
-	8		CONFIG_ICACHE_SZ8 \
-	16		CONFIG_ICACHE_SZ16 \
-	32		CONFIG_ICACHE_SZ32 \
-	64		CONFIG_ICACHE_SZ64" 2
-# choice translation skipped
-	"16		CONFIG_ICACHE_LZ16 \
-	32		CONFIG_ICACHE_LZ32" 16
-if y # TODO: improve if translation
-# choice translation skipped
-	"Random		CONFIG_ICACHE_ALGORND \
-	LRR		CONFIG_ICACHE_ALGOLRR \
-	LRU		CONFIG_ICACHE_ALGOLRU" Random
+#   if [ "$CONFIG_CP_ENABLE" = "y" ]; then
+#     string 'Co-processor configuration' CONFIG_CP_CFG "cp_none"
+#   fi
+#   endmenu
+#   mainmenu_option next_comment
+#   comment 'Cache system              '
+#   comment 'Instruction cache                              '
+#   choice 'Associativity (sets)            ' \
+# 	"1		CONFIG_ICACHE_ASSO1 \
+# 	2		CONFIG_ICACHE_ASSO2 \
+# 	3		CONFIG_ICACHE_ASSO3 \
+# 	4		CONFIG_ICACHE_ASSO4" 1
+#   choice 'Set size (kbytes/set)' \
+# 	"1		CONFIG_ICACHE_SZ1 \
+# 	2		CONFIG_ICACHE_SZ2 \
+# 	4		CONFIG_ICACHE_SZ4 \
+# 	8		CONFIG_ICACHE_SZ8 \
+# 	16		CONFIG_ICACHE_SZ16 \
+# 	32		CONFIG_ICACHE_SZ32 \
+# 	64		CONFIG_ICACHE_SZ64" 2
+#   choice 'Line size (bytes/line)' \
+# 	"16		CONFIG_ICACHE_LZ16 \
+# 	32		CONFIG_ICACHE_LZ32" 16
+#   if [ "$CONFIG_ICACHE_ASSO1" != "y" ]; then
+#     choice 'Replacement alorithm' \
+# 	"Random		CONFIG_ICACHE_ALGORND \
+# 	LRR		CONFIG_ICACHE_ALGOLRR \
+# 	LRU		CONFIG_ICACHE_ALGOLRU" Random
 config ICACHE_LOCK
     bool "Cache locking      "
-endif
-comment "Data cache"
-# choice translation skipped
-	"1		CONFIG_DCACHE_ASSO1 \
-	2		CONFIG_DCACHE_ASSO2 \
-	3		CONFIG_DCACHE_ASSO3 \
-	4		CONFIG_DCACHE_ASSO4" 1
-# choice translation skipped
-	"1		CONFIG_DCACHE_SZ1 \
-	2		CONFIG_DCACHE_SZ2 \
-	4		CONFIG_DCACHE_SZ4 \
-	8		CONFIG_DCACHE_SZ8 \
-	16		CONFIG_DCACHE_SZ16 \
-	32		CONFIG_DCACHE_SZ32 \
-	64		CONFIG_DCACHE_SZ64" 2
-# choice translation skipped
-	"16		CONFIG_DCACHE_LZ16 \
-	32		CONFIG_DCACHE_LZ32" 16
-if y # TODO: improve if translation
-# choice translation skipped
-	"Random		CONFIG_DCACHE_ALGORND \
-	LRR		CONFIG_DCACHE_ALGOLRR \
-	LRU		CONFIG_DCACHE_ALGOLRU" Random
+#   fi
+#   comment 'Data cache'
+#   choice 'Associativity (sets)' \
+# 	"1		CONFIG_DCACHE_ASSO1 \
+# 	2		CONFIG_DCACHE_ASSO2 \
+# 	3		CONFIG_DCACHE_ASSO3 \
+# 	4		CONFIG_DCACHE_ASSO4" 1
+#   choice 'Set size (kbytes/set)' \
+# 	"1		CONFIG_DCACHE_SZ1 \
+# 	2		CONFIG_DCACHE_SZ2 \
+# 	4		CONFIG_DCACHE_SZ4 \
+# 	8		CONFIG_DCACHE_SZ8 \
+# 	16		CONFIG_DCACHE_SZ16 \
+# 	32		CONFIG_DCACHE_SZ32 \
+# 	64		CONFIG_DCACHE_SZ64" 2
+#   choice 'Line size (bytes/line)' \
+# 	"16		CONFIG_DCACHE_LZ16 \
+# 	32		CONFIG_DCACHE_LZ32" 16
+#   if [ "$CONFIG_DCACHE_ASSO1" != "y" ]; then
+#     choice 'Replacement alorithm' \
+# 	"Random		CONFIG_DCACHE_ALGORND \
+# 	LRR		CONFIG_DCACHE_ALGOLRR \
+# 	LRU		CONFIG_DCACHE_ALGOLRU" Random
 config DCACHE_LOCK
     bool "Cache locking      "
-endif
-  if [ "$CONFIG_SYN_ATC25" = "y" -o "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y" \
-	-o "$CONFIG_SYN_ATC18" = "y" -o "$CONFIG_SYN_TSMC025" = "y" ]; then
-if y # TODO: improve if translation
+#   fi
+#   if [ "$CONFIG_SYN_ATC25" = "y" -o "$CONFIG_SYN_VIRTEX" = "y" -o "$CONFIG_SYN_VIRTEX2" = "y" \
+# 	-o "$CONFIG_SYN_ATC18" = "y" -o "$CONFIG_SYN_TSMC025" = "y" ]; then
+#     if [ "$CONFIG_SYN_INFER_RAM" != "y" -a "$CONFIG_MMU_ENABLE" != "y" ]; then
 config DCACHE_SNOOP
     bool "AHB snooping       "
-endif
-endif
-if y # TODO: improve if translation
-# choice translation skipped
-	"Slow		CONFIG_DCACHE_SNOOP_SLOW \
-	Fast		CONFIG_DCACHE_SNOOP_FAST" Slow
-endif
-if y # TODO: improve if translation
+#     fi
+#   fi
+#   if [ "$CONFIG_DCACHE_SNOOP" = "y" ]; then
+#   choice 'Snoop implementation' \
+# 	"Slow		CONFIG_DCACHE_SNOOP_SLOW \
+# 	Fast		CONFIG_DCACHE_SNOOP_FAST" Slow
+#   fi
+#   if [ "$CONFIG_DCACHE_ASSO1" != "y" ]; then
 config DCACHE_RFAST
     bool "Fast read-data generation   "
-endif
-if y # TODO: improve if translation
+#   fi
+#   if [ "$CONFIG_DCACHE_ASSO1" != "y" ]; then
 config DCACHE_WFAST
     bool "Fast write-data generation   "
-endif
-if y # TODO: improve if translation
+#   fi
+#   if [ "$CONFIG_MMU_ENABLE" != "y" ]; then
 config DCACHE_LRAM
     bool "Enable local data RAM            "
-endif
-if y # TODO: improve if translation
-# choice translation skipped
-	"1		CONFIG_DCACHE_LRAM_SZ1 \
-	2		CONFIG_DCACHE_LRAM_SZ2 \
-	4		CONFIG_DCACHE_LRAM_SZ4 \
-	8		CONFIG_DCACHE_LRAM_SZ8 \
-	16		CONFIG_DCACHE_LRAM_SZ16 \
-	32		CONFIG_DCACHE_LRAM_SZ32 \
-	64		CONFIG_DCACHE_LRAM_SZ64" 2
+#   fi
+#     if [ "$CONFIG_DCACHE_LRAM" = "y" ]; then
+#       choice 'Local data RAM size (kbytes)' \
+# 	"1		CONFIG_DCACHE_LRAM_SZ1 \
+# 	2		CONFIG_DCACHE_LRAM_SZ2 \
+# 	4		CONFIG_DCACHE_LRAM_SZ4 \
+# 	8		CONFIG_DCACHE_LRAM_SZ8 \
+# 	16		CONFIG_DCACHE_LRAM_SZ16 \
+# 	32		CONFIG_DCACHE_LRAM_SZ32 \
+# 	64		CONFIG_DCACHE_LRAM_SZ64" 2
 config DCACHE_LRSTART
     hex " Local RAM start address (8 MSB) "
     default 0x8f
-endif
-endmenu
-menu "Options"
-comment "MMU"
+#     fi
+# endmenu
+#   mainmenu_option next_comment
+#   comment 'MMU'
 config MMU_ENABLE
     bool "Enable MMU       "
-if y # TODO: improve if translation
-# choice translation skipped
-	"combined	CONFIG_MMU_COMBINED \
-	 split		CONFIG_MMU_SPLIT" combined
-# choice translation skipped
-	"LRU      	CONFIG_MMU_REPARRAY \
-	 Increment	CONFIG_MMU_REPINCREMENT" increment 
-# choice translation skipped
-	"2		CONFIG_MMU_I2 \
-	4		CONFIG_MMU_I4 \
-	8		CONFIG_MMU_I8 \
-	16		CONFIG_MMU_I16 \
-	32		CONFIG_MMU_I32" 8
-if y # TODO: improve if translation
-# choice translation skipped
-	"2		CONFIG_MMU_D2 \
-	4		CONFIG_MMU_D4 \
-	8		CONFIG_MMU_D8 \
-	16		CONFIG_MMU_D16 \
-	32		CONFIG_MMU_D32" 8
-endif
+#   if [ "$CONFIG_MMU_ENABLE" = "y" ]; then
+#     choice 'MMU type              ' \
+# 	"combined	CONFIG_MMU_COMBINED \
+# 	 split		CONFIG_MMU_SPLIT" combined
+#     choice 'TLB replacement sheme              ' \
+# 	"LRU      	CONFIG_MMU_REPARRAY \
+# 	 Increment	CONFIG_MMU_REPINCREMENT" increment 
+#        choice 'Instruction (or combined) TLB entries' \
+# 	"2		CONFIG_MMU_I2 \
+# 	4		CONFIG_MMU_I4 \
+# 	8		CONFIG_MMU_I8 \
+# 	16		CONFIG_MMU_I16 \
+# 	32		CONFIG_MMU_I32" 8
+#     if [ "$CONFIG_MMU_SPLIT" = "y" ]; then
+#        choice 'Data TLB entries' \
+# 	"2		CONFIG_MMU_D2 \
+# 	4		CONFIG_MMU_D4 \
+# 	8		CONFIG_MMU_D8 \
+# 	16		CONFIG_MMU_D16 \
+# 	32		CONFIG_MMU_D32" 8
+#     fi         
 config MMU_DIAG
     bool "Enable Diagnostic Access       "
-endif
-endmenu
+#   fi
+#   endmenu
 
-menu "Options"
-comment "Debug support unit          "
+# mainmenu_option next_comment
+# comment 'Debug support unit          '
 config DSU_ENABLE
     bool "Debug support unit                       "
-if y # TODO: improve if translation
+#   if [ "$CONFIG_DSU_ENABLE" = "y" ]; then
 config DSU_TRACEBUF
     bool "Trace buffer"
-if y # TODO: improve if translation
+#     if [ "$CONFIG_DSU_TRACEBUF" = "y" ]; then
 config DSU_MIXED_TRACE
     bool "Mixed instruction/AHB tracing"
-# choice translation skipped
-	"64		CONFIG_DSU_TRACESZ64 \
-	128		CONFIG_DSU_TRACESZ128 \
-	256		CONFIG_DSU_TRACESZ256 \
-	512		CONFIG_DSU_TRACESZ512 \
-	1024		CONFIG_DSU_TRACESZ1024" 128
-endif
-endif
-endmenu
-endmenu
-menu "Options"
-comment "AMBA configuration"
+#       choice 'Trace buffer lines' \
+# 	"64		CONFIG_DSU_TRACESZ64 \
+# 	128		CONFIG_DSU_TRACESZ128 \
+# 	256		CONFIG_DSU_TRACESZ256 \
+# 	512		CONFIG_DSU_TRACESZ512 \
+# 	1024		CONFIG_DSU_TRACESZ1024" 128
+#     fi
+#   fi
+# endmenu
+# endmenu
+# mainmenu_option next_comment
+# comment 'AMBA configuration'
 config AHB_DEFMST
     int "Default AHB master"
     default 0
 config AHB_SPLIT
     bool "AHB split-transaction support             "
-endmenu
+# endmenu
 
-menu "Options"
-comment "Memory controller"
+# mainmenu_option next_comment
+# comment 'Memory controller'
 config MCTRL_8BIT
     bool "8-bit PROM/SRAM bus support    "
 config MCTRL_16BIT
@@ -331,44 +331,44 @@ config MCTRL_5CS
     bool "5th SRAM chip-select  "
 config MCTRL_SDRAM
     bool "SDRAM controller       "
-if y # TODO: improve if translation
+#   if [ "$CONFIG_MCTRL_SDRAM" = "y" ]; then
 config MCTRL_SDRAM_INVCLK
     bool "Inverted SDRAM clock"
 config MCTRL_SDRAM_SEPBUS
     bool "Separate address and data buses"
-endif
-endmenu
+#   fi
+# endmenu
 
-menu "Options"
-comment "Peripherals        "
+# mainmenu_option next_comment
+# comment 'Peripherals        '
 config PERI_LCONF
     bool "LEON configuration register       "
 config PERI_IRQ2
     bool "Secondary interrupt controller    "
-if y # TODO: improve if translation
-    string 'Sec. interrupt controller configuration       ' CONFIG_PERI_IRQ2_CFG "irq2none"
-endif
+#   if [ "$CONFIG_PERI_IRQ2" = "y" ]; then
+#     string 'Sec. interrupt controller configuration       ' CONFIG_PERI_IRQ2_CFG "irq2none"
+#   fi
 config PERI_WDOG
     bool "Watchdog                            "
 config PERI_AHBSTAT
     bool "AHB status register       "
 config AHBRAM_ENABLE
     bool "On-chip AHB RAM                   "
-if y # TODO: improve if translation
-# choice translation skipped
-	"1		CONFIG_AHBRAM_SZ1 \
-	2		CONFIG_AHBRAM_SZ2 \
-	4		CONFIG_AHBRAM_SZ4 \
-	8		CONFIG_AHBRAM_SZ8 \
-	16		CONFIG_AHBRAM_SZ16 \
-	32		CONFIG_AHBRAM_SZ32 \
-	64		CONFIG_AHBRAM_SZ64" 4
-endif
-menu "Options"
-comment "Ethernet interface          "
+#   if [ "$CONFIG_AHBRAM_ENABLE" = "y" ]; then
+#       choice 'AHB RAM size (Kbyte)' \
+# 	"1		CONFIG_AHBRAM_SZ1 \
+# 	2		CONFIG_AHBRAM_SZ2 \
+# 	4		CONFIG_AHBRAM_SZ4 \
+# 	8		CONFIG_AHBRAM_SZ8 \
+# 	16		CONFIG_AHBRAM_SZ16 \
+# 	32		CONFIG_AHBRAM_SZ32 \
+# 	64		CONFIG_AHBRAM_SZ64" 4
+#   fi
+# mainmenu_option next_comment
+# comment 'Ethernet interface          '
 config ETH_ENABLE
     bool "Enable Ethernet interface                 "
-if y # TODO: improve if translation
+#   if [ "$CONFIG_ETH_ENABLE" = "y" ]; then
 config ETH_TXFIFO
     int "TX FIFO depth"
     default 8
@@ -378,16 +378,16 @@ config ETH_RXFIFO
 config ETH_BURST
     int "AHB burst length"
     default 4
-endif
-endmenu
+#   fi
+# endmenu
 
-menu "Options"
-comment "PCI interface          "
+# mainmenu_option next_comment
+# comment 'PCI interface          '
 config PCI_ENABLE
     bool "Enable PCI interface                 "
-if y # TODO: improve if translation
-# choice translation skipped
-	"Simple-target		CONFIG_PCI_SIMPLE_TARGET" Simple-target
+#   if [ "$CONFIG_PCI_ENABLE" = "y" ]; then
+#     choice 'PCI core' \
+# 	"Simple-target		CONFIG_PCI_SIMPLE_TARGET" Simple-target
 config PCI_VENDORID
     hex "PCI vendor ID"
     default 16E3
@@ -397,38 +397,38 @@ config PCI_DEVICEID
 config PCI_REVID
     hex "PCI revision ID"
     default 1
-if y # TODO: improve if translation
-# choice translation skipped
-	"8		CONFIG_PCI_FIFO8     \
-	16		CONFIG_PCI_FIFO16      \
-	32		CONFIG_PCI_FIFO32      \
-	64		CONFIG_PCI_FIFO64      \
-	128 		CONFIG_PCI_FIFO128" 8
-endif
-if y # TODO: improve if translation
-# choice translation skipped
-	"256		CONFIG_PCI_TRACE256     \
-	512		CONFIG_PCI_TRACE512      \
-	1024		CONFIG_PCI_TRACE1024     \
-	2048		CONFIG_PCI_TRACE2048     \
-	4096 		CONFIG_PCI_TRACE4096" 256
-endif
+#     if [ "$CONFIG_PCI_FAST_TARGET" = "y" -o "$CONFIG_PCI_MASTER_TARGET" = "y" ]; then
+#       choice 'PCI FIFO depth' \
+# 	"8		CONFIG_PCI_FIFO8     \
+# 	16		CONFIG_PCI_FIFO16      \
+# 	32		CONFIG_PCI_FIFO32      \
+# 	64		CONFIG_PCI_FIFO64      \
+# 	128 		CONFIG_PCI_FIFO128" 8
+#     fi
+#     if [ "$CONFIG_PCI_TRACE" = "y" ]; then
+#       choice 'PCI trace buffer depth' \
+# 	"256		CONFIG_PCI_TRACE256     \
+# 	512		CONFIG_PCI_TRACE512      \
+# 	1024		CONFIG_PCI_TRACE1024     \
+# 	2048		CONFIG_PCI_TRACE2048     \
+# 	4096 		CONFIG_PCI_TRACE4096" 256
+#     fi
 config PCI_RESETALL
     bool "PCI reset affects complete processor"
 config PCI_ARBEN
     bool "PCI arbiter                         "
-endif
-endmenu
+#   fi
+# endmenu
 
-endmenu
+# endmenu
 
-menu "Options"
-comment "Boot options"
-# choice translation skipped
-	"Memory		CONFIG_BOOT_EXTPROM \
-	Internal-PROM		CONFIG_BOOT_INTPROM \
-	Both		CONFIG_BOOT_MIXPROM" Memory
-if y # TODO: improve if translation
+# mainmenu_option next_comment
+# comment 'Boot options'
+#   choice 'Boot selection            ' \
+# 	"Memory		CONFIG_BOOT_EXTPROM \
+# 	Internal-PROM		CONFIG_BOOT_INTPROM \
+# 	Both		CONFIG_BOOT_MIXPROM" Memory
+#   if [ "$CONFIG_BOOT_EXTPROM" != "y" ]; then
 config BOOT_RWS
     int "RAM read waitstates"
     default 0
@@ -446,27 +446,27 @@ config BOOT_EXTBAUD
 config BOOT_PROMABITS
     int "Internal boot PROM address bits"
     default 11
-endif
-endmenu
-menu "Options"
-comment "VHDL Debugging        "
+#   fi
+# endmenu
+# mainmenu_option next_comment
+# comment 'VHDL Debugging        '
 config DEBUG_UART
     bool "Accelerated UART tracing       "
 config DEBUG_IURF
     bool "Integer unit register writes       "
-  dep_bool 'Floating-point unit register writes       ' CONFIG_DEBUG_FPURF $CONFIG_FPU_ENABLE
+#   dep_bool 'Floating-point unit register writes       ' CONFIG_DEBUG_FPURF $CONFIG_FPU_ENABLE
 config DEBUG_NOHALT
     bool "Continue on reset trap       "
 config DEBUG_PC32
     bool "32-bit program counters       "
-if y # TODO: improve if translation
-if y # TODO: improve if translation
+#   if [ "$CONFIG_FT_ENABLE" = "y" ]; then
+#     if [ "$CONFIG_FT_RF_ENABLE" = "y" ]; then
 config DEBUG_RFERR
     bool "Inject register-file errors    "
-endif
-if y # TODO: improve if translation
+#     fi
+#     if [ "$CONFIG_FT_CACHEMEM_ENABLE" = "y" ]; then
 config DEBUG_CACHEMEMERR
     bool "Inject cache memory errors    "
-endif
-endif
-endmenu
+#     fi
+#   fi
+# endmenu

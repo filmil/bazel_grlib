@@ -1,8 +1,8 @@
-menu "Options"
-comment "SPI memory controller "
+#   mainmenu_option next_comment
+#   comment 'SPI memory controller '
 config SPIMCTRL
     bool "Enable SPI memory controller    "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_SPIMCTRL" = "y" ]; then
 config SPIMCTRL_READCMD
     hex "Read instruction    "
     default 0B
@@ -46,5 +46,5 @@ config SPIMCTRL_XIPBYTE
 config SPIMCTRL_XIPPOL
     int "XIP disable bit polarity  "
     default 1
-endif
-endmenu
+#     fi
+#   endmenu

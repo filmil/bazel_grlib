@@ -1,6 +1,16 @@
-# GRLIB Kconfig placeholder
-mainmenu "GRLIB Configuration"
+# GRLIB Kconfig Entry Point
+mainmenu "GRLIB Hardware Configuration"
 
-config GRLIB_DUMMY
-    bool "Dummy option"
-    default y
+config AHBDW
+    int "AHB Data Width"
+    default 32
+    help
+      Valid values are 32, 64, 128 and 256.
+
+config AHB_ACDM
+    int "Enable AMBA Compliant Data Muxing"
+    default 0
+    range 0 1
+
+# Source the main GRLIB configuration
+rsource "third_party/grlib/kconfig/bin/tkconfig/config.in.Kconfig"

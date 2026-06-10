@@ -1,75 +1,75 @@
 config SPWRTR_ENABLE
     bool "Enable Spacewire routing switch               "
-if y # TODO: improve if translation
-# choice translation skipped
-	"SDR       CONFIG_SPWRTR_RX_SDR	 \
-	 DDR       CONFIG_SPWRTR_RX_DDR   \
-         XOR       CONFIG_SPWRTR_RX_XOR \
-         XOR-ER1   CONFIG_SPWRTR_RX_XORER1 \
-         XOR-ER2   CONFIG_SPWRTR_RX_XORER2 \
-         Aeroflex  CONFIG_SPWRTR_RX_AFLEX " DDR
-# choice translation skipped
-        "SDR       CONFIG_SPW_TX_SDR	 \
-	 DDR       CONFIG_SPW_TX_DDR   \
-         Aeroflex  CONFIG_SPW_TX_AFLEX " SDR   
+#   if [ "$CONFIG_SPWRTR_ENABLE" = "y" ]; then
+#         choice 'Select SpaceWire link receiver input type ' \
+# 	"SDR       CONFIG_SPWRTR_RX_SDR	 \
+# 	 DDR       CONFIG_SPWRTR_RX_DDR   \
+#          XOR       CONFIG_SPWRTR_RX_XOR \
+#          XOR-ER1   CONFIG_SPWRTR_RX_XORER1 \
+#          XOR-ER2   CONFIG_SPWRTR_RX_XORER2 \
+#          Aeroflex  CONFIG_SPWRTR_RX_AFLEX " DDR
+#         choice 'Select SpaceWire link transmitter output type ' \
+#         "SDR       CONFIG_SPW_TX_SDR	 \
+# 	 DDR       CONFIG_SPW_TX_DDR   \
+#          Aeroflex  CONFIG_SPW_TX_AFLEX " SDR   
 config SPWRTR_RTSAME
     bool "SpaceWire link receiver and transmitter uses same clock  "
-# choice translation skipped
-	"16	CONFIG_SPWRTR_RXFIFO16	 \
-	 32	CONFIG_SPWRTR_RXFIFO32	 \
-         64	CONFIG_SPWRTR_RXFIFO64	 \
-         128	CONFIG_SPWRTR_RXFIFO128	 \
-         256	CONFIG_SPWRTR_RXFIFO256	 \
-         512	CONFIG_SPWRTR_RXFIFO512	 \
-         1024	CONFIG_SPWRTR_RXFIFO1024 \
-	 2048	CONFIG_SPWRTR_RXFIFO2048 " 64
+#         choice 'Port receiver and transmitter FIFO size (SpW characters) ' \
+# 	"16	CONFIG_SPWRTR_RXFIFO16	 \
+# 	 32	CONFIG_SPWRTR_RXFIFO32	 \
+#          64	CONFIG_SPWRTR_RXFIFO64	 \
+#          128	CONFIG_SPWRTR_RXFIFO128	 \
+#          256	CONFIG_SPWRTR_RXFIFO256	 \
+#          512	CONFIG_SPWRTR_RXFIFO512	 \
+#          1024	CONFIG_SPWRTR_RXFIFO1024 \
+# 	 2048	CONFIG_SPWRTR_RXFIFO2048 " 64
 config SPWRTR_TECHFIFO
     bool "Use technology specific RAM blocks for routing table and port FIFOs"
-# choice translation skipped
-        "NoFT   CONFIG_SPWRTR_FT_NOFT	 \
-	 Parity CONFIG_SPWRTR_FT_PAR   \
-         TMR    CONFIG_SPWRTR_FT_TMR " NoFT   
+#         choice 'Select SpaceWire RAM fault-tolerance ' \
+#         "NoFT   CONFIG_SPWRTR_FT_NOFT	 \
+# 	 Parity CONFIG_SPWRTR_FT_PAR   \
+#          TMR    CONFIG_SPWRTR_FT_TMR " NoFT   
 config SPWRTR_SPWEN
     bool "Enable Spacewire link ports "
-if y # TODO: improve if translation
+#         if [ "$CONFIG_SPWRTR_SPWEN" = "y" ]; then
 config SPWRTR_SPWPORTS
     int "Number of SpaceWire link ports (0 - 31)"
     default 2
-endif
+#         fi
 config SPWRTR_AMBAEN
     bool "Enable AMBA ports "
-if y # TODO: improve if translation
+#         if [ "$CONFIG_SPWRTR_AMBAEN" = "y" ]; then
 config SPWRTR_AMBAPORTS
     int "Number of AMBA ports (0 - 16)"
     default 0
-endif
+#         fi
 config SPWRTR_FIFOEN
     bool "Enable FIFO ports "
-if y # TODO: improve if translation
+#         if [ "$CONFIG_SPWRTR_FIFOEN" = "y" ]; then
 config SPWRTR_FIFOPORTS
     int "Number of FIFO ports (0 - 31)"
     default 0
-endif
-# choice translation skipped
-        "Round-robin CONFIG_SPWRTR_ARB_RR" Round-robin   
+#         fi
+#         choice 'Select port arbitration ' \
+#         "Round-robin CONFIG_SPWRTR_ARB_RR" Round-robin   
 config SPWRTR_RMAP
     bool "Enable hardware RMAP target in AMBA ports   "
-if y # TODO: improve if translation
-# choice translation skipped
-        	"64	CONFIG_SPWRTR_RMAPBUF2	 \
-	         128	CONFIG_SPWRTR_RMAPBUF4	 \
-        	 192	CONFIG_SPWRTR_RMAPBUF6	 \
-	         256	CONFIG_SPWRTR_RMAPBUF8" 64
-endif
+#         if [ "$CONFIG_SPWRTR_RMAP" = "y" ]; then
+#                 choice 'RMAP buffer size (bytes)    ' \
+#         	"64	CONFIG_SPWRTR_RMAPBUF2	 \
+# 	         128	CONFIG_SPWRTR_RMAPBUF4	 \
+#         	 192	CONFIG_SPWRTR_RMAPBUF6	 \
+# 	         256	CONFIG_SPWRTR_RMAPBUF8" 64
+#         fi
 config SPWRTR_RMAPCRC
     bool "Enable RMAP CRC support in AMBA ports  "
 config SPWRTR_RXUNAL
     bool "Enable Rx unaligned transfers in AMBA ports"
-# choice translation skipped
-	"4	CONFIG_SPWRTR_FIFO2_4	 \
-	 8	CONFIG_SPWRTR_FIFO2_8	 \
-	 16	CONFIG_SPWRTR_FIFO2_16	 \
-	 32	CONFIG_SPWRTR_FIFO2_32" 16
+#         choice 'AMBA port AHB RX/TX FIFO size (32-bit words)     ' \
+# 	"4	CONFIG_SPWRTR_FIFO2_4	 \
+# 	 8	CONFIG_SPWRTR_FIFO2_8	 \
+# 	 16	CONFIG_SPWRTR_FIFO2_16	 \
+# 	 32	CONFIG_SPWRTR_FIFO2_32" 16
 config SPWRTR_ALMOST
     int "FIFO port almost indication range"
     default 8
@@ -86,5 +86,5 @@ config SPWRTR_PNP
 config SPWRTR_AUTOSCRUB
     bool "Routing table Auto-scrubbing "
        
-endif
+#   fi
 

@@ -1,10 +1,10 @@
 config AHBROM_ENABLE
     bool "On-chip AHB ROM                   "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_AHBROM_ENABLE" = "y" ]; then
 config AHBROM_START
     hex "ROM start address (haddr[31:20]) "
     default 000
 config AHBROM_PIPE
     bool "Pipelined ROM access              "
-endif
+#     fi
 

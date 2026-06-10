@@ -12,39 +12,39 @@ config HAS_SHARED_GRFPU
     bool
     default y
 
-mainmenu "NOELV Design Configuration"
+# mainmenu_name "NOELV Design Configuration"
 
-menu "Options"
-comment "Synthesis      "
+# mainmenu_option next_comment
+#   comment 'Synthesis      '
 rsource "../../../../lib/techmap/gencomp/tech.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Clock generation"
+# mainmenu_option next_comment
+#   comment 'Clock generation'
 rsource "../../../../lib/techmap/clocks/clkgen.in.Kconfig"
-endmenu
+# endmenu
 
 rsource "../../../../lib/gaisler/noelv/noelv.in.Kconfig"
 rsource "../../../../lib/gaisler/l2cache/l2c.in.Kconfig"
 rsource "../../../../lib/grlib/amba/amba.in.Kconfig"
 
-menu "Options"
-comment "Debug Link           "
+# mainmenu_option next_comment
+#   comment 'Debug Link           '
 rsource "../../../../lib/gaisler/uart/dcom.in.Kconfig"
 rsource "../../../../lib/gaisler/jtag/jtag.in.Kconfig"
 #  source lib/gaisler/usb/grusb_dcl.in
 rsource "../../../../lib/gaisler/net/edcl.in.Kconfig"
-endmenu
+# endmenu
 
-menu "Options"
-comment "Peripherals             "
+# mainmenu_option next_comment
+# comment 'Peripherals             '
 
-menu "Options"
-comment "Memory controller             "
+#   mainmenu_option next_comment
+#   comment 'Memory controller             '
 #    source lib/esa/memoryctrl/mctrl.in
 rsource "../../../../lib/gaisler/ddr/mig_7series.in.Kconfig"
 rsource "../../../../lib/gaisler/misc/ahbstat.in.Kconfig"
-endmenu
+#   endmenu
 
 rsource "../../../../lib/gaisler/nandfctrl2/nandfctrl2.in.Kconfig"
 
@@ -54,46 +54,46 @@ rsource "../../../../lib/gaisler/nandfctrl2/nandfctrl2.in.Kconfig"
 #    source lib/gaisler/misc/ahbram.in
 #  endmenu
 
-menu "Options"
-comment "Ethernet             "
+#   mainmenu_option next_comment
+#   comment 'Ethernet             '
 rsource "../../../../lib/gaisler/greth/greth.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "UARTs, timers and irq control         "
+#   mainmenu_option next_comment
+#   comment 'UARTs, timers and irq control         '
 #    source lib/gaisler/uart/uart1.in
 #    source lib/gaisler/misc/gptimer.in
 rsource "../../../../lib/gaisler/misc/grgpio.in.Kconfig"
 #    source lib/gaisler/i2c/i2c.in
-endmenu
+#   endmenu
 
 #  mainmenu_option next_comment
 #  comment 'SPI'
 #    source lib/gaisler/spi/spictrl.in
 #  endmenu
 
-menu "Options"
-comment "SPW"
+#   mainmenu_option next_comment
+#   comment 'SPW'
     #source lib/gaisler/spacewire/spacewire.in
 rsource "../../../../lib/gaisler/spacewire/router.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "CANFD"
+#   mainmenu_option next_comment
+#   comment 'CANFD'
 rsource "../../../../lib/gaisler/canfd/grcanfd.in.Kconfig"
-endmenu
+#   endmenu
 
-menu "Options"
-comment "HSSL"
+#   mainmenu_option next_comment
+#   comment 'HSSL'
 rsource "../../../../lib/gaisler/hssl/hssl.in.Kconfig"
-endmenu
+#   endmenu
 
-endmenu
+# endmenu
 
-menu "Options"
-comment "VHDL Debugging        "
+# mainmenu_option next_comment
+# comment 'VHDL Debugging        '
 rsource "../../../../lib/grlib/util/debug.in.Kconfig"
-endmenu
+# endmenu
 
 #mainmenu_option next_comment
 #comment 'Version number        '

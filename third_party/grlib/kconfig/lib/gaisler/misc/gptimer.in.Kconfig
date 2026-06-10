@@ -1,6 +1,6 @@
 config GPT_ENABLE
     bool "Enable Timer Unit                    "
-if y # TODO: improve if translation
+#     if [ "$CONFIG_GPT_ENABLE" = "y" ]; then
 config GPT_NTIM
     int "Number of timers (1 - 7)              "
     default 2
@@ -17,9 +17,9 @@ config GPT_SEPIRQ
     bool "Separate interrupts                  "
 config GPT_WDOGEN
     bool "Watchdog enable                      "
-if y # TODO: improve if translation
+#       if [ "$CONFIG_GPT_WDOGEN" = "y" ]; then
 config GPT_WDOG
     hex "Initial watchdog time-out value       "
     default FFFF
-endif
-endif
+#       fi
+#     fi
