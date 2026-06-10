@@ -35,7 +35,7 @@ bazel build --@grlib_config//:CONFIG_LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS=16 //..
 
 ### Reference
 
-See `docs/example.bazelrc` for a full list of available namespaced parameters.
+See `docs/worked_example.md` for a step-by-step guide on customizing your build, and `docs/example.bazelrc` for a full list of available namespaced parameters.
 
 ## Usage
 
