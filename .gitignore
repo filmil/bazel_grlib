@@ -1,0 +1,13 @@
+# Bazel build artifacts
+/bazel-*
+
+# Local Bazel configuration
+.bazelrc.user
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "scripts_lib",
+    srcs = ["gen_build_files.go"],
+    importpath = "grlib/scripts",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "gen_build_files",
+    embed = [":scripts_lib"],
+    visibility = ["//visibility:public"],
+)
