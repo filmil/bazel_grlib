@@ -20,6 +20,7 @@ filegroup(
         "lib/grlib/util/util.vhd",
         "lib/grlib/sparc/sparc.vhd",
         "lib/grlib/sparc/sparc_disas.vhd",
+        "lib/grlib/sparc/cpu_disas.vhd",
         "lib/grlib/riscv/riscv.vhd",
         "lib/grlib/riscv/riscv_disas.vhd",
         "lib/grlib/riscv/cpu_disas.vhd",
@@ -190,10 +191,7 @@ vhdl_library(
 filegroup(
     name = "gaisler_files",
     # do not sort
-    srcs = select({
-        "@@//:NOELV_RV64": ["lib/gaisler/noelv/pkg/noelv_cfg_64.vhd"],
-        "//conditions:default": ["lib/gaisler/noelv/pkg/noelv_cfg_32.vhd"],
-    }) + [
+    srcs = [
         "lib/gaisler/arith/arith.vhd",
         "lib/gaisler/arith/mul32.vhd",
         "lib/gaisler/arith/div32.vhd",
@@ -484,8 +482,8 @@ filegroup(
         "lib/gaisler/l5nv/shared/tcmwrap5.vhd",
         "lib/gaisler/l5nv/shared/cachemem5.vhd",
         "lib/gaisler/l5nv/shared/snoopmem5.vhd",
-        "lib/gaisler/noelv/pkg/noelv.vhd",
         "lib/gaisler/noelv/pkg/noelv_cpu_cfg.vhd",
+        "lib/gaisler/noelv/pkg/noelv.vhd",
         "lib/gaisler/noelv/pkg/nvnlconfig.vhd",
         "lib/gaisler/noelv/core/utilnv.vhd",
         "lib/gaisler/noelv/core/noelvtypes.vhd",
