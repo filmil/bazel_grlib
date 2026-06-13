@@ -53,12 +53,11 @@ http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "ht
 
 register_toolchains("//build/nvc:nvc_linux_toolchain")
 
-local_nvc = use_repo_rule("//internal:local_nvc.bzl", "local_nvc")
+patched_nvc = use_repo_rule("//internal:patched_nvc.bzl", "patched_nvc")
 
-local_nvc(
+patched_nvc(
     name = "nvc_deb_24_04",
-    nvc_binary_path = "/home/filmil/tmp/ai/grlib-and-nvc/nvc/build/bin/nvc",
-    nvc_lib_dir = "/home/filmil/tmp/ai/grlib-and-nvc/nvc/build/lib",
+    patch = "//third_party/nvc:nvc_grlib.patch",
 )
 
 bazel_dep(name = "portable_cc_toolchain", version = "2025.12.16", dev_dependency = True)

@@ -1,5 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
+exports_files(["nvc_grlib.patch"])
+
 filegroup(
     name = "nvc_repo",
     srcs = ["@nvc_deb_24_04//:all_files"],
