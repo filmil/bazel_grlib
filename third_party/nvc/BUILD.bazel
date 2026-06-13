@@ -1,0 +1,2 @@
+# This file marks this directory as a package for Bazel Bzlmod patches.
+exports_files(["issue1537_lower.patch"])

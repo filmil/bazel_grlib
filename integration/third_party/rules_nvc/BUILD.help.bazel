@@ -1,0 +1,2 @@
+load(":help.bzl", "verilator_help")
+verilator_help(name = "help")

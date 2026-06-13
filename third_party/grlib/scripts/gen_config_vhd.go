@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
 )
 
@@ -51,40 +52,55 @@ func main() {
 	fmt.Fprintln(df, "")
 	fmt.Fprintln(df, "package config is")
 
-	re := regexp.MustCompile(`^#define\s+(CONFIG_[a-zA-Z0-9_]+)\s+(.*)$`)
-	reHex := regexp.MustCompile(`^[0-9a-fA-F]+$`)
+	reDef := regexp.MustCompile(`^#define\s+(CONFIG_[a-zA-Z0-9_]+)\s+(.*)$`)
 	
 	defs := make(map[string]string)
 	
 	scanner := bufio.NewScanner(sf)
 	for scanner.Scan() {
 		line := scanner.Text()
-		match := re.FindStringSubmatch(line)
+		match := reDef.FindStringSubmatch(line)
 		if len(match) > 2 {
 			name := match[1]
 			val := strings.TrimSpace(match[2])
-			// If it's a string literal, we keep the quotes for later type detection
 			defs[name] = val
 		}
 	}
 
-	// 1. Output all namespaced symbols
-	fmt.Fprintln(df, "  -- Namespaced symbols")
-	for name, val := range defs {
+	// 1. Output root symbols
+	fmt.Fprintln(df, "  -- Root symbols")
+	var rootNames []string
+	for name := range defs {
+		if !strings.HasPrefix(name, "CONFIG_LIB_") && !strings.HasPrefix(name, "CONFIG_DESIGNS_") && !strings.HasPrefix(name, "CONFIG_BIN_") {
+			rootNames = append(rootNames, name)
+		}
+	}
+	sort.Strings(rootNames)
+	for _, name := range rootNames {
 		cfgName := strings.Replace(name, "CONFIG_", "CFG_", 1)
-		outputVHDLConstant(df, cfgName, val, reHex)
+		outputVHDLConstant(df, cfgName, defs[name])
 	}
 
-	// 2. Promote selected design symbols to generic names
+	// 2. Promote selected design symbols
 	if prefix != "" {
 		fmt.Fprintf(df, "\n  -- Promoted symbols for prefix: %s\n", prefix)
 		fullPrefix := "CONFIG_" + prefix + "_"
-		for name, val := range defs {
+		promoted := make(map[string]bool)
+		
+		var allNames []string
+		for name := range defs { allNames = append(allNames, name) }
+		sort.Strings(allNames)
+
+		for _, name := range allNames {
 			if strings.HasPrefix(name, fullPrefix) {
 				genericName := "CFG_" + strings.TrimPrefix(name, fullPrefix)
-				// Strip numeric uniqueness suffix
 				genericName = regexp.MustCompile(`_[0-9]+$`).ReplaceAllString(genericName, "")
-				outputVHDLConstant(df, genericName, val, reHex)
+				
+				if !promoted[genericName] {
+					fmt.Fprintf(df, "  -- Promoted from %s\n", name)
+					outputVHDLConstant(df, genericName, defs[name])
+					promoted[genericName] = true
+				}
 			}
 		}
 	}
@@ -92,13 +108,28 @@ func main() {
 	// Add the mandatory GRLIB_CONFIG_ARRAY
 	fmt.Fprintln(df, "")
 	fmt.Fprintln(df, "  constant GRLIB_CONFIG_ARRAY : grlib_config_array_type := (")
+	
+	getVal := func(name string, def int) int {
+		if val, ok := defs["CONFIG_"+name]; ok {
+			if val == "y" || val == "1" { return 1 }
+			return 0
+		}
+		return def
+	}
+
+	fmt.Fprintf(df, "    4 => %d, -- grlib_sync_reset_enable_all\n", getVal("SYNC_RESET_ENABLE_ALL", 0))
+	fmt.Fprintf(df, "    5 => %d, -- grlib_async_reset_enable\n", getVal("ASYNC_RESET_ENABLE", 0))
+	fmt.Fprintf(df, "    9 => %d, -- grlib_amba_inc_nirq\n", getVal("AMBA_INC_NIRQ", 0))
+	fmt.Fprintf(df, "    10 => %d, -- grlib_little_endian\n", getVal("LITTLE_ENDIAN", 0))
 	fmt.Fprintln(df, "    others => 0);")
 	fmt.Fprintln(df, "")
 	fmt.Fprintln(df, "end;")
 }
 
-func outputVHDLConstant(df io.Writer, name, val string, reHex *regexp.Regexp) {
-	// If the name is CFG_ACTIVE_DESIGN_PREFIX, don't output as integer
+var reHexOnly = regexp.MustCompile(`^[0-9a-fA-F]+$`)
+var reHasAlpha = regexp.MustCompile(`[a-fA-F]`)
+
+func outputVHDLConstant(df io.Writer, name, val string) {
 	if name == "CFG_ACTIVE_DESIGN_PREFIX" {
 		fmt.Fprintf(df, "  constant %s : string := %s;\n", name, val)
 		return
@@ -110,17 +141,16 @@ func outputVHDLConstant(df io.Writer, name, val string, reHex *regexp.Regexp) {
 		fmt.Fprintf(df, "  constant %s : integer := %s;\n", name, trimmedVal)
 	} else if strings.HasPrefix(trimmedVal, "0x") {
 		fmt.Fprintf(df, "  constant %s : integer := 16#%s#;\n", name, strings.TrimPrefix(trimmedVal, "0x"))
-	} else if reHex.MatchString(trimmedVal) && len(trimmedVal) > 1 {
+	} else if reHexOnly.MatchString(trimmedVal) && len(trimmedVal) > 1 && reHasAlpha.MatchString(trimmedVal) {
 		fmt.Fprintf(df, "  constant %s : integer := 16#%s#;\n", name, trimmedVal)
 	} else if trimmedVal == "y" {
 		fmt.Fprintf(df, "  constant %s : integer := 1;\n", name)
 	} else if trimmedVal == "n" {
 		fmt.Fprintf(df, "  constant %s : integer := 0;\n", name)
 	} else if strings.HasPrefix(val, "\"") && strings.HasSuffix(val, "\"") {
-		// String literal
 		fmt.Fprintf(df, "  constant %s : string := %s;\n", name, val)
 	} else {
-		// Try parsing as integer
+		// Assume decimal integer
 		fmt.Fprintf(df, "  constant %s : integer := %s;\n", name, trimmedVal)
 	}
 }

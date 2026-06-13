@@ -37,6 +37,11 @@ func main() {
 	fmt.Fprintln(rootKconfig, "    default \"\"")
 	fmt.Fprintln(rootKconfig, "")
 
+	fmt.Fprintln(rootKconfig, "config NOELV_RV64")
+	fmt.Fprintln(rootKconfig, "    bool \"Build NOEL-V as 64-bit\"")
+	fmt.Fprintln(rootKconfig, "    default y")
+	fmt.Fprintln(rootKconfig, "")
+
 	err = filepath.Walk("third_party/grlib/kconfig", func(path string, info os.FileInfo, err error) error {
 		if err != nil { return err }
 		if !info.IsDir() && strings.HasSuffix(path, ".Kconfig") {

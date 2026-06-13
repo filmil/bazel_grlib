@@ -15,7 +15,7 @@ config LIB_GAISLER_NOELV_NOELV_NOELV_XLEN
     int
     default 32
 #     else
-config LIB_GAISLER_NOELV_NOELV_NOELV_XLEN_2
+config LIB_GAISLER_NOELV_NOELV_NOELV_XLEN
     int
     default 64
 #     fi
@@ -58,53 +58,53 @@ config LIB_GAISLER_NOELV_NOELV_PROC_S
     default 0
 #    fi
 #    if [ "$CONFIG_NOELV_GP" = "y" ]; then
-config LIB_GAISLER_NOELV_NOELV_PROC_TYP_2
+config LIB_GAISLER_NOELV_NOELV_PROC_TYP
     int
     default 3
-config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU_2
+config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU
     int
     default 0
 #     if [ "$CONFIG_NOELV_LITE" = "y" ]; then
-config LIB_GAISLER_NOELV_NOELV_PROC_LITE_2
+config LIB_GAISLER_NOELV_NOELV_PROC_LITE
     int
     default 1
 #     else
-config LIB_GAISLER_NOELV_NOELV_PROC_LITE_3
+config LIB_GAISLER_NOELV_NOELV_PROC_LITE
     int
     default 0
 #     fi
 #     if [ "$CONFIG_NOELV_SISSUE" = "y" ]; then
-config LIB_GAISLER_NOELV_NOELV_PROC_S_2
+config LIB_GAISLER_NOELV_NOELV_PROC_S
     int
     default 1
 #     else
-config LIB_GAISLER_NOELV_NOELV_PROC_S_3
+config LIB_GAISLER_NOELV_NOELV_PROC_S
     int
     default 0
 #     fi
 #    fi
 #    if [ "$CONFIG_NOELV_MC" = "y" ]; then
-config LIB_GAISLER_NOELV_NOELV_PROC_TYP_3
+config LIB_GAISLER_NOELV_NOELV_PROC_TYP
     int
     default 2
-config LIB_GAISLER_NOELV_NOELV_PROC_S_4
+config LIB_GAISLER_NOELV_NOELV_PROC_S
     int
     default 1
 #     if [ "$CONFIG_NOELV_LITE" = "y" ]; then
-config LIB_GAISLER_NOELV_NOELV_PROC_LITE_4
+config LIB_GAISLER_NOELV_NOELV_PROC_LITE
     int
     default 1
 #     else
-config LIB_GAISLER_NOELV_NOELV_PROC_LITE_5
+config LIB_GAISLER_NOELV_NOELV_PROC_LITE
     int
     default 0
 #     fi
 #     if [ "$CONFIG_NOELV_FPU" = "y" ]; then
-config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU_3
+config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU
     int
     default 0
 #     else
-config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU_4
+config LIB_GAISLER_NOELV_NOELV_PROC_NOFPU
     int
     default 1
 #     fi

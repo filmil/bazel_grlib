@@ -5,6 +5,54 @@ load("@rules_shell//shell:sh_test.bzl", "sh_test")
 # gazelle:prefix grlib
 gazelle(name = "gazelle")
 
+exports_files(["Kconfig"])
+
+# Export Kconfig settings as aliases for external modules
+alias(
+    name = "CONFIG_NOELV_RV64",
+    actual = "@grlib_config//:CONFIG_NOELV_RV64",
+    visibility = ["//visibility:public"],
+)
+
+config_setting(
+    name = "NOELV_RV64_SETTING",
+    flag_values = {
+        ":CONFIG_NOELV_RV64": "True",
+    },
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "NOELV_RV64",
+    actual = ":NOELV_RV64_SETTING",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "ACTIVE_DESIGN_PREFIX",
+    actual = "@grlib_config//:CONFIG_ACTIVE_DESIGN_PREFIX",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "grlib",
+    actual = "@grlib_srcs//:grlib",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "gaisler",
+    actual = "@grlib_srcs//:gaisler",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "techmap",
+    actual = "@grlib_srcs//:techmap",
+    visibility = ["//visibility:public"],
+)
+
+# Maintenance targets
 sh_binary(
     name = "maintain",
     srcs = ["maintain.sh"],
@@ -20,11 +68,11 @@ sh_binary(
     data = [
         "maintain.sh",
         "//third_party/grlib/scripts:gen_build_files",
-        "//third_party/grlib/scripts:in2kconfig",
-        "//third_party/grlib/scripts:gen_master_kconfig",
         "//third_party/grlib/scripts:gen_example_bazelrc",
-        "//third_party/grlib/scripts:vhd_preprocess",
+        "//third_party/grlib/scripts:gen_master_kconfig",
+        "//third_party/grlib/scripts:in2kconfig",
         "//third_party/grlib/scripts:maintain",
+        "//third_party/grlib/scripts:vhd_preprocess",
         "@grlib_srcs//:grlib_srcs_all",
         "@python_3_12_host//:python",
         "//third_party/grlib:kconfig_all",
@@ -49,8 +97,8 @@ sh_test(
         "//third_party/grlib/scripts:in2kconfig",
         "//third_party/grlib/scripts:gen_master_kconfig",
         "//third_party/grlib/scripts:gen_example_bazelrc",
-        "//third_party/grlib/scripts:vhd_preprocess",
         "//third_party/grlib/scripts:maintain",
+        "//third_party/grlib/scripts:vhd_preprocess",
         "@grlib_srcs//:grlib_srcs_all",
         "//third_party/grlib:grlib.BUILD",
         "@python_3_12_host//:python",

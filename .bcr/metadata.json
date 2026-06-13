@@ -1,0 +1,13 @@
+{
+    "homepage": "https://github.com/filmil/bazel_grlib",
+    "maintainers": [
+        {
+            "email": "filmil@gmail.com",
+            "github": "filmil",
+            "name": "Filip Filmar"
+        }
+    ],
+    "versions": [
+        "1.0.0"
+    ]
+}

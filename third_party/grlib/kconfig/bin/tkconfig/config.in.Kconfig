@@ -341,7 +341,7 @@ config BIN_TKCONFIG_CONFIG_MCTRL_SDRAM_SEPBUS
 
 # mainmenu_option next_comment
 # comment 'Peripherals        '
-config BIN_TKCONFIG_CONFIG_PERI_LCONF_2
+config BIN_TKCONFIG_CONFIG_PERI_LCONF
     bool "LEON configuration register       "
 config BIN_TKCONFIG_CONFIG_PERI_IRQ2
     bool "Secondary interrupt controller    "

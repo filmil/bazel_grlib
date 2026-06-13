@@ -105,10 +105,10 @@ config LIB_GAISLER_LEON3_LEON3_REX
     default n
 #   fi
 #   if [ "$CONFIG_LEON3_GP" = "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS_2
+config LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS
     int
     default 8
-config LIB_GAISLER_LEON3_LEON3_IU_V8MULDIV_2
+config LIB_GAISLER_LEON3_LEON3_IU_V8MULDIV
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_IU_MUL_LATENCY_5
@@ -117,28 +117,28 @@ config LIB_GAISLER_LEON3_LEON3_IU_MUL_LATENCY_5
 config LIB_GAISLER_LEON3_LEON3_IU_MUL_MAC
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_IU_BP_2
+config LIB_GAISLER_LEON3_LEON3_IU_BP
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_IU_SVT_2
+config LIB_GAISLER_LEON3_LEON3_IU_SVT
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_IU_LDELAY_2
+config LIB_GAISLER_LEON3_LEON3_IU_LDELAY
     int
     default 1
-config LIB_GAISLER_LEON3_LEON3_IU_WATCHPOINTS_2
+config LIB_GAISLER_LEON3_LEON3_IU_WATCHPOINTS
     int
     default 2
-config LIB_GAISLER_LEON3_LEON3_PWD_2
+config LIB_GAISLER_LEON3_LEON3_PWD
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_IU_RSTADDR_2
+config LIB_GAISLER_LEON3_LEON3_IU_RSTADDR
     hex
     default 00000
-config LIB_GAISLER_LEON3_LEON3_FPU_ENABLE_2
+config LIB_GAISLER_LEON3_LEON3_FPU_ENABLE
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_ICACHE_ENABLE_2
+config LIB_GAISLER_LEON3_LEON3_ICACHE_ENABLE
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_ICACHE_ASSO2
@@ -147,19 +147,19 @@ config LIB_GAISLER_LEON3_LEON3_ICACHE_ASSO2
 config LIB_GAISLER_LEON3_LEON3_ICACHE_SZ4
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ICACHE_LZ16_2
+config LIB_GAISLER_LEON3_LEON3_ICACHE_LZ16
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ICACHE_ALGORND_2
+config LIB_GAISLER_LEON3_LEON3_ICACHE_ALGORND
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ICACHE_LOCK_2
+config LIB_GAISLER_LEON3_LEON3_ICACHE_LOCK
     bool
     default n
 config LIB_GAISLER_LEON3_LEON3_ICACHE_LRAM
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_DCACHE_ENABLE_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_ENABLE
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_DCACHE_ASSO2
@@ -168,16 +168,16 @@ config LIB_GAISLER_LEON3_LEON3_DCACHE_ASSO2
 config LIB_GAISLER_LEON3_LEON3_DCACHE_SZ4
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DCACHE_LZ16_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_LZ16
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DCACHE_ALGORND_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_ALGORND
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DCACHE_LOCK_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_LOCK
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SEPTAG
@@ -186,16 +186,16 @@ config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SEPTAG
 config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SP
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_CACHE_FIXED_2
+config LIB_GAISLER_LEON3_LEON3_CACHE_FIXED
     hex
     default 0
 config LIB_GAISLER_LEON3_LEON3_DCACHE_LRAM
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_MMU_ENABLE_2
+config LIB_GAISLER_LEON3_LEON3_MMU_ENABLE
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_MMU_SV_2
+config LIB_GAISLER_LEON3_LEON3_MMU_SV
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_MMU_SPLIT
@@ -216,7 +216,7 @@ config LIB_GAISLER_LEON3_LEON3_MMU_FASTWB
 config LIB_GAISLER_LEON3_LEON3_MMU_PAGE_4K
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DSU_ENABLE_2
+config LIB_GAISLER_LEON3_LEON3_DSU_ENABLE
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_DSU_ITRACE
@@ -228,51 +228,51 @@ config LIB_GAISLER_LEON3_LEON3_DSU_ITRACESZ4
 config LIB_GAISLER_LEON3_LEON3_DSU_ATRACESZ4
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_NP_ASI_2
+config LIB_GAISLER_LEON3_LEON3_NP_ASI
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_PWRPSR_2
+config LIB_GAISLER_LEON3_LEON3_PWRPSR
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ALTWIN_2
+config LIB_GAISLER_LEON3_LEON3_ALTWIN
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_REX_2
+config LIB_GAISLER_LEON3_LEON3_REX
     bool
     default n
 #   fi
 #   if [ "$CONFIG_LEON3_HP" = "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS_3
+config LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS
     int
     default 8
-config LIB_GAISLER_LEON3_LEON3_IU_V8MULDIV_3
+config LIB_GAISLER_LEON3_LEON3_IU_V8MULDIV
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_IU_MUL_LATENCY_2
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_IU_MUL_MAC_2
+config LIB_GAISLER_LEON3_LEON3_IU_MUL_MAC
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_IU_BP_3
+config LIB_GAISLER_LEON3_LEON3_IU_BP
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_IU_SVT_3
+config LIB_GAISLER_LEON3_LEON3_IU_SVT
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_IU_LDELAY_3
+config LIB_GAISLER_LEON3_LEON3_IU_LDELAY
     int
     default 1
-config LIB_GAISLER_LEON3_LEON3_IU_WATCHPOINTS_3
+config LIB_GAISLER_LEON3_LEON3_IU_WATCHPOINTS
     int
     default 4
-config LIB_GAISLER_LEON3_LEON3_PWD_3
+config LIB_GAISLER_LEON3_LEON3_PWD
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_IU_RSTADDR_3
+config LIB_GAISLER_LEON3_LEON3_IU_RSTADDR
     hex
     default 00000
-config LIB_GAISLER_LEON3_LEON3_FPU_ENABLE_3
+config LIB_GAISLER_LEON3_LEON3_FPU_ENABLE
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_FPU_GRFPU
@@ -281,70 +281,70 @@ config LIB_GAISLER_LEON3_LEON3_FPU_GRFPU
 config LIB_GAISLER_LEON3_LEON3_FPU_GRFPU_INFMUL
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ICACHE_ENABLE_3
+config LIB_GAISLER_LEON3_LEON3_ICACHE_ENABLE
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ICACHE_ASSO2_2
+config LIB_GAISLER_LEON3_LEON3_ICACHE_ASSO2
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ICACHE_SZ4_2
+config LIB_GAISLER_LEON3_LEON3_ICACHE_SZ4
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ICACHE_LZ16_3
+config LIB_GAISLER_LEON3_LEON3_ICACHE_LZ16
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_ICACHE_ALGOLRU
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ICACHE_LOCK_3
+config LIB_GAISLER_LEON3_LEON3_ICACHE_LOCK
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_ICACHE_LRAM_2
+config LIB_GAISLER_LEON3_LEON3_ICACHE_LRAM
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_DCACHE_ENABLE_3
+config LIB_GAISLER_LEON3_LEON3_DCACHE_ENABLE
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DCACHE_ASSO2_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_ASSO2
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DCACHE_SZ4_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_SZ4
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DCACHE_LZ16_3
+config LIB_GAISLER_LEON3_LEON3_DCACHE_LZ16
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_DCACHE_ALGOLRU
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DCACHE_LOCK_3
+config LIB_GAISLER_LEON3_LEON3_DCACHE_LOCK
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_3
+config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SEPTAG_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SEPTAG
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SP_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SP
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_CACHE_FIXED_3
+config LIB_GAISLER_LEON3_LEON3_CACHE_FIXED
     hex
     default 0
-config LIB_GAISLER_LEON3_LEON3_DCACHE_LRAM_2
+config LIB_GAISLER_LEON3_LEON3_DCACHE_LRAM
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_MMU_ENABLE_3
+config LIB_GAISLER_LEON3_LEON3_MMU_ENABLE
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_MMU_SV_3
+config LIB_GAISLER_LEON3_LEON3_MMU_SV
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_MMU_SPLIT_2
+config LIB_GAISLER_LEON3_LEON3_MMU_SPLIT
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_MMU_REPARRAY_2
+config LIB_GAISLER_LEON3_LEON3_MMU_REPARRAY
     bool
     default y
 config LIB_GAISLER_LEON3_LEON3_MMU_I16
@@ -353,48 +353,48 @@ config LIB_GAISLER_LEON3_LEON3_MMU_I16
 config LIB_GAISLER_LEON3_LEON3_MMU_D16
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_MMU_FASTWB_2
+config LIB_GAISLER_LEON3_LEON3_MMU_FASTWB
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_MMU_PAGE_4K_2
+config LIB_GAISLER_LEON3_LEON3_MMU_PAGE_4K
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DSU_ENABLE_3
+config LIB_GAISLER_LEON3_LEON3_DSU_ENABLE
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DSU_ITRACE_2
+config LIB_GAISLER_LEON3_LEON3_DSU_ITRACE
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DSU_ITRACESZ4_2
+config LIB_GAISLER_LEON3_LEON3_DSU_ITRACESZ4
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_DSU_ATRACESZ4_2
+config LIB_GAISLER_LEON3_LEON3_DSU_ATRACESZ4
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_NP_ASI_3
+config LIB_GAISLER_LEON3_LEON3_NP_ASI
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_PWRPSR_3
+config LIB_GAISLER_LEON3_LEON3_PWRPSR
     bool
     default y
-config LIB_GAISLER_LEON3_LEON3_ALTWIN_3
+config LIB_GAISLER_LEON3_LEON3_ALTWIN
     bool
     default n
-config LIB_GAISLER_LEON3_LEON3_REX_3
+config LIB_GAISLER_LEON3_LEON3_REX
     bool
     default n
 #   fi
 #   if [ "$CONFIG_LEON3_CUSTOM" = "y" ]; then
 #     mainmenu_option next_comment
 #       comment 'Integer unit                                           '
-config LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS_4
+config LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS
     int "SPARC register windows"
     default 8
 #       if [ "$CONFIG_LEON_MEMTECH" = "y" ]; then
 config LIB_GAISLER_LEON3_LEON3_IU_RFINF
     bool "Use inferred tech for IU register file"
 #       fi
-config LIB_GAISLER_LEON3_LEON3_IU_V8MULDIV_4
+config LIB_GAISLER_LEON3_LEON3_IU_V8MULDIV
     bool "SPARC V8 MUL/DIV instructions"
 #       if [ "$CONFIG_IU_V8MULDIV" = "y" ]; then
 #         choice 'Hardware multiplier latency' \
@@ -402,7 +402,7 @@ config LIB_GAISLER_LEON3_LEON3_IU_V8MULDIV_4
 # 	  4-cycles		CONFIG_IU_MUL_LATENCY_4 \
 # 	  5-cycles		CONFIG_IU_MUL_LATENCY_5" 5-cycles
 #         if [ "$CONFIG_IU_MUL_LATENCY_4" = "y" -o "$CONFIG_IU_MUL_LATENCY_5" = "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_IU_MUL_MAC_3
+config LIB_GAISLER_LEON3_LEON3_IU_MUL_MAC
     bool "SPARC V8e SMAC/UMAC instructions     "
 #         fi
 #         choice 'Multipler structure        ' \
@@ -411,33 +411,33 @@ config LIB_GAISLER_LEON3_LEON3_IU_MUL_MAC_3
 # 	  TechSpec		CONFIG_IU_MUL_TECHSPEC \
 # 	  Designware		CONFIG_IU_MUL_DW" Inferred
 #       fi
-config LIB_GAISLER_LEON3_LEON3_IU_BP_4
+config LIB_GAISLER_LEON3_LEON3_IU_BP
     bool "Branch prediction     "
-config LIB_GAISLER_LEON3_LEON3_IU_SVT_4
+config LIB_GAISLER_LEON3_LEON3_IU_SVT
     bool "Single-vector trapping"
-config LIB_GAISLER_LEON3_LEON3_IU_LDELAY_4
+config LIB_GAISLER_LEON3_LEON3_IU_LDELAY
     int "Load delay"
     default 1
-config LIB_GAISLER_LEON3_LEON3_IU_WATCHPOINTS_4
+config LIB_GAISLER_LEON3_LEON3_IU_WATCHPOINTS
     int "Hardware watchpoints"
     default 0
-config LIB_GAISLER_LEON3_LEON3_PWD_4
+config LIB_GAISLER_LEON3_LEON3_PWD
     bool "Enable power-down mode "
-config LIB_GAISLER_LEON3_LEON3_IU_RSTADDR_4
+config LIB_GAISLER_LEON3_LEON3_IU_RSTADDR
     hex " Reset start address (addr[31:12]) "
     default 00000
-config LIB_GAISLER_LEON3_LEON3_NP_ASI_4
+config LIB_GAISLER_LEON3_LEON3_NP_ASI
     bool "SPARC V8E non-privileged ASI access"
 config LIB_GAISLER_LEON3_LEON3_WRPSR
     bool "SPARC V8E partial Write %psr (WRPSR)"
-config LIB_GAISLER_LEON3_LEON3_ALTWIN_4
+config LIB_GAISLER_LEON3_LEON3_ALTWIN
     bool "SPARC V8E AWP and regfile partitioning "
-config LIB_GAISLER_LEON3_LEON3_REX_4
+config LIB_GAISLER_LEON3_LEON3_REX
     bool "Enable LEON-REX extension"
 #     endmenu
 #     mainmenu_option next_comment
 #     comment 'Floating-point unit'
-config LIB_GAISLER_LEON3_LEON3_FPU_ENABLE_4
+config LIB_GAISLER_LEON3_LEON3_FPU_ENABLE
     bool "Enable FPU                             "
 #       if [ "$CONFIG_FPU_ENABLE" = "y" ]; then
 #         choice 'FPU core' \
@@ -469,7 +469,7 @@ config LIB_GAISLER_LEON3_LEON3_FPU_RFINF
 #     endmenu
 #     mainmenu_option next_comment
 #     comment 'Cache system'
-config LIB_GAISLER_LEON3_LEON3_ICACHE_ENABLE_4
+config LIB_GAISLER_LEON3_LEON3_ICACHE_ENABLE
     bool "Enable instruction cache       "
 #       if [ "$CONFIG_ICACHE_ENABLE" = "y" ]; then
 #         choice 'Associativity (sets)            ' \
@@ -496,12 +496,12 @@ config LIB_GAISLER_LEON3_LEON3_ICACHE_ENABLE_4
 # 	  Direct		CONFIG_ICACHE_ALGODIR \
 # 	  LRR		CONFIG_ICACHE_ALGOLRR \
 # 	  LRU		CONFIG_ICACHE_ALGOLRU" Random
-config LIB_GAISLER_LEON3_LEON3_ICACHE_LOCK_4
+config LIB_GAISLER_LEON3_LEON3_ICACHE_LOCK
     bool "Cache locking      "
 #         fi
 #       fi
 #       if [ "$CONFIG_MMU_ENABLE" != "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_ICACHE_LRAM_3
+config LIB_GAISLER_LEON3_LEON3_ICACHE_LRAM
     bool "Enable local instruction RAM            "
 #       fi
 #       if [ "$CONFIG_ICACHE_LRAM" = "y" ]; then
@@ -519,7 +519,7 @@ config LIB_GAISLER_LEON3_LEON3_ICACHE_LRSTART
     hex " Local instruction RAM start address (8 MSB) "
     default 8e
 #       fi
-config LIB_GAISLER_LEON3_LEON3_DCACHE_ENABLE_4
+config LIB_GAISLER_LEON3_LEON3_DCACHE_ENABLE
     bool "Enable data cache       "
 #       if [ "$CONFIG_DCACHE_ENABLE" = "y" ]; then
 #         choice 'Associativity (sets)' \
@@ -546,27 +546,27 @@ config LIB_GAISLER_LEON3_LEON3_DCACHE_ENABLE_4
 # 	  Direct		CONFIG_DCACHE_ALGODIR \
 # 	  LRR		CONFIG_DCACHE_ALGOLRR \
 # 	  LRU		CONFIG_DCACHE_ALGOLRU" Random
-config LIB_GAISLER_LEON3_LEON3_DCACHE_LOCK_4
+config LIB_GAISLER_LEON3_LEON3_DCACHE_LOCK
     bool "Cache locking      "
 #         fi
-config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_4
+config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP
     bool "AHB snooping       "
 #         if [ "$CONFIG_DCACHE_SNOOP" = "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SEPTAG_3
+config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SEPTAG
     bool "Separate physical/snoop tags  "
 #             if [ "$CONFIG_DCACHE_SNOOP_SEPTAG" = "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SP_3
+config LIB_GAISLER_LEON3_LEON3_DCACHE_SNOOP_SP
     bool "Use SP RAM for separate tags  "
 #             fi
 #         fi
 #       fi
 #       if [ "$CONFIG_ICACHE_ENABLE" = "y" -o "$CONFIG_DCACHE_ENABLE" = "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_CACHE_FIXED_4
+config LIB_GAISLER_LEON3_LEON3_CACHE_FIXED
     hex "Fixed cacheability map  "
     default 0
 #       fi
 #       if [ "$CONFIG_MMU_ENABLE" != "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_DCACHE_LRAM_3
+config LIB_GAISLER_LEON3_LEON3_DCACHE_LRAM
     bool "Enable local data RAM            "
 #       fi
 #       if [ "$CONFIG_DCACHE_LRAM" = "y" ]; then
@@ -588,10 +588,10 @@ config LIB_GAISLER_LEON3_LEON3_DCACHE_LRSTART
 
 #     mainmenu_option next_comment
 #     comment 'MMU'
-config LIB_GAISLER_LEON3_LEON3_MMU_ENABLE_4
+config LIB_GAISLER_LEON3_LEON3_MMU_ENABLE
     bool "Enable MMU       "
 #     if [ "$CONFIG_MMU_ENABLE" = "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_MMU_SV_4
+config LIB_GAISLER_LEON3_LEON3_MMU_SV
     bool "Include supervisor bit in tag"
 #       choice 'MMU type              ' \
 # 	  "combined	CONFIG_MMU_COMBINED \
@@ -614,7 +614,7 @@ config LIB_GAISLER_LEON3_LEON3_MMU_SV_4
 # 	   16		CONFIG_MMU_D16 \
 # 	   32		CONFIG_MMU_D32 \
 # 	   64		CONFIG_MMU_D64" 8
-config LIB_GAISLER_LEON3_LEON3_MMU_FASTWB_3
+config LIB_GAISLER_LEON3_LEON3_MMU_FASTWB
     bool "Fast writebuffer       "
 #       fi
 #       choice 'MMU page size' \
@@ -632,10 +632,10 @@ config LIB_GAISLER_LEON3_LEON3_MMU_INF
 
 #     mainmenu_option next_comment
 #       comment 'Debug Support Unit        '
-config LIB_GAISLER_LEON3_LEON3_DSU_ENABLE_4
+config LIB_GAISLER_LEON3_LEON3_DSU_ENABLE
     bool "Enable LEON3 Debug support unit    "
 #       if [ "$CONFIG_DSU_ENABLE" = "y" ]; then
-config LIB_GAISLER_LEON3_LEON3_DSU_ITRACE_3
+config LIB_GAISLER_LEON3_LEON3_DSU_ITRACE
     bool "Instruction trace buffer"
 #         if [ "$CONFIG_DSU_ITRACE" = "y" ]; then
 #           choice 'Instruction trace buffer size (kbytes)' \

@@ -1,0 +1,35 @@
+# LICENSE sha256: c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4
+
+load("@rules_nvc//internal:cosim.bzl", "nvc_verilator_cosim")
+load("@rules_nvc//nvc:rules.bzl", "vhdl_test", "vhdl_library")
+
+# Generate only the architecture
+nvc_verilator_cosim(
+    name = "cosim_bridge_gen",
+    srcs = ["dut.v"],
+    top_module = "dut",
+    path_prefix = ":top_tb:dut_inst",
+    separate_entity_arch = True,
+)
+
+# Manually defined entity combined with generated architecture
+# We name this cosim_bridge because top_tb.vhdl expects it.
+vhdl_library(
+    name = "cosim_bridge",
+    srcs = [
+        "dut_entity.vhdl",
+        ":cosim_bridge_gen.arch_vhdl",
+    ],
+    vpi_plugins = [
+        ":cosim_bridge_gen.vpi",
+    ],
+)
+
+vhdl_test(
+    name = "cosim_test",
+    srcs = ["top_tb.vhdl"],
+    deps = [
+        ":cosim_bridge",
+    ],
+    entity = "top_tb",
+)

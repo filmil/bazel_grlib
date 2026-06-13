@@ -1,0 +1,12 @@
+# Registries
+common --registry=https://raw.githubusercontent.com/filmil/bazel-registry/main
+common --registry=https://bcr.bazel.build
+
+build --announce_rc
+test --test_output=errors
+
+# Promote the NOEL-V design's Kconfig symbols (PROC_NUM, NOELV_XLEN, DOMAINS_NUM,
+# EIID_NUM, ...) into the grlib.config VHDL package so the testbench can use the
+# CFG_* constants. Without this the generated config.vhd only carries the root
+# symbols and the testbench fails to compile.
+common --@grlib//:ACTIVE_DESIGN_PREFIX=LIB_GAISLER_NOELV_NOELV

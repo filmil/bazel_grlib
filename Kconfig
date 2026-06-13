@@ -13,6 +13,10 @@ config ACTIVE_DESIGN_PREFIX
     string "Active Design Prefix (e.g. DESIGNS_LEON3_MINIMAL)"
     default ""
 
+config NOELV_RV64
+    bool "Build NOEL-V as 64-bit"
+    default y
+
 rsource "third_party/grlib/kconfig/bin/tkconfig/config.in.Kconfig"
 rsource "third_party/grlib/kconfig/designs/leon3-ahbfile/config.in.Kconfig"
 rsource "third_party/grlib/kconfig/designs/leon3-ahbfile/config.vhd.in.Kconfig"

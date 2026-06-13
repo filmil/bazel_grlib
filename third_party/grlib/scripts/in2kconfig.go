@@ -69,7 +69,6 @@ func convertInToKconfig(grlibPath, outDir, src, dest string) {
 	prefix = strings.Trim(prefix, "_")
 
 	scanner := bufio.NewScanner(sf)
-	symbolCounts := make(map[string]int)
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -82,13 +81,8 @@ func convertInToKconfig(grlibPath, outDir, src, dest string) {
 
 		handleSymbol := func(rawName, kind, label, def string) {
 			name := strings.TrimPrefix(rawName, "CONFIG_")
-			symbolCounts[name]++
-			uniqueName := name
-			if symbolCounts[name] > 1 {
-				uniqueName = fmt.Sprintf("%s_%d", name, symbolCounts[name])
-			}
 			
-			fullName := fmt.Sprintf("%s_%s", prefix, uniqueName)
+			fullName := fmt.Sprintf("%s_%s", prefix, name)
 			
 			fmt.Fprintf(df, "config %s\n", fullName)
 			if label != "" {

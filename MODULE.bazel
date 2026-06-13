@@ -3,7 +3,12 @@ module(
     version = "1.0.0",
 )
 
-bazel_dep(name = "rules_nvc", version = "4.2.4")
+bazel_dep(name = "rules_nvc", version = "4.2.5")
+local_path_override(
+    module_name = "rules_nvc",
+    path = "integration/third_party/rules_nvc",
+)
+
 bazel_dep(name = "rules_go", version = "0.60.0")
 bazel_dep(name = "gazelle", version = "0.51.0")
 bazel_dep(name = "rules_python", version = "1.7.0")
@@ -31,5 +36,5 @@ http_archive(
     name = "grlib_srcs",
     build_file = "//third_party/grlib:grlib.BUILD",
     strip_prefix = "grlib-gpl-2025.2-b4298",
-    urls = ["https://download.gaisler.com/products/GRLIB/bin/grlib-gpl-2025.2-b4298.tar.gz"],
+    urls = ["file:///home/filmil/code/grlib/grlib_local.tar.gz"],
 )

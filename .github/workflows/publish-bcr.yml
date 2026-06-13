@@ -1,0 +1,28 @@
+name: Publish to BCR
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g., 1.0.1)'
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Bazel
+        uses: bazelbuild/setup-bazelisk@v3
+
+      - name: Create BCR Pull Request
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          echo "Preparing BCR publication for version $VERSION"
+          # Logic to create BCR PR would go here, often using a tool like 'bazel run //:publish_to_bcr'
+          # and adding the mandatory suffix to the PR description:
+          # echo "@bazel-io skip_check unstable_url" >> pr_description.txt

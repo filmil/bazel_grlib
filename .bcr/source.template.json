@@ -1,0 +1,5 @@
+{
+  "integrity": "sha256-{INTEGRITY}",
+  "strip_prefix": "bazel_grlib-{VERSION}",
+  "url": "https://github.com/filmil/bazel_grlib/archive/refs/tags/v{VERSION}.tar.gz"
+}
