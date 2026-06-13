@@ -1,0 +1,57 @@
+load("@rules_nvc//nvc:rules.bzl", "vhdl_elaborate", "vhdl_library", "vhdl_test")
+
+config_setting(
+    name = "NOELV_RV64_SETTING",
+    flag_values = {
+        "@grlib//:CONFIG_NOELV_RV64": "True",
+    },
+    visibility = ["//visibility:public"],
+)
+
+# Replace the previous definition
+alias(
+    name = "NOELV_RV64",
+    actual = ":NOELV_RV64_SETTING",
+)
+
+# Note: The grlib repository provides the core libraries.
+# We need to depend on them to build our testbench.
+
+vhdl_test(
+    name = "noelv_simulation",
+    srcs = ["noelv_tb.vhd"],
+    deps = [
+        "@grlib//:grlib",
+        "@grlib//:gaisler",
+        "@grlib//:techmap",
+    ],
+    entity = "noelv_tb",
+    standard = "1993",
+)
+
+# NVC elaboration-bug reproducer. This instantiates the full gaisler.noelvsys,
+# which no released NVC version can elaborate (see docs/compilation_challenges.md).
+# Both targets are tagged "manual" so they are excluded from `bazel build //...`
+# and `bazel test //...`. The crash happens at *elaboration*, so build the
+# elaborate target explicitly to trigger it (its name must match the entity):
+#
+#   bazel build //:noelvsys_repro_tb
+#
+vhdl_library(
+    name = "noelvsys_repro_lib",
+    srcs = ["noelvsys_repro_tb.vhd"],
+    deps = [
+        "@grlib//:grlib",
+        "@grlib//:gaisler",
+        "@grlib//:techmap",
+    ],
+    standard = "1993",
+    tags = ["manual"],
+)
+
+vhdl_elaborate(
+    name = "noelvsys_repro_tb",
+    library = ":noelvsys_repro_lib",
+    standard = "1993",
+    tags = ["manual"],
+)

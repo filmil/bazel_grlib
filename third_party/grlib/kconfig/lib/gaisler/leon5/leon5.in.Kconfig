@@ -17,12 +17,12 @@ config LIB_GAISLER_LEON5_LEON5_LEON5_PERFCFG
     default 0
 #   fi
 #   if [ "$CONFIG_LEON5_GP" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_PERFCFG_2
+config LIB_GAISLER_LEON5_LEON5_LEON5_PERFCFG
     int
     default 1
 #   fi
 #   if [ "$CONFIG_LEON5_EP" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_PERFCFG_3
+config LIB_GAISLER_LEON5_LEON5_LEON5_PERFCFG
     int
     default 2
 #   fi
@@ -35,7 +35,7 @@ config LIB_GAISLER_LEON5_LEON5_LEON5_RFCFG
     default 0
 #   fi
 #   if [ "$CONFIG_LEON5_RF_1" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_RFCFG_2
+config LIB_GAISLER_LEON5_LEON5_LEON5_RFCFG
     int
     default 1
 #   fi
@@ -83,57 +83,57 @@ config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     default 0
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_1K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_2
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 7
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_2K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_3
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 8
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_4K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_4
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 9
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_8K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_5
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 10
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_16K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_6
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 11
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_32K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_7
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 12
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_64K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_8
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 13
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_128K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_9
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 14
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_256K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_10
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 15
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_512K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_11
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 16
 #   fi
 #   if [ "$CONFIG_LEON5_ITCM_1M" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG_12
+config LIB_GAISLER_LEON5_LEON5_LEON5_ITCMCFG
     int
     default 17
 #   fi
@@ -143,57 +143,57 @@ config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     default 0
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_1K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_2
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 7
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_2K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_3
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 8
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_4K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_4
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 9
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_8K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_5
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 10
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_16K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_6
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 11
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_32K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_7
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 12
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_64K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_8
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 13
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_128K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_9
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 14
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_256K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_10
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 15
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_512K" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_11
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 16
 #   fi
 #   if [ "$CONFIG_LEON5_DTCM_1M" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG_12
+config LIB_GAISLER_LEON5_LEON5_LEON5_DTCMCFG
     int
     default 17
 #   fi
@@ -215,12 +215,12 @@ config LIB_GAISLER_LEON5_LEON5_LEON5_RF_FTCFG
     default 0
 #   fi
 #   if [ "$CONFIG_IUFT_TECHSPEC" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_RF_FTCFG_2
+config LIB_GAISLER_LEON5_LEON5_LEON5_RF_FTCFG
     int
     default 16
 #   fi
 #   if [ "$CONFIG_IUFT_RTL" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_RF_FTCFG_3
+config LIB_GAISLER_LEON5_LEON5_LEON5_RF_FTCFG
     int
     default 32
 #   fi
@@ -230,12 +230,12 @@ config LIB_GAISLER_LEON5_LEON5_LEON5_CACHE_FTCFG
     default 0
 #   fi
 #   if [ "$CONFIG_CACHE_FT_TECHSPEC" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_CACHE_FTCFG_2
+config LIB_GAISLER_LEON5_LEON5_LEON5_CACHE_FTCFG
     int
     default 16
 #   fi
 #   if [ "$CONFIG_CACHE_FT_RTL" = "y" ]; then
-config LIB_GAISLER_LEON5_LEON5_LEON5_CACHE_FTCFG_3
+config LIB_GAISLER_LEON5_LEON5_LEON5_CACHE_FTCFG
     int
     default 32
 #   fi

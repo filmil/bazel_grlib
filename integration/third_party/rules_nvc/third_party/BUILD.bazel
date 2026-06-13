@@ -1,0 +1,2 @@
+# An empty package.
+exports_files(["bazel_linux_packages_rules_shell.patch"])

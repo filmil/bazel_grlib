@@ -1,0 +1,29 @@
+load("@rules_nvc//build/nvc:rules.bzl", "verilog_library")
+
+package(default_visibility = ["//visibility:public"])
+
+verilog_library(
+    name = "nvc_verilog",
+    srcs = [
+        "counter.sv",
+    ],
+    includes = [
+        "systemverilog",
+    ],
+)
+
+verilog_library(
+    name = "counter2",
+    srcs = [
+        "counter2.sv",
+    ],
+    hdrs = [
+        "counter.sv",
+    ],
+    deps = [
+        ":nvc_verilog",
+    ],
+    includes = [
+        "systemverilog",
+    ],
+)

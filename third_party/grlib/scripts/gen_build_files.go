@@ -93,6 +93,7 @@ func main() {
 
 	libDeps := make(map[string][]string)
 	libFiles := make(map[string][]string)
+	libNoelvCfg := make(map[string]bool)
 
 	for _, lib := range allLibs {
 		libSourcePath := filepath.Join(grlibPath, "lib", lib)
@@ -117,11 +118,21 @@ func main() {
 
 				if len(linesSyn) == 0 && len(linesSim) == 0 {
 					entries, _ := os.ReadDir(subdirPath)
+					var pkgFiles []string
+					var otherFiles []string
 					for _, entry := range entries {
 						if !entry.IsDir() && strings.HasSuffix(entry.Name(), ".vhd") {
-							linesSyn = append(linesSyn, entry.Name())
+							name := entry.Name()
+							if strings.Contains(name, "_cfg") || strings.Contains(name, "_types") || strings.Contains(name, "_pkg") || name == "noelv.vhd" {
+								pkgFiles = append(pkgFiles, name)
+							} else {
+								otherFiles = append(otherFiles, name)
+							}
 						}
 					}
+					sort.Strings(pkgFiles)
+					sort.Strings(otherFiles)
+					linesSyn = append(pkgFiles, otherFiles...)
 				}
 
 				for _, fLine := range append(linesSyn, linesSim...) {
@@ -134,9 +145,19 @@ func main() {
 					fullVhdPath := filepath.Join(grlibPath, relVhdPath)
 
 					if _, err := os.Stat(fullVhdPath); err == nil {
+						// Skip problematic files
+						if fileName == "grtachom.vhd" { continue }
+						if relVhdPath == "lib/grlib/sparc/cpu_disas.vhd" { continue }
+						
+						// Handle noelv configuration specially
+						if fileName == "noelv_cfg_32.vhd" || fileName == "noelv_cfg_64.vhd" {
+							libNoelvCfg[lib] = true
+							continue
+						}
+
 						finalRef := relVhdPath
 						if relVhdPath == "lib/grlib/stdlib/config.vhd" {
-							finalRef = "@@//third_party/grlib:config.vhd"
+							finalRef = "@grlib//third_party/grlib:config.vhd"
 						}
 
 						// Avoid duplicates
@@ -156,7 +177,7 @@ func main() {
 			}
 		}
 
-		if len(files) > 0 {
+		if len(files) > 0 || libNoelvCfg[lib] {
 			libFiles[lib] = files
 			var deps []string
 			for d := range depsSet {
@@ -179,25 +200,49 @@ func main() {
 	
 	for _, lib := range allLibs {
 		files := libFiles[lib]
-		if len(files) == 0 { continue }
+		if len(files) == 0 && !libNoelvCfg[lib] { continue }
 
 		libBase := filepath.Base(lib)
 		fmt.Fprintln(gb, "# do not sort")
-		fmt.Fprintf(gb, "filegroup(\n    name = \"%s_files\",\n    # do not sort\n    srcs = [\n", libBase)
+		fmt.Fprintln(gb, "filegroup(")
+		fmt.Fprintf(gb, "    name = \"%s_files\",\n", libBase)
+		fmt.Fprintln(gb, "    # do not sort")
+		fmt.Fprintf(gb, "    srcs = ")
+		
+		if libNoelvCfg[lib] {
+			fmt.Fprintln(gb, "select({")
+			fmt.Fprintln(gb, "        \"@@//:NOELV_RV64\": [\"lib/gaisler/noelv/pkg/noelv_cfg_64.vhd\"],")
+			fmt.Fprintln(gb, "        \"//conditions:default\": [\"lib/gaisler/noelv/pkg/noelv_cfg_32.vhd\"],")
+			fmt.Fprintln(gb, "    }) + [")
+		} else {
+			fmt.Fprintln(gb, "[")
+		}
+
 		for _, f := range files {
 			fmt.Fprintf(gb, "        \"%s\",\n", f)
 		}
-		fmt.Fprintf(gb, "    ],\n    visibility = [\"//visibility:public\"],\n)\n\n")
+		
+		fmt.Fprintln(gb, "    ],")
+		fmt.Fprintln(gb, "    visibility = [\"//visibility:public\"],")
+		fmt.Fprintln(gb, ")")
+		fmt.Fprintln(gb, "")
 
-		fmt.Fprintf(gb, "vhdl_library(\n    name = \"%s\",\n    # do not sort\n    srcs = [\":%s_files\"],\n", libBase, libBase)
+		fmt.Fprintln(gb, "vhdl_library(")
+		fmt.Fprintf(gb, "    name = \"%s\",\n", libBase)
+		fmt.Fprintln(gb, "    # do not sort")
+		fmt.Fprintf(gb, "    srcs = [\":%s_files\"],\n", libBase)
 		std := libStds[lib]
 		if std == "" { std = "1993" } else if std == "93" { std = "1993" } else if std == "08" { std = "2008" }
-		fmt.Fprintf(gb, "    standard = \"%s\",\n    deps = [\n", std)
+		fmt.Fprintf(gb, "    standard = \"%s\",\n", std)
+		fmt.Fprintln(gb, "    deps = [")
 		sort.Strings(libDeps[lib])
 		for _, d := range libDeps[lib] {
 			fmt.Fprintf(gb, "        \":%s\",\n", filepath.Base(d))
 		}
-		fmt.Fprintf(gb, "    ],\n    visibility = [\"//visibility:public\"],\n)\n\n")
+		fmt.Fprintln(gb, "    ],")
+		fmt.Fprintln(gb, "    visibility = [\"//visibility:public\"],")
+		fmt.Fprintln(gb, ")")
+		fmt.Fprintln(gb, "")
 	}
 	gb.Close()
 	fmt.Println("Generated grlib.BUILD")

@@ -1,0 +1,24 @@
+module(
+    name = "integration",
+    version = "0.0.0",
+)
+
+bazel_dep(name = "fshlib", version = "0.2.0")
+bazel_dep(name = "gotopt2", version = "2.7.1")
+bazel_dep(name = "protobuf", version = "35.0")
+
+# If not mentioned here, build will fail on github actions. :/
+bazel_dep(name = "rules_android", version = "0.7.2")
+bazel_dep(name = "rules_shell", version = "0.8.0")
+bazel_dep(name = "rules_nvc", version = "0.0.0")
+local_path_override(
+    module_name = "rules_nvc",
+    path = "../",
+)
+
+bazel_dep(name = "portable_cc_toolchain", version = "2025.12.16")
+
+toolchain = use_extension("@portable_cc_toolchain//:extensions.bzl", "toolchain")
+use_repo(toolchain, "toolchains")
+
+register_toolchains("@toolchains//:toolchainlinux_x86_64linux_x86_64")

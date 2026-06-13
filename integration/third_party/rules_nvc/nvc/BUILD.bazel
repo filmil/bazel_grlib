@@ -1,0 +1,40 @@
+load("@bazel_lib//:bzl_library.bzl", "bzl_library")
+load("@bazel_lib//lib:write_source_files.bzl", "write_source_files")
+load("@stardoc//stardoc:stardoc.bzl", "stardoc")
+
+package(
+    default_visibility = [
+        "//visibility:public",
+    ],
+)
+
+bzl_library(
+    name = "rules",
+    srcs = ["rules.bzl"],
+    deps = [
+        "//internal:extract_file",
+        "//internal:macros",
+        "//internal:produce_waveform",
+        "//internal:providers",
+        "//internal:toolchain",
+        "//internal:utils",
+        "//internal:vhdl_elaborate",
+        "//internal:vhdl_library",
+        "//internal:vhdl_run",
+        "//internal:vhdl_test",
+    ],
+)
+
+stardoc(
+    name = "md_rules",
+    out = "gen.rules.md",
+    input = "rules.bzl",
+    deps = [":rules"],
+)
+
+write_source_files(
+    name = "update",
+    files = {
+        "rules.md": ":md_rules",
+    },
+)

@@ -1,0 +1,26 @@
+load("@rules_nvc//internal:cosim.bzl", "nvc_verilator_cosim")
+load("@rules_nvc//nvc:rules.bzl", "vhdl_test")
+
+nvc_verilator_cosim(
+    name = "adder_bridge",
+    srcs = ["adder.sv"],
+    top_module = "adder",
+    path_prefix = ":top_tb:adder_inst",
+)
+
+nvc_verilator_cosim(
+    name = "counter_bridge",
+    srcs = ["counter.sv"],
+    top_module = "counter",
+    path_prefix = ":top_tb:counter_inst",
+)
+
+vhdl_test(
+    name = "demo_test",
+    srcs = ["top_tb.vhdl"],
+    deps = [
+        ":adder_bridge",
+        ":counter_bridge",
+    ],
+    entity = "top_tb",
+)

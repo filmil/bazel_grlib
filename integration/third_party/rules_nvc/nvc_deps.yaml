@@ -1,0 +1,16 @@
+version: 1
+sources:
+  - channel: jammy main
+    url: http://archive.ubuntu.com/ubuntu
+  - channel: jammy-updates main
+    url: http://archive.ubuntu.com/ubuntu
+  - channel: jammy-security main
+    url: http://security.ubuntu.com/ubuntu
+archs:
+  - "amd64"
+packages:
+  - "libdw1"
+  - "libffi8"
+  - "libllvm14"
+  - "libzstd1"
+  - "zlib1g"
