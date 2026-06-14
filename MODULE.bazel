@@ -40,6 +40,6 @@ http_archive(
     name = "grlib_srcs",
     build_file = "//third_party/grlib:grlib.BUILD",
     strip_prefix = "grlib-gpl-2025.2-b4298",
-    urls = ["http://127.0.0.1:18080/grlib_local.tar.gz"],
+    urls = ["https://download.gaisler.com/products/GRLIB/bin/grlib-gpl-2025.2-b4298.tar.gz"],
     integrity = "sha256-NCv//yj1TxVyXP77p+n6xc6/MNGJnlkPzVIWz6UiBkA=",
 )
