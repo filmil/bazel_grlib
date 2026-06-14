@@ -1,5 +1,7 @@
 load("@rules_nvc//nvc:rules.bzl", "vhdl_elaborate", "vhdl_library", "vhdl_test")
 
+exports_files(["rules_nvc_grlib.patch"])
+
 config_setting(
     name = "NOELV_RV64_SETTING",
     flag_values = {
