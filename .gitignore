@@ -1,12 +1,14 @@
 # Bazel build artifacts
-/bazel-*
+bazel-*
 
 # Local Bazel configuration
-.bazelrc.user
+user.bazelrc
 
 # IDE files
 .idea/
 .vscode/
+.gemini
+.claude
 
 # OS files
 .DS_Store
