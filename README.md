@@ -1,6 +1,9 @@
 # GRLIB Bazel Repository
 
 ![Build Status](https://github.com/filmil/bazel_grlib/actions/workflows/build.yml/badge.svg)
+![Publish to my Bazel registry](https://github.com/filmil/bazel_grlib/actions/workflows/publish.yml/badge.svg)
+![Publish on Bazel Central Registry](https://github.com/filmil/bazel_grlib/actions/workflows/publish-bcr.yml/badge.svg)
+![Tag and Release](https://github.com/filmil/bazel_grlib/actions/workflows/tag-and-release.yml/badge.svg)
 
 **Note:** The repository name is `bazel_grlib`, while the Bazel module name is `grlib`.
 
