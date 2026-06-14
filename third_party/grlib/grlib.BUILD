@@ -63,7 +63,14 @@ vhdl_library(
     name = "grlib",
     # do not sort
     srcs = [":grlib_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
     ],
     visibility = ["//visibility:public"],
@@ -98,7 +105,14 @@ vhdl_library(
     name = "techmap",
     # do not sort
     srcs = [":techmap_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
     ],
@@ -122,7 +136,14 @@ vhdl_library(
     name = "spw",
     # do not sort
     srcs = [":spw_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
         ":techmap",
@@ -152,7 +173,14 @@ vhdl_library(
     name = "eth",
     # do not sort
     srcs = [":eth_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
         ":techmap",
@@ -179,7 +207,14 @@ vhdl_library(
     name = "opencores",
     # do not sort
     srcs = [":opencores_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
     ],
@@ -532,7 +567,14 @@ vhdl_library(
     name = "gaisler",
     # do not sort
     srcs = [":gaisler_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":eth",
         ":grlib",
@@ -561,7 +603,14 @@ vhdl_library(
     name = "esa",
     # do not sort
     srcs = [":esa_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":gaisler",
         ":grlib",
@@ -589,7 +638,14 @@ vhdl_library(
     name = "fmf",
     # do not sort
     srcs = [":fmf_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
     ],
     visibility = ["//visibility:public"],
@@ -611,7 +667,14 @@ vhdl_library(
     name = "gsi",
     # do not sort
     srcs = [":gsi_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
     ],
@@ -635,7 +698,14 @@ vhdl_library(
     name = "cypress",
     # do not sort
     srcs = [":cypress_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
     ],
     visibility = ["//visibility:public"],
@@ -656,7 +726,14 @@ vhdl_library(
     name = "micron",
     # do not sort
     srcs = [":micron_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
     ],
@@ -678,7 +755,14 @@ vhdl_library(
     name = "atc18",
     # do not sort
     srcs = [":atc18_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
     ],
     visibility = ["//visibility:public"],
@@ -701,7 +785,14 @@ vhdl_library(
     name = "dware",
     # do not sort
     srcs = [":dware_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
     ],
@@ -725,7 +816,14 @@ vhdl_library(
     name = "ec",
     # do not sort
     srcs = [":ec_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
     ],
@@ -746,7 +844,14 @@ vhdl_library(
     name = "eclipsee",
     # do not sort
     srcs = [":eclipsee_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
     ],
@@ -767,7 +872,14 @@ vhdl_library(
     name = "simprim",
     # do not sort
     srcs = [":simprim_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
     ],
     visibility = ["//visibility:public"],
@@ -788,7 +900,14 @@ vhdl_library(
     name = "umc18",
     # do not sort
     srcs = [":umc18_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
     ],
@@ -810,7 +929,14 @@ vhdl_library(
     name = "virage",
     # do not sort
     srcs = [":virage_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
     ],
     visibility = ["//visibility:public"],
@@ -835,7 +961,14 @@ vhdl_library(
     name = "testgrouppolito",
     # do not sort
     srcs = [":testgrouppolito_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":grlib",
         ":unisim",
@@ -860,7 +993,14 @@ vhdl_library(
     name = "work",
     # do not sort
     srcs = [":work_files"],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     deps = [
         ":gaisler",
         ":grlib",

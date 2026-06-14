@@ -28,7 +28,14 @@ vhdl_test(
         "@grlib//:techmap",
     ],
     entity = "noelv_tb",
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
 )
 
 # NVC elaboration-bug reproducer. This instantiates the full gaisler.noelvsys,
@@ -47,13 +54,27 @@ vhdl_library(
         "@grlib//:gaisler",
         "@grlib//:techmap",
     ],
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     tags = ["manual"],
 )
 
 vhdl_elaborate(
     name = "noelvsys_repro_tb",
     library = ":noelvsys_repro_lib",
-    standard = "1993",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
     tags = ["manual"],
 )
