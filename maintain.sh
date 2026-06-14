@@ -1,85 +1,90 @@
 #!/bin/bash
 set -e
 
-OTHER_ARGS=()
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    --maintain_bin=*)
-      MAINTAIN_BIN="${1#*=}"
-      shift
-      ;;
-    --gen_build_files=*)
-      GEN_BUILD_FILES="${1#*=}"
-      shift
-      ;;
-    --in2kconfig=*)
-      IN2KCONFIG="${1#*=}"
-      shift
-      ;;
-    --gen_master_kconfig=*)
-      GEN_MASTER_KCONFIG="${1#*=}"
-      shift
-      ;;
-    --gen_example_bazelrc=*)
-      GEN_EXAMPLE_BAZELRC="${1#*=}"
-      shift
-      ;;
-    --vhd_preprocess=*)
-      VHD_PREPROCESS="${1#*=}"
-      shift
-      ;;
-    --python_bin=*)
-      PYTHON_BIN="${1#*=}"
-      shift
-      ;;
-    *)
-      OTHER_ARGS+=("$1")
-      shift
-      ;;
-  esac
-done
-
-# Find GRLIB_SRCS. In runfiles it is typically at external/+http_archive+grlib_srcs
-GRLIB_SRCS=""
-if [ -d "external/+http_archive+grlib_srcs" ]; then
-    GRLIB_SRCS=$(readlink -f "external/+http_archive+grlib_srcs")
-elif [ -d "../+http_archive+grlib_srcs" ]; then
-    GRLIB_SRCS=$(readlink -f "../+http_archive+grlib_srcs")
+# --- begin runfiles.bash initialization v3 ---
+set -uo pipefail; f=bazel_tools/tools/bash/runfiles/runfiles.bash
+if [ -z "${RUNFILES_DIR:-}" ] && [ -z "${RUNFILES_MANIFEST_FILE:-}" ]; then
+  if [ -d "$0.runfiles" ]; then
+    export RUNFILES_DIR="$0.runfiles"
+  elif [ -f "$0.runfiles_manifest" ]; then
+    export RUNFILES_MANIFEST_FILE="$0.runfiles_manifest"
+  elif [ -f "$0.runfiles/MANIFEST" ]; then
+    export RUNFILES_MANIFEST_FILE="$0.runfiles/MANIFEST"
+  fi
 fi
-
-if [ -z "$GRLIB_SRCS" ]; then
-    # Try finding it recursively in the current directory (runfiles root)
-    GRLIB_SRCS=$(find . -name "lib" -type d -path "*/external/*" | head -n 1 | xargs dirname | xargs readlink -f)
+if [ -f "${RUNFILES_DIR:-/dev/null}/$f" ]; then
+  source "${RUNFILES_DIR}/$f"
+elif [ -f "${RUNFILES_MANIFEST_FILE:-/dev/null}" ]; then
+  source "$(grep -sm1 "^$f " "$RUNFILES_MANIFEST_FILE" | cut -f2- -d' ')"
+else
+  rlocation() {
+    if [ -f "$1" ]; then echo "$1";
+    elif [ -f "external/$1" ]; then echo "external/$1";
+    fi
+  }
 fi
+# --- end runfiles.bash initialization v3 ---
+
+# Locate components
+GRLIB_SRCS_FILE=$(rlocation "grlib_srcs/lib/libs.txt")
+if [ -n "$GRLIB_SRCS_FILE" ]; then
+    GRLIB_SRCS=$(dirname "$(dirname "$GRLIB_SRCS_FILE")")
+fi
+[ -z "${GRLIB_SRCS:-}" ] && GRLIB_SRCS=$(find . -maxdepth 5 -name "lib" -type d | grep "grlib_srcs" | head -n 1 | xargs -r dirname)
 
 export GRLIB_SRCS
 if [ -z "$GRLIB_SRCS" ]; then
-    echo "ERROR: Could not find GRLIB_SRCS"
+    echo "ERROR: Could not find GRLIB_SRCS."
     exit 1
 fi
 
-# Ensure paths are absolute if they are relative (relative to runfiles root)
-[[ "$MAINTAIN_BIN" != /* ]] && MAINTAIN_BIN="$(pwd)/$MAINTAIN_BIN"
-[[ "$GEN_BUILD_FILES" != /* ]] && GEN_BUILD_FILES="$(pwd)/$GEN_BUILD_FILES"
-[[ "$IN2KCONFIG" != /* ]] && IN2KCONFIG="$(pwd)/$IN2KCONFIG"
-[[ "$GEN_MASTER_KCONFIG" != /* ]] && GEN_MASTER_KCONFIG="$(pwd)/$GEN_MASTER_KCONFIG"
-[[ "$GEN_EXAMPLE_BAZELRC" != /* ]] && GEN_EXAMPLE_BAZELRC="$(pwd)/$GEN_EXAMPLE_BAZELRC"
-[[ "$VHD_PREPROCESS" != /* ]] && VHD_PREPROCESS="$(pwd)/$VHD_PREPROCESS"
+find_bin() {
+    local name=$1
+    local res=$(rlocation "grlib/third_party/grlib/scripts/$name")
+    if [ -z "$res" ]; then
+         res=$(rlocation "grlib/third_party/grlib/scripts/${name}_/${name}")
+    fi
+    if [ -z "$res" ]; then
+        # Search runfiles tree
+        res=$(find "${RUNFILES_DIR:-.}" -type f -executable -name "$name" | grep "scripts" | head -n 1)
+    fi
+    if [ -n "$res" ]; then
+        readlink -f "$res"
+    fi
+}
 
-"$MAINTAIN_BIN" \
-    --gen_build_files "$GEN_BUILD_FILES" \
-    --in2kconfig "$IN2KCONFIG" \
-    --gen_master_kconfig "$GEN_MASTER_KCONFIG" \
-    --vhd_preprocess "$VHD_PREPROCESS" \
-    "${OTHER_ARGS[@]}"
+BIN_maintain=$(find_bin maintain)
+BIN_gen_build_files=$(find_bin gen_build_files)
+BIN_in2kconfig=$(find_bin in2kconfig)
+BIN_gen_master_kconfig=$(find_bin gen_master_kconfig)
+BIN_gen_example_bazelrc=$(find_bin gen_example_bazelrc)
+BIN_vhd_preprocess=$(find_bin vhd_preprocess)
 
-# Finally, update the example bazelrc if not in check mode
-if [[ ! " ${OTHER_ARGS[@]} " =~ " --check " ]]; then
-    if [ -n "$BUILD_WORKSPACE_DIRECTORY" ]; then
+if [ -z "$BIN_maintain" ]; then echo "ERROR: maintain not found"; exit 1; fi
+if [ -z "$BIN_gen_build_files" ]; then echo "ERROR: gen_build_files not found"; exit 1; fi
+if [ -z "$BIN_in2kconfig" ]; then echo "ERROR: in2kconfig not found"; exit 1; fi
+if [ -z "$BIN_gen_master_kconfig" ]; then echo "ERROR: gen_master_kconfig not found"; exit 1; fi
+if [ -z "$BIN_gen_example_bazelrc" ]; then echo "ERROR: gen_example_bazelrc not found"; exit 1; fi
+if [ -z "$BIN_vhd_preprocess" ]; then echo "ERROR: vhd_preprocess not found"; exit 1; fi
+
+# Change to workspace root in runfiles
+WS_ROOT=$(dirname $(readlink -f $(rlocation grlib/Kconfig)))
+cd "$WS_ROOT"
+
+"$BIN_maintain" \
+    --gen_build_files "$BIN_gen_build_files" \
+    --in2kconfig "$BIN_in2kconfig" \
+    --gen_master_kconfig "$BIN_gen_master_kconfig" \
+    --vhd_preprocess "$BIN_vhd_preprocess" \
+    "$@"
+
+# Update example bazelrc if needed (only when running via 'bazel run')
+if [[ ! " $@ " =~ " --check " ]]; then
+    if [ -n "${BUILD_WORKSPACE_DIRECTORY:-}" ]; then
         echo "Updating docs/example.bazelrc..."
         cd "$BUILD_WORKSPACE_DIRECTORY"
-        bazel query "@grlib_config//:all" --output=label_kind | grep "CONFIG_" > settings_list.txt
-        "$GEN_EXAMPLE_BAZELRC" settings_list.txt docs/example.bazelrc
+        npx bazelisk query "@grlib_config//:all" --output=label_kind | grep "CONFIG_" > settings_list.txt
+        "$BIN_gen_example_bazelrc" settings_list.txt docs/example.bazelrc
         rm settings_list.txt
     fi
 fi

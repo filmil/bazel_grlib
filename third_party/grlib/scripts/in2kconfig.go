@@ -27,12 +27,18 @@ func main() {
 	os.MkdirAll(outDir, 0755)
 
 	err := filepath.Walk(grlibPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil { return err }
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error accessing path %q: %v\n", path, err)
+			return err
+		}
 		if !info.IsDir() && strings.HasSuffix(path, ".in") {
 			relPath, _ := filepath.Rel(grlibPath, path)
-			// Avoid including 'grlib-gpl-...' in the output path if it was part of grlibPath
 			targetPath := filepath.Join(outDir, relPath+".Kconfig")
-			os.MkdirAll(filepath.Dir(targetPath), 0755)
+			if err := os.MkdirAll(filepath.Dir(targetPath), 0755); err != nil {
+				fmt.Fprintf(os.Stderr, "Error creating dir for %q: %v\n", targetPath, err)
+				return err
+			}
+			fmt.Printf("Converting %s to %s\n", path, targetPath)
 			convertInToKconfig(grlibPath, outDir, path, targetPath)
 		}
 		return nil
