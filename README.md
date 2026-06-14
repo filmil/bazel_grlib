@@ -36,15 +36,15 @@ You can override any namespaced value via the command line:
 bazel build --@grlib_config//:CONFIG_LIB_GAISLER_LEON3_LEON3_IU_NWINDOWS=16 //...
 ```
 
-### Specifying the VHDL Standard
+### Specifying the VHDL Version (Standard)
 
-By default, the project uses VHDL 1993. You can specify a different VHDL standard (e.g., 2008 or 2019) using the `--@grlib//:vhdl_standard` flag:
+By default, the project uses VHDL 1993. You can specify a different VHDL version or standard (e.g., 2008 or 2019) using the `--@grlib//:vhdl_standard` flag. This version flag controls the standard used for compilation:
 
 ```bash
 bazel test //... --@grlib//:vhdl_standard=2019
 ```
 
-Available standards are: `1987`, `1993`, `2002`, `2008`, `2019`.
+Available versions are: `1987`, `1993`, `2002`, `2008`, `2019`.
 
 ### Reference
 
