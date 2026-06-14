@@ -9,5 +9,7 @@
   ],
   "repository": [
     "github:filmil/bazel_grlib"
+  ],
+  "versions": [
   ]
 }
