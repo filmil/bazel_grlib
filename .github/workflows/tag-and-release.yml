@@ -6,6 +6,11 @@ on:
   schedule:
     - cron: '0 0 10 * *'
   workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual release'
+        required: false
+        default: 'Manual release trigger'
 
 jobs:
   tag:
