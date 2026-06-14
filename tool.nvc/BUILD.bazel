@@ -1,5 +1,7 @@
 load("@rules_nvc//nvc:rules.bzl", "vhdl_elaborate", "vhdl_library", "vhdl_test")
 
+exports_files(["BUILD.bazel"])
+
 vhdl_library(
     name = "grlib",
     srcs = ["@grlib_srcs//:grlib_files"],

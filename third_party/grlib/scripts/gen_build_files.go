@@ -245,6 +245,8 @@ func main() {
 	nv, _ := os.Create(nvcPath)
 	fmt.Fprintln(nv, "load(\"@rules_nvc//nvc:rules.bzl\", \"vhdl_elaborate\", \"vhdl_library\", \"vhdl_test\")")
 	fmt.Fprintln(nv, "")
+	fmt.Fprintln(nv, "exports_files([\"BUILD.bazel\"])")
+	fmt.Fprintln(nv, "")
 	
 	// Helper to get transitive deps
 	getTransitiveDeps := func(lib string) []string {

@@ -95,12 +95,21 @@ sh_binary(
     name = "maintain",
     srcs = ["maintain.sh"],
     data = [
+        "Kconfig",
+        "@grlib_srcs//:grlib_srcs_all",
+        "//third_party/grlib:grlib.BUILD",
+        "//tool.nvc:BUILD.bazel",
         "//third_party/grlib/scripts:maintain",
-    ],
+    ] + glob([
+        "third_party/grlib/kconfig/**",
+        "third_party/grlib/*.py",
+    ], allow_empty = True),
+    deps = ["@bazel_tools//tools/bash/runfiles"],
 )
 
 sh_test(
     name = "maintain_test",
     srcs = ["maintain_test.sh"],
     data = [":maintain"],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
 )
