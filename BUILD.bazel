@@ -2,6 +2,7 @@ load("@gazelle//:def.bzl", "gazelle")
 load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
+load("@doxygen//:doxygen.bzl", "doxygen")
 
 string_flag(
     name = "vhdl_standard",
@@ -72,6 +73,22 @@ alias(
     name = "techmap",
     actual = "@grlib_srcs//:techmap",
     visibility = ["//visibility:public"],
+)
+
+# Documentation target
+filegroup(
+    name = "doxygen_srcs",
+    srcs = [
+        "@grlib_srcs//:grlib_srcs_all",
+    ],
+)
+
+doxygen(
+    name = "docs",
+    srcs = [":doxygen_srcs"],
+    project_name = "GRLIB Bazel",
+    optimize_output_vhdl = True,
+    quiet = True,
 )
 
 # Maintenance targets

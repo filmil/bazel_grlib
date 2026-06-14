@@ -26,6 +26,11 @@ bazel_dep(name = "rules_python", version = "1.7.0")
 bazel_dep(name = "rules_kconfig", version = "0.4.0")
 bazel_dep(name = "rules_shell", version = "0.8.0")
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "platforms", version = "0.0.11")
+bazel_dep(name = "rules_doxygen", version = "2.6.3")
+
+doxygen_extension = use_extension("@rules_doxygen//:extensions.bzl", "doxygen_extension")
+use_repo(doxygen_extension, "doxygen")
 
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 go_sdk.download(version = "1.26.2")
