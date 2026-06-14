@@ -1,0 +1,10 @@
+--- internal/vhdl_library.bzl
++++ internal/vhdl_library.bzl
+@@ -75,6 +75,7 @@
+         arguments = [
+           analyzer,
+           "--std={}".format(ctx.attr.standard),
++          "--relaxed",
+           "-L", nvc_lib_path,
+         ] + flag_libraries + [
+           "--work={}:{}/{}".format(
