@@ -1,5 +1,3 @@
-load("@rules_nvc//nvc:rules.bzl", "vhdl_library")
-
 exports_files(glob(["**/*.vhd"]))
 
 filegroup(
@@ -21,23 +19,6 @@ filegroup(
         "@grlib//:std_2019": ["@grlib//third_party/grlib:lib/grlib/stdlib/testlib_2008.vhd"],
         "//conditions:default": ["lib/grlib/stdlib/testlib.vhd"],
     }) + ["lib/grlib/util/util.vhd"] + ["lib/grlib/sparc/sparc.vhd"] + ["lib/grlib/sparc/sparc_disas.vhd"] + ["lib/grlib/riscv/riscv.vhd"] + ["lib/grlib/riscv/riscv_disas.vhd"] + ["lib/grlib/riscv/cpu_disas.vhd"] + ["lib/grlib/modgen/multlib.vhd"] + ["lib/grlib/modgen/leaves.vhd"] + ["lib/grlib/amba/amba.vhd"] + ["lib/grlib/amba/devices.vhd"] + ["lib/grlib/amba/defmst.vhd"] + ["lib/grlib/amba/apbctrl.vhd"] + ["lib/grlib/amba/apbctrlx.vhd"] + ["lib/grlib/amba/apbctrlsp.vhd"] + ["lib/grlib/amba/apbctrldp.vhd"] + ["lib/grlib/amba/apbctrl3p.vhd"] + ["lib/grlib/amba/apbctrl4p.vhd"] + ["lib/grlib/amba/ahbctrl.vhd"] + ["lib/grlib/amba/dma2ahb_pkg.vhd"] + ["lib/grlib/amba/dma2ahb.vhd"] + ["lib/grlib/amba/ahbmst.vhd"] + ["lib/grlib/amba/ahblitm2ahbm.vhd"] + ["lib/grlib/amba/dma2ahb_tp.vhd"] + ["lib/grlib/amba/amba_tp.vhd"] + ["lib/grlib/dftlib/dftlib.vhd"] + ["lib/grlib/dftlib/trstmux.vhd"] + ["lib/grlib/dftlib/synciotest.vhd"] + ["lib/grlib/generic_bm/generic_bm_pkg.vhd"] + ["lib/grlib/generic_bm/ahb_be.vhd"] + ["lib/grlib/generic_bm/axi4_be.vhd"] + ["lib/grlib/generic_bm/bmahbmst.vhd"] + ["lib/grlib/generic_bm/bm_fre.vhd"] + ["lib/grlib/generic_bm/bm_me_rc.vhd"] + ["lib/grlib/generic_bm/bm_me_wc.vhd"] + ["lib/grlib/generic_bm/fifo_control_rc.vhd"] + ["lib/grlib/generic_bm/fifo_control_wc.vhd"] + ["lib/grlib/generic_bm/generic_bm_ahb.vhd"] + ["lib/grlib/generic_bm/generic_bm_axi.vhd"],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "grlib",
-    # do not sort
-    srcs = [":grlib_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-    ],
     visibility = ["//visibility:public"],
 )
 
@@ -66,24 +47,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "techmap",
-    # do not sort
-    srcs = [":techmap_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "spw_files",
@@ -93,25 +56,6 @@ filegroup(
         "lib/spw/wrapper/grspw_gen.vhd",
         "lib/spw/wrapper/grspw2_gen.vhd",
         "lib/spw/wrapper/grspw_codec_gen.vhd",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "spw",
-    # do not sort
-    srcs = [":spw_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
-        ":techmap",
     ],
     visibility = ["//visibility:public"],
 )
@@ -134,25 +78,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "eth",
-    # do not sort
-    srcs = [":eth_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
-        ":techmap",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "opencores_files",
@@ -168,30 +93,12 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "opencores",
-    # do not sort
-    srcs = [":opencores_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "gaisler_files",
     # do not sort
     srcs = select({
-        "@@//:NOELV_RV64": ["lib/gaisler/noelv/pkg/noelv_cfg_64.vhd"],
+        "@grlib//:NOELV_RV64": ["lib/gaisler/noelv/pkg/noelv_cfg_64.vhd"],
         "//conditions:default": ["lib/gaisler/noelv/pkg/noelv_cfg_32.vhd"],
     }) + [
         "lib/gaisler/arith/arith.vhd",
@@ -528,27 +435,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "gaisler",
-    # do not sort
-    srcs = [":gaisler_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":eth",
-        ":grlib",
-        ":opencores",
-        ":techmap",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "esa_files",
@@ -560,26 +446,6 @@ filegroup(
         "lib/esa/pci/pci_arb_pkg.vhd",
         "lib/esa/pci/pci_arb.vhd",
         "lib/esa/pci/pciarb.vhd",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "esa",
-    # do not sort
-    srcs = [":esa_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":gaisler",
-        ":grlib",
-        ":techmap",
     ],
     visibility = ["//visibility:public"],
 )
@@ -599,23 +465,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "fmf",
-    # do not sort
-    srcs = [":fmf_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "gsi_files",
@@ -624,24 +473,6 @@ filegroup(
         "lib/gsi/ssram/functions.vhd",
         "lib/gsi/ssram/core_burst.vhd",
         "lib/gsi/ssram/g880e18bt.vhd",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "gsi",
-    # do not sort
-    srcs = [":gsi_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
     ],
     visibility = ["//visibility:public"],
 )
@@ -659,23 +490,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "cypress",
-    # do not sort
-    srcs = [":cypress_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "micron_files",
@@ -687,24 +501,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "micron",
-    # do not sort
-    srcs = [":micron_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "atc18_files",
@@ -712,23 +508,6 @@ filegroup(
     srcs = [
         "lib/tech/atc18/components/atmel_components.vhd",
         "lib/tech/atc18/components/atmel_simprims.vhd",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "atc18",
-    # do not sort
-    srcs = [":atc18_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
     ],
     visibility = ["//visibility:public"],
 )
@@ -746,24 +525,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "dware",
-    # do not sort
-    srcs = [":dware_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "ec_files",
@@ -773,24 +534,6 @@ filegroup(
         "lib/tech/ec/orca/global.vhd",
         "lib/tech/ec/orca/orca.vhd",
         "lib/tech/ec/orca/orca_ecmem.vhd",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "ec",
-    # do not sort
-    srcs = [":ec_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
     ],
     visibility = ["//visibility:public"],
 )
@@ -805,47 +548,12 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "eclipsee",
-    # do not sort
-    srcs = [":eclipsee_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "simprim_files",
     # do not sort
     srcs = [
         "lib/tech/simprim/vcomponents/vcomponents.vhd",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "simprim",
-    # do not sort
-    srcs = [":simprim_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
     ],
     visibility = ["//visibility:public"],
 )
@@ -861,24 +569,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "umc18",
-    # do not sort
-    srcs = [":umc18_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "virage_files",
@@ -886,23 +576,6 @@ filegroup(
     srcs = [
         "lib/tech/virage/vcomponents/virage_vcomponents.vhd",
         "lib/tech/virage/simprims/virage_simprims.vhd",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "virage",
-    # do not sort
-    srcs = [":virage_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
     ],
     visibility = ["//visibility:public"],
 )
@@ -922,26 +595,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-vhdl_library(
-    name = "testgrouppolito",
-    # do not sort
-    srcs = [":testgrouppolito_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":grlib",
-        ":unisim",
-        ":techmap",
-    ],
-    visibility = ["//visibility:public"],
-)
-
 # do not sort
 filegroup(
     name = "work_files",
@@ -950,25 +603,6 @@ filegroup(
         "lib/work/debug/debug.vhd",
         "lib/work/debug/grtestmod.vhd",
         "lib/work/debug/cpu_disas.vhd",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "work",
-    # do not sort
-    srcs = [":work_files"],
-    standard = select({
-        "@grlib//:std_1987": "1987",
-        "@grlib//:std_1993": "1993",
-        "@grlib//:std_2002": "2002",
-        "@grlib//:std_2008": "2008",
-        "@grlib//:std_2019": "2019",
-        "//conditions:default": "1993",
-    }),
-    deps = [
-        ":gaisler",
-        ":grlib",
     ],
     visibility = ["//visibility:public"],
 )
