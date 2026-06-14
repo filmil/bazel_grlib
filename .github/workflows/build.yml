@@ -10,17 +10,20 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        vhdl_std: ["1993", "2002", "2008", "2019"]
     runs-on: ubuntu-latest
     steps:
       - name: Setup bazel
         uses: bazel-contrib/setup-bazel@0.15.0
         with:
           bazelisk-cache: true
-          disk-cache: ${{ github.workflow }}
+          disk-cache: ${{ github.workflow }}-${{ matrix.vhdl_std }}
           repository-cache: true
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: bazel build //...
+        run: bazel build --@grlib//:vhdl_standard=${{ matrix.vhdl_std }} //...
       - name: Test
-        run: bazel test --test_output=errors //...
+        run: bazel test --@grlib//:vhdl_standard=${{ matrix.vhdl_std }} --test_output=errors //...

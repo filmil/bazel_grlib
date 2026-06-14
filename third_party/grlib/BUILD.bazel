@@ -1,4 +1,24 @@
-exports_files(["grlib.BUILD"])
+exports_files([
+    "grlib.BUILD",
+])
+
+genrule(
+    name = "stdio_2008",
+    srcs = ["@grlib_srcs//:lib/grlib/stdlib/stdio.vhd"],
+    outs = ["lib/grlib/stdlib/stdio_2008.vhd"],
+    cmd = "python3 $(location patch_vhdl_2008.py) stdio $< $@",
+    tools = ["patch_vhdl_2008.py"],
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "testlib_2008",
+    srcs = ["@grlib_srcs//:lib/grlib/stdlib/testlib.vhd"],
+    outs = ["lib/grlib/stdlib/testlib_2008.vhd"],
+    cmd = "python3 $(location patch_vhdl_2008.py) testlib $< $@",
+    tools = ["patch_vhdl_2008.py"],
+    visibility = ["//visibility:public"],
+)
 
 filegroup(
     name = "kconfig_all",

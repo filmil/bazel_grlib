@@ -191,6 +191,8 @@ func main() {
 	gb, _ := os.Create(outPath)
 	fmt.Fprintln(gb, "load(\"@rules_nvc//nvc:rules.bzl\", \"vhdl_library\")")
 	fmt.Fprintln(gb, "")
+	fmt.Fprintln(gb, "exports_files(glob([\"**/*.vhd\"]))")
+	fmt.Fprintln(gb, "")
 	fmt.Fprintln(gb, "filegroup(")
 	fmt.Fprintln(gb, "    name = \"grlib_srcs_all\",")
 	fmt.Fprintln(gb, "    srcs = glob([\"**\"]),")
@@ -230,7 +232,30 @@ func main() {
 		fmt.Fprintln(gb, "vhdl_library(")
 		fmt.Fprintf(gb, "    name = \"%s\",\n", libBase)
 		fmt.Fprintln(gb, "    # do not sort")
-		fmt.Fprintf(gb, "    srcs = [\":%s_files\"],\n", libBase)
+		if libBase == "grlib" {
+			fmt.Fprint(gb, "    srcs = []")
+			for _, f := range libFiles[lib] {
+				base := filepath.Base(f)
+				if base == "stdio.vhd" {
+					fmt.Fprintln(gb, " + select({")
+					fmt.Fprintln(gb, "        \"@grlib//:std_2008\": [\"@grlib//third_party/grlib:lib/grlib/stdlib/stdio_2008.vhd\"],")
+					fmt.Fprintln(gb, "        \"@grlib//:std_2019\": [\"@grlib//third_party/grlib:lib/grlib/stdlib/stdio_2008.vhd\"],")
+					fmt.Fprintln(gb, "        \"//conditions:default\": [\"lib/grlib/stdlib/stdio.vhd\"],")
+					fmt.Fprint(gb, "    })")
+				} else if base == "testlib.vhd" {
+					fmt.Fprintln(gb, " + select({")
+					fmt.Fprintln(gb, "        \"@grlib//:std_2008\": [\"@grlib//third_party/grlib:lib/grlib/stdlib/testlib_2008.vhd\"],")
+					fmt.Fprintln(gb, "        \"@grlib//:std_2019\": [\"@grlib//third_party/grlib:lib/grlib/stdlib/testlib_2008.vhd\"],")
+					fmt.Fprintln(gb, "        \"//conditions:default\": [\"lib/grlib/stdlib/testlib.vhd\"],")
+					fmt.Fprint(gb, "    })")
+				} else {
+					fmt.Fprintf(gb, " + [\"%s\"]", f)
+				}
+			}
+			fmt.Fprintln(gb, ",")
+		} else {
+			fmt.Fprintf(gb, "    srcs = [\":%s_files\"],\n", libBase)
+		}
 		fmt.Fprintln(gb, "    standard = select({")
 		fmt.Fprintln(gb, "        \"@grlib//:std_1987\": \"1987\",")
 		fmt.Fprintln(gb, "        \"@grlib//:std_1993\": \"1993\",")
