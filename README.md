@@ -46,6 +46,8 @@ bazel test //... --@grlib//:vhdl_standard=2019
 
 Available versions are: `1987`, `1993`, `2002`, `2008`, `2019`.
 
+**Support Note:** VHDL 1993, 2002, 2008, and 2019 are fully supported and tested in CI. For VHDL 2008 and 2019, the build system automatically patches specific GRLIB files (like `stdio.vhd` and `testlib.vhd`) to resolve name collisions with the newer IEEE standard libraries. VHDL 1987 is currently not supported by the underlying `nvc` compiler.
+
 ### Reference
 
 See `docs/worked_example.md` for a step-by-step guide on customizing your build, and `docs/example.bazelrc` for a full list of available namespaced parameters.
