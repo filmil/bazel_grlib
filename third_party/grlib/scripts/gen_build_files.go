@@ -246,10 +246,33 @@ func main() {
 	fmt.Fprintln(nv, "load(\"@rules_nvc//nvc:rules.bzl\", \"vhdl_elaborate\", \"vhdl_library\", \"vhdl_test\")")
 	fmt.Fprintln(nv, "")
 	
+	// Helper to get transitive deps
+	getTransitiveDeps := func(lib string) []string {
+		res := make(map[string]bool)
+		var visit func(string)
+		visit = func(curr string) {
+			for _, d := range libDeps[curr] {
+				depBase := filepath.Base(d)
+				if (len(libFiles[d]) > 0 || libNoelvCfg[d]) && !res[depBase] {
+					res[depBase] = true
+					visit(d)
+				}
+			}
+		}
+		visit(lib)
+		var sorted []string
+		for d := range res { sorted = append(sorted, d) }
+		sort.Strings(sorted)
+		return sorted
+	}
+
 	for _, lib := range allLibs {
 		files := libFiles[lib]
 		if len(files) == 0 && !libNoelvCfg[lib] { continue }
 		libBase := filepath.Base(lib)
+		
+		transDeps := getTransitiveDeps(lib)
+
 		fmt.Fprintln(nv, "vhdl_library(")
 		fmt.Fprintf(nv, "    name = \"%s\",\n", libBase)
 		fmt.Fprintf(nv, "    srcs = [\"@grlib_srcs//:%s_files\"],\n", libBase)
@@ -264,9 +287,24 @@ func main() {
 		fmt.Fprintf(nv, "        \"//conditions:default\": \"%s\",\n", std)
 		fmt.Fprintln(nv, "    }),")
 		fmt.Fprintln(nv, "    deps = [")
-		sort.Strings(libDeps[lib])
-		for _, d := range libDeps[lib] { fmt.Fprintf(nv, "        \":%s\",\n", filepath.Base(d)) }
+		for _, d := range transDeps {
+			if d != libBase {
+				fmt.Fprintf(nv, "        \":%s\",\n", d)
+			}
+		}
 		fmt.Fprintln(nv, "    ],")
+		
+		// Also mark manual if any direct dep was missing (handled by transDeps being filtered)
+		hasMissingDirectDep := false
+		for _, d := range libDeps[lib] {
+			if len(libFiles[d]) == 0 && !libNoelvCfg[d] {
+				hasMissingDirectDep = true; break
+			}
+		}
+		if hasMissingDirectDep || libBase == "gsi" {
+			fmt.Fprintln(nv, "    tags = [\"manual\"],")
+		}
+
 		fmt.Fprintln(nv, "    visibility = [\"//visibility:public\"],")
 		fmt.Fprintln(nv, ")")
 		fmt.Fprintln(nv, "")
@@ -331,7 +369,7 @@ func main() {
 	fmt.Println("Generated grlib.BUILD and tool.nvc/BUILD.bazel")
 }
 
-var libRegex = regexp.MustCompile(`(?i)^\s*library\s+([a-zA-Z0-9_]+)\s*;`)
+var libRegex = regexp.MustCompile(`(?i)^\s*library\s+([^;]+);`)
 
 func parseLibDeps(path string) []string {
 	f, err := os.Open(path)
@@ -342,9 +380,18 @@ func parseLibDeps(path string) []string {
 	for scanner.Scan() {
 		match := libRegex.FindStringSubmatch(scanner.Text())
 		if len(match) > 1 {
-			dep := strings.ToLower(match[1])
-			if dep != "ieee" && dep != "std" && dep != "work" {
-				deps = append(deps, dep)
+			libs := strings.Split(match[1], ",")
+			for _, l := range libs {
+				dep := strings.ToLower(strings.TrimSpace(l))
+				if dep != "ieee" && dep != "std" && dep != "work" && dep != "" {
+					found := false
+					for _, existing := range deps {
+						if existing == dep { found = true; break }
+					}
+					if !found {
+						deps = append(deps, dep)
+					}
+				}
 			}
 		}
 	}

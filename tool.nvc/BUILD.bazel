@@ -118,8 +118,10 @@ vhdl_library(
         "//conditions:default": "1993",
     }),
     deps = [
+        ":eth",
         ":gaisler",
         ":grlib",
+        ":opencores",
         ":techmap",
     ],
     visibility = ["//visibility:public"],
@@ -155,6 +157,7 @@ vhdl_library(
     deps = [
         ":grlib",
     ],
+    tags = ["manual"],
     visibility = ["//visibility:public"],
 )
 
@@ -170,6 +173,7 @@ vhdl_library(
         "//conditions:default": "1993",
     }),
     deps = [
+        ":grlib",
     ],
     visibility = ["//visibility:public"],
 )
@@ -320,9 +324,9 @@ vhdl_library(
     }),
     deps = [
         ":grlib",
-        ":unisim",
         ":techmap",
     ],
+    tags = ["manual"],
     visibility = ["//visibility:public"],
 )
 
@@ -338,8 +342,11 @@ vhdl_library(
         "//conditions:default": "1993",
     }),
     deps = [
+        ":eth",
         ":gaisler",
         ":grlib",
+        ":opencores",
+        ":techmap",
     ],
     visibility = ["//visibility:public"],
 )

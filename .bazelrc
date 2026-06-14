@@ -1,10 +1,9 @@
-# Load user-specific configurations if they exist
-try-import %workspace%/user.bazelrc
-
-# Standard Bazel settings
-build --announce_rc
-test --test_output=errors
-
 # Registries
 common --registry=https://raw.githubusercontent.com/filmil/bazel-registry/main
 common --registry=https://bcr.bazel.build
+
+build --announce_rc
+test --test_output=errors
+
+# Default design prefix for Noel-V
+common --@grlib_config//:CONFIG_ACTIVE_DESIGN_PREFIX=LIB_GAISLER_NOELV_NOELV
