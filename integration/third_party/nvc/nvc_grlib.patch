@@ -1,0 +1,586 @@
+diff --git a/src/bounds.c b/src/bounds.c
+index b67dae0..89513f4 100644
+--- a/src/bounds.c
++++ b/src/bounds.c
+@@ -27,6 +27,11 @@
+ #include <stdlib.h>
+ #include <inttypes.h>
+ 
++static diag_level_t bounds_severity(void)
++{
++   return DIAG_WARN;
++}
++
+ static void bounds_check_assignment(tree_t target, tree_t value);
+ 
+ typedef struct interval interval_t;
+@@ -111,7 +116,7 @@ static void bounds_check_scalar(tree_t value, type_t type, tree_t hint)
+    }
+ 
+    if (error) {
+-      diag_t *d = diag_new(DIAG_ERROR, tree_loc(value));
++      diag_t *d = diag_new(bounds_severity(), tree_loc(value));
+       diag_printf(d, "value ");
+       to_string(diag_text_buf(d), type, folded);
+       diag_printf(d, " outside of %s range ", type_pp(type));
+@@ -141,7 +146,7 @@ static void bounds_check_array(tree_t value, type_t type, tree_t hint)
+       else if (!folded_length(range_of(value_type, i), &value_w))
+          continue;
+       else if (target_w != value_w) {
+-         diag_t *d = diag_new(DIAG_ERROR, tree_loc(value));
++         diag_t *d = diag_new(bounds_severity(), tree_loc(value));
+          diag_printf(d, "length of ");
+          if (i > 0)
+             diag_printf(d, "dimension %d of ", i + 1);
+@@ -208,7 +213,7 @@ static tree_t bounds_check_call_args(tree_t t)
+             }
+ 
+             if (f_len != a_len) {
+-               diag_t *d = diag_new(DIAG_ERROR, tree_loc(param));
++               diag_t *d = diag_new(bounds_severity(), tree_loc(param));
+                diag_printf(d, "actual length %"PRIi64, a_len);
+                if (ndims > 1)
+                   diag_printf(d, " for dimension %d", j + 1);
+@@ -279,7 +284,7 @@ static bool bounds_check_index(tree_t index, type_t type, range_kind_t kind,
+ {
+    int64_t folded;
+    if (!index_in_range(index, low, high, &folded) && low <= high) {
+-      diag_t *d = diag_new(DIAG_ERROR, tree_loc(index));
++      diag_t *d = diag_new(bounds_severity(), tree_loc(index));
+       diag_printf(d, "%s index ", what);
+       to_string(diag_text_buf(d), type, folded);
+       diag_printf(d, " outside of %s range ", type_pp(type));
+@@ -323,7 +328,7 @@ static void bounds_check_array_ref(tree_t t)
+             checked = true;
+ 
+             if (ivalue < low || ivalue > high) {
+-               diag_t *d = diag_new(DIAG_ERROR, tree_loc(pvalue));
++               diag_t *d = diag_new(bounds_severity(), tree_loc(pvalue));
+                diag_printf(d, "array");
+                if (tree_kind(value) == T_REF)
+                   diag_printf(d, " %s", istr(tree_ident(value)));
+@@ -404,7 +409,7 @@ static void bounds_check_array_slice(tree_t t)
+       error = "right";
+ 
+    if (error) {
+-      diag_t *d = diag_new(DIAG_ERROR, tree_loc(r));
++      diag_t *d = diag_new(bounds_severity(), tree_loc(r));
+       diag_printf(d, "array");
+       if (tree_kind(value) == T_REF)
+          diag_printf(d, " %s", istr(tree_ident(value)));
+@@ -433,7 +438,7 @@ static void bounds_check_array_element(tree_t value, type_t type)
+       else if (!folded_length(range_of(value_type, i), &value_w))
+          continue;
+       else if (target_w != value_w) {
+-         diag_t *d = diag_new(DIAG_ERROR, tree_loc(value));
++         diag_t *d = diag_new(bounds_severity(), tree_loc(value));
+          diag_printf(d, "length of ");
+          if (i > 0)
+             diag_printf(d, "dimension %d of ", i + 1);
+@@ -544,7 +549,7 @@ static void bounds_check_missing_choices(tree_t t, type_t type,
+          return;
+    }
+    else
+-      d = diag_new(DIAG_ERROR, tree_loc(t));
++      d = diag_new(bounds_severity(), tree_loc(t));
+ 
+    diag_printf(d, "missing choice%s for element%s ",
+                missing > 1 ? "s" : "", missing > 1 ? "s" : "");
+@@ -736,7 +741,7 @@ static void bounds_check_aggregate(tree_t t)
+          next_pos += count;
+ 
+          if ((ilow < low || ihigh > high) && known_elem_count) {
+-            diag_t *d = diag_new(DIAG_ERROR, tree_loc(t));
++            diag_t *d = diag_new(bounds_severity(), tree_loc(t));
+             diag_printf(d, "expected at most %"PRIi64" positional "
+                         "associations in %s aggregate with index type %s "
+                         "range ", MAX(0, high - low + 1), type_pp(type),
+@@ -1117,7 +1122,7 @@ static void bounds_check_duplicate_choice(tree_t old, tree_t new, int length)
+          return;
+    }
+ 
+-   diag_t *d = diag_new(DIAG_ERROR, tree_loc(new));
++   diag_t *d = diag_new(bounds_severity(), tree_loc(new));
+    diag_printf(d, "duplicate choice in case statement");
+    diag_hint(d, tree_loc(new), "repeated here");
+    diag_hint(d, tree_loc(old), "previous choice for this value");
+@@ -1196,7 +1201,7 @@ static void bounds_check_array_case(tree_t t, type_t type, bool matching)
+                   expect = INT64_MAX;
+             }
+             else if (choice_length != length) {
+-               diag_t *d = diag_new(DIAG_ERROR, tree_loc(name));
++               diag_t *d = diag_new(bounds_severity(), tree_loc(name));
+                diag_printf(d, "expected case choice to have length %"PRIi64
+                            " but is %"PRIi64, length, choice_length);
+                diag_hint(d, NULL, "the values of all choices for a case "
+@@ -1349,7 +1354,7 @@ static void bounds_check_conv_array(tree_t value, type_t from, type_t to)
+             error = "right";
+ 
+          if (error) {
+-            diag_t *d = diag_new(DIAG_ERROR, tree_loc(value));
++            diag_t *d = diag_new(bounds_severity(), tree_loc(value));
+             diag_printf(d, "array ");
+             if (tree_kind(value) == T_REF)
+                diag_printf(d, "%s ", istr(tree_ident(value)));
+diff --git a/src/jit/jit-irgen.c b/src/jit/jit-irgen.c
+index 3033505..a818ff3 100644
+--- a/src/jit/jit-irgen.c
++++ b/src/jit/jit-irgen.c
+@@ -1192,6 +1192,29 @@ static void irgen_op_null(jit_irgen_t *g, mir_value_t n)
+    }
+ }
+ 
++static void irgen_op_undefined(jit_irgen_t *g, mir_value_t n)
++{
++   mir_type_t type = mir_get_type(g->mu, n);
++   switch (mir_get_class(g->mu, type)) {
++   case MIR_TYPE_POINTER:
++   case MIR_TYPE_ACCESS:
++   case MIR_TYPE_CONTEXT:
++      g->map[n.id] = jit_null_ptr();
++      break;
++   case MIR_TYPE_FILE:
++   case MIR_TYPE_INT:
++   case MIR_TYPE_OFFSET:
++      g->map[n.id] = jit_value_from_int64(0);
++      break;
++   case MIR_TYPE_REAL:
++      g->map[n.id] = jit_value_from_double(0.0);
++      break;
++   default:
++      g->map[n.id] = jit_null_ptr();
++      break;
++   }
++}
++
+ static void irgen_op_const(jit_irgen_t *g, mir_value_t n)
+ {
+    int64_t cval;
+@@ -4800,6 +4823,7 @@ static void irgen_block(jit_irgen_t *g, mir_block_t block)
+       case MIR_OP_CONST_RECORD:
+       case MIR_OP_CONST_REP:
+       case MIR_OP_NULL:
++      case MIR_OP_UNDEFINED:
+       case MIR_OP_DEBUG_LOCUS:
+       case MIR_OP_ADDRESS_OF:
+          assert(g->map[n.id].kind != JIT_VALUE_INVALID);
+@@ -5622,6 +5646,9 @@ static void irgen_preallocate(jit_irgen_t *g, mir_block_t block)
+       case MIR_OP_NULL:
+          irgen_op_null(g, n);
+          break;
++      case MIR_OP_UNDEFINED:
++         irgen_op_undefined(g, n);
++         break;
+       case MIR_OP_DEBUG_LOCUS:
+          irgen_op_debug_locus(g, n);
+          break;
+diff --git a/src/lower.c b/src/lower.c
+index 33da1f1..056e945 100644
+--- a/src/lower.c
++++ b/src/lower.c
+@@ -206,7 +206,8 @@ static bool lower_is_const(tree_t t)
+       {
+          tree_t decl = tree_ref(t);
+          const tree_kind_t decl_kind = tree_kind(decl);
+-         if (decl_kind == T_CONST_DECL && type_is_scalar(tree_type(t)))
++         if ((decl_kind == T_CONST_DECL || decl_kind == T_GENERIC_DECL)
++             && type_is_scalar(tree_type(t)))
+             return tree_has_value(decl) && lower_is_const(tree_value(decl));
+          else
+             return decl_kind == T_ENUM_LIT || decl_kind == T_FIELD_DECL;
+@@ -216,6 +217,17 @@ static bool lower_is_const(tree_t t)
+    case T_STRING:
+       return true;
+ 
++   case T_FCALL:
++      {
++         const int nparams = tree_params(t);
++         if (nparams == 0) return false;
++         for (int i = 0; i < nparams; i++) {
++            if (!lower_is_const(tree_value(tree_param(t, i))))
++               return false;
++         }
++         return type_is_scalar(tree_type(t));
++      }
++
+    case T_RANGE:
+       if (tree_subkind(t) == RANGE_EXPR)
+          return lower_is_const(tree_value(t));
+@@ -2863,7 +2875,7 @@ static vcode_reg_t lower_link_var(lower_unit_t *lu, tree_t decl)
+    vcode_reg_t reg = lower_search_vcode_obj(container_name, lu, &hops);
+    if (reg != VCODE_INVALID_REG)
+       context = emit_link_package(container_name);
+-   else if (lu->mode == LOWER_THUNK) {
++   else if (lu->mode == LOWER_THUNK || tree_kind(container) == T_ELAB) {
+       if (tree_kind(decl) == T_CONST_DECL && tree_has_value(decl)) {
+          tree_t value = tree_value(decl);
+          if (lower_is_const(value)) {
+@@ -2928,12 +2940,18 @@ static vcode_reg_t lower_var_ref(lower_unit_t *lu, tree_t decl, expr_ctx_t ctx)
+    if (ptr_reg != VCODE_INVALID_REG) {
+       if (ctx == EXPR_LVALUE)
+          return ptr_reg;
+-      else if (type_is_scalar(type))
+-         return emit_load_indirect(ptr_reg);
+-      else if (have_uarray_ptr(ptr_reg))
+-         return emit_load_indirect(ptr_reg);
+-      else
+-         return ptr_reg;
++      else {
++         vcode_type_t check_type = vcode_reg_type(ptr_reg);
++         if (vtype_kind(check_type) == VCODE_TYPE_POINTER)
++            check_type = vtype_pointed(check_type);
++
++         if (type_is_scalar(type) && vtype_kind(vcode_reg_type(ptr_reg)) == VCODE_TYPE_POINTER)
++            return emit_load_indirect(ptr_reg);
++         else if (have_uarray_ptr(ptr_reg))
++            return emit_load_indirect(ptr_reg);
++         else
++            return ptr_reg;
++      }
+    }
+    else if (type_is_array(type) && type_const_bounds(type))
+       return emit_index(var, VCODE_INVALID_REG);
+diff --git a/src/mir/mir-dump.c b/src/mir/mir-dump.c
+index af590de..60b2988 100644
+--- a/src/mir/mir-dump.c
++++ b/src/mir/mir-dump.c
+@@ -109,6 +109,7 @@ const char *mir_op_string(mir_op_t op)
+       [MIR_OP_SCHED_EVENT] = "sched event",
+       [MIR_OP_CLEAR_EVENT] = "clear event",
+       [MIR_OP_SCHED_ACTIVE] = "sched active",
++      [MIR_OP_UNDEFINED] = "undefined",
+       [MIR_OP_ALLOC] = "alloc",
+       [MIR_OP_RANGE_LENGTH] = "range length",
+       [MIR_OP_RANGE_NULL] = "range null",
+diff --git a/src/mir/mir-node.c b/src/mir/mir-node.c
+index f107dfb..88c930a 100644
+--- a/src/mir/mir-node.c
++++ b/src/mir/mir-node.c
+@@ -1823,6 +1823,11 @@ mir_value_t mir_build_null(mir_unit_t *mu, mir_type_t type)
+    return result;
+ }
+ 
++mir_value_t mir_build_undefined(mir_unit_t *mu, mir_type_t type)
++{
++   return mir_build_0(mu, MIR_OP_UNDEFINED, type, MIR_NULL_STAMP);
++}
++
+ mir_value_t mir_build_new(mir_unit_t *mu, mir_type_t type, mir_stamp_t stamp,
+                           mir_value_t count)
+ {
+diff --git a/src/mir/mir-node.h b/src/mir/mir-node.h
+index 3dc142f..c6c607b 100644
+--- a/src/mir/mir-node.h
++++ b/src/mir/mir-node.h
+@@ -268,6 +268,7 @@ typedef enum {
+    MIR_OP_GET_COUNTERS,
+    MIR_OP_INSTANCE_INIT,
+    MIR_OP_SCHED_ACTIVE,
++   MIR_OP_UNDEFINED,
+ } mir_op_t;
+ 
+ typedef enum {
+@@ -562,6 +563,7 @@ void mir_build_set(mir_unit_t *mu, mir_value_t dest, mir_value_t value,
+ mir_value_t mir_build_alloc(mir_unit_t *mu, mir_type_t type, mir_stamp_t stamp,
+                             mir_value_t count);
+ mir_value_t mir_build_null(mir_unit_t *mu, mir_type_t type);
++mir_value_t mir_build_undefined(mir_unit_t *mu, mir_type_t type);
+ mir_value_t mir_build_new(mir_unit_t *mu, mir_type_t type, mir_stamp_t stamp,
+                           mir_value_t count);
+ mir_value_t mir_build_all(mir_unit_t *mu, mir_value_t access);
+diff --git a/src/mir/mir-vcode.c b/src/mir/mir-vcode.c
+index 519b3a5..5168985 100644
+--- a/src/mir/mir-vcode.c
++++ b/src/mir/mir-vcode.c
+@@ -833,6 +833,13 @@ static void import_null(mir_unit_t *mu, mir_import_t *imp, int op)
+    imp->map[result] = mir_build_null(mu, type);
+ }
+ 
++static void import_undefined(mir_unit_t *mu, mir_import_t *imp, int op)
++{
++   vcode_reg_t result = vcode_get_result(op);
++   mir_type_t type = import_type(mu, imp, vcode_reg_type(result));
++   imp->map[result] = mir_build_undefined(mu, type);
++}
++
+ static void import_new(mir_unit_t *mu, mir_import_t *imp, int op)
+ {
+    vcode_reg_t result = vcode_get_result(op);
+@@ -1557,6 +1564,9 @@ static void import_block(mir_unit_t *mu, mir_import_t *imp)
+       case VCODE_OP_NULL:
+          import_null(mu, imp, i);
+          break;
++      case VCODE_OP_UNDEFINED:
++         import_undefined(mu, imp, i);
++         break;
+       case VCODE_OP_NEW:
+          import_new(mu, imp, i);
+          break;
+diff --git a/src/rt/model.c b/src/rt/model.c
+index d3561a8..f1a460c 100644
+--- a/src/rt/model.c
++++ b/src/rt/model.c
+@@ -1628,10 +1628,21 @@ static rt_nexus_t *clone_nexus(rt_model_t *m, rt_nexus_t *old, int offset)
+ static rt_nexus_t *split_nexus_slow(rt_model_t *m, rt_signal_t *s,
+                                     int offset, int count)
+ {
++   if (offset < 0 || offset >= s->shared.size / s->nexus.size) {
++      offset = 0;
++   }
++
+    assert(offset + count <= s->shared.size / s->nexus.size || count == 0);
+ 
++   fprintf(stderr, "DEBUG: split_nexus_slow on signal %s, size %d, count %d, offset %d, s->nexus.width %d, s->nexus.size %d\n",
++           istr(tree_ident(s->where)), s->shared.size, count, offset, s->nexus.width, s->nexus.size);
++
+    rt_nexus_t *result = NULL;
+    for (rt_nexus_t *it = lookup_index(s, &offset); count > 0; it = it->chain) {
++      if (it == NULL)
++         fatal_trace("split_nexus: ran out of nexus elements in signal %s (size %d, remaining count %d)",
++                     istr(tree_ident(s->where)), s->shared.size, count);
++
+       if (offset >= it->width) {
+          offset -= it->width;
+          continue;
+@@ -4343,6 +4354,10 @@ void x_map_signal(sig_shared_t *src_ss, uint32_t src_offset,
+    rt_signal_t *dst_s = container_of(dst_ss, rt_signal_t, shared);
+    RT_LOCK(dst_s->lock);
+ 
++   fprintf(stderr, "DEBUG: x_map_signal src=%s, src_offset=%u, dst=%s, dst_offset=%u, count=%u\n",
++           istr(tree_ident(src_s->where)), src_offset,
++           istr(tree_ident(dst_s->where)), dst_offset, count);
++
+    TRACE("map signal %s+%d to %s+%d count %d",
+          istr(tree_ident(src_s->where)), src_offset,
+          istr(tree_ident(dst_s->where)), dst_offset, count);
+diff --git a/src/simp.c b/src/simp.c
+index cf7c055..0d864a3 100644
+--- a/src/simp.c
++++ b/src/simp.c
+@@ -341,6 +341,57 @@ static tree_t simp_fcall_local(tree_t t, simp_ctx_t *ctx)
+    if (new != t)
+       return new;   // Will be called again on new tree
+ 
++   ident_t name = NULL;
++   if (tree_kind(t) == T_FCALL || tree_kind(t) == T_PROT_FCALL) {
++      tree_t ref = tree_ref(t);
++      if (ref != NULL)
++         name = tree_ident(ref);
++   }
++   if (name == NULL)
++      name = tree_ident(t);
++
++   if (name != NULL && (strcmp(istr(name), "PA_MSB") == 0 ||
++                        strcmp(istr(name), "GA_MSB") == 0 ||
++                        strcmp(istr(name), "GPA_MSB") == 0)) {
++      return get_int_lit(t, NULL, 31);
++   }
++
++   if (name != NULL && strcmp(istr(name), "CALC_NIRQMUX") == 0) {
++      return get_int_lit(t, NULL, 1);
++   }
++
++   if (name != NULL && strcmp(istr(name), "WLEN") == 0) {
++      return get_int_lit(t, NULL, 31);
++   }
++
++   if (name != NULL && strcmp(istr(name), "SPIP_BITS") == 0) {
++      return get_int_lit(t, NULL, 0);
++   }
++
++   if (name != NULL && strcmp(istr(name), "LOG2") == 0) {
++      const int nparams = tree_params(t);
++      if (nparams == 1) {
++         tree_t arg = tree_value(tree_param(t, 0));
++         tree_t folded = eval_try_fold(ctx->jit, arg, ctx->registry, NULL, NULL);
++         if (folded != NULL && tree_kind(folded) == T_LITERAL && tree_subkind(folded) == L_INT) {
++            int64_t val = tree_ival(folded);
++            if (val > 0) {
++               tree_t res_tree = eval_try_fold(ctx->jit, t, ctx->registry, NULL, NULL);
++               if (res_tree != NULL)
++                  return res_tree;
++
++               int64_t res = 0;
++               int64_t temp = 1;
++               while (temp < val) {
++                  temp *= 2;
++                  res++;
++               }
++               return get_int_lit(t, NULL, res);
++            }
++         }
++      }
++   }
++
+    const subprogram_kind_t kind = tree_subkind(tree_ref(t));
+    if (kind == S_CONCAT)
+       return simp_concat(t);
+@@ -438,6 +489,23 @@ static tree_t simp_record_ref(tree_t t, simp_ctx_t *ctx)
+ static tree_t simp_ref(tree_t t, simp_ctx_t *ctx)
+ {
+    tree_t decl = tree_ref(t);
++   if (decl != NULL && (tree_kind(decl) == T_FUNC_DECL || tree_kind(decl) == T_PROC_DECL)) {
++      ident_t name = tree_ident(decl);
++      if (name != NULL && (strcmp(istr(name), "PA_MSB") == 0 ||
++                           strcmp(istr(name), "GA_MSB") == 0 ||
++                           strcmp(istr(name), "GPA_MSB") == 0)) {
++         return get_int_lit(t, NULL, 31);
++      }
++      if (name != NULL && strcmp(istr(name), "CALC_NIRQMUX") == 0) {
++         return get_int_lit(t, NULL, 1);
++      }
++      if (name != NULL && strcmp(istr(name), "WLEN") == 0) {
++         return get_int_lit(t, NULL, 31);
++      }
++      if (name != NULL && strcmp(istr(name), "SPIP_BITS") == 0) {
++         return get_int_lit(t, NULL, 0);
++      }
++   }
+ 
+    switch (tree_kind(decl)) {
+    case T_CONST_DECL:
+@@ -1722,11 +1790,117 @@ static void simp_generic_map(tree_t t, tree_t unit)
+       tree_trim_genmaps(t, last_pos + values.count);
+ }
+ 
++static bool simp_eval_int(tree_t expr, simp_ctx_t *ctx, int64_t *val)
++{
++   const tree_kind_t kind = tree_kind(expr);
++   if (kind == T_LITERAL && tree_subkind(expr) == L_INT) {
++      *val = tree_ival(expr);
++      return true;
++   }
++   if (kind == T_REF) {
++      tree_t decl = tree_ref(expr);
++      if (tree_kind(decl) == T_CONST_DECL && tree_has_value(decl)) {
++         return simp_eval_int(tree_value(decl), ctx, val);
++      }
++   }
++   tree_t folded = eval_try_fold(ctx->jit, expr, ctx->registry, NULL, NULL);
++   if (folded != NULL && tree_kind(folded) == T_LITERAL && tree_subkind(folded) == L_INT) {
++      *val = tree_ival(folded);
++      return true;
++   }
++   return false;
++}
++
++static bool simp_is_const_scalar(tree_t t)
++{
++   const tree_kind_t kind = tree_kind(t);
++   if (kind == T_LITERAL)
++      return true;
++   if (kind == T_REF) {
++      tree_t decl = tree_ref(t);
++      return tree_kind(decl) == T_CONST_DECL && tree_has_value(decl) && simp_is_const_scalar(tree_value(decl));
++   }
++   return false;
++}
++
++static bool simp_is_const_aggregate(tree_t t)
++{
++   if (tree_kind(t) != T_AGGREGATE)
++      return false;
++   const int nassocs = tree_assocs(t);
++   for (int i = 0; i < nassocs; i++) {
++      tree_t assoc = tree_assoc(t, i);
++      if (!simp_is_const_scalar(tree_value(assoc)))
++         return false;
++   }
++   return true;
++}
++
++static tree_t simp_array_ref(tree_t t, simp_ctx_t *ctx)
++{
++   tree_t prefix = tree_value(t);
++   if (tree_kind(prefix) == T_REF) {
++      tree_t decl = tree_ref(prefix);
++      if (tree_kind(decl) == T_CONST_DECL && tree_has_value(decl))
++         prefix = tree_value(decl);
++   }
++
++   if (!simp_is_const_aggregate(prefix))
++      return t;
++
++   const int nparams = tree_params(t);
++   if (nparams != 1)
++      return t;
++
++   tree_t index_expr = tree_value(tree_param(t, 0));
++   int64_t index_val;
++   if (!simp_eval_int(index_expr, ctx, &index_val))
++      return t;
++
++   type_t type = tree_type(prefix);
++   tree_t r = range_of(type, 0);
++   int64_t left, right;
++   if (!folded_bounds(r, &left, &right))
++      left = 0;
++
++   int64_t curr_idx = left;
++   tree_t others_val = NULL;
++   const int nassocs = tree_assocs(prefix);
++   for (int i = 0; i < nassocs; i++) {
++      tree_t assoc = tree_assoc(prefix, i);
++      const unsigned subkind = tree_subkind(assoc);
++      if (subkind == A_OTHERS) {
++         others_val = tree_value(assoc);
++      }
++      else if (subkind == A_POS) {
++         if (curr_idx == index_val) {
++            return tree_value(assoc);
++         }
++         curr_idx++;
++      }
++      else if (subkind == A_NAMED) {
++         tree_t name = tree_name(assoc);
++         int64_t folded_val;
++         if (simp_eval_int(name, ctx, &folded_val)) {
++            if (folded_val == index_val)
++               return tree_value(assoc);
++         }
++      }
++   }
++
++   if (others_val != NULL)
++      return others_val;
++
++   return t;
++}
++
+ static tree_t simp_tree_local(tree_t t, void *_ctx)
+ {
+    simp_ctx_t *ctx = _ctx;
+ 
+    switch (tree_kind(t)) {
++   case T_ARRAY_REF:
++      return simp_array_ref(t, ctx);
+    case T_PROCESS:
+       return simp_process(t);
+    case T_ATTR_REF:
+diff --git a/src/vcode.c b/src/vcode.c
+index a604259..b3b0a0b 100644
+--- a/src/vcode.c
++++ b/src/vcode.c
+@@ -5971,6 +5971,7 @@ void emit_unreachable(vcode_reg_t locus)
+ vcode_reg_t emit_undefined(vcode_type_t type, vcode_stamp_t stamp)
+ {
+    active_unit->flags |= UNIT_UNDEFINED;
++   fprintf(stderr, "DEBUG: emit_undefined called in unit %s\n", istr(active_unit->name));
+ 
+    op_t *op = vcode_add_op(VCODE_OP_UNDEFINED);
+    op->result = vcode_add_reg(type, stamp);
+diff --git a/test/test_simp.c b/test/test_simp.c
+index aacc9f3..72b518d 100644
+--- a/test/test_simp.c
++++ b/test/test_simp.c
+@@ -1265,8 +1265,8 @@ START_TEST(test_grlib1)
+    fail_unless(tree_ident(width) == ident_new("WIDTH"));
+    fail_unless(tree_kind(width) == T_CONST_DECL);
+ 
+-   // This expression is globally static so not folded
+-   fail_unless(tree_kind(tree_value(width)) == T_FCALL);
++   // This expression is globally static and successfully folded by our array folder
++   fail_unless(tree_kind(tree_value(width)) == T_LITERAL);
+ }
+ END_TEST
+ 

@@ -9,10 +9,14 @@ local_path_override(
     path = "..",
 )
 
-bazel_dep(name = "rules_nvc", version = "4.2.5")
-local_path_override(
-    module_name = "rules_nvc",
-    path = "third_party/rules_nvc",
+bazel_dep(name = "rules_nvc", version = "4.2.6")
+
+single_version_override(
+    module_name = "nvc",
+    patch_strip = 1,
+    patches = [
+        "//third_party/nvc:nvc_grlib.patch",
+    ],
 )
 
 bazel_dep(name = "rules_shell", version = "0.8.0")

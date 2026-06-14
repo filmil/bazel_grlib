@@ -3,10 +3,14 @@ module(
     version = "1.0.0",
 )
 
-bazel_dep(name = "rules_nvc", version = "4.2.5")
-local_path_override(
-    module_name = "rules_nvc",
-    path = "integration/third_party/rules_nvc",
+bazel_dep(name = "rules_nvc", version = "4.2.6")
+
+single_version_override(
+    module_name = "nvc",
+    patch_strip = 1,
+    patches = [
+        "//third_party/nvc:nvc_grlib.patch",
+    ],
 )
 
 bazel_dep(name = "rules_go", version = "0.60.0")
@@ -36,5 +40,6 @@ http_archive(
     name = "grlib_srcs",
     build_file = "//third_party/grlib:grlib.BUILD",
     strip_prefix = "grlib-gpl-2025.2-b4298",
-    urls = ["file:///home/filmil/code/grlib/grlib_local.tar.gz"],
+    urls = ["http://127.0.0.1:18080/grlib_local.tar.gz"],
+    integrity = "sha256-NCv//yj1TxVyXP77p+n6xc6/MNGJnlkPzVIWz6UiBkA=",
 )

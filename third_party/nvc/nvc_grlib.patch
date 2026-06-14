@@ -1,5 +1,5 @@
 diff --git a/src/bounds.c b/src/bounds.c
-index b67dae00f..89513f462 100644
+index b67dae0..89513f4 100644
 --- a/src/bounds.c
 +++ b/src/bounds.c
 @@ -27,6 +27,11 @@
@@ -123,7 +123,7 @@ index b67dae00f..89513f462 100644
              if (tree_kind(value) == T_REF)
                 diag_printf(d, "%s ", istr(tree_ident(value)));
 diff --git a/src/jit/jit-irgen.c b/src/jit/jit-irgen.c
-index 5549a80d2..a818ff3e6 100644
+index 3033505..a818ff3 100644
 --- a/src/jit/jit-irgen.c
 +++ b/src/jit/jit-irgen.c
 @@ -1192,6 +1192,29 @@ static void irgen_op_null(jit_irgen_t *g, mir_value_t n)
@@ -156,21 +156,7 @@ index 5549a80d2..a818ff3e6 100644
  static void irgen_op_const(jit_irgen_t *g, mir_value_t n)
  {
     int64_t cval;
-@@ -2344,7 +2367,12 @@ static void irgen_op_cast(jit_irgen_t *g, mir_value_t n)
-             j_and(g, abits, abits, irgen_vector_mask(result_size));
- 
-             jit_value_t btmp = irgen_alloc_temp(g);
--            j_mov(g, btmp, bbits);
-+            if (arg_class == MIR_TYPE_VEC4) {
-+               bbits = irgen_sign_extend(g, bbits, arg_size);
-+               j_and(g, btmp, bbits, irgen_vector_mask(result_size));
-+            }
-+            else
-+               j_mov(g, btmp, bbits);
-             bbits = btmp;
-          }
- 
-@@ -4795,6 +4823,7 @@ static void irgen_block(jit_irgen_t *g, mir_block_t block)
+@@ -4800,6 +4823,7 @@ static void irgen_block(jit_irgen_t *g, mir_block_t block)
        case MIR_OP_CONST_RECORD:
        case MIR_OP_CONST_REP:
        case MIR_OP_NULL:
@@ -178,7 +164,7 @@ index 5549a80d2..a818ff3e6 100644
        case MIR_OP_DEBUG_LOCUS:
        case MIR_OP_ADDRESS_OF:
           assert(g->map[n.id].kind != JIT_VALUE_INVALID);
-@@ -5617,6 +5646,9 @@ static void irgen_preallocate(jit_irgen_t *g, mir_block_t block)
+@@ -5622,6 +5646,9 @@ static void irgen_preallocate(jit_irgen_t *g, mir_block_t block)
        case MIR_OP_NULL:
           irgen_op_null(g, n);
           break;
@@ -189,7 +175,7 @@ index 5549a80d2..a818ff3e6 100644
           irgen_op_debug_locus(g, n);
           break;
 diff --git a/src/lower.c b/src/lower.c
-index 82f935eef..056e945f6 100644
+index 33da1f1..056e945 100644
 --- a/src/lower.c
 +++ b/src/lower.c
 @@ -206,7 +206,8 @@ static bool lower_is_const(tree_t t)
@@ -220,28 +206,7 @@ index 82f935eef..056e945f6 100644
     case T_RANGE:
        if (tree_subkind(t) == RANGE_EXPR)
           return lower_is_const(tree_value(t));
-@@ -948,6 +960,20 @@ static void lower_get_scalar_type_bounds(lower_unit_t *lu, type_t type,
-          vcode_reg_t ptr_reg = emit_link_var(context, id, vuarray);
-          wrap_reg = emit_load_indirect(ptr_reg);
-       }
-+      else if (var & INSTANCE_BIT) {
-+         // Type of subtype declared in an instantiated package
-+         vcode_var_t pkg_var = var & ~INSTANCE_BIT;
-+         vcode_reg_t pkg_reg;
-+         if (hops == 0)
-+            pkg_reg = emit_load(pkg_var);
-+         else
-+            pkg_reg = emit_load_indirect(emit_var_upref(hops, pkg_var));
-+
-+         vcode_type_t vuarray = vtype_uarray(1, vtype);
-+         vcode_reg_t ptr_reg =
-+            emit_link_var(pkg_reg, type_ident(type), vuarray);
-+         wrap_reg = emit_load_indirect(ptr_reg);
-+      }
-       else if (hops == 0)
-          wrap_reg = emit_load(var);
-       else {
-@@ -2849,7 +2875,7 @@ static vcode_reg_t lower_link_var(lower_unit_t *lu, tree_t decl)
+@@ -2863,7 +2875,7 @@ static vcode_reg_t lower_link_var(lower_unit_t *lu, tree_t decl)
     vcode_reg_t reg = lower_search_vcode_obj(container_name, lu, &hops);
     if (reg != VCODE_INVALID_REG)
        context = emit_link_package(container_name);
@@ -250,7 +215,7 @@ index 82f935eef..056e945f6 100644
        if (tree_kind(decl) == T_CONST_DECL && tree_has_value(decl)) {
           tree_t value = tree_value(decl);
           if (lower_is_const(value)) {
-@@ -2914,12 +2940,18 @@ static vcode_reg_t lower_var_ref(lower_unit_t *lu, tree_t decl, expr_ctx_t ctx)
+@@ -2928,12 +2940,18 @@ static vcode_reg_t lower_var_ref(lower_unit_t *lu, tree_t decl, expr_ctx_t ctx)
     if (ptr_reg != VCODE_INVALID_REG) {
        if (ctx == EXPR_LVALUE)
           return ptr_reg;
@@ -275,26 +240,8 @@ index 82f935eef..056e945f6 100644
     }
     else if (type_is_array(type) && type_const_bounds(type))
        return emit_index(var, VCODE_INVALID_REG);
-@@ -6229,7 +6261,7 @@ static void lower_var_assign(lower_unit_t *lu, tree_t stmt, gen_stack_t *gs)
- 
-       if (type_is_array(type)) {
-          vcode_reg_t rhs_len = lower_array_len(lu, tree_type(value), 0, rhs);
--         vcode_reg_t locus = lower_debug_locus(target);
-+         vcode_reg_t locus = lower_debug_locus(value);
-          assert(parts[nparts - 1].kind == PART_POP);
-          emit_length_check(parts[nparts - 1].off, rhs_len, locus,
-                            VCODE_INVALID_REG);
-@@ -6509,7 +6541,7 @@ static void lower_signal_assign(lower_unit_t *lu, tree_t stmt, gen_stack_t *gs)
- 
-          if (ptr->kind != PART_ALL && type_is_array(wtype)) {
-             vcode_reg_t rhs_len = lower_array_len(lu, wtype, 0, rhs);
--            vcode_reg_t locus = lower_debug_locus(target);
-+            vcode_reg_t locus = lower_debug_locus(wvalue);
-             assert(parts[nparts - 1].kind == PART_POP);
-             emit_length_check(parts[nparts - 1].off, rhs_len, locus,
-                               VCODE_INVALID_REG);
 diff --git a/src/mir/mir-dump.c b/src/mir/mir-dump.c
-index af590def0..60b2988fe 100644
+index af590de..60b2988 100644
 --- a/src/mir/mir-dump.c
 +++ b/src/mir/mir-dump.c
 @@ -109,6 +109,7 @@ const char *mir_op_string(mir_op_t op)
@@ -306,36 +253,10 @@ index af590def0..60b2988fe 100644
        [MIR_OP_RANGE_LENGTH] = "range length",
        [MIR_OP_RANGE_NULL] = "range null",
 diff --git a/src/mir/mir-node.c b/src/mir/mir-node.c
-index 0b6a337f1..88c930af9 100644
+index f107dfb..88c930a 100644
 --- a/src/mir/mir-node.c
 +++ b/src/mir/mir-node.c
-@@ -1118,25 +1118,6 @@ static mir_value_t mir_build_arith(mir_unit_t *mu, mir_op_t op, mir_type_t type,
-                     "arguments to %s are not the same type", mir_op_string(op));
-       }
-       break;
--
--   case MIR_TYPE_VEC2:
--   case MIR_TYPE_VEC4:
--      {
--         const type_data_t *td = mir_type_data(mu, type);
--         const type_data_t *ltd = mir_type_data(mu, mir_get_type(mu, left));
--         const type_data_t *rtd = mir_type_data(mu, mir_get_type(mu, right));
--
--         MIR_ASSERT(td->class == ltd->class && td->class == rtd->class,
--                    "cannot mix vector types");
--         MIR_ASSERT(td->u.vec.issigned == ltd->u.vec.issigned
--                    && td->u.vec.issigned == rtd->u.vec.issigned,
--                    "cannot mix vector signedness");
--         MIR_ASSERT(td->u.vec.size >= ltd->u.vec.size
--                    && td->u.vec.size >= rtd->u.vec.size,
--                    "implicit narrowing conversions are not allowed");
--      }
--      break;
--
-    default:
-       MIR_ASSERT(false, "arithmetic is not allowed on this type");
-       break;
-@@ -1842,6 +1823,11 @@ mir_value_t mir_build_null(mir_unit_t *mu, mir_type_t type)
+@@ -1823,6 +1823,11 @@ mir_value_t mir_build_null(mir_unit_t *mu, mir_type_t type)
     return result;
  }
  
@@ -347,26 +268,8 @@ index 0b6a337f1..88c930af9 100644
  mir_value_t mir_build_new(mir_unit_t *mu, mir_type_t type, mir_stamp_t stamp,
                            mir_value_t count)
  {
-@@ -3421,15 +3407,16 @@ mir_value_t mir_build_cast(mir_unit_t *mu, mir_type_t type, mir_value_t value)
-          node_data_t *n = mir_node_data(mu, value);
-          if (n->op == MIR_OP_CONST_VEC && mir_get_size(mu, type) <= 64) {
-             uint64_t abits = n->bits[0];
-+            uint64_t bbits = class == MIR_TYPE_VEC2 ? 0 : n->bits[1];
-             if (mir_get_signed(mu, n->type)) {
-                const int arg_size = mir_get_size(mu, n->type);
-                if (arg_size > 0 && arg_size < 64) {
-                   const int shift = 64 - arg_size;
-                   abits = ((int64_t)abits << shift) >> shift;
-+                  bbits = ((int64_t)bbits << shift) >> shift;
-                }
-             }
- 
--            const uint64_t bbits = (class == MIR_TYPE_VEC2 ? 0 : n->bits[1]);
-             return mir_const_vec(mu, type, abits, bbits);
-          }
-       }
 diff --git a/src/mir/mir-node.h b/src/mir/mir-node.h
-index d3f416efe..c6c607bd9 100644
+index 3dc142f..c6c607b 100644
 --- a/src/mir/mir-node.h
 +++ b/src/mir/mir-node.h
 @@ -268,6 +268,7 @@ typedef enum {
@@ -377,15 +280,7 @@ index d3f416efe..c6c607bd9 100644
  } mir_op_t;
  
  typedef enum {
-@@ -385,6 +386,7 @@ mir_type_t mir_file_type(mir_unit_t *mu, mir_type_t base);
- mir_type_t mir_vec2_type(mir_unit_t *mu, int size, bool issigned);
- mir_type_t mir_vec4_type(mir_unit_t *mu, int size, bool issigned);
- 
-+mir_type_t mir_vector_slice(mir_unit_t *mu, mir_type_t base, int size);
- mir_type_t mir_get_base(mir_unit_t *mu, mir_type_t type);
- mir_type_t mir_get_elem(mir_unit_t *mu, mir_type_t type);
- mir_type_t mir_get_pointer(mir_unit_t *mu, mir_type_t type);
-@@ -561,6 +563,7 @@ void mir_build_set(mir_unit_t *mu, mir_value_t dest, mir_value_t value,
+@@ -562,6 +563,7 @@ void mir_build_set(mir_unit_t *mu, mir_value_t dest, mir_value_t value,
  mir_value_t mir_build_alloc(mir_unit_t *mu, mir_type_t type, mir_stamp_t stamp,
                              mir_value_t count);
  mir_value_t mir_build_null(mir_unit_t *mu, mir_type_t type);
@@ -394,7 +289,7 @@ index d3f416efe..c6c607bd9 100644
                            mir_value_t count);
  mir_value_t mir_build_all(mir_unit_t *mu, mir_value_t access);
 diff --git a/src/mir/mir-vcode.c b/src/mir/mir-vcode.c
-index 519b3a5bb..516898567 100644
+index 519b3a5..5168985 100644
 --- a/src/mir/mir-vcode.c
 +++ b/src/mir/mir-vcode.c
 @@ -833,6 +833,13 @@ static void import_null(mir_unit_t *mu, mir_import_t *imp, int op)
@@ -422,7 +317,7 @@ index 519b3a5bb..516898567 100644
           import_new(mu, imp, i);
           break;
 diff --git a/src/rt/model.c b/src/rt/model.c
-index d3561a8c7..f1a460c4e 100644
+index d3561a8..f1a460c 100644
 --- a/src/rt/model.c
 +++ b/src/rt/model.c
 @@ -1628,10 +1628,21 @@ static rt_nexus_t *clone_nexus(rt_model_t *m, rt_nexus_t *old, int offset)
@@ -459,7 +354,7 @@ index d3561a8c7..f1a460c4e 100644
           istr(tree_ident(src_s->where)), src_offset,
           istr(tree_ident(dst_s->where)), dst_offset, count);
 diff --git a/src/simp.c b/src/simp.c
-index cf7c0558b..0d864a38b 100644
+index cf7c055..0d864a3 100644
 --- a/src/simp.c
 +++ b/src/simp.c
 @@ -341,6 +341,57 @@ static tree_t simp_fcall_local(tree_t t, simp_ctx_t *ctx)
@@ -663,7 +558,7 @@ index cf7c0558b..0d864a38b 100644
        return simp_process(t);
     case T_ATTR_REF:
 diff --git a/src/vcode.c b/src/vcode.c
-index a60425956..b3b0a0bfb 100644
+index a604259..b3b0a0b 100644
 --- a/src/vcode.c
 +++ b/src/vcode.c
 @@ -5971,6 +5971,7 @@ void emit_unreachable(vcode_reg_t locus)
@@ -675,7 +570,7 @@ index a60425956..b3b0a0bfb 100644
     op_t *op = vcode_add_op(VCODE_OP_UNDEFINED);
     op->result = vcode_add_reg(type, stamp);
 diff --git a/test/test_simp.c b/test/test_simp.c
-index aacc9f3cd..72b518d35 100644
+index aacc9f3..72b518d 100644
 --- a/test/test_simp.c
 +++ b/test/test_simp.c
 @@ -1265,8 +1265,8 @@ START_TEST(test_grlib1)
