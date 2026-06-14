@@ -2,33 +2,56 @@ load("@gazelle//:def.bzl", "gazelle")
 load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
-load("@doxygen//:doxygen.bzl", "doxygen")
 
 string_flag(
     name = "vhdl_standard",
     build_setting_default = "1993",
-    visibility = ["//visibility:public"],
-)
-
-[
-    config_setting(
-        name = "std_" + std,
-        flag_values = {":vhdl_standard": std},
-        visibility = ["//visibility:public"],
-    )
-    for std in [
+    values = [
         "1987",
         "1993",
         "2002",
         "2008",
         "2019",
-    ]
-]
+    ],
+    visibility = ["//visibility:public"],
+)
 
-# gazelle:prefix grlib
-gazelle(name = "gazelle")
+config_setting(
+    name = "std_1987",
+    flag_values = {":vhdl_standard": "1987"},
+    visibility = ["//visibility:public"],
+)
 
-exports_files(["Kconfig"])
+config_setting(
+    name = "std_1993",
+    flag_values = {":vhdl_standard": "1993"},
+    visibility = ["//visibility:public"],
+)
+
+config_setting(
+    name = "std_2002",
+    flag_values = {":vhdl_standard": "2002"},
+    visibility = ["//visibility:public"],
+)
+
+config_setting(
+    name = "std_2008",
+    flag_values = {":vhdl_standard": "2008"},
+    visibility = ["//visibility:public"],
+)
+
+config_setting(
+    name = "std_2019",
+    flag_values = {":vhdl_standard": "2019"},
+    visibility = ["//visibility:public"],
+)
+
+# Active design prefix configuration
+string_flag(
+    name = "ACTIVE_DESIGN_PREFIX",
+    build_setting_default = "",
+    visibility = ["//visibility:public"],
+)
 
 # Export Kconfig settings as aliases for external modules
 alias(
@@ -38,109 +61,46 @@ alias(
 )
 
 config_setting(
-    name = "NOELV_RV64_SETTING",
+    name = "NOELV_RV64",
     flag_values = {
-        ":CONFIG_NOELV_RV64": "True",
+        ":CONFIG_NOELV_RV64": "y",
     },
     visibility = ["//visibility:public"],
 )
 
-alias(
-    name = "NOELV_RV64",
-    actual = ":NOELV_RV64_SETTING",
-    visibility = ["//visibility:public"],
-)
+# gazelle:prefix grlib
+gazelle(name = "gazelle")
 
-alias(
-    name = "ACTIVE_DESIGN_PREFIX",
-    actual = "@grlib_config//:CONFIG_ACTIVE_DESIGN_PREFIX",
-    visibility = ["//visibility:public"],
-)
-
+# Export standard GRLIB libraries (NVC specific)
 alias(
     name = "grlib",
-    actual = "@grlib_srcs//:grlib",
+    actual = "//tool.nvc:grlib",
     visibility = ["//visibility:public"],
 )
 
 alias(
     name = "gaisler",
-    actual = "@grlib_srcs//:gaisler",
+    actual = "//tool.nvc:gaisler",
     visibility = ["//visibility:public"],
 )
 
 alias(
     name = "techmap",
-    actual = "@grlib_srcs//:techmap",
+    actual = "//tool.nvc:techmap",
     visibility = ["//visibility:public"],
-)
-
-# Documentation target
-filegroup(
-    name = "doxygen_srcs",
-    srcs = [
-        "@grlib_srcs//:grlib_srcs_all",
-    ],
-)
-
-doxygen(
-    name = "docs",
-    srcs = [":doxygen_srcs"],
-    project_name = "GRLIB Bazel",
-    optimize_output_vhdl = True,
-    quiet = True,
 )
 
 # Maintenance targets
 sh_binary(
     name = "maintain",
     srcs = ["maintain.sh"],
-    args = [
-        "--maintain_bin=$(rootpath //third_party/grlib/scripts:maintain)",
-        "--gen_build_files=$(rootpath //third_party/grlib/scripts:gen_build_files)",
-        "--in2kconfig=$(rootpath //third_party/grlib/scripts:in2kconfig)",
-        "--gen_master_kconfig=$(rootpath //third_party/grlib/scripts:gen_master_kconfig)",
-        "--gen_example_bazelrc=$(rootpath //third_party/grlib/scripts:gen_example_bazelrc)",
-        "--vhd_preprocess=$(rootpath //third_party/grlib/scripts:vhd_preprocess)",
-        "--python_bin=$(rootpath @python_3_12_host//:python)",
-    ],
     data = [
-        "maintain.sh",
-        "//third_party/grlib/scripts:gen_build_files",
-        "//third_party/grlib/scripts:gen_example_bazelrc",
-        "//third_party/grlib/scripts:gen_master_kconfig",
-        "//third_party/grlib/scripts:in2kconfig",
         "//third_party/grlib/scripts:maintain",
-        "//third_party/grlib/scripts:vhd_preprocess",
-        "@grlib_srcs//:grlib_srcs_all",
-        "@python_3_12_host//:python",
-        "//third_party/grlib:kconfig_all",
     ],
 )
 
 sh_test(
     name = "maintain_test",
     srcs = ["maintain_test.sh"],
-    args = [
-        "--maintain_bin=$(rootpath //third_party/grlib/scripts:maintain)",
-        "--gen_build_files=$(rootpath //third_party/grlib/scripts:gen_build_files)",
-        "--in2kconfig=$(rootpath //third_party/grlib/scripts:in2kconfig)",
-        "--gen_master_kconfig=$(rootpath //third_party/grlib/scripts:gen_master_kconfig)",
-        "--gen_example_bazelrc=$(rootpath //third_party/grlib/scripts:gen_example_bazelrc)",
-        "--vhd_preprocess=$(rootpath //third_party/grlib/scripts:vhd_preprocess)",
-        "--python_bin=$(rootpath @python_3_12_host//:python)",
-    ],
-    data = [
-        "maintain.sh",
-        "//third_party/grlib/scripts:gen_build_files",
-        "//third_party/grlib/scripts:in2kconfig",
-        "//third_party/grlib/scripts:gen_master_kconfig",
-        "//third_party/grlib/scripts:gen_example_bazelrc",
-        "//third_party/grlib/scripts:maintain",
-        "//third_party/grlib/scripts:vhd_preprocess",
-        "@grlib_srcs//:grlib_srcs_all",
-        "//third_party/grlib:grlib.BUILD",
-        "@python_3_12_host//:python",
-        "//third_party/grlib:kconfig_all",
-    ],
+    data = [":maintain"],
 )

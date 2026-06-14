@@ -1,5 +1,4 @@
 exports_files([
     "noelv_tb.vhd",
     "noelvsys_repro_tb.vhd",
-    "rules_nvc_grlib.patch",
 ])

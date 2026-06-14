@@ -1,0 +1,398 @@
+load("@rules_nvc//nvc:rules.bzl", "vhdl_elaborate", "vhdl_library", "vhdl_test")
+
+vhdl_library(
+    name = "grlib",
+    srcs = ["@grlib_srcs//:grlib_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "techmap",
+    srcs = ["@grlib_srcs//:techmap_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "spw",
+    srcs = ["@grlib_srcs//:spw_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+        ":techmap",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "eth",
+    srcs = ["@grlib_srcs//:eth_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+        ":techmap",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "opencores",
+    srcs = ["@grlib_srcs//:opencores_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "gaisler",
+    srcs = ["@grlib_srcs//:gaisler_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":eth",
+        ":grlib",
+        ":opencores",
+        ":techmap",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "esa",
+    srcs = ["@grlib_srcs//:esa_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":gaisler",
+        ":grlib",
+        ":techmap",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "fmf",
+    srcs = ["@grlib_srcs//:fmf_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "gsi",
+    srcs = ["@grlib_srcs//:gsi_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "cypress",
+    srcs = ["@grlib_srcs//:cypress_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "micron",
+    srcs = ["@grlib_srcs//:micron_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "atc18",
+    srcs = ["@grlib_srcs//:atc18_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "dware",
+    srcs = ["@grlib_srcs//:dware_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "ec",
+    srcs = ["@grlib_srcs//:ec_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "eclipsee",
+    srcs = ["@grlib_srcs//:eclipsee_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "simprim",
+    srcs = ["@grlib_srcs//:simprim_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "umc18",
+    srcs = ["@grlib_srcs//:umc18_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "virage",
+    srcs = ["@grlib_srcs//:virage_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "testgrouppolito",
+    srcs = ["@grlib_srcs//:testgrouppolito_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":grlib",
+        ":unisim",
+        ":techmap",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "work",
+    srcs = ["@grlib_srcs//:work_files"],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    deps = [
+        ":gaisler",
+        ":grlib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+# Integration tests moved to tool.nvc
+vhdl_test(
+    name = "noelv_simulation",
+    srcs = ["//tool.nvc/integration:noelv_tb.vhd"],
+    deps = [
+        ":grlib",
+        ":gaisler",
+        ":techmap",
+    ],
+    entity = "noelv_tb",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+)
+
+vhdl_library(
+    name = "noelvsys_repro_lib",
+    srcs = ["//tool.nvc/integration:noelvsys_repro_tb.vhd"],
+    deps = [
+        ":grlib",
+        ":gaisler",
+        ":techmap",
+    ],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    tags = ["manual"],
+)
+
+vhdl_elaborate(
+    name = "noelvsys_repro_tb",
+    library = ":noelvsys_repro_lib",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    tags = ["manual"],
+)
