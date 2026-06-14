@@ -231,9 +231,22 @@ func main() {
 		fmt.Fprintf(gb, "    name = \"%s\",\n", libBase)
 		fmt.Fprintln(gb, "    # do not sort")
 		fmt.Fprintf(gb, "    srcs = [\":%s_files\"],\n", libBase)
+		fmt.Fprintln(gb, "    standard = select({")
+		fmt.Fprintln(gb, "        \"@grlib//:std_1987\": \"1987\",")
+		fmt.Fprintln(gb, "        \"@grlib//:std_1993\": \"1993\",")
+		fmt.Fprintln(gb, "        \"@grlib//:std_2002\": \"2002\",")
+		fmt.Fprintln(gb, "        \"@grlib//:std_2008\": \"2008\",")
+		fmt.Fprintln(gb, "        \"@grlib//:std_2019\": \"2019\",")
 		std := libStds[lib]
-		if std == "" { std = "1993" } else if std == "93" { std = "1993" } else if std == "08" { std = "2008" }
-		fmt.Fprintf(gb, "    standard = \"%s\",\n", std)
+		if std == "" {
+			std = "1993"
+		} else if std == "93" {
+			std = "1993"
+		} else if std == "08" {
+			std = "2008"
+		}
+		fmt.Fprintf(gb, "        \"//conditions:default\": \"%s\",\n", std)
+		fmt.Fprintln(gb, "    }),")
 		fmt.Fprintln(gb, "    deps = [")
 		sort.Strings(libDeps[lib])
 		for _, d := range libDeps[lib] {

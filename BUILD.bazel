@@ -1,6 +1,28 @@
 load("@gazelle//:def.bzl", "gazelle")
 load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
+load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
+
+string_flag(
+    name = "vhdl_standard",
+    build_setting_default = "1993",
+    visibility = ["//visibility:public"],
+)
+
+[
+    config_setting(
+        name = "std_" + std,
+        flag_values = {":vhdl_standard": std},
+        visibility = ["//visibility:public"],
+    )
+    for std in [
+        "1987",
+        "1993",
+        "2002",
+        "2008",
+        "2019",
+    ]
+]
 
 # gazelle:prefix grlib
 gazelle(name = "gazelle")
