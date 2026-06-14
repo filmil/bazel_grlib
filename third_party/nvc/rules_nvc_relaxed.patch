@@ -1,10 +1,10 @@
 --- internal/vhdl_library.bzl
 +++ internal/vhdl_library.bzl
-@@ -75,6 +75,7 @@
-         arguments = [
-           analyzer,
-           "--std={}".format(ctx.attr.standard),
+@@ -73,6 +73,7 @@
+             library_name,
+           ),
+           "-a",
 +          "--relaxed",
-           "-L", nvc_lib_path,
-         ] + flag_libraries + [
-           "--work={}:{}/{}".format(
+         ] + [f.path for f in srcs],
+         tools = [analyzer_x] + artifacts,
+         # Only seems to work from bazel 6.0.0 on.
