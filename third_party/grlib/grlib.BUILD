@@ -12,58 +12,6 @@ filegroup(
 filegroup(
     name = "grlib_files",
     # do not sort
-    srcs = [
-        "lib/grlib/stdlib/version.vhd",
-        "lib/grlib/stdlib/config_types.vhd",
-        "@grlib//third_party/grlib:config.vhd",
-        "lib/grlib/stdlib/stdlib.vhd",
-        "lib/grlib/stdlib/stdio.vhd",
-        "lib/grlib/stdlib/testlib.vhd",
-        "lib/grlib/util/util.vhd",
-        "lib/grlib/sparc/sparc.vhd",
-        "lib/grlib/sparc/sparc_disas.vhd",
-        "lib/grlib/riscv/riscv.vhd",
-        "lib/grlib/riscv/riscv_disas.vhd",
-        "lib/grlib/riscv/cpu_disas.vhd",
-        "lib/grlib/modgen/multlib.vhd",
-        "lib/grlib/modgen/leaves.vhd",
-        "lib/grlib/amba/amba.vhd",
-        "lib/grlib/amba/devices.vhd",
-        "lib/grlib/amba/defmst.vhd",
-        "lib/grlib/amba/apbctrl.vhd",
-        "lib/grlib/amba/apbctrlx.vhd",
-        "lib/grlib/amba/apbctrlsp.vhd",
-        "lib/grlib/amba/apbctrldp.vhd",
-        "lib/grlib/amba/apbctrl3p.vhd",
-        "lib/grlib/amba/apbctrl4p.vhd",
-        "lib/grlib/amba/ahbctrl.vhd",
-        "lib/grlib/amba/dma2ahb_pkg.vhd",
-        "lib/grlib/amba/dma2ahb.vhd",
-        "lib/grlib/amba/ahbmst.vhd",
-        "lib/grlib/amba/ahblitm2ahbm.vhd",
-        "lib/grlib/amba/dma2ahb_tp.vhd",
-        "lib/grlib/amba/amba_tp.vhd",
-        "lib/grlib/dftlib/dftlib.vhd",
-        "lib/grlib/dftlib/trstmux.vhd",
-        "lib/grlib/dftlib/synciotest.vhd",
-        "lib/grlib/generic_bm/generic_bm_pkg.vhd",
-        "lib/grlib/generic_bm/ahb_be.vhd",
-        "lib/grlib/generic_bm/axi4_be.vhd",
-        "lib/grlib/generic_bm/bmahbmst.vhd",
-        "lib/grlib/generic_bm/bm_fre.vhd",
-        "lib/grlib/generic_bm/bm_me_rc.vhd",
-        "lib/grlib/generic_bm/bm_me_wc.vhd",
-        "lib/grlib/generic_bm/fifo_control_rc.vhd",
-        "lib/grlib/generic_bm/fifo_control_wc.vhd",
-        "lib/grlib/generic_bm/generic_bm_ahb.vhd",
-        "lib/grlib/generic_bm/generic_bm_axi.vhd",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-vhdl_library(
-    name = "grlib",
-    # do not sort
     srcs = [] + ["lib/grlib/stdlib/version.vhd"] + ["lib/grlib/stdlib/config_types.vhd"] + ["@grlib//third_party/grlib:config.vhd"] + ["lib/grlib/stdlib/stdlib.vhd"] + select({
         "@grlib//:std_2008": ["@grlib//third_party/grlib:lib/grlib/stdlib/stdio_2008.vhd"],
         "@grlib//:std_2019": ["@grlib//third_party/grlib:lib/grlib/stdlib/stdio_2008.vhd"],
@@ -73,6 +21,13 @@ vhdl_library(
         "@grlib//:std_2019": ["@grlib//third_party/grlib:lib/grlib/stdlib/testlib_2008.vhd"],
         "//conditions:default": ["lib/grlib/stdlib/testlib.vhd"],
     }) + ["lib/grlib/util/util.vhd"] + ["lib/grlib/sparc/sparc.vhd"] + ["lib/grlib/sparc/sparc_disas.vhd"] + ["lib/grlib/riscv/riscv.vhd"] + ["lib/grlib/riscv/riscv_disas.vhd"] + ["lib/grlib/riscv/cpu_disas.vhd"] + ["lib/grlib/modgen/multlib.vhd"] + ["lib/grlib/modgen/leaves.vhd"] + ["lib/grlib/amba/amba.vhd"] + ["lib/grlib/amba/devices.vhd"] + ["lib/grlib/amba/defmst.vhd"] + ["lib/grlib/amba/apbctrl.vhd"] + ["lib/grlib/amba/apbctrlx.vhd"] + ["lib/grlib/amba/apbctrlsp.vhd"] + ["lib/grlib/amba/apbctrldp.vhd"] + ["lib/grlib/amba/apbctrl3p.vhd"] + ["lib/grlib/amba/apbctrl4p.vhd"] + ["lib/grlib/amba/ahbctrl.vhd"] + ["lib/grlib/amba/dma2ahb_pkg.vhd"] + ["lib/grlib/amba/dma2ahb.vhd"] + ["lib/grlib/amba/ahbmst.vhd"] + ["lib/grlib/amba/ahblitm2ahbm.vhd"] + ["lib/grlib/amba/dma2ahb_tp.vhd"] + ["lib/grlib/amba/amba_tp.vhd"] + ["lib/grlib/dftlib/dftlib.vhd"] + ["lib/grlib/dftlib/trstmux.vhd"] + ["lib/grlib/dftlib/synciotest.vhd"] + ["lib/grlib/generic_bm/generic_bm_pkg.vhd"] + ["lib/grlib/generic_bm/ahb_be.vhd"] + ["lib/grlib/generic_bm/axi4_be.vhd"] + ["lib/grlib/generic_bm/bmahbmst.vhd"] + ["lib/grlib/generic_bm/bm_fre.vhd"] + ["lib/grlib/generic_bm/bm_me_rc.vhd"] + ["lib/grlib/generic_bm/bm_me_wc.vhd"] + ["lib/grlib/generic_bm/fifo_control_rc.vhd"] + ["lib/grlib/generic_bm/fifo_control_wc.vhd"] + ["lib/grlib/generic_bm/generic_bm_ahb.vhd"] + ["lib/grlib/generic_bm/generic_bm_axi.vhd"],
+    visibility = ["//visibility:public"],
+)
+
+vhdl_library(
+    name = "grlib",
+    # do not sort
+    srcs = [":grlib_files"],
     standard = select({
         "@grlib//:std_1987": "1987",
         "@grlib//:std_1993": "1993",

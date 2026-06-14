@@ -209,29 +209,7 @@ func main() {
 		fmt.Fprintln(gb, "filegroup(")
 		fmt.Fprintf(gb, "    name = \"%s_files\",\n", libBase)
 		fmt.Fprintln(gb, "    # do not sort")
-		fmt.Fprintf(gb, "    srcs = ")
 		
-		if libNoelvCfg[lib] {
-			fmt.Fprintln(gb, "select({")
-			fmt.Fprintln(gb, "        \"@@//:NOELV_RV64\": [\"lib/gaisler/noelv/pkg/noelv_cfg_64.vhd\"],")
-			fmt.Fprintln(gb, "        \"//conditions:default\": [\"lib/gaisler/noelv/pkg/noelv_cfg_32.vhd\"],")
-			fmt.Fprintln(gb, "    }) + [")
-		} else {
-			fmt.Fprintln(gb, "[")
-		}
-
-		for _, f := range files {
-			fmt.Fprintf(gb, "        \"%s\",\n", f)
-		}
-		
-		fmt.Fprintln(gb, "    ],")
-		fmt.Fprintln(gb, "    visibility = [\"//visibility:public\"],")
-		fmt.Fprintln(gb, ")")
-		fmt.Fprintln(gb, "")
-
-		fmt.Fprintln(gb, "vhdl_library(")
-		fmt.Fprintf(gb, "    name = \"%s\",\n", libBase)
-		fmt.Fprintln(gb, "    # do not sort")
 		if libBase == "grlib" {
 			fmt.Fprint(gb, "    srcs = []")
 			for _, f := range libFiles[lib] {
@@ -253,9 +231,31 @@ func main() {
 				}
 			}
 			fmt.Fprintln(gb, ",")
+		} else if libNoelvCfg[lib] {
+			fmt.Fprintln(gb, "    srcs = select({")
+			fmt.Fprintln(gb, "        \"@@//:NOELV_RV64\": [\"lib/gaisler/noelv/pkg/noelv_cfg_64.vhd\"],")
+			fmt.Fprintln(gb, "        \"//conditions:default\": [\"lib/gaisler/noelv/pkg/noelv_cfg_32.vhd\"],")
+			fmt.Fprintln(gb, "    }) + [")
+			for _, f := range files {
+				fmt.Fprintf(gb, "        \"%s\",\n", f)
+			}
+			fmt.Fprintln(gb, "    ],")
 		} else {
-			fmt.Fprintf(gb, "    srcs = [\":%s_files\"],\n", libBase)
+			fmt.Fprintln(gb, "    srcs = [")
+			for _, f := range files {
+				fmt.Fprintf(gb, "        \"%s\",\n", f)
+			}
+			fmt.Fprintln(gb, "    ],")
 		}
+		
+		fmt.Fprintln(gb, "    visibility = [\"//visibility:public\"],")
+		fmt.Fprintln(gb, ")")
+		fmt.Fprintln(gb, "")
+
+		fmt.Fprintln(gb, "vhdl_library(")
+		fmt.Fprintf(gb, "    name = \"%s\",\n", libBase)
+		fmt.Fprintln(gb, "    # do not sort")
+		fmt.Fprintf(gb, "    srcs = [\":%s_files\"],\n", libBase)
 		fmt.Fprintln(gb, "    standard = select({")
 		fmt.Fprintln(gb, "        \"@grlib//:std_1987\": \"1987\",")
 		fmt.Fprintln(gb, "        \"@grlib//:std_1993\": \"1993\",")
