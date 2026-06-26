@@ -144,7 +144,11 @@ func main() {
 					if _, err := os.Stat(fullVhdPath); err == nil {
 						if fileName == "grtachom.vhd" { continue }
 						if relVhdPath == "lib/grlib/sparc/cpu_disas.vhd" { continue }
-						
+						// leon5v0/cachemem5.vhd is superseded by l5nv/shared/cachemem5.vhd.
+						// Compiling both into the gaisler library leaves a stale GAISLER.CACHEMEM5
+						// unit whose L5NV_SHARED checksum mismatch blocks noelvsys elaboration.
+						if relVhdPath == "lib/gaisler/leon5v0/cachemem5.vhd" { continue }
+
 						if fileName == "noelv_cfg_32.vhd" || fileName == "noelv_cfg_64.vhd" {
 							libNoelvCfg[lib] = true
 							continue

@@ -1,5 +1,67 @@
+load("@rules_nvc//nvc:rules.bzl", "vhdl_elaborate", "vhdl_library", "vhdl_test")
+
 exports_files([
     "noelv_tb.vhd",
     "noelvsys_repro_tb.vhd",
-    "rules_nvc_grlib.patch",
 ])
+
+# NOEL-V integration simulation: instantiates an apbuart on a minimal APB bus.
+# Run with:
+#   bazel test //:noelv_simulation_noelv_tb_test \
+#       --@grlib_config//:CONFIG_ACTIVE_DESIGN_PREFIX=LIB_GAISLER_NOELV_NOELV
+vhdl_test(
+    name = "noelv_simulation",
+    srcs = ["noelv_tb.vhd"],
+    deps = [
+        "@grlib//:grlib",
+        "@grlib//:gaisler",
+        "@grlib//:techmap",
+    ],
+    entity = "noelv_tb",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+)
+
+# Full NOEL-V subsystem reproducer — cannot be elaborated by any released NVC
+# version; see the file header for details.  Tagged manual so `bazel test //...`
+# stays green.  Build explicitly to reproduce the crash:
+#   bazel build //:noelvsys_repro_tb \
+#       --@grlib_config//:CONFIG_ACTIVE_DESIGN_PREFIX=LIB_GAISLER_NOELV_NOELV
+vhdl_library(
+    name = "noelvsys_repro_lib",
+    srcs = ["noelvsys_repro_tb.vhd"],
+    deps = [
+        "@grlib//:grlib",
+        "@grlib//:gaisler",
+        "@grlib//:techmap",
+    ],
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    tags = ["manual"],
+)
+
+vhdl_elaborate(
+    name = "noelvsys_repro_tb",
+    library = ":noelvsys_repro_lib",
+    standard = select({
+        "@grlib//:std_1987": "1987",
+        "@grlib//:std_1993": "1993",
+        "@grlib//:std_2002": "2002",
+        "@grlib//:std_2008": "2008",
+        "@grlib//:std_2019": "2019",
+        "//conditions:default": "1993",
+    }),
+    tags = ["manual"],
+)
