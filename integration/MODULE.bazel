@@ -21,9 +21,11 @@ single_version_override(
 
 bazel_dep(name = "rules_shell", version = "0.8.0")
 
-# Note: the `grlib` module already creates the `grlib_config` kconfig repository
-# (via the rules_kconfig module extension) and re-exports its settings as public
-# aliases such as `@grlib//:CONFIG_NOELV_RV64` and `@grlib//:ACTIVE_DESIGN_PREFIX`.
-# Declaring our own `grlib_config` repo here would collide with grlib's, because
-# the extension creates one repo per tag across all modules. Reference grlib's
-# aliases instead of re-declaring the repository.
+# Expose @grlib_config so that --@grlib_config//:CONFIG_ACTIVE_DESIGN_PREFIX can
+# be set from this workspace's .bazelrc (and by downstream users).  We do NOT
+# create a new kconfig.repo tag — that would duplicate grlib's declaration.
+# Instead we just import the repo that @grlib's extension already created.
+bazel_dep(name = "rules_kconfig", version = "0.4.0")
+
+kconfig = use_extension("@rules_kconfig//kconfig:extensions.bzl", "kconfig")
+use_repo(kconfig, "grlib_config")

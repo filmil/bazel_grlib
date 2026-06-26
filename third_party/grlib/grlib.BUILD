@@ -362,7 +362,6 @@ filegroup(
         "lib/gaisler/leon5v0/iu5.vhd",
         "lib/gaisler/leon5v0/cctrl5.vhd",
         "lib/gaisler/leon5v0/tcmwrap5.vhd",
-        "lib/gaisler/leon5v0/cachemem5.vhd",
         "lib/gaisler/leon5v0/regfile5_ram.vhd",
         "lib/gaisler/leon5v0/regfile5_dff.vhd",
         "lib/gaisler/leon5v0/cpucore5.vhd",
