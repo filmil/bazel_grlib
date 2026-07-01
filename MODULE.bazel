@@ -51,4 +51,6 @@ http_archive(
     strip_prefix = "grlib-gpl-2025.2-b4298",
     urls = ["https://download.gaisler.com/products/GRLIB/bin/grlib-gpl-2025.2-b4298.tar.gz"],
     integrity = "sha256-NCv//yj1TxVyXP77p+n6xc6/MNGJnlkPzVIWz6UiBkA=",
+    patches = ["//third_party/grlib:cctrl5nv_nvc_fold.patch"],
+    patch_args = ["-p1"],
 )
