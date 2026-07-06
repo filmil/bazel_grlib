@@ -11,12 +11,10 @@ local_path_override(
 
 bazel_dep(name = "rules_nvc", version = "4.2.6")
 
+# Pin NVC to 1.22.0.bcr.2 (nickg/nvc @ f1bb06a); no workaround patch needed.
 single_version_override(
     module_name = "nvc",
-    patch_strip = 1,
-    patches = [
-        "//third_party/nvc:nvc_grlib.patch",
-    ],
+    version = "1.22.0.bcr.2",
 )
 
 bazel_dep(name = "rules_shell", version = "0.8.0")
