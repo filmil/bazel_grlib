@@ -1,0 +1,1 @@
+Files under third_party/grlib are derived from GRLIB (Kconfig conversions of its design configuration menus, and patches against it) and remain under GRLIB's own license terms.
